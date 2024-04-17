@@ -5,6 +5,7 @@ import NotFoundPage from './pages/NotFound/NotFoundPage';
 import CampingListPage from "./pages/CampingListPage/CampingListPage"
 import CampingDetailPage from './pages/CampingDetailPage/CampingDetailPage';
 import SearchDataPage from './pages/SearchDataPage/SearchDataPage';
+import EventList from './pages/EventList/EventList';
 function App() {
   return (
     <Routes>
@@ -13,6 +14,9 @@ function App() {
         <Route path="/campings">
           <Route index element={<CampingListPage />} />
           <Route path=":contentId" element={<CampingDetailPage />} />
+        </Route>
+        <Route path='/EventList'>
+          <Route index element={<EventList />} />
         </Route>
         <Route path="/search">
           <Route index element={<SearchDataPage />} />
