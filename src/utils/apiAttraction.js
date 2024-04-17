@@ -8,7 +8,7 @@ const apiAttraction = axios.create({
     params: {
         MobileOS: "WIN",
         MobileApp: "so",
-        radius: 1000,
+        // radius: 20000,
         _type: "json",
         serviceKey: `${REACT_APP_API_KEY_DN_JIN}`
         // serviceKey: `HYuPePscXWsXZj8LTa900BZgb%2F66OeqfpbjmL5mjoYqMmd2mZ55p1glzPRGOwRsWXISJeiRhKygjhqMiEIPQLw%3D%3D`
