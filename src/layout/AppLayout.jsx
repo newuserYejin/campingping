@@ -4,6 +4,7 @@ import { Outlet } from 'react-router-dom';
 import { Box, Container } from '@mui/material';
 
 import Header from './components/Header';
+import Footer from './components/Footer/Footer'
 
 const maxWidth = "";
 
@@ -34,11 +35,7 @@ const AppLayout = () => {
       >
         <Outlet />
       </Box>
-      <footer>
-        <Container maxWidth="xl">
-        footer
-        </Container>
-      </footer>
+      <Footer />
     </Box>
   )
 }
