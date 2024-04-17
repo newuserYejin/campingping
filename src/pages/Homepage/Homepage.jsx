@@ -7,8 +7,8 @@ const Homepage = () => {
   return (
     <section>
       <TopBanner />
-      <Container maxWidth="xl"></Container>
       <CurrentLocation />
+      <Container maxWidth="xl"></Container>
     </section>
   );
 };
