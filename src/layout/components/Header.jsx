@@ -1,28 +1,49 @@
 import React from 'react'
-import { Container } from '@mui/material';
-import logo from '../../assets/logo.png';
-
-
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import CssBaseline from '@mui/material/CssBaseline';
-import Divider from '@mui/material/Divider';
-import Drawer from '@mui/material/Drawer';
-import IconButton from '@mui/material/IconButton';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-
+import { Link } from 'react-router-dom';
+import logo from '../../assets/whatAboutCampingLogo.png';
+import styled from 'styled-components';
+import { StylesProvider } from '@material-ui/core/styles';
+import { Container, Box, AppBar, Drawer, IconButton, List, Toolbar, Typography, Button } from '@mui/material';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 
 
-const drawerWidth = 300;
-const navItems = ['캠핑장 찾기', '가볼만한 곳', '공공우수야영장'];
+const drawerWidth = 260;
+const navItems = [
+  ['캠핑장 찾기🔍', '/캠핑장찾기url'],
+  ['가볼만한 곳✨', '/가볼만한곳url'],
+  ['공공 우수 야영장⛺', '/공공우수야영장url']
+];
+
+const GnbItemMobile = styled.li`
+  a{
+    display:block;
+    width:100%;
+    color:var(--main-font-color);
+    padding:8px 0;
+    font-family:'Spoqa Han Sans Neo', sans-serif; 
+    font-size:1rem;
+    text-align: center;
+    text-decoration:none;
+    cursor:pointer;
+    &:hover{
+      color:var(--key-color);
+    }
+  }
+`;
+
+const GnbItemPC = styled.li`
+  list-style:none;
+  a{
+    padding:5px 10px;
+    font-family:'Spoqa Han Sans Neo', sans-serif; 
+    color: var(--main-font-color);
+    text-decoration:none;
+    &:hover{
+      color:var(--key-color);
+    }
+  }
+`;
 
 const Header = (props) => {
   const { window } = props;
@@ -33,17 +54,31 @@ const Header = (props) => {
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
-      <Typography component="h1">
-        <img src={logo} alt="Go Camping" />
+      <Typography component="h1" sx={{
+        backgroundColor:'var(--key-color)',
+        marginBottom:'10px',
+        padding:'20px 0'
+      }}>
+        <Link to='/'>
+          <Box
+            component="img"
+            sx={{
+              width: '100px',
+              height: 'auto',
+              filter: 'brightness(0%) contrast(100%) invert(1)'
+            }}
+            alt="캠핑 어때"
+            src={logo}
+          />
+        </Link>
       </Typography>
-      <Divider />
       <List>
         {navItems.map((item) => (
-          <ListItem key={item} disablePadding>
-            <ListItemButton sx={{ textAlign: 'center' }}>
-              <ListItemText primary={item} />
-            </ListItemButton>
-          </ListItem>
+          <StylesProvider injectFirst>
+            <GnbItemMobile key={item}>
+              <Link to={item[1]}>{item[0]}</Link>
+            </GnbItemMobile>
+          </StylesProvider>
         ))}
       </List>
     </Box>
@@ -53,14 +88,23 @@ const Header = (props) => {
 
   return (
     <header>
-      <AppBar component="nav" maxWidth="xl" sx={{ display: 'flex', backgroundColor: "var(--main-background-color)" }}>
+      <AppBar component="nav" maxWidth="xl" sx={{
+        height:{
+          xs:'70px',
+          md:"135px",
+        },
+        justifyContent: {
+          xs:'center'
+        },
+        backgroundColor: "var(--main-background-color)",
+        boxShadow:'0 5px 20px rgba(0,0,0,0.1)'
+      }}>
         <Container maxWidth="xl">
           <Toolbar sx={{
             position:"relative",
-            justifyContent:{
-              xs: "center", md:"space-between"
-            },
-            alignItems:"center"
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
             
           }}>
             <IconButton
@@ -75,18 +119,43 @@ const Header = (props) => {
                 transform: "translateY(-50%)",
                 display: { 
                   md: 'none', 
-                  color:"red"
+                  color:"var(--color-darkGray)"
                 } 
               }}
             >
               <FontAwesomeIcon icon={faBars} />
             </IconButton>
-            <Typography component="h1"><img src={logo} alt="Go Camping" /></Typography>
-            <Box sx={{ 
-              display: { xs: 'none', md: 'block' }
+            <Typography component="h1">
+              <Box
+                component="img"
+                sx={{
+                  display:'block',
+                  width:{
+                    xs:'90px',
+                    md:'120px'
+                  },
+                  height: 'auto',
+                  padding:{
+                    xs:'0',
+                    md:'15px 0 5px'
+                  }
+                }}
+                alt="캠핑 어때"
+                src={logo}
+              />
+            </Typography>
+            <Box component="ul" sx={{ 
+              display: { xs: 'none', md: 'flex' },
+              gap:'20px',
+              margin:'15px 0 10px',
+              padding:'0'
             }}>
               {navItems.map((item) => (
-                <Button key={item} size="large" sx={{ color: 'var(--main-font-color)' }}>{item}</Button>
+                <StylesProvider injectFirst>
+                  <GnbItemPC key={item}>
+                    <Link to={item[1]}>{item[0]}</Link>
+                  </GnbItemPC>
+                </StylesProvider>
               ))}
             </Box>
           </Toolbar>

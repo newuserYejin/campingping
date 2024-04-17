@@ -1,0 +1,20 @@
+
+.mainSearchForm{
+  padding:3rem;
+  width:90%;
+  max-width:800px;
+  margin:0 auto;
+  background-color:rgba(255,255,255,0.4);
+  .formDiv{
+    display:flex;
+    h4{
+      width:20%;
+    }
+    input[type='text']{
+      
+    }
+    div[class*='MuiSelect-root']{
+      width:40%;
+    }
+  }
+}

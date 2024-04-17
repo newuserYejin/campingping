@@ -12,6 +12,6 @@ export const useWeatherQuery = (lat, lon) => {
   return useQuery({
     queryKey: ["weather", lat, lon],
     queryFn: () => fetchWeather(lat, lon),
-    // select: (result) => result.data.response?.body?.items?.item,
+    // select: (result) => result
   });
 };
