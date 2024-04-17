@@ -26,7 +26,7 @@ const Footer = () => {
                 target="_blank"
                 rel="noreferrer">
                 <Tooltip title={data?.name} arrow>
-                  <Avatar alt={data?.name} src={data?.avatar_url} />
+                  <Avatar alt={data?.login} src={data?.avatar_url} />
                 </Tooltip>
               </a>
             ))}
@@ -40,7 +40,7 @@ const Footer = () => {
                 {item.content}
               </li>
             ))}
-            <p class="footer-info-copy">
+            <p className="footer-info-copy">
               <span>Copyrights(c) 2024 캠핑어때 ALL RIGHTS RESERVED.</span>
             </p>
           </ul>
