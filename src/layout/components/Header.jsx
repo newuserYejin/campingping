@@ -126,23 +126,25 @@ const Header = (props) => {
               <FontAwesomeIcon icon={faBars} />
             </IconButton>
             <Typography component="h1">
-              <Box
-                component="img"
-                sx={{
-                  display:'block',
-                  width:{
-                    xs:'90px',
-                    md:'120px'
-                  },
-                  height: 'auto',
-                  padding:{
-                    xs:'0',
-                    md:'15px 0 5px'
-                  }
-                }}
-                alt="캠핑 어때"
-                src={logo}
-              />
+              <Link to='/'>
+                <Box
+                  component="img"
+                  sx={{
+                    display:'block',
+                    width:{
+                      xs:'90px',
+                      md:'120px'
+                    },
+                    height: 'auto',
+                    padding:{
+                      xs:'0',
+                      md:'15px 0 5px'
+                    }
+                  }}
+                  alt="캠핑 어때"
+                  src={logo}
+                />
+              </Link>
             </Typography>
             <Box component="ul" sx={{ 
               display: { xs: 'none', md: 'flex' },

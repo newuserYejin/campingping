@@ -27,12 +27,14 @@ const MainSearchForm = () => {
       </div>
       <div className='formDiv'>
         <h4>지역별</h4>
-        <Select>
-          <MenuItem value="">전체/도</MenuItem>
-        </Select>
-        <Select>
-          <MenuItem value="">전체/시/군</MenuItem>
-        </Select>
+        <div className="location">
+          <Select>
+            <MenuItem value="">전체/도</MenuItem>
+          </Select>
+          <Select>
+            <MenuItem value="">전체/시/군</MenuItem>
+          </Select>
+        </div>
       </div>
       <div className='formDiv'>
         <h4>테마별</h4>
@@ -40,7 +42,10 @@ const MainSearchForm = () => {
           <MenuItem value="">전체테마</MenuItem>
         </Select>
       </div>
-      <Button type="submit" variant="contained">검색</Button>
+      <div className="formBtnDiv">
+        <Button type="submit" variant="contained">검색</Button>
+        <Button type="button" variant="contained">상세 검색</Button>
+      </div>
     </Box>
   )
 }

@@ -1,25 +1,90 @@
 
 .mainSearchForm{
   padding:2rem;
-  width:90%;
-  max-width:800px;
-  margin:0 auto;
-  background-color:rgba(255,255,255,0.4);
+  width:100%;
+  max-width:580px;
+  margin:2rem auto 0;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
   h3{
     font-size:0;
     text-indent:-9999px;
   }
   .formDiv{
     display:flex;
-    h4{
-      font-size:1.15rem;
-      width:20%;
+    align-items: center;
+    width:100%;
+    margin:5px 0;
+    .location{
+      display:flex;
+      gap:5px;
+      width:80%;
+      select{
+        width:calc((100% - 5px) / 2);
+        height:45px;
+        padding:0;
+        border-radius:5px;
+        background:rgba(255, 255, 255, 0.15);
+        color:1px solid var(--main-background-color);
+        border:none;
+      }
     }
-    input[type='text']{
+    h4{
+      display:inline-block;
+      width:20%;
+      margin:0;
+      padding:0;
+      font-size:1rem;
+      line-height:1;
+      color:var(--main-background-color);
+    }
+    div[class^="MuiInputBase"]{
+      width:80%;
       
     }
-    div[class*='MuiSelect-root']{
-      width:40%;
+    div[class^="MuiSelect"], input[type='text']{
+      height:45px;
+      padding:0;
+      border-radius:5px;
+      background:rgba(255, 255, 255, 0.15);
+      color:var(--main-background-color);
+      border:none;
+      padding:0 10px;
+    }
+    input[type='text']{
+      width:100%;
+    }
+  }
+  .formBtnDiv{
+    display:flex;
+    justify-content: center;
+    gap:10px;
+    margin-top:20px;
+    button{
+      display:block;
+      height:45px;
+      &[type='submit']{
+        width:70%;
+        background:var(--key-color);
+      }
+      &[type='button']{
+        width:30%;
+        background:var(--color-darkGray);
+      }
+    }
+  }
+  @media screen and (max-width:600px) {
+    padding:1.5rem;
+    .formDiv{
+      align-items: flex-start;
+      flex-direction: column;
+      margin:8px 0;
+      h4{
+        margin-bottom:5px;
+      }
+      div[class^="MuiInputBase"], .location{
+        width:100%;
+      }
     }
   }
 }
