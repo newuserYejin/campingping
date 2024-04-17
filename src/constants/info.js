@@ -1,7 +1,7 @@
 export const infoProject = [
   {
     title: "Project Name",
-    content: "캠핑어떄",
+    content: "캠핑어때",
   },
   {
     title: "Project period",
@@ -41,5 +41,36 @@ export const infoMember = [
   {
     id: "sanggyeol1",
     name: "한상결",
+  },
+];
+
+export const infoFacility = [
+  {
+    name: "전기",
+    icon: "electric",
+  },
+  {
+    name: "와이파이",
+    icon: "wifi",
+  },
+  {
+    name: "장작판매",
+    icon: "firewood",
+  },
+  {
+    name: "온수",
+    icon: "hotwatter",
+  },
+  {
+    name: "물놀이장",
+    icon: "pool",
+  },
+  {
+    name: "놀이터",
+    icon: "play",
+  },
+  {
+    name: "운동시설",
+    icon: "gym",
   },
 ];
