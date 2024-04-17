@@ -57,8 +57,8 @@
 }
 
 .contentItem img {
-    width: 16vw;
-    height: 16vw;
+    width: 10vw;
+    height: 10vw;
     border-radius: 50%;
 }
 
@@ -86,4 +86,34 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+@media (max-width:720px) {
+    .contentItem img {
+        width: 16vw;
+        height: 16vw;
+        border-radius: 50%;
+    }
+}
+
+@media (max-width: 464px) {
+    .contentItem {
+        width: 30%;
+        font-size: 0.5em;
+    }
+
+    .contentItem>div {
+        text-align: center;
+    }
+
+    .active>.carousel-inner {
+        display: flex;
+        justify-content: center;
+    }
+
+    .contentItem img {
+        width: 16vw;
+        height: 16vw;
+        border-radius: 50%;
+    }
 }

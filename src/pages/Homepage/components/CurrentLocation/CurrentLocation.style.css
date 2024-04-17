@@ -1,3 +1,9 @@
 .attractionArea {
-    height: 25vh;
+    height: 30vh;
+}
+
+@media (max-width:720px) {
+    .attractionArea {
+        height: 25vh;
+    }
 }
