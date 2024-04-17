@@ -11,7 +11,7 @@ import { faBars } from "@fortawesome/free-solid-svg-icons";
 const drawerWidth = 260;
 const navItems = [
   ['캠핑장 찾기🔍', '/캠핑장찾기url'],
-  ['가볼만한 곳✨', '/가볼만한곳url'],
+  ['행사✨', '/행사url'],
   ['공공 우수 야영장⛺', '/공공우수야영장url']
 ];
 

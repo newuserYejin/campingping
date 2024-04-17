@@ -1,6 +1,6 @@
 import React from 'react';
 import './MainSearchForm.style.css';
-import { Box, FormControl, InputLabel, Input, Select, MenuItem, Button } from '@mui/material';
+import { Box, Input, Select, MenuItem, Button } from '@mui/material';
 import { useNavigate} from 'react-router-dom';
 import { useState } from 'react';
 
