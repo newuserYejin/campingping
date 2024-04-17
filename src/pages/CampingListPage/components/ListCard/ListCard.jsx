@@ -13,14 +13,14 @@ const facilitySampleList = [
   "운동시설",
 ];
 
-const ListCard = () => {
+const ListCard = ({ data }) => {
   return (
     <div className="list-item">
       <div className="list-thumb">
         <Link to="">
           <img
-            src="https://gocamping.or.kr/upload/camp/10/thumb/thumb_720_1869epdMHtUyrinZWKFHDWty.jpg"
-            alt=""
+            src={data.firstImageUrl}
+            alt=''
           />
         </Link>
       </div>
@@ -28,33 +28,33 @@ const ListCard = () => {
       <div className="list-details">
         <hgroup className="lit-title">
           <h3 className="list-facltNm">
-            <Link to="">아웃오브파크</Link>
+            <Link to="#">{data.facltNm}</Link>
           </h3>
           <h4 className="list-lineIntro">
-            <Link to="">이국적인 캐러밴과 알찬 부대시설</Link>
+            <Link to="#">{data.featureNm.substring(0, 140)}...</Link>
           </h4>
         </hgroup>
 
         <div className="list-info">
           <dl className="list-addr">
             <dt>주소</dt>
-            <dd>강원도 춘천시 남면 가옹개길 52-9</dd>
+            <dd>{data.addr1}</dd>
           </dl>
           <dl className="list-tel">
-            <dt>연락처</dt>
-            <dd>1522-1861-</dd>
+            <dt>홈페이지</dt>
+            <dd><a href={data.homepage}>{data.homepage}</a></dd>
           </dl>
           <dl className="list-operPdCl">
             <dt>운영계절</dt>
-            <dd>봄,여름,가을,겨울</dd>
+            <dd>{data.operPdCl}</dd>
           </dl>
           <dl className="list-operDeCl">
             <dt>운영요일</dt>
-            <dd>평일+주말</dd>
+            <dd>{data.operDeCl}</dd>
           </dl>
           <dl className="list-animalCmgCl">
             <dt>애완동물</dt>
-            <dd>불가능</dd>
+            <dd>{data.animalCmgCl}</dd>
           </dl>
           <dl>
             <dt>시설정보</dt>
