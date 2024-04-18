@@ -1,16 +1,17 @@
 import React from "react";
 import "./CampingDetailWeather.style.css";
-import { useWeatherQuery } from "../../../hooks/useWeather";
+import { useFiveDaysWeatherQuery, useWeatherQuery } from "../../../hooks/useWeather";
 
 const CampingDetailWeather = ({ lat, lon }) => {
-  const { data, isLoading } = useWeatherQuery(lat, lon);
+  // const { data, isLoading } = useWeatherQuery(lat, lon);
+  const { data, isLoading } = useFiveDaysWeatherQuery(lat, lon);
 
   console.log("data", data);
-  console.log("weather", data?.weather[0].description);
+  // console.log("weather", data?.weather[0].description);
 
   return (
     <div className="camping-detail-weather-box-area">
-      <h1>현재 날씨-5일 예보로 변경 예정</h1>
+      {/* <h1>현재 날씨-5일 예보로 변경 예정</h1>
       <div className="camping-detail-weather-box-5days">
         <div className="camping-detail-weather-box-1day">
           <img
@@ -63,7 +64,7 @@ const CampingDetailWeather = ({ lat, lon }) => {
           <div>{`(체감 온도 : ${Math.round(data?.main.feels_like)}도)`}</div>
         </div>
         
-      </div>
+      </div> */}
     </div>
   );
 };
