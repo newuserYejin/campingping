@@ -19,13 +19,13 @@ const EventList = () => {
 
   let realList = [];
   let Arealist = [];
-  realList = EventList.body.items.item;
-  Arealist = AreaData.item;
+  realList = EventList?.body.items.item;
+  Arealist = AreaData?.item;
   console.log("realList:", realList);
 
   return (
     <div>
-      {realList.map((eventItem) => {
+      {realList?.map((eventItem) => {
         return (
           <div className="eventItem">
             <img
@@ -38,7 +38,7 @@ const EventList = () => {
             <div>
               <div>
                 지역:
-                {Arealist.map((Area) => {
+                {Arealist?.map((Area) => {
                   if (Area.code == eventItem.areacode) {
                     return Area.name;
                   }

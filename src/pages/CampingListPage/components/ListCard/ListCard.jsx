@@ -15,8 +15,6 @@ const facilitySampleList = [
 
 const ListCard = ({ data, facilityData, index }) => {
 
-  console.log(facilityData)
-
   return (
     <div className="list-item">
       <div className="list-thumb">
