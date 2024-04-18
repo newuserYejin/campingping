@@ -1,39 +1,64 @@
 import React from "react";
 import "./ListGalleryItem.style.css";
+import { useAreaCode } from "../../hooks/useAreaCode";
 
-const ListGalleryItem = ({ isConnect = false, isLink = false }) => {
+const ListGalleryItem = ({ isConnect = false, isLink = false, item }) => {
+  const { data: AreaData } = useAreaCode();
+  let AreaList = [];
+  AreaList = AreaData.item;
+
   const sampleFn = () => {
     // isLink=true 링크가 있을 때
   };
+
   return (
     <>
       <div className="list-gallery-item">
         <div
           className={isLink ? "gallery-item-top pointer " : "gallery-item-top"}
-          onlick={isLink ? sampleFn : null}>
+          onlick={isLink ? sampleFn : null}
+        >
           <div className="gallery-item-thumb tnumb">
             <img
-              src="http://tong.visitkorea.or.kr/cms/resource/50/3111750_image2_1.JPG"
-              alt=""
+              src={
+                item.firstimage ||
+                item.firstimage2 ||
+                "../../../src/assets/whatAboutCampingLogo.png"
+              }
+              alt={item.title + "사진"}
             />
           </div>
           <div className="gallery-item-info">
             <div className="flag">
-              <span>#경상북도</span>
+              <span>
+                #
+                {AreaList.map((area) => {
+                  if (area.code == item.areacode) {
+                    return area.name;
+                  }
+                })}
+              </span>
               <span>#칠곡군</span>
             </div>
-            <h3 className="title">가산산성 문화유산 야행</h3>
+            <h3 className="title">{item.title}</h3>
             <ul>
               <li>
                 🗓️
-                <span className="eventstartdate">2024.04.27 ~ </span>
-                <span className="eventenddate">2024.04.28</span>
+                <span className="eventstartdate">
+                  {`${item.eventstartdate.slice(0, 4)}
+                  .${item.eventstartdate.slice(4, 6)}
+                  .${item.eventstartdate.slice(6, 8)}`}
+                  ~
+                </span>
+                <span className="eventenddate">
+                  {`${item.eventenddate.slice(0, 4)}
+                  .${item.eventenddate.slice(4, 6)}
+                  .${item.eventenddate.slice(6, 8)}`}
+                </span>
               </li>
 
-              <li className="addr">
-                👉🏻 경상북도 칠곡군 동명면 남원리 625-1 가산산성 진남문 일원
-              </li>
-              <li className="tel">📞 010-2998-0103</li>
+              <li className="addr">👉🏻 {item.addr1}</li>
+              <li className="tel">📞 {item.tel}</li>
             </ul>
           </div>
         </div>
@@ -49,7 +74,8 @@ const ListGalleryItem = ({ isConnect = false, isLink = false }) => {
                 className="connect connect-map"
                 href="https://map.naver.com/p/search/경상북도 칠곡군 동명면 남원리 625-1 가산산성 진남문 일원"
                 target="_blank"
-                rel="noreferrer">
+                rel="noreferrer"
+              >
                 지도
               </a>
             </div>

@@ -1,5 +1,4 @@
 import React from "react";
-import TopBanner from "../../layout/components/TopButton";
 import { useFetchEvent } from "../../hooks/useFetchEvent";
 import { useAreaCode } from "../../hooks/useAreaCode";
 import "./EventList.style.css";
