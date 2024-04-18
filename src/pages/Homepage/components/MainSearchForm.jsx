@@ -2,7 +2,7 @@ import React, { useState }from 'react';
 import './MainSearchForm.style.css';
 import { Box, Input, Select, MenuItem, Stack, Button } from '@mui/material';
 import { Dialog, DialogTitle, DialogContent } from '@mui/material';
-import { FormGroup, FormControlLabel, Checkbox} from '@mui/material';
+import { FormGroup, FormControlLabel, Checkbox } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { regions } from '../../../constants/sigungu';
 import { search_detail_filters } from '../../../constants/info';
