@@ -2,6 +2,7 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Carousel } from "react-bootstrap";
 import "./AttractionCarousel.style.css";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const AttractionCarousel = ({ attractData, title, itemsPerPage }) => {
   return (
@@ -36,7 +37,9 @@ const AttractionCarousel = ({ attractData, title, itemsPerPage }) => {
           ))}
         </Carousel>
       ) : (
-        <h1 className="AttractionNo">추천 리스트가 없습니다.</h1>
+        <h1 className="AttractionNo">
+          <CircularProgress />
+        </h1>
       )}
     </div>
   );
