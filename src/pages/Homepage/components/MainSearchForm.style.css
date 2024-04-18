@@ -121,3 +121,59 @@
     }
   }
 }
+
+.mainDetailSearchModal{
+  .MuiDialog-paper{
+    width:100%;
+    max-width:800px;
+    h4{
+      margin:0;
+      padding:1.5rem;
+      font-size:1.25rem;
+    }
+    h5{
+      font-size:1.15rem;
+      line-height:1;
+      margin:25px 0 10px;
+    }
+    ul{
+      display:flex;
+      flex-wrap: wrap;
+      margin:0;
+      padding:1rem;
+      background:#f5f5f5;
+      li{
+        list-style:none;
+        padding-right:20px;
+        span[class*="MuiCheckbox-root"]{
+          padding:5px;
+        }
+        label{
+          margin:0;
+        }
+      }
+    }
+  }
+  .formBtnDiv{
+    width:60%;
+    max-width:450px;
+    display:flex;
+    justify-content: center;
+    gap:10px;
+    margin:3rem auto 2rem;
+    button{
+      display:block;
+      height:45px;
+      margin:0;
+      color:var(--main-background-color);
+      &.btn_search{
+        width:70%;
+        background:var(--key-color);
+      }
+      &.btn_reset{
+        width:30%;
+        background:var(--color-darkGray);
+      }
+    }
+  }
+}
