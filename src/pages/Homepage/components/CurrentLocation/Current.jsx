@@ -14,7 +14,7 @@ const Current = ({ userLat, userLot }) => {
     isLoading,
     isError,
     error,
-  } = useFetchLocation(userLat, userLot, 1000);
+  } = useFetchLocation(userLat, userLot, 7000);
 
   // const {
   //   data: apiData,

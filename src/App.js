@@ -6,6 +6,9 @@ import CampingListPage from "./pages/CampingListPage/CampingListPage";
 import CampingDetailPage from "./pages/CampingDetailPage/CampingDetailPage";
 import SearchDataPage from "./pages/SearchDataPage/SearchDataPage";
 import EventListPage from "./pages/EventListPage/EventListPage";
+import EventList from "./pages/EventList/EventList"
+import CampingPage from "./pages/CampingPage/CampingPage"
+
 function App() {
   return (
     <Routes>
