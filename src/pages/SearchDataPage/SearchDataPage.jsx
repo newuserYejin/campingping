@@ -11,9 +11,13 @@ const SearchDataPage = () => {
     const [page, setPage] = useState(1)
     const [query, setQuery] = useSearchParams()
     const navigate = useNavigate()
-    const keyword = query.get("q");
+    const keyword = query.get("q") || ""
+    const province = query.get("province")
+    const city = query.get("city")
 
-    const { data, isLoading, isError, error } = useSearchDataQuery({ keyword, page });
+
+
+    const { data, isLoading, isError, error } = useSearchDataQuery({ keyword, page })
     console.log('data?', data)
 
     if (isLoading) {
@@ -23,29 +27,30 @@ const SearchDataPage = () => {
         return <h3>Error: {error.message}</h3>;
     }
 
+
+    const filteredData = data?.body.items.item.filter(item => {
+        return (!province || item.doNm === province) && (!city || item.SigunguNm === city);
+    })
+
+    let lengthOfFilteredData = filteredData?.length;
+
     return (
         <div>
-
-
-            <h2>'{keyword}'에 대한 검색 결과 : {data.body.totalCount}건</h2>
+            <h2>{page} 페이지의 '{keyword}'에 대한 검색 결과 : {lengthOfFilteredData}건</h2>
+            <div>현재 페이지 : {page}</div>
+            <button onClick={() => { setPage(page - 1) }}>이전</button>
+            <button onClick={() => { setPage(page + 1) }}>다음</button>
             <Grid container spacing={2}>
                 {
-                    data?.body.items.item.map((searchData, index) => (
-                        // <Grid lg={3} key={index}>
-                        //     <div className='search-data-box'>
-                        //         <h3>{searchData.facltNm}</h3>
-                        //         <img width={300} src={searchData.firstImageUrl =='' ? 'https://search.pstatic.net/sunny/?src=https%3A%2F%2Fpng.pngtree.com%2Fpng-vector%2F20240128%2Fourlarge%2Fpngtree-big-green-tree-isolated-png-image_11509925.png&type=ff332_332':searchData.firstImageUrl } />
-                        //     </div>
-                        // </Grid>
+                    filteredData.map((searchData, index) => (
+                        
                         <div key={index}>
                             <ListCard data={searchData} />
                         </div>
                     ))
                 }
             </Grid>
-            <div>현재 페이지 : {page}</div>
-            <button onClick={() => { setPage(page - 1) }}>이전</button>
-            <button onClick={() => { setPage(page + 1) }}>다음</button>
+            
         </div>
     )
 }
