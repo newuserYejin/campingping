@@ -1,8 +1,63 @@
-.camping-detail-main{
-    margin-top: 150px;
-    border: none;
+.camping-detail-main {
+  margin-top: 130px;
 }
-
-.img{
-    height: 500px;
+.img {
+  height: 500px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.camping-detail-second-grid {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 10px;
+}
+.camping-detail-second-grid-urls {
+  text-align: center;
+  margin-top: 15px;
+}
+.camping-detail-url {
+  cursor: pointer;
+  margin-right: 10px;
+  border-radius: 30px;
+  margin-bottom: 10px;
+  background-color: white;
+  padding: 5px 10px;
+}
+.camping-detail-url:hover {
+  text-decoration: underline;
+}
+.camping-detail-second-line {
+  margin-top: 3em;
+  text-align: center;
+  border-top: 2px solid #4b494c36;
+  border-bottom: 2px solid #4b494c36;
+  padding-top: 3em;
+  padding-bottom: 3em;
+  font-size: 1.5em;
+}
+.camping-detail-second-line-count {
+  margin-top: 3em;
+  text-align: center;
+  width: 50%;
+}
+.camping-detail-second-line-count div {
+  border-top: 1px solid #4b494cb4;
+  display: flex;
+  justify-content: space-around;
+}
+.camping-detail-second-line-count span {
+  margin: 10px;
+}
+.camping-detail-second-line-count-first {
+  border-top: 1px solid #4b494cb4;
+}
+.comping-detail-table {
+  width: 60%;
+}
+.comping-detail-table-area {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
 }

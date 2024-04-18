@@ -9,19 +9,19 @@ import "./Current.style.css";
 const Current = ({ userLat, userLot }) => {
   const [itemsPerPage, setItemsPerPage] = useState(5);
 
-  // const {
-  //   data: apiData,
-  //   isLoading,
-  //   isError,
-  //   error,
-  // } = useFetchLocation(userLat, userLot, 1000);
-
   const {
     data: apiData,
     isLoading,
     isError,
     error,
-  } = useFetchLocation(127.5612654, 37.7300273, 3000);
+  } = useFetchLocation(userLat, userLot, 1000);
+
+  // const {
+  //   data: apiData,
+  //   isLoading,
+  //   isError,
+  //   error,
+  // } = useFetchLocation(127.5612654, 37.7300273, 3000);
 
   const {
     data: RecommandData,
@@ -82,7 +82,7 @@ const Current = ({ userLat, userLot }) => {
         />
       )}
 
-      <hr></hr>
+      {itemList?.body.items === "" ? null : <hr></hr>}
 
       <AttractionCarousel
         attractData={RecommendAttractData}

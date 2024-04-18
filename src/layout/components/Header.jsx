@@ -20,7 +20,7 @@ import { faBars } from "@fortawesome/free-solid-svg-icons";
 const drawerWidth = 260;
 const navItems = [
   ["캠핑장 찾기🔍", "/캠핑장찾기url"],
-  ["가볼만한 곳✨", "/EventList"],
+  ["행사✨", "/EventList"],
   ["공공 우수 야영장⛺", "/공공우수야영장url"],
 ];
 
@@ -144,23 +144,25 @@ const Header = (props) => {
               <FontAwesomeIcon icon={faBars} />
             </IconButton>
             <Typography component="h1">
-              <Box
-                component="img"
-                sx={{
-                  display: "block",
-                  width: {
-                    xs: "90px",
-                    md: "120px",
-                  },
-                  height: "auto",
-                  padding: {
-                    xs: "0",
-                    md: "15px 0 5px",
-                  },
-                }}
-                alt="캠핑 어때"
-                src={logo}
-              />
+              <Link to="/">
+                <Box
+                  component="img"
+                  sx={{
+                    display: "block",
+                    width: {
+                      xs: "90px",
+                      md: "120px",
+                    },
+                    height: "auto",
+                    padding: {
+                      xs: "0",
+                      md: "15px 0 5px",
+                    },
+                  }}
+                  alt="캠핑 어때"
+                  src={logo}
+                />
+              </Link>
             </Typography>
             <Box
               component="ul"
