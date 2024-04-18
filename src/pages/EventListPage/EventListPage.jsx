@@ -4,6 +4,7 @@ import { Container, Pagination } from "@mui/material";
 import ListGalleryItem from "../../components/ListGalleryItem/ListGalleryItem";
 import { useFetchEvent } from "../../hooks/useFetchEvent";
 import { useAreaCode } from "../../hooks/useAreaCode";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const EventListPage = () => {
   let [CurrentPage, setCurrentPage] = useState(1);
@@ -14,19 +15,28 @@ const EventListPage = () => {
     isError,
     error,
     refetch,
-  } = useFetchEvent(CurrentPage);
+  } = useFetchEvent({ CurrentPage });
 
   const { data: AreaData } = useAreaCode();
 
   useEffect(() => {
     // CurrentPage가 변경될 때마다 데이터 다시 가져오기
     refetch(CurrentPage);
-    console.log(CurrentPage);
   }, [CurrentPage, refetch]);
 
+  // useEffect(() => {
+  //   // 페이지가 처음 로딩될 때만 새로고침
+  //   window.location.reload();
+  // }, []);
+
   if (isLoading) {
-    return <h1>Loading....</h1>;
+    return (
+      <div className="loading_Zone">
+        <CircularProgress />
+      </div>
+    );
   }
+
   if (isError) {
     return <div>{error.message}</div>;
   }
@@ -36,11 +46,11 @@ const EventListPage = () => {
 
   let realList = [];
   let Arealist = [];
-  realList = EventList?.body.items.item;
-  Arealist = AreaData.item;
+  realList = EventList?.body?.items?.item;
+  Arealist = AreaData?.item;
   console.log("realList:", realList);
 
-  const chagePage = (event, page) => {
+  const changePage = (event, page) => {
     setCurrentPage(page);
   };
 
@@ -56,8 +66,14 @@ const EventListPage = () => {
         검색되었습니다.
       </p>
       <div className="list-gallery-wrap">
-        {realList.map((item) => {
-          return <ListGalleryItem isConnect={true} isLink={true} item={item} />;
+        {realList?.map((item) => {
+          return (
+            <ListGalleryItem
+              isConnect={item.tel ? true : false}
+              isLink={item.addr1 ? true : false}
+              item={item}
+            />
+          );
         })}
         {/* <ListGalleryItem isLink={true} />
         <ListGalleryItem isConnect={true} />
@@ -75,7 +91,7 @@ const EventListPage = () => {
           justifyContent: "center",
           marginTop: "2em",
         }}
-        onChange={chagePage}
+        onChange={changePage}
       />
     </Container>
   );

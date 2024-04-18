@@ -15,6 +15,6 @@ export const useSearchDataQuery = ({keyword, page}) => {
     return useQuery({
         queryKey: ['search-data',{keyword, page}],
         queryFn:()=> fetchSearchData({keyword, page}),
-        select:(result)=>result.data.response
+        select:(result)=>result.data.response.body
     });
 };
