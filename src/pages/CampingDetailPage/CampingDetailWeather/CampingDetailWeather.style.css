@@ -1,0 +1,18 @@
+.camping-detail-weather-box-area h1{
+font-size: 25px;
+}
+.camping-detail-weather-box-1day img{
+    width: 80%;
+}
+.camping-detail-weather-box-5days{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #4b494c36;
+    
+}
+.camping-detail-weather-box-1day{
+    border-right: 2px solid black;
+    flex-direction: column;
+    padding: 1em;
+}

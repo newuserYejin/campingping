@@ -11,7 +11,7 @@ export default function CampingPage() {
       {data &&
         data.item.map((value) => (
           <li>
-            <a href={`/campings/${value.contentId}?keyword=${value.facltNm}&lat=${value.mapX}&lon=${value.mapY}`}>
+            <a href={`/campings/${value.contentId}?keyword=${value.facltNm}&lat=${value.mapY}&lon=${value.mapX}`}>
               {value.facltNm}
             </a>
           </li>
