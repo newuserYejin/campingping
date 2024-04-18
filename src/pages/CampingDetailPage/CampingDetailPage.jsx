@@ -27,10 +27,10 @@ const CampingDetailPage = () => {
 
   const campingDetail = data[0];
 
-  console.log("campingDetail", campingDetail);
+  // console.log("campingDetail", campingDetail);
 
   function createData(name, decription) {
-    return { name, decription};
+    return { name, decription };
   }
 
   const rows = [
@@ -94,22 +94,43 @@ const CampingDetailPage = () => {
                       ? `문의처 : ${campingDetail.tel}`
                       : "문의번호가 없습니다"}
                   </div>
-                  <div>운영기간 : {campingDetail.operPdCl} </div>
-                  <div>운영일 : {campingDetail.operDeCl}</div>
-                  <div>예약방법 : {campingDetail.resveCl}</div>
+                  <div>
+                    {" "}
+                    {campingDetail.operPdCl
+                      ? `운영기간 : ${campingDetail.operPdCl}`
+                      : ""}{" "}
+                  </div>
+                  <div>
+                    {campingDetail.operDeCl
+                      ? `운영일 : ${campingDetail.operDeCl}`
+                      : ""}
+                  </div>
+                  <div>
+                    {campingDetail.resveCl
+                      ? `예약방법 : ${campingDetail.resveCl}`
+                      : ""}
+                  </div>
                   <div className="camping-detail-second-grid-urls">
-                    <Button
-                      onClick={() => window.open(`${campingDetail.resveUrl}`)}
-                      className="camping-detail-url"
-                    >
-                      {campingDetail.resveUrl ? "예약사이트 바로가기 " : ""}
-                    </Button>
-                    <Button
-                      onClick={() => window.open(`${campingDetail.homepage}`)}
-                      className="camping-detail-url"
-                    >
-                      {campingDetail.homepage ? "홈페이지 바로가기" : ""}
-                    </Button>
+                    {campingDetail.homepage ? (
+                      <Button
+                        onClick={() => window.open(`${campingDetail.homepage}`)}
+                        className="camping-detail-url"
+                      >
+                        홈페이지 바로가기
+                      </Button>
+                    ) : (
+                      ""
+                    )}
+                    {campingDetail.resveUrl ? (
+                      <Button
+                        onClick={() => window.open(`${campingDetail.resveUrl}`)}
+                        className="camping-detail-url"
+                      >
+                        예약사이트 바로가기
+                      </Button>
+                    ) : (
+                      ""
+                    )}
                   </div>
                   <div>
                     {campingDetail.siteBottomCl1 > 0
@@ -141,74 +162,51 @@ const CampingDetailPage = () => {
                       ? `잔디데크 : ${campingDetail.siteBottomCl1}개`
                       : ""}
                   </div>
-
-                  <div>
-                    <CampingDetailWeather lat={lat} lon={lon} />
-                  </div>
                 </div>
               </Grid>
             </Grid>
-
+            <div className="camping-detail-weather-line">
+              <CampingDetailWeather lat={lat} lon={lon} />
+            </div>
             <div className="camping-detail-second-line">
-              {campingDetail.intro ? `${campingDetail.intro}` : ""}
+              {campingDetail.intro
+                ? `${campingDetail.intro}`
+                : `이번 캠핑은 ${campingDetail.facltNm}에서 함께하는건 어떨까요? 공기좋은 곳에서 소중한 순간을 보내게 해주는 ${campingDetail.facltNm}입니다.`}
             </div>
-            <div className="camping-detail-second-line-count">
-              {/* <div>
-                <span className="camping-detail-second-line-count-first">
-                  화장실
-                </span>
-                <span>
-                  {campingDetail?.toiletCo ? campingDetail.toiletCo : "0"}
-                </span>
-              </div>
-              <div>
-                <span>샤워실</span>
-                <span>
-                  {campingDetail?.swrmCo ? campingDetail.swrmCo : "0"}
-                </span>
-              </div>
-              <div>
-                <span>개수대</span>
-                <span>
-                  {campingDetail?.wtrplCo ? campingDetail.wtrplCo : "0"}
-                </span>
-              </div>
-              <div>
-                <span>트레일러 동반</span>
-                <span>
-                  {campingDetail?.trlerAcmpnyAt == "Y" ? "동반가능" : "불가능"}
-                </span>
-              </div>
-              <div>
-                <span>카라반 동반</span>
-                <span>
-                  {campingDetail?.trlerAcmpnyAt == "Y" ? "동반가능" : "불가능"}
-                </span>
-              </div> */}
-            </div>
+            <div className="camping-detail-second-line-count"></div>
             <div className="comping-detail-table-area">
-              <TableContainer
-                component={Paper}
-                className="comping-detail-table"
-              >
-                <Table sx={{ minWidth: 400 }} aria-label="simple table">
-                  <TableBody>
-                    {rows.map((row) => (
-                      <TableRow
-                        key={row.name}
-                        sx={{
-                          "&:last-child td, &:last-child th": { border: 0 },
-                        }}
-                      >
-                        <TableCell component="th" scope="row">
-                          {row.name}
-                        </TableCell>
-                        <TableCell align="right">{row.decription}</TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </TableContainer>
+              <div className="comping-detail-table-area-inside">
+                <div className="comping-detail-table-area-title">
+                  캠핑장 시설정보
+                </div>
+                <TableContainer
+                  component={Paper}
+                  className="comping-detail-table"
+                >
+                  <Table sx={{ minWidth: 400 }} aria-label="simple table">
+                    <TableBody>
+                      {rows.map((row) => (
+                        <TableRow
+                          key={row.name}
+                          sx={{
+                            "&:last-child td, &:last-child th": { border: 0 },
+                          }}
+                        >
+                          <TableCell component="th" scope="row">
+                            {row.name}
+                          </TableCell>
+                          <TableCell align="right">{row.decription}</TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+                <div className="comping-detail-table-area-footer">
+                  * 캠핑어때에 등록된 정보는 현장상황과 다소 다를 수 있으니
+                  반려동물 동반 여부, 부가 시설물, 추가차량 등 원활한 캠핑을
+                  위해 꼭 필요한 사항은 해당 캠핑장에 미리 확인하시기 바랍니다
+                </div>
+              </div>
             </div>
           </Container>
         </div>
