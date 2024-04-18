@@ -20,7 +20,7 @@ const EventListPage = () => {
 
   useEffect(() => {
     // CurrentPage가 변경될 때마다 데이터 다시 가져오기
-    refetch((CurrentPage = { CurrentPage }));
+    refetch(CurrentPage);
     console.log(CurrentPage);
   }, [CurrentPage, refetch]);
 
