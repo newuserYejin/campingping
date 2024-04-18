@@ -13,7 +13,10 @@ const facilitySampleList = [
   "운동시설",
 ];
 
-const ListCard = ({ data }) => {
+const ListCard = ({ data, facilityData, index }) => {
+
+  console.log(facilityData)
+
   return (
     <div className="list-item">
       <div className="list-thumb">
@@ -60,7 +63,7 @@ const ListCard = ({ data }) => {
             <dt>시설정보</dt>
             <dd className="list-sbrsCl">
               <ul>
-                {facilitySampleList.map((item) => (
+                {facilityData[index].map((item) => (
                   <li>
                     <FacilityIcon name={item} />
                     {item}

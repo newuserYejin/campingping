@@ -88,3 +88,17 @@
     }
   }
 }
+
+.province-select{
+  line-height: normal; /* 필요에 따라 이 값을 조정하세요 */
+  padding-top: 8px; /* 필요에 따라 조정하세요 */
+  padding-bottom: 8px; /* 필요에 따라 조정하세요 */
+  vertical-align: middle;
+}
+
+.city-select{
+  line-height: normal; /* 필요에 따라 이 값을 조정하세요 */
+  padding-top: 8px; /* 필요에 따라 조정하세요 */
+  padding-bottom: 8px; /* 필요에 따라 조정하세요 */
+  vertical-align: middle;
+}

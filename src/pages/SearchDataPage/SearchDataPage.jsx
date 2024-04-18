@@ -35,6 +35,13 @@ const SearchDataPage = () => {
 
     // let lengthOfFilteredData = filteredData?.length;
 
+    const facilityData = data?.body.items.item.map((item,index)=>(
+        item.sbrsCl.split(',')
+    ))
+
+    
+    
+
     return (
         <Container maxWidth="lg">
             <div>
@@ -47,8 +54,8 @@ const SearchDataPage = () => {
                         filteredData.map((searchData, index) => (
 
                             
-                                <Grid>
-                                    <ListCard data={searchData} />
+                                <Grid key={index}>
+                                    <ListCard data={searchData} facilityData={facilityData} index={index} />
                                 </Grid>
                             
                         ))
