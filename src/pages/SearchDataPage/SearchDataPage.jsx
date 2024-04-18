@@ -29,15 +29,16 @@ const SearchDataPage = () => {
     }
 
 
-    const filteredData = data?.body.items.item.filter(item => {
+    const filteredData = data?.items.item.filter(item => {
         return (!province || item.doNm === province) && (!city || item.SigunguNm === city);
     })
 
     // let lengthOfFilteredData = filteredData?.length;
 
-    const facilityData = data?.body.items.item.map((item,index)=>(
+    const facilityData = data?.items.item.map((item,index)=>(
         item.sbrsCl.split(',')
     ))
+    
 
     
     
@@ -45,7 +46,7 @@ const SearchDataPage = () => {
     return (
         <Container maxWidth="lg">
             <div>
-                <h2>{page} 페이지의 '{keyword}'에 대한 검색 결과</h2>
+                <h2>'{keyword}'에 대한 검색 결과 : {data?.totalCount}건</h2>
                 <div>현재 페이지 : {page}</div>
                 <button onClick={() => { setPage(page - 1) }}>이전</button>
                 <button onClick={() => { setPage(page + 1) }}>다음</button>

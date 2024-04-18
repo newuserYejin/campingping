@@ -3,7 +3,7 @@ import './MainSearchForm.style.css';
 import { Box, Input, Select, MenuItem, Button } from '@mui/material';
 import { Dialog, DialogTitle, DialogContent } from '@mui/material';
 import { useNavigate} from 'react-router-dom';
-import {regions} from '../../../constants/sigungu';
+import {regions} from '../../../constants/sigungu.js';
 
 
 const MainSearchForm = () => {
@@ -49,16 +49,16 @@ const MainSearchForm = () => {
         <div className='formDiv'>
         <h4>지역별</h4>
         <Select value={selectedProvince} onChange={handleProvinceChange} displayEmpty>
-        <MenuItem value="">전체/도</MenuItem>
+        <MenuItem value=""><div className='pt-10'>전체/도</div></MenuItem>
           {Object.keys(regions).map((province) => (
-            <MenuItem key={province} value={province}>{province}</MenuItem>
+            <MenuItem key={province} value={province}><div className='pt-10'>{province}</div></MenuItem>
           ))}
           
         </Select>
         <Select value={selectedCity} onChange={handleCityChange} displayEmpty>
-          <MenuItem value="">전체/시/군</MenuItem>
+          <MenuItem value=""><div className='pt-10'>전체/시/군</div></MenuItem>
           {selectedProvince && regions[selectedProvince].map((city) => (
-            <MenuItem key={city} value={city}>{city}</MenuItem>
+            <MenuItem key={city} value={city}><div className='pt-10'>{city}</div></MenuItem>
           ))}
         </Select>
       </div>
