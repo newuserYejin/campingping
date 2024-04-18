@@ -49,18 +49,20 @@ const MainSearchForm = () => {
         </div>
         <div className='formDiv'>
         <h4>지역별</h4>
-        <Select value={selectedProvince} onChange={handleProvinceChange} displayEmpty>
-          <MenuItem value=""><em>전체/도</em></MenuItem>
-          {Object.keys(regions).map((province) => (
-            <MenuItem key={province} value={province}>{province}</MenuItem>
-          ))}
-        </Select>
-        <Select value={selectedCity} onChange={handleCityChange} displayEmpty>
-          <MenuItem value=""><em>전체/시/군</em></MenuItem>
-          {selectedProvince && regions[selectedProvince].map((city) => (
-            <MenuItem key={city} value={city}>{city}</MenuItem>
-          ))}
-        </Select>
+        <div className='inputDiv'>
+          <Select value={selectedProvince} onChange={handleProvinceChange} displayEmpty>
+            <MenuItem value=""><em>전체/도</em></MenuItem>
+            {Object.keys(regions).map((province) => (
+              <MenuItem key={province} value={province}>{province}</MenuItem>
+            ))}
+          </Select>
+          <Select value={selectedCity} onChange={handleCityChange} displayEmpty>
+            <MenuItem value=""><em>전체/시/군</em></MenuItem>
+            {selectedProvince && regions[selectedProvince].map((city) => (
+              <MenuItem key={city} value={city}>{city}</MenuItem>
+            ))}
+          </Select>
+          </div>
       </div>
         <div className='formDiv'>
           <h4>테마별</h4>
