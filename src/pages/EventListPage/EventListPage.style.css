@@ -10,6 +10,13 @@
   margin: 1%;
 }
 
+.loading_Zone {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40vh;
+}
+
 @media screen and (max-width: 900px) {
   .list-gallery-wrap {
     display: block;

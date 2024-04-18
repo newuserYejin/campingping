@@ -7,8 +7,8 @@ const fetchCurrentLocation = (userLat, userLot, radius) => {
 
     console.log("recv Lat:", userLat, "recv Lot:", userLot);
 
-    const mapX = userLat;
-    const mapY = userLot;
+    const mapX = userLot;
+    const mapY = userLat;
 
     // const mapX = 126.364195
     // const mapY = 37.4594355

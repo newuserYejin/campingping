@@ -5,6 +5,7 @@ import { Carousel } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import AttractionCarousel from "./AttractionCarousel";
 import "./Current.style.css";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const Current = ({ userLat, userLot }) => {
   const [itemsPerPage, setItemsPerPage] = useState(5);
@@ -14,7 +15,7 @@ const Current = ({ userLat, userLot }) => {
     isLoading,
     isError,
     error,
-  } = useFetchLocation(userLat, userLot, 7000);
+  } = useFetchLocation(userLat, userLot, 5000);
 
   // const {
   //   data: apiData,
@@ -28,7 +29,7 @@ const Current = ({ userLat, userLot }) => {
     isLoading: RecommandIsLoading,
     isError: RecommandIsError,
     error: RecommandError,
-  } = useFetchLocation(126.364195, 37.4594355, 20000);
+  } = useFetchLocation(37.4594355, 126.364195, 20000);
 
   useEffect(() => {
     const handleResize = () => {
@@ -51,6 +52,14 @@ const Current = ({ userLat, userLot }) => {
     // 창 크기가 변경될 때마다 handleResize 함수가 실행됩니다.
     window.addEventListener("resize", handleResize);
 
+    if (isLoading) {
+      return (
+        <div className="loading_Zone">
+          <CircularProgress />
+        </div>
+      );
+    }
+
     // 컴포넌트가 언마운트될 때 이벤트 리스너를 정리합니다.
     return () => window.removeEventListener("resize", handleResize);
   }, [itemsPerPage]); // 빈 배열을 전달하여 이 효과가 컴포넌트가 처음 렌더링될 때만 실행되도록 합니다.
@@ -58,6 +67,8 @@ const Current = ({ userLat, userLot }) => {
   useEffect(() => {
     console.log("itemsPerPage:", itemsPerPage);
   }, [itemsPerPage]);
+
+  console.log("Current userLat", userLat, "Current userLot:", userLot);
 
   let itemList = [];
   let attractData = [];
