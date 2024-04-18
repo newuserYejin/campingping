@@ -1,10 +1,11 @@
-import { Routes, Route } from 'react-router-dom';
-import AppLayout from './layout/AppLayout';
-import Homepage from './pages/Homepage/Homepage';
-import NotFoundPage from './pages/NotFound/NotFoundPage';
-import CampingListPage from "./pages/CampingListPage/CampingListPage"
-import CampingDetailPage from './pages/CampingDetailPage/CampingDetailPage';
-import SearchDataPage from './pages/SearchDataPage/SearchDataPage';
+import { Routes, Route } from "react-router-dom";
+import AppLayout from "./layout/AppLayout";
+import Homepage from "./pages/Homepage/Homepage";
+import NotFoundPage from "./pages/NotFound/NotFoundPage";
+import CampingListPage from "./pages/CampingListPage/CampingListPage";
+import CampingDetailPage from "./pages/CampingDetailPage/CampingDetailPage";
+import SearchDataPage from "./pages/SearchDataPage/SearchDataPage";
+import EventListPage from "./pages/EventListPage/EventListPage";
 function App() {
   return (
     <Routes>
@@ -17,6 +18,9 @@ function App() {
         <Route path="/search">
           <Route index element={<SearchDataPage />} />
           <Route path=":contentId" element={<SearchDataPage />} />
+        </Route>
+        <Route path="/event">
+          <Route index element={<EventListPage />} />
         </Route>
       </Route>
       <Route path="*" element={<NotFoundPage />} />
