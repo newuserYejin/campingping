@@ -22,8 +22,6 @@ const MainSearchForm = () => {
     }else{
       alert("검색어를 입력하세요")
     }
-    
-    
   }
   const handleProvinceChange = (e) => {
     setSelectedProvince(e.target.value);
@@ -42,30 +40,36 @@ const MainSearchForm = () => {
         <h3>캠핑장 검색</h3>
         <div className='formDiv'>
           <h4>키워드</h4>
-          <Input id="keyword" placeholder="키워드를 입력하세요" value={keyword} onChange={(e)=>{
-            setKeyword(e.target.value)
-          }}/>
+          <div className='inputDiv'>
+            <Input id="keyword" placeholder="키워드를 입력하세요" value={keyword} onChange={(e)=>{
+              setKeyword(e.target.value)
+            }}/>
+          </div>
         </div>
         <div className='formDiv'>
         <h4>지역별</h4>
-        <Select value={selectedProvince} onChange={handleProvinceChange} displayEmpty>
-          <MenuItem value=""><em>전체/도</em></MenuItem>
-          {Object.keys(regions).map((province) => (
-            <MenuItem key={province} value={province}>{province}</MenuItem>
-          ))}
-        </Select>
-        <Select value={selectedCity} onChange={handleCityChange} displayEmpty>
-          <MenuItem value=""><em>전체/시/군</em></MenuItem>
-          {selectedProvince && regions[selectedProvince].map((city) => (
-            <MenuItem key={city} value={city}>{city}</MenuItem>
-          ))}
-        </Select>
+        <div className='inputDiv'>
+          <Select value={selectedProvince} onChange={handleProvinceChange} displayEmpty>
+            <MenuItem value=""><em>전체/도</em></MenuItem>
+            {Object.keys(regions).map((province) => (
+              <MenuItem key={province} value={province}>{province}</MenuItem>
+            ))}
+          </Select>
+          <Select value={selectedCity} onChange={handleCityChange} displayEmpty>
+            <MenuItem value=""><em>전체/시/군</em></MenuItem>
+            {selectedProvince && regions[selectedProvince].map((city) => (
+              <MenuItem key={city} value={city}>{city}</MenuItem>
+            ))}
+          </Select>
+        </div>
       </div>
         <div className='formDiv'>
           <h4>테마별</h4>
-          <Select>
-            <MenuItem value="">전체테마</MenuItem>
-          </Select>
+          <div className='inputDiv'>
+            <Select>
+              <MenuItem value="">전체테마</MenuItem>
+            </Select>
+          </div>
         </div>
         <div className="formBtnDiv">
           <Button type="submit" variant="contained">검색</Button>

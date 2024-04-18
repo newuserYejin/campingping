@@ -6,18 +6,23 @@
 }
 
 .topBanner{
+  display:flex;
+  align-items: center;
   width:100%;
   height:80vh;
+  min-height:600px;
   max-height:650px;
+  padding:6rem 0;
   background-image:
-    url('../../../assets/bg_topBanner.png'),
-    linear-gradient(180deg,  rgb(17, 17, 40) 0%, rgb(0 88 141) 65%, rgb(46, 139, 87) 30%, rgb(60, 179, 113) 100%);
-  background-repeat:no-repeat no-repeat;
-  background-position: 50% 96%, 50% 100%;
-  background-size: auto 45%, contain;
+    url('../../../assets/bg_topBannerLayer1.png'),
+    url('../../../assets/bg_topBannerLayer2.png'),
+    linear-gradient(180deg,  rgb(6 12 41) 0%, rgb(19,28, 70) 30%, rgb(19,28, 70) 100%);
+  background-repeat:no-repeat, no-repeat, no-repeat;
+  background-position: 50% 125%, 50% 100%, 100% 100%;
+  background-size: auto 48%, contain, contain;
   h2{
     margin:0;
-    padding:6rem 0 1rem;
+    padding:0 0 1rem 0;
     font-family: 'TTHakgyoansimMulgyeolB';
     font-size:3rem;
     line-height:1;
@@ -25,6 +30,8 @@
     color:var(--main-background-color);
     em{
       display:inline;
+      font-family:inherit;
+      font-style:normal;
     }
     @media screen and (max-width:600px) {
       em{display: block;}
@@ -33,5 +40,13 @@
   p{
     text-align:center;
     color:var(--main-background-color);
+  }
+  @media screen and (max-width:600px) {
+    height:auto;
+    min-height:unset;
+    padding:5rem 0;
+    h2{
+      font-size:2.5rem;
+    }
   }
 }
