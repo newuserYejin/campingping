@@ -6,6 +6,7 @@ import Grid from '@mui/material/Unstable_Grid2'; // Grid version 2
 import './SearchDataPage.style.css'
 import { faCloudDownloadAlt } from '@fortawesome/free-solid-svg-icons';
 import ListCard from '../CampingListPage/components/ListCard/ListCard';
+import { Container } from 'react-bootstrap';
 
 const SearchDataPage = () => {
     const [page, setPage] = useState(1)
@@ -32,26 +33,37 @@ const SearchDataPage = () => {
         return (!province || item.doNm === province) && (!city || item.SigunguNm === city);
     })
 
-    let lengthOfFilteredData = filteredData?.length;
+    // let lengthOfFilteredData = filteredData?.length;
+
+    const facilityData = data?.body.items.item.map((item,index)=>(
+        item.sbrsCl.split(',')
+    ))
+
+    
+    
 
     return (
-        <div>
-            <h2>{page} 페이지의 '{keyword}'에 대한 검색 결과 : {lengthOfFilteredData}건</h2>
-            <div>현재 페이지 : {page}</div>
-            <button onClick={() => { setPage(page - 1) }}>이전</button>
-            <button onClick={() => { setPage(page + 1) }}>다음</button>
-            <Grid container spacing={2}>
-                {
-                    filteredData.map((searchData, index) => (
-                        
-                        <div key={index}>
-                            <ListCard data={searchData} />
-                        </div>
-                    ))
-                }
-            </Grid>
-            
-        </div>
+        <Container maxWidth="lg">
+            <div>
+                <h2>{page} 페이지의 '{keyword}'에 대한 검색 결과</h2>
+                <div>현재 페이지 : {page}</div>
+                <button onClick={() => { setPage(page - 1) }}>이전</button>
+                <button onClick={() => { setPage(page + 1) }}>다음</button>
+                <Grid container spacing={2}>
+                    {
+                        filteredData.map((searchData, index) => (
+
+                            
+                                <Grid key={index}>
+                                    <ListCard data={searchData} facilityData={facilityData} index={index} />
+                                </Grid>
+                            
+                        ))
+                    }
+                </Grid>
+
+            </div>
+        </Container>
     )
 }
 

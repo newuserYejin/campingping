@@ -7,7 +7,7 @@ const PARAMS = process.env.REACT_APP_PARAMS_DEFAULT;
 const fetchSearchData = ({keyword, page}) => {
     console.log('keyword? : ' , keyword)
     return apiGocamping.get(
-        `searchList?numOfRows=20&pageNo=${page}&MobileOS=ETC&MobileApp=test&serviceKey=${API_KEY}&${PARAMS}&keyword=${keyword}`
+        `searchList?numOfRows=30&pageNo=${page}&MobileOS=ETC&MobileApp=test&serviceKey=${API_KEY}&${PARAMS}&keyword=${keyword}`
     );
 }
 
