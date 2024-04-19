@@ -6,9 +6,6 @@ import Grid from "@mui/material/Grid";
 import CircularProgress from "@mui/material/CircularProgress";
 import { Container } from "@mui/material";
 import CampingDetailWeather from "./CampingDetailWeather/CampingDetailWeather";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowPointer } from "@fortawesome/free-solid-svg-icons";
-import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
@@ -19,6 +16,7 @@ import Paper from "@mui/material/Paper";
 import { Button } from "@mui/base/Button";
 import AttractionCarousel from "../Homepage/components/CurrentLocation/AttractionCarousel";
 import { useFetchLocation } from "../../hooks/useFetchLocation";
+import CampingDetailMap from "./CampingDetailMap/CampingDetailMap";
 
 const CampingDetailPage = () => {
   const [searchParams] = useSearchParams();
@@ -29,7 +27,7 @@ const CampingDetailPage = () => {
 
   const campingDetail = data[0];
   // console.log("campingDetail", campingDetail);
-
+  
   const {
     data: campingRecommendData,
     isLoading: campingRecommendIsLoading,
@@ -196,8 +194,19 @@ const CampingDetailPage = () => {
                 </div>
               </Grid>
             </Grid>
+            <div className="camping-detail-map-line">
+              <CampingDetailMap
+                lat={lat}
+                lon={lon}
+                name={campingDetail.facltNm}
+              />
+            </div>
             <div className="camping-detail-weather-line">
-              <CampingDetailWeather lat={lat} lon={lon} />
+              <CampingDetailWeather
+                lat={lat}
+                lon={lon}
+                name={campingDetail.facltNm}
+              />
             </div>
             <div className="camping-detail-second-line">
               {campingDetail.intro
@@ -243,16 +252,18 @@ const CampingDetailPage = () => {
                   위해 꼭 필요한 사항은 해당 캠핑장에 미리 확인하시기 바랍니다
                 </div>
               </div>
+              <div className="camping-detail-attraction-line">
+                <AttractionCarousel
+                  attractData={CampingRecommendItemList}
+                  title={campingDetail.facltNm + " 주변 갈만한 곳"}
+                />
+              </div>
             </div>
           </Container>
         </div>
       ) : (
         <div>존재하지 않는 캠핑장입니다.</div>
       )}
-      <AttractionCarousel
-        attractData={CampingRecommendItemList}
-        title={'"' + campingDetail.facltNm + '" 주변 갈만한 곳'}
-      />
     </div>
   );
 };
