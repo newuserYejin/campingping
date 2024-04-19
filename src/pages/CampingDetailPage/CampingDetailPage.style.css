@@ -31,7 +31,6 @@
   margin-top: 15px;
 }
 .camping-detail-url {
-
   margin-right: 10px;
   border-radius: 30px;
   border: 2px solid rgb(22, 22, 144);
@@ -50,6 +49,12 @@
 }
 .camping-detail-weather-line {
   border-top: 2px solid #4b494c36;
+  padding-top: 3em;
+  margin-top: 3em;
+  text-align: center;
+}
+.camping-detail-attraction-line{
+    border-top: 2px solid #4b494c36;
   padding-top: 3em;
   margin-top: 3em;
   text-align: center;

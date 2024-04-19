@@ -14,6 +14,8 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Button } from "@mui/base/Button";
+import AttractionCarousel from "../Homepage/components/CurrentLocation/AttractionCarousel";
+import { useFetchLocation } from "../../hooks/useFetchLocation";
 import CampingDetailMap from "./CampingDetailMap/CampingDetailMap";
 
 const CampingDetailPage = () => {
@@ -24,8 +26,14 @@ const CampingDetailPage = () => {
   const { data = [], isLoading } = useCampingKeywordQuery(keyword);
 
   const campingDetail = data[0];
-
   // console.log("campingDetail", campingDetail);
+  
+  const {
+    data: campingRecommendData,
+    isLoading: campingRecommendIsLoading,
+    isError: campingRecommendIsError,
+    error: campingRecommendError,
+  } = useFetchLocation(lat, lon, 5000);
 
   function createData(name, decription) {
     return { name, decription };
@@ -60,6 +68,29 @@ const CampingDetailPage = () => {
       </div>
     );
   }
+
+  if (campingRecommendIsLoading) {
+    return (
+      <div>
+        <CircularProgress />
+      </div>
+    );
+  }
+
+  if (campingRecommendIsError) {
+    return <div>{campingRecommendError.message}</div>;
+  }
+
+  console.log("campingRecommendData:", campingRecommendData);
+
+  let CampingRecommendAttractData = [];
+  let CampingRecommendItemList = [];
+  CampingRecommendAttractData = campingRecommendData.data?.response;
+  CampingRecommendItemList = CampingRecommendAttractData?.body.items?.item;
+
+  console.log("camping Location lat:", lat, "Camping Location lot:", lon);
+  console.log("CampingRecommendAttractData:", CampingRecommendAttractData);
+  console.log("CampingRecommendItemList:", CampingRecommendItemList);
 
   return (
     <div className="camping-detail-main">
@@ -220,6 +251,12 @@ const CampingDetailPage = () => {
                   반려동물 동반 여부, 부가 시설물, 추가차량 등 원활한 캠핑을
                   위해 꼭 필요한 사항은 해당 캠핑장에 미리 확인하시기 바랍니다
                 </div>
+              </div>
+              <div className="camping-detail-attraction-line">
+                <AttractionCarousel
+                  attractData={CampingRecommendItemList}
+                  title={campingDetail.facltNm + " 주변 갈만한 곳"}
+                />
               </div>
             </div>
           </Container>
