@@ -43,7 +43,12 @@ const AttractionCarousel = ({ attractData, title }) => {
             <Carousel.Item key={index}>
               <div className="carousel-inner">
                 {attractData
-                  .filter((item) => item.firstimage) // 이미지가 있는 아이템만 필터링합니다.
+                  .filter(
+                    (item) =>
+                      item.firstimage ||
+                      item.firstimage2 ||
+                      "../../../../assets/whatAboutCampingLogo.png"
+                  ) // 이미지가 있는 아이템만 필터링합니다.
                   .slice(index * itemsPerPage, (index + 1) * itemsPerPage) // 5개씩 자른 배열을 만듭니다.
                   .map((item) => (
                     <div key={item.contentid} className="contentItem">

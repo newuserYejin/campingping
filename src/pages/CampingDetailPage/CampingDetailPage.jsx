@@ -251,7 +251,7 @@ const CampingDetailPage = () => {
       )}
       <AttractionCarousel
         attractData={CampingRecommendItemList}
-        title={'"' + campingDetail.facltNm + '" 주변 관광지'}
+        title={'"' + campingDetail.facltNm + '" 주변 갈만한 곳'}
       />
     </div>
   );
