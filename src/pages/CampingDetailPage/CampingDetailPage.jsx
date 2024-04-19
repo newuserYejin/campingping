@@ -171,7 +171,7 @@ const CampingDetailPage = () => {
             <div className="camping-detail-second-line">
               {campingDetail.intro
                 ? `${campingDetail.intro}`
-                : `이번 캠핑은 ${campingDetail.facltNm}에서 함께하는건 어떨까요? 공기좋은 곳에서 소중한 순간을 보내게 해주는 ${campingDetail.facltNm}입니다.`}
+                : `이번 캠핑은 ${campingDetail.facltNm}에서 함께하는건 어떨까요? 공기 좋은 곳에서 소중한 순간을 보내게 해주는 ${campingDetail.facltNm}입니다.`}
             </div>
             <div className="camping-detail-second-line-count"></div>
             <div className="comping-detail-table-area">
