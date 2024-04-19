@@ -77,7 +77,7 @@ export const infoFacility = [
 
 export const search_detail_filters = [
   {
-    id: 'search_detail_filter1',
+    id: 'search_detail_filter1',//facltDivNm
     name:'운영형태',
     labels:[
       {id: 'search_detail_filter1-1', name: '지자체'},
@@ -89,7 +89,7 @@ export const search_detail_filters = [
   },
   {
     id: 'search_detail_filter2',
-    name:'입지구분',
+    name:'입지구분',//lctCl
     labels:[
       {id: 'search_detail_filter2-1', name: '해변'},
       {id: 'search_detail_filter2-2', name: '섬'},
@@ -103,7 +103,7 @@ export const search_detail_filters = [
   },
   {
     id: 'search_detail_filter3',
-    name:'주요시설',
+    name:'주요시설',//induty
     labels:[
       {id: 'search_detail_filter3-1', name: '일반야영장'},
       {id: 'search_detail_filter3-2', name: '자동차야영장'},
@@ -126,7 +126,7 @@ export const search_detail_filters = [
   },
   {
     id: 'search_detail_filter6',
-    name:'테마별',
+    name:'테마별',//themaEnvrnCl
     labels:[
       {id: 'search_detail_filter6-1', name: '일출명소'},
       {id: 'search_detail_filter6-2', name: '일몰명소'},
@@ -143,7 +143,7 @@ export const search_detail_filters = [
     ]
   },
   {
-    id: 'search_detail_filter7',
+    id: 'search_detail_filter7', //sbrsCl
     name:'부대시설',
     labels:[
       {id: 'search_detail_filter7-1', name: '전기'},
@@ -166,7 +166,7 @@ export const search_detail_filters = [
     labels:[
       {id: 'search_detail_filter8-1', name: '개인 트레일러 입장가능'},
       {id: 'search_detail_filter8-2', name: '개인 캠핑카 입장가능'},
-      {id: 'search_detail_filter8-3', name: '반려동물 동반가능'},
+      {id: 'search_detail_filter8-3', name: '반려동물 동반가능'},//animalCmgCl "가능" "불가능"
     ]
   },
 ];

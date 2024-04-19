@@ -13,16 +13,13 @@ const MainSearchForm = () => {
   const navigate = useNavigate();
   const [selectedProvince, setSelectedProvince] = useState('');
   const [selectedCity, setSelectedCity] = useState('');
+  const [selectedTheme, setSelectedTheme] = useState('');
   console.log("modalOpen222:", modalOpen,)
 
   const searchByKeyword = (e) => {
     e.preventDefault()//폼 제출시 새로고침 막음
-    if( keyword != "" ){
-      navigate(`/search?q=${keyword}&province=${selectedProvince}&city=${selectedCity}`)
+      navigate(`/search?q=${keyword}&province=${selectedProvince}&city=${selectedCity}&theme=${selectedTheme}`)
       setKeyword("")
-    }else{
-      alert("검색어를 입력하세요")
-    }
   }
   const handleProvinceChange = (e) => {
     setSelectedProvince(e.target.value);
@@ -32,6 +29,10 @@ const MainSearchForm = () => {
   const handleCityChange = (e) => {
     setSelectedCity(e.target.value)
   };
+
+  const handleThemeChage = (e) => {
+    setSelectedTheme(e.target.value)
+  }
   const handleClickOpen = () => setModalOpen(true);
   const handleClickClose = () => setModalOpen(false);
 
@@ -67,8 +68,12 @@ const MainSearchForm = () => {
         <div className='formDiv'>
           <h4>테마별</h4>
           <div className='inputDiv'>
-            <Select>
-              <MenuItem value="">전체테마</MenuItem>
+            <Select value={selectedTheme} onChange={handleThemeChage} displayEmpty>
+              <MenuItem value="">전체테마</MenuItem>{
+                search_detail_filters[4].labels.map((theme)=>(
+                  <MenuItem key={theme.name} value={theme.name}>{theme.name}</MenuItem>
+                ))
+              }
             </Select>
           </div>
         </div>
