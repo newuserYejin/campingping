@@ -1,14 +1,60 @@
 .TagSearch{
+  padding:2.5rem 0;
+  background: #f5f5f5;
+  .title{
+    display:flex;
+    justify-content: space-between;
+    margin-bottom:1rem;
+    h3{
+    }
+    > div{
+      display:flex;
+      button{
+        width:40px;
+        height:40px;
+        font-size:1.5rem;
+        padding:0;
+      }
+    }
+  }
+
   ul{
     display:flex;
     flex-wrap: wrap;
     justify-content: center;
+    gap:10px;
+    justify-content: flex-start;
     margin:0;
     padding:0; 
     li{
       list-style:none;
       margin:0;
       padding:0;
+      border-radius:5px;
+      border:1px solid #d1d1d1;
+      box-sizing:border-box;
+      input[type='checkbox']{
+        position:absolute;
+        top:0;
+        left:0;
+        opacity:0.5;    
+        &:checked + label {
+          background: var(--color-darkGray);
+          color:#fff;
+          border-radius:5px;
+        }
+      }
+      label{
+        position:relative;
+        display:flex;
+        padding:5px 15px;
+        cursor: pointer;
+        &::before{
+          content:"#";
+          display:block;
+          margin-right:3px;
+        }
+      }
     }
   }
 }

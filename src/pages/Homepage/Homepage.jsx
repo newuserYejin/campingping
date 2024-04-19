@@ -8,9 +8,9 @@ const Homepage = () => {
   return (
     <section>
       <TopBanner />
+      <TagSearch/>
       <Container maxWidth="xl">
         <CurrentLocation />
-        <TagSearch/>
       </Container>
     </section>
   );

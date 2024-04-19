@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './TagSearch.style.css';
-import { Box, FormGroup, FormControlLabel, Checkbox , Button } from '@mui/material';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faRotateLeft, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { Container, Box, Button } from '@mui/material';
 import { search_tags } from '../../../constants/info';
 import { useTagSearchQuery } from '../../../hooks/useTagSearch';
 import { useNavigate } from 'react-router-dom';
@@ -31,24 +33,40 @@ const TagSearch = () => {
 
 
   return (
-    <Box component="form" className='TagSearch' onSubmit={searchByTag}>
-      <h3>태그로 찾는 나만의 캠핑장</h3>
-      <ul>
-        {search_tags.map((tag) => 
-          <li key={tag.id}>
-            <FormControlLabel
-              label={tag.text}
-              control={<Checkbox />}
-              name={tag.id}
-              id={tag.id}
-            />
-          </li>
-        )}
-      </ul>
-      <Button>초기화</Button>
-      <Button type='submit'>검색</Button>
-    </Box>
+    
+      <Box component="form" className='TagSearch' onSubmit={searchByTag}>
+        <Container maxWidth="xl">
+          <div className='title'>
+            <h3>태그로 찾는 나만의 캠핑장</h3>
+            <div>
+              <Button>
+                <FontAwesomeIcon icon={faRotateLeft} />
+              </Button>
+              <Button type='submit'>
+                <FontAwesomeIcon icon={faMagnifyingGlass} />
+              </Button>
+            </div>
+          </div>
+          <ul>
+            {search_tags.map((tag) => 
+              <li key={tag.id}>
+                <input type="checkbox" name="search_tags" id={tag.id} />
+                <label htmlFor={tag.id}>{tag.text}</label>
+              </li>
+            )}
+          </ul>
+
+        </Container>
+      </Box>
   )
 }
 
 export default TagSearch
+
+
+
+// <div class="checkbox-wrapper-8">
+//   <input class="tgl tgl-skewed" id="cb3-8" type="checkbox"/>
+//   <label class="tgl-btn" data-tg-off="OFF" data-tg-on="ON" for="cb3-8"></label>
+// </div>
+
