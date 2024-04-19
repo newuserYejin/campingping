@@ -27,13 +27,13 @@ const CampingDetailPage = () => {
 
   const campingDetail = data[0];
   // console.log("campingDetail", campingDetail);
-  
+
   const {
     data: campingRecommendData,
     isLoading: campingRecommendIsLoading,
     isError: campingRecommendIsError,
     error: campingRecommendError,
-  } = useFetchLocation(lat, lon, 5000);
+  } = useFetchLocation(lat, lon, 10000);
 
   function createData(name, decription) {
     return { name, decription };
