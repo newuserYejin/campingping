@@ -51,7 +51,7 @@ const AttractionCarousel = ({ attractData, title }) => {
                         src={`${
                           item.firstimage ||
                           item.firstimage2 ||
-                          "../../../../assets/whatAboutCampingLogo.png"
+                          require("../../../../assets/whatAboutCampingLogo.png")
                         }`}
                         alt="대표 이미지"
                       />
