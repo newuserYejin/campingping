@@ -1,10 +1,33 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Carousel } from "react-bootstrap";
 import "./AttractionCarousel.style.css";
 import CircularProgress from "@mui/material/CircularProgress";
 
-const AttractionCarousel = ({ attractData, title, itemsPerPage }) => {
+const AttractionCarousel = ({ attractData, title }) => {
+  const [itemsPerPage, setItemsPerPage] = useState(5);
+
+  useEffect(() => {
+    const handleResize = () => {
+      let newItemsPerPage;
+      if (window.innerWidth <= 464) {
+        newItemsPerPage = 3;
+      } else {
+        newItemsPerPage = 5;
+      }
+      setItemsPerPage(newItemsPerPage);
+    };
+
+    // 처음에도 한 번 실행하고, 창 크기가 변경될 때마다 실행됩니다.
+    handleResize();
+
+    // 창 크기가 변경될 때마다 handleResize 함수가 실행됩니다.
+    window.addEventListener("resize", handleResize);
+
+    // 컴포넌트가 언마운트될 때 이벤트 리스너를 정리합니다.
+    return () => window.removeEventListener("resize", handleResize);
+  }, []); // 빈 배열을 전달하여 이 효과가 컴포넌트가 처음 렌더링될 때만 실행되도록 합니다.
+
   return (
     <div className="ReccomendSurroungingCarousel">
       <div className="AttractionTitle">{title}</div>

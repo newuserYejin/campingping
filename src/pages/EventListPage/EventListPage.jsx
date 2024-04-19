@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./EventListPage.style.css";
 import { Container, Pagination } from "@mui/material";
 import ListGalleryItem from "../../components/ListGalleryItem/ListGalleryItem";
@@ -14,20 +14,9 @@ const EventListPage = () => {
     isLoading,
     isError,
     error,
-    refetch,
   } = useFetchEvent({ CurrentPage });
 
   const { data: AreaData } = useAreaCode();
-
-  useEffect(() => {
-    // CurrentPage가 변경될 때마다 데이터 다시 가져오기
-    refetch(CurrentPage);
-  }, [CurrentPage, refetch]);
-
-  // useEffect(() => {
-  //   // 페이지가 처음 로딩될 때만 새로고침
-  //   window.location.reload();
-  // }, []);
 
   if (isLoading) {
     return (
