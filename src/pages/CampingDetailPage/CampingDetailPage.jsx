@@ -67,7 +67,7 @@ const CampingDetailPage = () => {
     <div className="camping-detail-main">
       {campingDetail ? (
         <div>
-          <Container>
+          <Container className="camping-detail-main-area">
             <Grid container spacing={2}>
               <Grid xs={12} md={8}>
                 <div className="camping-detail-main-img">
@@ -183,7 +183,7 @@ const CampingDetailPage = () => {
                   component={Paper}
                   className="comping-detail-table"
                 >
-                  <Table sx={{ minWidth: 400 }} aria-label="simple table">
+                  <Table sx={{ minWidth: 350 }} aria-label="simple table">
                     <TableBody>
                       {rows.map((row) => (
                         <TableRow
@@ -192,7 +192,12 @@ const CampingDetailPage = () => {
                             "&:last-child td, &:last-child th": { border: 0 },
                           }}
                         >
-                          <TableCell component="th" scope="row">
+                          <TableCell
+                            component="th"
+                            scope="row"
+                            className="comping-detail-table-row"
+                            sx={{ width: 1/2 }}
+                          >
                             {row.name}
                           </TableCell>
                           <TableCell align="right">{row.decription}</TableCell>
