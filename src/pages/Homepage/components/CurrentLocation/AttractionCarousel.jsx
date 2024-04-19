@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import CircularProgress from "@mui/material/CircularProgress";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Carousel } from "react-bootstrap";
+import CircularProgress from "@mui/material/CircularProgress";
 import "./AttractionCarousel.style.css";
 
 const AttractionCarousel = ({ attractData, title }) => {
