@@ -4,18 +4,26 @@ import {
   useFiveDaysWeatherQuery,
   useWeatherQuery,
 } from "../../../hooks/useWeather";
+import CircularProgress from "@mui/material/CircularProgress";
 
-const CampingDetailWeather = ({ lat, lon }) => {
+const CampingDetailWeather = ({ lat, lon, name}) => {
   // const { data, isLoading } = useWeatherQuery(lat, lon);
   const { data, isLoading } = useFiveDaysWeatherQuery(lat, lon);
 
-  console.log("data", data);
-  // console.log("weather", data?.weather[0].description);
+  // console.log("data", data);
+
+  if (isLoading) {
+    return (
+      <div className="loading_wrap">
+        <CircularProgress />
+      </div>
+    );
+  }
 
   return (
     <div className="camping-detail-weather">
       <div className="camping-detail-weather-box-area">
-        <h1>캠핑장 5일 날씨</h1>
+        <h1>{`${name}`} 주변 5일 날씨</h1>
         <div className="camping-detail-weather-box-5days">
           <div className="camping-detail-weather-box-1day">
             <div>{`${data?.list[2].dt_txt.substr(
@@ -107,7 +115,7 @@ const CampingDetailWeather = ({ lat, lon }) => {
       </div>
 
       <div className="camping-detail-weather-box-area-mobile">
-        <h1>캠핑장의 내일 날씨</h1>
+        <h1>{`${name}`} 의 내일 날씨</h1>
         <div className="camping-detail-weather-box-mobile">
           <div>{`${data?.list[8].dt_txt.substr(
             5,

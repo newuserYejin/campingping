@@ -6,9 +6,6 @@ import Grid from "@mui/material/Grid";
 import CircularProgress from "@mui/material/CircularProgress";
 import { Container } from "@mui/material";
 import CampingDetailWeather from "./CampingDetailWeather/CampingDetailWeather";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowPointer } from "@fortawesome/free-solid-svg-icons";
-import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
@@ -17,6 +14,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Button } from "@mui/base/Button";
+import CampingDetailMap from "./CampingDetailMap/CampingDetailMap";
 
 const CampingDetailPage = () => {
   const [searchParams] = useSearchParams();
@@ -165,8 +163,19 @@ const CampingDetailPage = () => {
                 </div>
               </Grid>
             </Grid>
+            <div className="camping-detail-map-line">
+              <CampingDetailMap
+                lat={lat}
+                lon={lon}
+                name={campingDetail.facltNm}
+              />
+            </div>
             <div className="camping-detail-weather-line">
-              <CampingDetailWeather lat={lat} lon={lon} />
+              <CampingDetailWeather
+                lat={lat}
+                lon={lon}
+                name={campingDetail.facltNm}
+              />
             </div>
             <div className="camping-detail-second-line">
               {campingDetail.intro
@@ -196,7 +205,7 @@ const CampingDetailPage = () => {
                             component="th"
                             scope="row"
                             className="comping-detail-table-row"
-                            sx={{ width: 1/2 }}
+                            sx={{ width: 1 / 2 }}
                           >
                             {row.name}
                           </TableCell>
