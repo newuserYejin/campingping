@@ -6,9 +6,6 @@ import Grid from "@mui/material/Grid";
 import CircularProgress from "@mui/material/CircularProgress";
 import { Container } from "@mui/material";
 import CampingDetailWeather from "./CampingDetailWeather/CampingDetailWeather";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowPointer } from "@fortawesome/free-solid-svg-icons";
-import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
@@ -17,6 +14,9 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Button } from "@mui/base/Button";
+import AttractionCarousel from "../Homepage/components/CurrentLocation/AttractionCarousel";
+import { useFetchLocation } from "../../hooks/useFetchLocation";
+import CampingDetailMap from "./CampingDetailMap/CampingDetailMap";
 
 const CampingDetailPage = () => {
   const [searchParams] = useSearchParams();
@@ -26,8 +26,14 @@ const CampingDetailPage = () => {
   const { data = [], isLoading } = useCampingKeywordQuery(keyword);
 
   const campingDetail = data[0];
-
   // console.log("campingDetail", campingDetail);
+  
+  const {
+    data: campingRecommendData,
+    isLoading: campingRecommendIsLoading,
+    isError: campingRecommendIsError,
+    error: campingRecommendError,
+  } = useFetchLocation(lat, lon, 5000);
 
   function createData(name, decription) {
     return { name, decription };
@@ -63,11 +69,34 @@ const CampingDetailPage = () => {
     );
   }
 
+  if (campingRecommendIsLoading) {
+    return (
+      <div>
+        <CircularProgress />
+      </div>
+    );
+  }
+
+  if (campingRecommendIsError) {
+    return <div>{campingRecommendError.message}</div>;
+  }
+
+  console.log("campingRecommendData:", campingRecommendData);
+
+  let CampingRecommendAttractData = [];
+  let CampingRecommendItemList = [];
+  CampingRecommendAttractData = campingRecommendData.data?.response;
+  CampingRecommendItemList = CampingRecommendAttractData?.body.items?.item;
+
+  console.log("camping Location lat:", lat, "Camping Location lot:", lon);
+  console.log("CampingRecommendAttractData:", CampingRecommendAttractData);
+  console.log("CampingRecommendItemList:", CampingRecommendItemList);
+
   return (
     <div className="camping-detail-main">
       {campingDetail ? (
         <div>
-          <Container>
+          <Container className="camping-detail-main-area">
             <Grid container spacing={2}>
               <Grid xs={12} md={8}>
                 <div className="camping-detail-main-img">
@@ -165,13 +194,24 @@ const CampingDetailPage = () => {
                 </div>
               </Grid>
             </Grid>
+            <div className="camping-detail-map-line">
+              <CampingDetailMap
+                lat={lat}
+                lon={lon}
+                name={campingDetail.facltNm}
+              />
+            </div>
             <div className="camping-detail-weather-line">
-              <CampingDetailWeather lat={lat} lon={lon} />
+              <CampingDetailWeather
+                lat={lat}
+                lon={lon}
+                name={campingDetail.facltNm}
+              />
             </div>
             <div className="camping-detail-second-line">
               {campingDetail.intro
                 ? `${campingDetail.intro}`
-                : `이번 캠핑은 ${campingDetail.facltNm}에서 함께하는건 어떨까요? 공기좋은 곳에서 소중한 순간을 보내게 해주는 ${campingDetail.facltNm}입니다.`}
+                : `이번 캠핑은 ${campingDetail.facltNm}에서 함께하는건 어떨까요? 공기 좋은 곳에서 소중한 순간을 보내게 해주는 ${campingDetail.facltNm}입니다.`}
             </div>
             <div className="camping-detail-second-line-count"></div>
             <div className="comping-detail-table-area">
@@ -183,7 +223,7 @@ const CampingDetailPage = () => {
                   component={Paper}
                   className="comping-detail-table"
                 >
-                  <Table sx={{ minWidth: 400 }} aria-label="simple table">
+                  <Table sx={{ minWidth: 350 }} aria-label="simple table">
                     <TableBody>
                       {rows.map((row) => (
                         <TableRow
@@ -192,7 +232,12 @@ const CampingDetailPage = () => {
                             "&:last-child td, &:last-child th": { border: 0 },
                           }}
                         >
-                          <TableCell component="th" scope="row">
+                          <TableCell
+                            component="th"
+                            scope="row"
+                            className="comping-detail-table-row"
+                            sx={{ width: 1 / 2 }}
+                          >
                             {row.name}
                           </TableCell>
                           <TableCell align="right">{row.decription}</TableCell>
@@ -206,6 +251,12 @@ const CampingDetailPage = () => {
                   반려동물 동반 여부, 부가 시설물, 추가차량 등 원활한 캠핑을
                   위해 꼭 필요한 사항은 해당 캠핑장에 미리 확인하시기 바랍니다
                 </div>
+              </div>
+              <div className="camping-detail-attraction-line">
+                <AttractionCarousel
+                  attractData={CampingRecommendItemList}
+                  title={campingDetail.facltNm + " 주변 갈만한 곳"}
+                />
               </div>
             </div>
           </Container>

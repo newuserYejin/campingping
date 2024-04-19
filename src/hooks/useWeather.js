@@ -18,4 +18,17 @@ export const useWeatherQuery = (lat, lon) => {
   });
 };
 
-// https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric&lang=kr
+
+const fetchFiveDaysWeather = (lat, lon) => {
+  return apiWeather.get(
+    `forecast?lat=${lat}&lon=${lon}&lang=kr&appid=${API_KEY}&units=metric`
+  );
+};
+
+export const useFiveDaysWeatherQuery = (lat, lon) => {
+  return useQuery({
+    queryKey: ["weather", lat, lon],
+    queryFn: () => fetchFiveDaysWeather(lat, lon),
+    select: (result) => result.data
+  });
+};
