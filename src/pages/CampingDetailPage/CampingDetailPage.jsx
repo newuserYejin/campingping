@@ -17,6 +17,8 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Button } from "@mui/base/Button";
+import AttractionCarousel from "../Homepage/components/CurrentLocation/AttractionCarousel";
+import { useFetchLocation } from "../../hooks/useFetchLocation";
 
 const CampingDetailPage = () => {
   const [searchParams] = useSearchParams();
@@ -26,8 +28,14 @@ const CampingDetailPage = () => {
   const { data = [], isLoading } = useCampingKeywordQuery(keyword);
 
   const campingDetail = data[0];
-
   // console.log("campingDetail", campingDetail);
+
+  const {
+    data: campingRecommendData,
+    isLoading: campingRecommendIsLoading,
+    isError: campingRecommendIsError,
+    error: campingRecommendError,
+  } = useFetchLocation(lat, lon, 5000);
 
   function createData(name, decription) {
     return { name, decription };
@@ -62,6 +70,29 @@ const CampingDetailPage = () => {
       </div>
     );
   }
+
+  if (campingRecommendIsLoading) {
+    return (
+      <div>
+        <CircularProgress />
+      </div>
+    );
+  }
+
+  if (campingRecommendIsError) {
+    return <div>{campingRecommendError.message}</div>;
+  }
+
+  console.log("campingRecommendData:", campingRecommendData);
+
+  let CampingRecommendAttractData = [];
+  let CampingRecommendItemList = [];
+  CampingRecommendAttractData = campingRecommendData.data?.response;
+  CampingRecommendItemList = CampingRecommendAttractData?.body.items?.item;
+
+  console.log("camping Location lat:", lat, "Camping Location lot:", lon);
+  console.log("CampingRecommendAttractData:", CampingRecommendAttractData);
+  console.log("CampingRecommendItemList:", CampingRecommendItemList);
 
   return (
     <div className="camping-detail-main">
@@ -196,7 +227,7 @@ const CampingDetailPage = () => {
                             component="th"
                             scope="row"
                             className="comping-detail-table-row"
-                            sx={{ width: 1/2 }}
+                            sx={{ width: 1 / 2 }}
                           >
                             {row.name}
                           </TableCell>
@@ -218,6 +249,10 @@ const CampingDetailPage = () => {
       ) : (
         <div>존재하지 않는 캠핑장입니다.</div>
       )}
+      <AttractionCarousel
+        attractData={CampingRecommendItemList}
+        title={'"' + campingDetail.facltNm + '" 주변 갈만한 곳'}
+      />
     </div>
   );
 };
