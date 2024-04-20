@@ -32,7 +32,7 @@ const EventList = () => {
               src={
                 eventItem.firstimage ||
                 eventItem.firstimage2 ||
-                "../../../src/assets/whatAboutCampingLogo.png"
+                "../../../src/assets/howAboutCampingLogo.png"
               }
             ></img>
             <div>

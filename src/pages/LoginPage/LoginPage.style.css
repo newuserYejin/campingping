@@ -1,6 +1,7 @@
 .login-form-wrap {
   max-width: 600px;
-  height: calc(100vh - 135px - 372px - 8em);
+  margin: auto;
+  
 }
 
 .login-form-wrap .button-login {
@@ -8,4 +9,13 @@
   padding: 12px 0;
   font-size: 1em;
   background: var(--key-color);
+}
+
+@media screen and (max-width: 900px) {
+
+  
+}
+
+@media screen and (max-width: 600px) {
+ 
 }

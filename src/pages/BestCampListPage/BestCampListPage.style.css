@@ -41,10 +41,12 @@
     border: 1px solid #d3d3d3;
     height: 60px;
     div[role="tablist"]{
+      justify-content: space-between;
       height:100%;
     }
     button{
-      width:25%;
+      width:33.3%;
+      max-width:unset;
       font-size:1rem;
       font-weight:800;
       &:not(:first-child){

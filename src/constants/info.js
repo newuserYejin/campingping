@@ -25,22 +25,33 @@ export const infoMember = [
   {
     id: "doheeing",
     name: "한도희",
+    html_url: "https://github.com/doheeing",
+    avatar_url:"https://avatars.githubusercontent.com/u/140877307?v=4"
+    
   },
   {
     id: "alim-ui-developer",
     name: "정아림",
+    html_url:"https://github.com/alim-ui-developer",
+    avatar_url:"https://avatars.githubusercontent.com/u/70739908?v=4"
   },
   {
     id: "hellojoyworldz",
     name: "곽선아",
+    html_url:"https://github.com/hellojoyworldz",
+    avatar_url:"https://avatars.githubusercontent.com/u/116714457?v=4"
   },
   {
     id: "newuserYejin",
     name: "정예진",
+    html_url:"https://github.com/newuserYejin",
+    avatar_url:"https://avatars.githubusercontent.com/u/112992178?v=4"
   },
   {
     id: "sanggyeol1",
     name: "한상결",
+    html_url:"https://github.com/sanggyeol1",
+    avatar_url:"https://avatars.githubusercontent.com/u/126740335?v=4"
   },
 ];
 

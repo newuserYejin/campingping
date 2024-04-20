@@ -15,10 +15,10 @@ const HandleCopyClipBoard = ({ data }) => {
   return (
     <div>
       <button
-      className="clip-board-copy-button"
+        className="clip-board-copy-button"
         onClick={() =>
           copyURLToClipboard(
-            `http://localhost:3003/campings/${data?.contentId}?keyword=${data?.facltNm}&lat=${data?.mapY}&lon=${data?.mapX}`
+            `https://how-about-camping.netlify.app/campings/${data?.contentId}?keyword=${data?.facltNm}&lat=${data?.mapY}&lon=${data?.mapX}`
           )
         }
       >
