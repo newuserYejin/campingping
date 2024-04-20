@@ -86,8 +86,13 @@
 .list-sbrsCl li {
   display: inline-block;
   margin: 8px;
+  font-size: 0.9em;
   text-align: center;
   list-style: none;
+}
+
+.list-sbrsCl .facility-icon {
+  margin-bottom: 4px;
 }
 
 @media screen and (max-width: 900px) {
