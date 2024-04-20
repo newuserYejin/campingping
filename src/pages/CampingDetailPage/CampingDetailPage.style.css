@@ -43,7 +43,10 @@
   text-decoration: underline;
   color: rgb(22, 22, 144);
 }
-
+.kakao-talk-area{
+  display: flex;
+  justify-content: flex-end;
+}
 .camping-detail-map-line {
   border-top: 2px solid #4b494c36;
   padding-top: 3em;
