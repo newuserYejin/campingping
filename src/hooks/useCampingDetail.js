@@ -4,9 +4,9 @@ import apiGocamping from "../utils/apiGocamping";
 const API_KEY = process.env.REACT_APP_KEY_ENCODING_SA;
 const PARAMS = process.env.REACT_APP_PARAMS_DEFAULT;
 
-const fetchCampingDetail = () => {
+const fetchCampingDetail = (pageNo) => {
   return apiGocamping.get(
-    `basedList?serviceKey=${API_KEY}&${PARAMS}&pageNo=1&numOfRows=20/`
+    `basedList?serviceKey=${API_KEY}&${PARAMS}&pageNo=${pageNo}&numOfRows=20/`
   );
 };
 
@@ -29,5 +29,19 @@ export const useCampingKeywordQuery = (keyword) => {
     queryKey: ["camping", keyword],
     queryFn: () => fetchCampingKeyword(keyword),
     select: (result) => result.data.response?.body?.items?.item,
+  });
+};
+
+const fetchCampingDetailPageNum = (pageNo) => {
+  return apiGocamping.get(
+    `basedList?serviceKey=${API_KEY}&${PARAMS}&pageNo=${pageNo}&numOfRows=20/`
+  );
+};
+
+export const useCampingDetailPageNumQuery = (pageNo) => {
+  return useQuery({
+    queryKey: ["camping_detail_page_num", pageNo],
+    queryFn: () => fetchCampingDetailPageNum(pageNo),
+    select: (result) => result.data.response.body,
   });
 };

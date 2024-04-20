@@ -6,7 +6,7 @@ import {
 } from "../../../hooks/useWeather";
 import CircularProgress from "@mui/material/CircularProgress";
 
-const CampingDetailWeather = ({ lat, lon, name}) => {
+const CampingDetailWeather = ({ lat, lon, name }) => {
   // const { data, isLoading } = useWeatherQuery(lat, lon);
   const { data, isLoading } = useFiveDaysWeatherQuery(lat, lon);
 
@@ -54,7 +54,7 @@ const CampingDetailWeather = ({ lat, lon, name}) => {
             />
             <div>{data?.list[10].weather[0].description}</div>
             <div>{`현재 온도 : ${Math.round(data?.list[10]?.main.temp)}℃`}</div>
-            <div>{`(${Math.round(data?.list[10]?.main.temp_min)}도/${Math.round(
+            <div>{`(${Math.round(data?.list[10]?.main.temp_min)}℃/${Math.round(
               data?.list[10]?.main.temp_max
             )}℃)`}</div>
             <div>{`강수확률 : ${data?.list[10]?.pop * 100}%`}</div>
@@ -130,7 +130,7 @@ const CampingDetailWeather = ({ lat, lon, name}) => {
           <h6>{`(${Math.round(data?.list[8]?.main.temp_min)}℃/${Math.round(
             data?.list[8]?.main.temp_max
           )}℃)`}</h6>
-          <h6>{`강수확률 : ${data?.list[8]?.pop * 100}%`}</h6>
+          <h6>{`강수확률 : ${Math.round(data?.list[8]?.pop) * 100}%`}</h6>
           <h6>{`습도 : ${Math.round(data?.list[8]?.main.humidity)}%`}</h6>
         </div>
       </div>
