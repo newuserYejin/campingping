@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./CampingDetailPage.style.css";
 import { useCampingKeywordQuery } from "../../hooks/useCampingDetail";
 import { useSearchParams } from "react-router-dom";
 import Grid from "@mui/material/Grid";
@@ -17,6 +16,7 @@ import { Button } from "@mui/base/Button";
 import AttractionCarousel from "../Homepage/components/CurrentLocation/AttractionCarousel";
 import { useFetchLocation } from "../../hooks/useFetchLocation";
 import CampingDetailMap from "./CampingDetailMap/CampingDetailMap";
+import "./CampingDetailPage.style.css";
 
 const CampingDetailPage = () => {
   const [searchParams] = useSearchParams();
@@ -100,13 +100,22 @@ const CampingDetailPage = () => {
             <Grid container spacing={2}>
               <Grid xs={12} md={8}>
                 <div className="camping-detail-main-img">
-                  <div
-                    style={{
-                      backgroundImage:
-                        "url(" + `${campingDetail.firstImageUrl}` + ")",
-                    }}
-                    className="img"
-                  ></div>
+                  {campingDetail.firstImageUrl ? (
+                    <div
+                      style={{
+                        backgroundImage:
+                          "url(" + `${campingDetail.firstImageUrl}` + ")",
+                      }}
+                      className="img"
+                    />
+                  ) : (
+                    <div
+                      style={{
+                        backgroundImage: `url("https://search.pstatic.net/sunny/?src=https%3A%2F%2Fwatermark.lovepik.com%2Fphoto%2F40023%2F1965.jpg_wh1200.jpg&type=sc960_832")`,
+                      }}
+                      className="img"
+                    />
+                  )}
                 </div>
               </Grid>
               <Grid xs={12} md={4}>

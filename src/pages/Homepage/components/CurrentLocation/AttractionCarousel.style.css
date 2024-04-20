@@ -2,13 +2,6 @@
     font-family: 'Spoqa Han Sans Neo', sans-serif;
 }
 
-.AttractionTitle {
-    font-size: 1.5em;
-    font-weight: bold;
-    margin: 0;
-    padding: 10px 20px;
-}
-
 .AttractionCarousel {
     height: 100%;
 }
@@ -146,10 +139,6 @@
         font-size: 0.9em;
         width: 90%;
     }
-
-    .contentItem {
-        height: 23vw;
-    }
 }
 
 
@@ -189,10 +178,6 @@
     }
 
 
-
-    .AttractionTitle {
-        font-size: 1em;
-    }
 
     .contentItem {
         height: 28vw;

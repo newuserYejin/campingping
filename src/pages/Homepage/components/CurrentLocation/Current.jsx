@@ -56,9 +56,19 @@ const Current = ({ userLat, userLot }) => {
   return (
     <div className="AttractionCarousel">
       {itemList?.body.items === "" ? null : (
+        <section className="AttractionCarouselSection">
+          <AttractionCarousel
+            attractData={attractData}
+            title="우리 집 주변 관광지"
+            // itemsPerPage={itemsPerPage}
+          />
+        </section>
+      )}
+
+      <section className="AttractionCarouselSection">
         <AttractionCarousel
-          attractData={attractData}
-          title="우리 집 주변 관광지"
+          attractData={RecommendAttractData}
+          title="요즘 추천 관광지"
           // itemsPerPage={itemsPerPage}
         />
       )}
