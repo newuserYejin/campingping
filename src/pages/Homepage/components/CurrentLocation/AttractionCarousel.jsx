@@ -55,11 +55,15 @@ const AttractionCarousel = ({ attractData, title }) => {
                         }`}
                         alt="대표 이미지"
                       />
-                      <div className="title">{item.title}</div>
-                      {item.addr1 && (
-                        <div className="address">{item.addr1}</div>
-                      )}
-                      {/* <div>ContentID: {item.contentid}</div> */}
+                      <div className="RectangleBox">
+                        <div className="ItemInfo">
+                          <div className="title">{item.title}</div>
+                          {item.addr1 && (
+                            <div className="address">{item.addr1}</div>
+                          )}
+                        </div>
+                      </div>
+                      <div className="title miniTitle">{item.title}</div>
                     </div>
                   ))}
               </div>

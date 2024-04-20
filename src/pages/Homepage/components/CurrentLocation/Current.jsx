@@ -63,7 +63,7 @@ const Current = ({ userLat, userLot }) => {
         />
       )}
 
-      {itemList?.body.items === "" ? null : <hr></hr>}
+      {/* {itemList?.body.items === "" ? null : <hr></hr>} */}
 
       <AttractionCarousel
         attractData={RecommendAttractData}

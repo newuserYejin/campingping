@@ -31,6 +31,7 @@
 .carousel-item {
     height: 100%;
     cursor: pointer;
+    margin-bottom: 10px;
 }
 
 .active.carousel-item {
@@ -50,7 +51,7 @@
 }
 
 .contentItem .title {
-    margin: 10px 0;
+    margin: 5px 0;
     font-weight: bold;
     font-size: 1.1em;
 }
@@ -81,6 +82,45 @@
     color: white;
 }
 
+/*아이템 꾸미기*/
+.contentItem {
+    height: 18vw;
+
+    img {
+        position: absolute;
+        top: 0;
+        z-index: 2;
+    }
+
+    .RectangleBox {
+        min-width: 18%;
+        max-width: 18%;
+        top: 5vw;
+        height: calc(100% - 5vw);
+        position: absolute;
+
+        display: flex;
+        align-items: end;
+        justify-content: center;
+
+        background-color: #23489d;
+    }
+
+    .ItemInfo {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        color: white;
+        height: 100%;
+        padding-top: calc(5vw + 5px);
+    }
+
+    .title .address {
+        display: flex;
+        justify-content: center;
+    }
+}
 
 /* 아래버튼 */
 .carousel-indicators {
@@ -97,53 +137,79 @@
 }
 
 .ReccomendSurroungingCarousel {
-    max-height: 38vh;
+    /* max-height: 38vh; */
     margin-bottom: 10px;
 }
 
-@media (max-width:770px) {
+@media (max-width:1024px) {
+    .ItemInfo {
+        font-size: 0.9em;
+        width: 90%;
+    }
+
+    .contentItem {
+        height: 23vw;
+    }
+}
+
+
+@media (max-width:900px) {
+
     .AttractionTitle {
         font-size: 1.2em;
     }
 
-    .contentItem {
-        font-size: 0.8em;
-    }
-
-    .contentItem .title {
-        font-size: 0.9em;
+    .ItemInfo {
+        font-size: 0.7em;
     }
 
     .contentItem .address {
         max-width: 100%;
     }
 
-    .contentItem img {
-        width: 15vw;
-        height: 15vw;
-        border-radius: 50%;
+    .ReccomendSurroungingCarousel {
+        /* max-height: 25vh; */
+        margin-bottom: 10px;
     }
 
-    .ReccomendSurroungingCarousel {
-        max-height: 25vh;
-        margin-bottom: 10px;
+    .miniTitle {
+        display: none;
+    }
+}
+
+@media (max-width:600px) {
+    .ItemInfo {
+        font-size: 0.5em;
     }
 }
 
 @media (max-width: 464px) {
+    .miniTitle {
+        display: block;
+    }
+
+
 
     .AttractionTitle {
         font-size: 1em;
     }
 
     .contentItem {
-        width: 30%;
+        height: 28vw;
+        width: 40%;
         font-size: 0.5em;
+
+        .RectangleBox {
+            display: none;
+        }
     }
 
     .contentItem .title {
-        margin: 5px 0;
+        width: 80%;
+        color: black;
         font-size: 1.5em;
+        margin-top: calc(16vw + 10px);
+
     }
 
     .contentItem .address {
