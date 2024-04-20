@@ -40,7 +40,9 @@ const CampingDetailMap = ({ lat, lon, name }) => {
         className="camping-detail-map"
       ></div>
       <div className="camping-detail-map-url-area">
-        <div>{`우리집에서 ${name}까지 가려면?`}</div>
+        <div>
+          <strong>{`우리집에서 ${name}까지 가려면?`}</strong>
+        </div>
         <Button
           onClick={() =>
             window.open(`https://map.kakao.com/link/to/${name},${lat},${lon}`)
