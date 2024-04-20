@@ -25,7 +25,6 @@ const TagSearch = () => {
   // 모바일 태그 더보기 버튼
   const [isTagOpen, setIsTagOpen] = useState(false);
   const tagToggle = (isTagOpen) => {
-    console.log("tagTaggle")
     setIsTagOpen(!isTagOpen)
   }
 
