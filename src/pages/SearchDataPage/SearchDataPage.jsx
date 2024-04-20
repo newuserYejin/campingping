@@ -151,6 +151,9 @@ const SearchDataPage = () => {
             if (selectedTag.includes('가족')) {
                 valid = valid && (item.intro.includes('가족') || item.featureNm.includes('가족') || item.lineIntro.includes('가족'))
             }
+            if (selectedTag.includes('축제')) {
+                valid = valid && (item.intro.includes('축제') || item.featureNm.includes('축제') || item.lineIntro.includes('축제'))
+            }
 
             return valid
         }
@@ -163,7 +166,11 @@ const SearchDataPage = () => {
         item.sbrsCl.split(',')
     ))
 
-    const tagsArray = selectedTag.split(",")
+
+    // const tagsArray = selectedTag?.split(",")
+
+    
+    
 
 
 
@@ -175,7 +182,8 @@ const SearchDataPage = () => {
                 <div>
                     <div className='search-result-title'>
                         <h2>{page}페이지: {lengthOfFilteredData}건의 검색 결과가 있습니다.</h2>
-                        <h3>{tagsArray.map((tag)=>( '# ' + tag + " "))}</h3>
+                    
+                        
                     </div>
                     <button onClick={() => { setPage(page - 1) }}>이전</button>
                     <button onClick={() => { setPage(page + 1) }}>다음</button>

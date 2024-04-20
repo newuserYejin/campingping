@@ -21,21 +21,17 @@ const TagSearch = () => {
     console.log(selectedTag)
   },[selectedTag])
   
-
   const searchByTag = (e) => {
     e.preventDefault()//폼 제출시 새로고침 막음
       navigate(`/search?q=`)
       navigate(`/search?q=&selectedTag=${selectedTag}`)
   }
 
-
-  
   // 모바일 태그 더보기 버튼
   const [isTagOpen, setIsTagOpen] = useState(false);
   const tagToggle = (isTagOpen) => {
     setIsTagOpen(!isTagOpen)
   }
-
 
   return (
     <Box component="form" className='TagSearch' onSubmit={searchByTag}>
@@ -63,9 +59,9 @@ const TagSearch = () => {
         <p className='btn_more' onClick={() => tagToggle(isTagOpen)}>
           <FontAwesomeIcon icon={isTagOpen == false?faAngleDown:faAngleUp} /><span>{isTagOpen == false?"더보기":"닫기"}</span></p>
         <div className='btnBox'>
-          <Button className="btn_refresh">
+          <Button onClick={()=>{setSelectedTag([])}} className="btn_refresh">
             <FontAwesomeIcon icon={faRotateLeft} />
-            <span onClick={()=>{selectedTag = []}}>초기화</span>
+            <span>초기화</span>
           </Button>
           <Button className="btn_tagSearch" type="submit">
             <FontAwesomeIcon icon={faMagnifyingGlass} />
