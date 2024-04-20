@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const apiGocamping = axios.create({
-  baseURL: "http://apis.data.go.kr/B551011/GoCamping",
-  timeout: 1000,
+  baseURL: "https://apis.data.go.kr/B551011/GoCamping",
+  timeout: 3000,
 });
 
 // 요청 인터셉터 추가하기

@@ -18,6 +18,7 @@ const fetchCurrentLocation = (userLat, userLot, radius) => {
             mapX,
             mapY,
             radius: radius,
+            contentTypeId: 12,
             numOfRows: 100 // 출력 개수 조정,
         }
     })

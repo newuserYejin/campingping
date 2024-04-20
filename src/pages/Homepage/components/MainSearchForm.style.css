@@ -1,122 +1,138 @@
 
 .mainSearchForm{
-  padding:2rem;
+  display:flex;
   width:100%;
-  max-width:520px;
-  margin:2rem auto 0;
-  background-color: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  h3{
-    margin:0;
-    font-size:0;
-    text-indent:-9999px;
-  }
+  height: auto;
+  min-height:60px;
+  margin-top:-30px;
+  background:#fff;
   .formDiv{
     display:flex;
-    align-items: center;
-    width:100%;
-    margin:5px 0;
-    .location{
+    width:calc(100% - 120px);
+    .formInnerBox{
       display:flex;
-      gap:5px;
-      width:80%;
-      select{
-        width:calc((100% - 5px) / 2);
-        height:45px;
-        padding:0;
-        border-radius:5px;
-        background:rgba(255, 255, 255, 0.15);
-        color:1px solid var(--main-background-color);
-        border:none;
-      }
-    }
-    h4{
-      display:block;
+      align-items: center;
       width:25%;
-      margin:0;
-      padding:0;
-      font-size:1rem;
-      line-height:1;
-      color:var(--main-background-color);
-    }
-    .inputDiv{
-      display:flex;
-      gap:5px;
-      width:75%;
-    }
-    div[class^="MuiInputBase"]{
-      width:100%;
-      em{
-        font-style:normal;
-        line-height:45px;
+      &:not(:first-child){
+        border-left:1px solid #d3d3d3
       }
-      fieldset{
-        border:none;
+      i{
+        display:block;
+        width:50px;
+        font-size:1.35rem;
+        text-align: center;
       }
-      &::before, &::after{
-        display:none;
+      div[class*="MuiInput-root"], div[class*="MuiOutlinedInput-root"]{
+        width:calc(100% - 50px);
+        em{
+          font-style:normal;
+        }
+        fieldset{
+          border:none;
+        }
+        .MuiSelect-select{
+          padding-left:0;
+        }
+        &::before, &::after{
+          display:none;
+        }
       }
     }
-    div[class^="MuiSelect"], input[type='text']{
-      height:45px;
-      line-height:45px;
-      padding:0;
-      border-radius:5px;
-      background:rgba(255, 255, 255, 0.15);
-      color:var(--main-background-color);
-      border:none;
-      padding:0 10px;
-
+    select{
+      display:block;
     }
-    /* input[type='text']{
-      width:100%;
-    } */
+    input[type='value']{
+      display:block;
+    }
   }
   .formBtnDiv{
     display:flex;
-    justify-content: center;
-    gap:10px;
-    margin-top:20px;
+    width:120px;
+    background:var(--color-darkGray);
     button{
-      display:block;
-      height:45px;
+      width:60px;
+      min-width:60px;
+      height:60px;
+      font-size: 1.25rem;
+      border-radius:0;
+      background:var(--color-darkGray);
       &[type='submit']{
-        width:70%;
-        background:var(--key-color);
+        border-width:0 1px 0 0;
+        border-style:solid;
+        border-color:rgba(255,255,255,0.2);
       }
-      &[type='button']{
-        width:30%;
-        background:var(--color-darkGray);
+      &:hover{
+        background: var(--key-color);
       }
     }
   }
-  @media screen and (max-width:600px) {
-    width:90%;
-    padding:1.5rem;
+}
+
+@media screen and (max-width:900px) {
+  .mainSearchForm{
+    margin-top:-60px;
     .formDiv{
-      align-items: flex-start;
-      flex-direction: column;
-      margin:0 0 15px 0;
-      h4{
-        margin-bottom:5px;
-      }
-      div[class^="MuiInputBase"], .location{
-        width:100%;
-      }
-      .inputDiv{
-        width:100%;
+      flex-wrap: wrap;
+      width:calc(100% - 60px);
+      .formInnerBox{
+        width:50%;
+        height:60px;
+        border-left:1px solid #d3d3d3;
+        border-bottom:1px solid #d3d3d3;
       }
     }
     .formBtnDiv{
-      flex-direction: column;
-      margin-top:0;
+      width:60px;
+      flex-direction: column-reverse;
+      
+    }
+    .formBtnDiv{
       button{
         &[type='submit']{
+          border-width:1px 0 0 0;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width:600px) {
+  .mainSearchForm{
+    min-height:50px;
+    margin-top:0px;
+    .formDiv{
+      width:calc(100% - 50px);
+      border-top:1px solid #d3d3d3;
+      i{
+        width:50px;
+        font-size:1.35rem;
+      }
+      .formInnerBox {
+        width:100%;
+        height:50px;
+        div[class*="MuiInput-root"],
+        div[class*="MuiOutlinedInput-root"]{
           width:100%;
         }
-        &[type='button']{
-          width:100%;
+      }
+    }
+    .formBtnDiv{
+      width:50px;
+      height:auto;
+      button{
+        width:50px;
+        min-width:50px;
+        height:50px;
+        font-size: 1.25rem;
+      }  
+    }
+    .formBtnDiv{
+      button{
+        height:100px;
+        &[type='submit']{
+          border-width:0
         }
+
       }
     }
   }
@@ -126,15 +142,21 @@
   .MuiDialog-paper{
     width:100%;
     max-width:800px;
+    position:relative;
     h4{
       margin:0;
-      padding:1.5rem;
-      font-size:1.25rem;
+      padding:2.5rem 1rem;
+      border-bottom:1px solid silver;
+      font-family: 'TTHakgyoansimMoheomgaB';
+      text-align:center;
+      font-size:2rem;
+      color:var(--main-font-color);
     }
     h5{
-      font-size:1.15rem;
+      font-family: 'TTHakgyoansimMoheomgaB';
+      font-size:1.25rem;
       line-height:1;
-      margin:25px 0 10px;
+      margin:2rem 0 0.5rem;
     }
     ul{
       display:flex;
@@ -153,6 +175,15 @@
         }
       }
     }
+    .btn_modalClose{
+      position:absolute;
+      top:10px;
+      right:10px;
+      padding:10px;
+      font-size:2rem;
+      line-height:1;
+      cursor: pointer;
+    }
   }
   .formBtnDiv{
     width:60%;
@@ -163,8 +194,9 @@
     margin:3rem auto 2rem;
     button{
       display:block;
-      height:45px;
+      height:50px;
       margin:0;
+      font-size:1rem;
       color:var(--main-background-color);
       &.btn_search{
         width:70%;

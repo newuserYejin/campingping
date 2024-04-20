@@ -5,6 +5,57 @@
   align-items: center;
   width: 64px;
   height: 64px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: auto 24px;
   border-radius: 50%;
   border: 1px solid #ddd;
+}
+
+.icon-volt {
+  background-image: url(../../assets/ico_volt.png);
+}
+
+.icon-wifi {
+  background-image: url(../../assets/ico_wifi.png);
+}
+
+.icon-wood {
+  background-image: url(../../assets/ico_wood.png);
+}
+
+.icon-hotwater {
+  background-image: url(../../assets/ico_hotwater.png);
+}
+
+.icon-tramp {
+  background-image: url(../../assets/ico_tramp.png);
+}
+
+.icon-pool {
+  background-image: url(../../assets/ico_pool.png);
+}
+
+.icon-playzone {
+  background-image: url(../../assets/ico_playzone.png);
+}
+
+.icon-walk {
+  background-image: url(../../assets/ico_walk.png);
+}
+
+.icon-ground {
+  background-image: url(../../assets/ico_ground.png);
+}
+
+.icon-sports {
+  background-image: url(../../assets/ico_sports.png);
+}
+
+.icon-mart {
+  background-image: url(../../assets/ico_mart.png);
+}
+
+.icon-dumpstation {
+  background-image: url(../../assets/ico_dump_station.png);
 }
