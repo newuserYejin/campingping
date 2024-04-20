@@ -63,7 +63,7 @@
   margin-top: 3em;
   text-align: center;
 
-  max-width: 100%;
+  width: 100%;
 
   .carousel-inner {
     max-width: 100%;
@@ -146,8 +146,8 @@
     /* 한글 기준으로 줄 바꿈 */
     word-break: keep-all;
   }
-
-  .camping-detail-second-grid {
-    padding-left: 2em;
+  .css-mhc70k-MuiGrid-root{
+    margin-left: auto !important;
+    width: 100% !important;
   }
 }

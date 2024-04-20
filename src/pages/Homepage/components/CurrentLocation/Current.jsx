@@ -71,7 +71,15 @@ const Current = ({ userLat, userLot }) => {
           title="요즘 추천 관광지"
           // itemsPerPage={itemsPerPage}
         />
-      </section>
+      )}
+
+      {/* {itemList?.body.items === "" ? null : <hr></hr>} */}
+
+      <AttractionCarousel
+        attractData={RecommendAttractData}
+        title="요즘 추천 관광지"
+        // itemsPerPage={itemsPerPage}
+      />
     </div>
   );
 };
