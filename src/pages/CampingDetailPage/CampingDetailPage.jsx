@@ -162,6 +162,11 @@ const CampingDetailPage = () => {
                     )}
                   </div>
                   <div>
+                    <div>
+                      {campingDetail.siteBottomCl4 > 0
+                        ? `바닥형태(단위:면) : 자갈(${campingDetail.siteBottomCl4})`
+                        : ""}
+                    </div>
                     {campingDetail.siteBottomCl1 > 0
                       ? `바닥형태(단위:면) : 잔디(${campingDetail.siteBottomCl1})`
                       : ""}
@@ -177,18 +182,8 @@ const CampingDetailPage = () => {
                       : ""}
                   </div>
                   <div>
-                    {campingDetail.siteBottomCl4 > 0
-                      ? `바닥형태(단위:면) : 자갈(${campingDetail.siteBottomCl4})`
-                      : ""}
-                  </div>
-                  <div>
                     {campingDetail.siteBottomCl5 > 0
                       ? `바닥형태(단위:면) : 맨흙(${campingDetail.siteBottomCl5})`
-                      : ""}
-                  </div>
-                  <div>
-                    {campingDetail.siteBottomCl1 > 0
-                      ? `잔디데크 : ${campingDetail.siteBottomCl1}개`
                       : ""}
                   </div>
                 </div>
