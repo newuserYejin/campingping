@@ -20,7 +20,7 @@ function App() {
           <Route index element={<CampingListPage />} />
           <Route path=":contentId" element={<CampingDetailPage />} />
         </Route>
-        <Route path='/EventList'>
+        <Route path="/EventList">
           <Route index element={<EventListPage />} />
         </Route>
         <Route path="/search">
