@@ -103,6 +103,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        text-align: center;
 
         color: white;
         height: 100%;
@@ -132,6 +133,10 @@
 .ReccomendSurroungingCarousel {
     /* max-height: 38vh; */
     margin-bottom: 10px;
+}
+
+.miniTitle {
+    display: none;
 }
 
 @media (max-width:1024px) {
@@ -168,9 +173,6 @@
 }
 
 @media (max-width:600px) {
-    .miniTitle {
-        display: none;
-    }
 
     .contentItem {
         .title {
