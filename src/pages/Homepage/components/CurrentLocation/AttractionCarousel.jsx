@@ -53,7 +53,7 @@ const AttractionCarousel = ({ attractData, title }) => {
                         src={`${
                           item.firstimage ||
                           item.firstimage2 ||
-                          require("../../../../assets/whatAboutCampingLogo.png")
+                          require("../../../../assets/Lovepik_com-400231965-camping.jpg")
                         }`}
                         alt="대표 이미지"
                       />
