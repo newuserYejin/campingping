@@ -10,6 +10,7 @@ import { Container } from "react-bootstrap";
 import { Pagination } from "@mui/material";
 import TopBanner from "../Homepage/components/TopBanner";
 import { CircularProgress } from "@mui/material";
+import TitleMain from "../../components/Title/MainTitle";
 
 const SearchDataPage = () => {
   const [page, setPage] = useState(1);
@@ -220,6 +221,17 @@ const SearchDataPage = () => {
 
   // const tagsArray = selectedTag?.split(",")
 
+  const changePage = (event, page) => {
+    setPage(page);
+  };
+
+  let title = "";
+  if (keyword || province || city || theme || selectedTag) {
+    title = "검색 결과";
+  } else {
+    title = "전체 캠핑장";
+  }
+
   return (
     <>
       <TopBanner />
@@ -227,23 +239,9 @@ const SearchDataPage = () => {
         <div>
           <div className="search-result-title">
             <h2>
-              {page}페이지: {lengthOfFilteredData}건의 검색 결과가 있습니다.
+              <TitleMain title={title} />
             </h2>
           </div>
-          <button
-            onClick={() => {
-              setPage(page - 1);
-            }}
-          >
-            이전
-          </button>
-          <button
-            onClick={() => {
-              setPage(page + 1);
-            }}
-          >
-            다음
-          </button>
 
           {filteredData.map((searchData, index) => (
             <ListCard
@@ -256,6 +254,7 @@ const SearchDataPage = () => {
       </Container>
       <Pagination
         count={12}
+        page={page}
         defaultPage={1}
         siblingCount={0}
         size="large"
@@ -264,6 +263,7 @@ const SearchDataPage = () => {
           justifyContent: "center",
           marginTop: "2em",
         }}
+        onChange={changePage}
       />
     </>
   );
