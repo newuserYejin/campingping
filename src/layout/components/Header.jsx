@@ -21,7 +21,7 @@ const drawerWidth = 260;
 const navItems = [
   ["캠핑장 찾기🔍", "/search"],
   ["행사✨", "/event"],
-  ["공공 우수 야영장⛺", "/goodCamp"],
+  ["공공 우수 야영장⛺", "/bestCamp"],
 ];
 
 const GnbItemMobile = styled.li`

@@ -7,7 +7,7 @@ import CampingDetailPage from "./pages/CampingDetailPage/CampingDetailPage";
 import SearchDataPage from "./pages/SearchDataPage/SearchDataPage";
 import EventListPage from "./pages/EventListPage/EventListPage";
 import EventList from "./pages/EventList/EventList"
-import GoodPublicCampPage from "./pages/GoodPublicCampPage/GoodPublicCampPage"
+import BestCampListPage from "./pages/BestCampListPage/BestCampListPage"
 import CampingPage from "./pages/CampingPage/CampingPage"
 
 function App() {
@@ -29,8 +29,8 @@ function App() {
         <Route path="/event">
           <Route index element={<EventListPage />} />
         </Route>
-        <Route path="/goodCamp">
-          <Route index element={<GoodPublicCampPage />} />
+        <Route path="/bestCamp">
+          <Route index element={<BestCampListPage />} />
         </Route>
         {/* 아래 /campingdetail -> <CampingPage/>는 detail page 확인을 위해 임의로 만들었습니다. page연결시 지울예정 */}
         <Route path="/campingsdetail">
