@@ -142,15 +142,21 @@
   .MuiDialog-paper{
     width:100%;
     max-width:800px;
+    position:relative;
     h4{
       margin:0;
-      padding:1.5rem;
-      font-size:1.25rem;
+      padding:2.5rem 1rem;
+      border-bottom:1px solid silver;
+      font-family: 'TTHakgyoansimMoheomgaB';
+      text-align:center;
+      font-size:2rem;
+      color:var(--main-font-color);
     }
     h5{
-      font-size:1.15rem;
+      font-family: 'TTHakgyoansimMoheomgaB';
+      font-size:1.25rem;
       line-height:1;
-      margin:25px 0 10px;
+      margin:2rem 0 0.5rem;
     }
     ul{
       display:flex;
@@ -169,6 +175,15 @@
         }
       }
     }
+    .btn_modalClose{
+      position:absolute;
+      top:10px;
+      right:10px;
+      padding:10px;
+      font-size:2rem;
+      line-height:1;
+      cursor: pointer;
+    }
   }
   .formBtnDiv{
     width:60%;
@@ -179,8 +194,9 @@
     margin:3rem auto 2rem;
     button{
       display:block;
-      height:45px;
+      height:50px;
       margin:0;
+      font-size:1rem;
       color:var(--main-background-color);
       &.btn_search{
         width:70%;
