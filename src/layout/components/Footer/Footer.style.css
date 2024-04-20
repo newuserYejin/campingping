@@ -24,6 +24,7 @@
 }
 
 .footer-info {
+  margin:0;
   padding: 24px 0;
   font-style: normal;
   color: var(--color-gray);
