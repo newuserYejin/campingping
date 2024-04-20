@@ -15,13 +15,6 @@ const Current = ({ userLat, userLot }) => {
     error,
   } = useFetchLocation(userLat, userLot, 5000);
 
-  // const {
-  //   data: apiData,
-  //   isLoading,
-  //   isError,
-  //   error,
-  // } = useFetchLocation(127.5612654, 37.7300273, 3000);
-
   const {
     data: RecommandData,
     isLoading: RecommandIsLoading,
@@ -38,6 +31,8 @@ const Current = ({ userLat, userLot }) => {
   }
 
   console.log("Current userLat", userLat, "Current userLot:", userLot);
+  console.log("apiData:", apiData);
+  console.log("RecommandData:", RecommandData);
 
   let itemList = [];
   let attractData = [];
@@ -59,12 +54,13 @@ const Current = ({ userLat, userLot }) => {
         <section className="AttractionCarouselSection">
           <AttractionCarousel
             attractData={attractData}
-            title="우리 집 주변 관광지"
+            title="내 위치 주변 관광지"
             // itemsPerPage={itemsPerPage}
           />
         </section>
       )}
 
+      {/* {itemList?.body.items === "" ? null : <hr></hr>} */}
       <section className="AttractionCarouselSection">
         <AttractionCarousel
           attractData={RecommendAttractData}

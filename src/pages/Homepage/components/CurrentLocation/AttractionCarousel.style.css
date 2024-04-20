@@ -77,7 +77,7 @@
 
 /*아이템 꾸미기*/
 .contentItem {
-    height: 18vw;
+    height: 19vw;
 
     img {
         position: absolute;
@@ -106,7 +106,7 @@
 
         color: white;
         height: 100%;
-        padding-top: calc(5vw + 5px);
+        padding-top: calc(5vw + 10px);
     }
 
     .title .address {
@@ -137,12 +137,20 @@
 @media (max-width:1024px) {
     .ItemInfo {
         font-size: 0.9em;
-        width: 90%;
+        width: 95%;
+        text-align: center;
+    }
+
+    .contentItem {
+        height: 24vw;
     }
 }
 
 
 @media (max-width:900px) {
+    .contentItem {
+        height: 24vw;
+    }
 
     .AttractionTitle {
         font-size: 1.2em;
@@ -150,25 +158,29 @@
 
     .ItemInfo {
         font-size: 0.7em;
-    }
-
-    .contentItem .address {
-        max-width: 100%;
+        max-width: 95%;
     }
 
     .ReccomendSurroungingCarousel {
         /* max-height: 25vh; */
         margin-bottom: 10px;
     }
-
-    .miniTitle {
-        display: none;
-    }
 }
 
 @media (max-width:600px) {
-    .ItemInfo {
-        font-size: 0.5em;
+    .miniTitle {
+        display: none;
+    }
+
+    .contentItem {
+        .title {
+            padding-bottom: 0;
+        }
+
+        .ItemInfo {
+            font-size: 0.5em;
+            padding-top: calc(5vw);
+        }
     }
 }
 
@@ -176,8 +188,6 @@
     .miniTitle {
         display: block;
     }
-
-
 
     .contentItem {
         height: 28vw;
