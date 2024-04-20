@@ -11,6 +11,7 @@ import { Pagination } from "@mui/material";
 import TopBanner from "../Homepage/components/TopBanner";
 import { CircularProgress } from "@mui/material";
 import TitleMain from "../../components/Title/MainTitle";
+import TopButton from "../../components/TopButton/TopButton";
 
 const SearchDataPage = () => {
   const [page, setPage] = useState(1);
@@ -265,6 +266,7 @@ const SearchDataPage = () => {
         }}
         onChange={changePage}
       />
+      <TopButton />
     </>
   );
 };
