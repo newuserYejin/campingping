@@ -16,18 +16,22 @@ const BestCampMap = ({ list }) => {
     };
     const map = new kakao.maps.Map(container, options);
 
-    list.map((item) => (
-      new kakao.maps.Marker({
-        map: map,
-        position: new kakao.maps.LatLng(item.mapY, item.mapX),
-        title: item.facltNm,
-      })
-    ))
+    list?.map(
+      (item) =>
+        new kakao.maps.Marker({
+          map: map,
+          position: new kakao.maps.LatLng(item.mapY, item.mapX),
+          title: item.facltNm,
+        })
+    );
   };
 
   return (
-    <Box id="map" sx={{width:'60%', height:'auto', aspectRatio:'1/1.8'}}></Box>
+    <Box
+      id="map"
+      sx={{ width: "60%", height: "auto", aspectRatio: "1/1.8" }}
+    ></Box>
   );
-}
+};
 
-export default BestCampMap
+export default BestCampMap;
