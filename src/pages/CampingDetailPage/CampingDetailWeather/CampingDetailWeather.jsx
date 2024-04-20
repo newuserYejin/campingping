@@ -5,6 +5,7 @@ import {
   useWeatherQuery,
 } from "../../../hooks/useWeather";
 import CircularProgress from "@mui/material/CircularProgress";
+import weatherDescKo from './../../../constants/WeatherDescKo';
 
 const CampingDetailWeather = ({ lat, lon, name }) => {
   // const { data, isLoading } = useWeatherQuery(lat, lon);
@@ -34,7 +35,9 @@ const CampingDetailWeather = ({ lat, lon, name }) => {
               src={`https://openweathermap.org/img/wn/${data?.list[2].weather[0].icon}.png`}
               alt="Weather Icon"
             />
-            <div><strong>{data?.list[2].weather[0].description}</strong></div>
+            <div className="camping-detail-weather-description">
+              <strong>{weatherDescKo[data?.list[2].weather[0].id]}</strong>
+            </div>
             <div>{`현재 온도 : ${Math.round(data?.list[2]?.main.temp)}℃`}</div>
             <div>{`(${Math.round(data?.list[2]?.main.temp_min)}℃/${Math.round(
               data?.list[2]?.main.temp_max
@@ -52,7 +55,9 @@ const CampingDetailWeather = ({ lat, lon, name }) => {
               src={`https://openweathermap.org/img/wn/${data?.list[10].weather[0].icon}.png`}
               alt="Weather Icon"
             />
-            <div><strong>{data?.list[10].weather[0].description}</strong></div>
+            <div className="camping-detail-weather-description">
+              <strong>{weatherDescKo[data?.list[10].weather[0].id]}</strong>
+            </div>
             <div>{`현재 온도 : ${Math.round(data?.list[10]?.main.temp)}℃`}</div>
             <div>{`(${Math.round(data?.list[10]?.main.temp_min)}℃/${Math.round(
               data?.list[10]?.main.temp_max
@@ -69,7 +74,9 @@ const CampingDetailWeather = ({ lat, lon, name }) => {
               src={`https://openweathermap.org/img/wn/${data?.list[18].weather[0].icon}.png`}
               alt="Weather Icon"
             />
-            <div><strong>{data?.list[18].weather[0].description}</strong></div>
+            <div className="camping-detail-weather-description">
+              <strong>{weatherDescKo[data?.list[18].weather[0].id]}</strong>
+            </div>
             <div>{`현재 온도 : ${Math.round(data?.list[18]?.main.temp)}℃`}</div>
             <div>{`(${Math.round(data?.list[18]?.main.temp_min)}℃/${Math.round(
               data?.list[18]?.main.temp_max
@@ -86,7 +93,9 @@ const CampingDetailWeather = ({ lat, lon, name }) => {
               src={`https://openweathermap.org/img/wn/${data?.list[26].weather[0].icon}.png`}
               alt="Weather Icon"
             />
-            <div><strong>{data?.list[26].weather[0].description}</strong></div>
+            <div className="camping-detail-weather-description">
+              <strong>{weatherDescKo[data?.list[26].weather[0].id]}</strong>
+            </div>
             <div>{`현재 온도 : ${Math.round(data?.list[26]?.main.temp)}℃`}</div>
             <div>{`(${Math.round(data?.list[26]?.main.temp_min)}℃/${Math.round(
               data?.list[26]?.main.temp_max
@@ -103,7 +112,9 @@ const CampingDetailWeather = ({ lat, lon, name }) => {
               src={`https://openweathermap.org/img/wn/${data?.list[34].weather[0].icon}.png`}
               alt="Weather Icon"
             />
-            <div><strong>{data?.list[34].weather[0].description}</strong></div>
+            <div className="camping-detail-weather-description">
+              <strong>{weatherDescKo[data?.list[34].weather[0].id]}</strong>
+            </div>
             <div>{`현재 온도 : ${Math.round(data?.list[34]?.main.temp)}℃`}</div>
             <div>{`(${Math.round(data?.list[34]?.main.temp_min)}℃/${Math.round(
               data?.list[34]?.main.temp_max
@@ -125,7 +136,9 @@ const CampingDetailWeather = ({ lat, lon, name }) => {
             src={`https://openweathermap.org/img/wn/${data?.list[8].weather[0].icon}.png`}
             alt="Weather Icon"
           />
-          <div><strong>{data?.list[8].weather[0].description}</strong></div>
+          <div className="camping-detail-weather-description">
+            <strong>{weatherDescKo[data?.list[8].weather[0].id]}</strong>
+          </div>
           <h3>{`현재 온도 : ${Math.round(data?.list[8]?.main.temp)}℃`}</h3>
           <h6>{`(${Math.round(data?.list[8]?.main.temp_min)}℃/${Math.round(
             data?.list[8]?.main.temp_max

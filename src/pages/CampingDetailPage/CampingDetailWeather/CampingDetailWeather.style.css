@@ -10,6 +10,11 @@
 .camping-detail-weather h6 {
   margin: 1em;
 }
+.camping-detail-weather-description {
+  word-break: break-word;
+  font-size: 1em;
+  white-space: pre-line;
+}
 .camping-detail-weather-box-5days {
   display: flex;
   align-items: center;

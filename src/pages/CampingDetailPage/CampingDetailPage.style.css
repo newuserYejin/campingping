@@ -65,9 +65,7 @@
   padding-top: 3em;
   margin-top: 3em;
   text-align: center;
-
   width: 100%;
-
   .carousel-inner {
     max-width: 100%;
   }
@@ -85,6 +83,7 @@
   padding-top: 3em;
   padding-bottom: 3em;
   font-size: 1.5em;
+  word-break: keep-all;
 }
 
 .camping-detail-second-line-count {
@@ -152,5 +151,8 @@
   .css-mhc70k-MuiGrid-root{
     margin-left: auto !important;
     width: 100% !important;
+  }
+  .camping-detail-second-line {
+font-size: 1em;
   }
 }
