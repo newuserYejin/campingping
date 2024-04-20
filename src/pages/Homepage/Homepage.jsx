@@ -5,6 +5,7 @@ import MainSearchForm from "./components/MainSearchForm";
 import CurrentLocation from "./components/CurrentLocation/CurrentLocation";
 import TagSearch from "./components/TagSearch";
 import Video from "./components/Video/Video";
+import TopButton from "../../components/TopButton/TopButton";
 
 const Homepage = () => {
   return (
@@ -16,6 +17,8 @@ const Homepage = () => {
         <CurrentLocation />
         <Video></Video>
       </Container>
+
+      <TopButton />
     </section>
   );
 };
