@@ -12,8 +12,8 @@ const fetchBestCamping = () => {
 
 export const useBestCampListQuery = () => {
   return useQuery({
-    queryKey: ["best_camping"],
-    queryFn: fetchBestCamping,
-    select: (result) => result.data.response?.body.items.item,
+    queryKey: ["camping_detail"],
+    queryFn: fetchCampingDetail,
+    select: (result) => result?.data.response?.body.items.item,
   });
 };

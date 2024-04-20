@@ -16,7 +16,7 @@ const BestCampMap = ({ list }) => {
     };
     const map = new kakao.maps.Map(container, options);
 
-    list.map(
+    list?.map(
       (item) =>
         new kakao.maps.Marker({
           map: map,
