@@ -7,7 +7,7 @@ const PARAMS = process.env.REACT_APP_PARAMS_DEFAULT;
 const fetchTagSearch = ({page}) => {
     
      return apiGocamping.get(
-            `basedList?serviceKey=${API_KEY}&${PARAMS}&pageNo=${page}&numOfRows=50/`
+            `basedList?serviceKey=${API_KEY}&${PARAMS}&pageNo=${page}&numOfRows=100/`
           )
 }
 
