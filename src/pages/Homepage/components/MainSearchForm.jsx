@@ -2,7 +2,7 @@ import React, { useState }from 'react';
 import './MainSearchForm.style.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEarthAsia, faLocationDot, faTree, faMagnifyingGlass, faPlus, faPenNib } from "@fortawesome/free-solid-svg-icons";
-import { Box, Input, Select, MenuItem, Stack, Button } from '@mui/material';
+import { Container, Box, Input, Select, MenuItem, Stack, Button } from '@mui/material';
 import { Dialog, DialogTitle, DialogContent } from '@mui/material';
 import { FormGroup, FormControlLabel, Checkbox } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
@@ -40,60 +40,76 @@ const MainSearchForm = () => {
 
   return (
     <>
-      <Box component="form" noValidate="false" className='mainSearchForm' onSubmit={searchByKeyword}>
-        <div className='formDiv'>
-          <div className="formInnerBox">
-            <i>
-              <FontAwesomeIcon icon={faEarthAsia} />
-            </i>
-            <Select value={selectedProvince} onChange={handleProvinceChange} displayEmpty>
-              <MenuItem value=""><em>전체/도</em></MenuItem>
-              {Object.keys(regions).map((province) => (
-                <MenuItem key={province} value={province}>{province}</MenuItem>
-              ))}
-            </Select>
+      <Container maxWidth="lg" sx={{ 
+          position:'relative', 
+          paddingTop:{
+            xs:'1.5rem',
+            sm:'0'
+          },
+          paddingBottom:{
+            xs:'1.5rem',
+            sm:'0'
+          },
+          background: {
+            xs:'#f5f5f5',
+            sm:'none'
+          }
+        }}>
+        <Box component="form" noValidate="false" className='mainSearchForm' onSubmit={searchByKeyword}>
+          <div className='formDiv'>
+            <div className="formInnerBox">
+              <i>
+                <FontAwesomeIcon icon={faEarthAsia} />
+              </i>
+              <Select value={selectedProvince} onChange={handleProvinceChange} displayEmpty>
+                <MenuItem value=""><em>전체/도</em></MenuItem>
+                {Object.keys(regions).map((province) => (
+                  <MenuItem key={province} value={province}>{province}</MenuItem>
+                ))}
+              </Select>
+            </div>
+            <div className="formInnerBox">
+              <i>
+                <FontAwesomeIcon icon={faLocationDot} />
+              </i>
+              <Select value={selectedCity} onChange={handleCityChange} displayEmpty>
+                <MenuItem value=""><em>전체/시/군</em></MenuItem>
+                {selectedProvince && regions[selectedProvince].map((city) => (
+                  <MenuItem key={city} value={city}>{city}</MenuItem>
+                ))}
+              </Select>
+            </div>
+            <div className="formInnerBox">
+              <i>
+                <FontAwesomeIcon icon={faTree} />
+              </i>
+              <Select value={selectedTheme} onChange={handleThemeChage} displayEmpty>
+                <MenuItem value="">전체테마</MenuItem>
+                {search_detail_filters[4].labels.map((theme)=>(
+                    <MenuItem key={theme.name} value={theme.name}>{theme.name}</MenuItem>
+                  ))
+                }
+              </Select>
+            </div>
+            <div className="formInnerBox">
+              <i>
+                <FontAwesomeIcon icon={faPenNib} />
+              </i>
+              <Input id="keyword" placeholder="키워드를 입력하세요" value={keyword} onChange={(e)=>{
+                setKeyword(e.target.value)
+              }}/>
+            </div>
           </div>
-          <div className="formInnerBox">
-            <i>
-              <FontAwesomeIcon icon={faLocationDot} />
-            </i>
-            <Select value={selectedCity} onChange={handleCityChange} displayEmpty>
-              <MenuItem value=""><em>전체/시/군</em></MenuItem>
-              {selectedProvince && regions[selectedProvince].map((city) => (
-                <MenuItem key={city} value={city}>{city}</MenuItem>
-              ))}
-            </Select>
+          <div className="formBtnDiv">
+            <Button type="submit" variant="contained">
+              <FontAwesomeIcon icon={faMagnifyingGlass} />
+            </Button>
+            <Button type="button" variant="contained" onClick={() => handleClickOpen(true)}>
+              <FontAwesomeIcon icon={faPlus} />
+            </Button>
           </div>
-          <div className="formInnerBox">
-            <i>
-              <FontAwesomeIcon icon={faTree} />
-            </i>
-            <Select value={selectedTheme} onChange={handleThemeChage} displayEmpty>
-              <MenuItem value="">전체테마</MenuItem>
-              {search_detail_filters[4].labels.map((theme)=>(
-                  <MenuItem key={theme.name} value={theme.name}>{theme.name}</MenuItem>
-                ))
-              }
-            </Select>
-          </div>
-          <div className="formInnerBox">
-            <i>
-              <FontAwesomeIcon icon={faPenNib} />
-            </i>
-            <Input id="keyword" placeholder="키워드를 입력하세요" value={keyword} onChange={(e)=>{
-              setKeyword(e.target.value)
-            }}/>
-          </div>
-        </div>
-        <div className="formBtnDiv">
-          <Button type="submit" variant="contained">
-            <FontAwesomeIcon icon={faMagnifyingGlass} />
-          </Button>
-          <Button type="button" variant="contained" onClick={() => handleClickOpen(true)}>
-            <FontAwesomeIcon icon={faPlus} />
-          </Button>
-        </div>
-      </Box>
+        </Box>
+      </Container>
       <Dialog
         maxWidth="xl"
         open={ modalOpen }

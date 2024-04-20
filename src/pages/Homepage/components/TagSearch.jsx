@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './TagSearch.style.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faRotateLeft, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { faRotateLeft, faMagnifyingGlass, faAngleDown } from "@fortawesome/free-solid-svg-icons";
 import { Container, Box, Button } from '@mui/material';
 import { search_tags } from '../../../constants/info';
 import { useTagSearchQuery } from '../../../hooks/useTagSearch';
@@ -9,7 +9,6 @@ import { useNavigate } from 'react-router-dom';
 
 const TagSearch = () => {
 //searchTag의 id와 selectedTag의
-
 
   const [page, setPage] = useState(1)
   const navigate = useNavigate()
@@ -21,6 +20,16 @@ const TagSearch = () => {
       navigate(`/search?q=`)
   }
 
+
+  
+  // 모바일 태그 더보기 버튼
+  const [isTagOpen, setIsTagOpen] = useState(false);
+  const tagToggle = (isTagOpen) => {
+    console.log("tagTaggle")
+    setIsTagOpen(!isTagOpen)
+  }
+
+
   const { data, isLoading, isError, error } = useTagSearchQuery({page})
     console.log('data?', data)
 
@@ -30,23 +39,13 @@ const TagSearch = () => {
     if (isError) {
         return <h3>Error: {error.message}</h3>;
     }
-
-
   return (
-    
-      <Box component="form" className='TagSearch' onSubmit={searchByTag}>
-        <Container maxWidth="xl">
-          <div className='title'>
-            <h3>태그로 찾는 나만의 캠핑장</h3>
-            <div>
-              <Button>
-                <FontAwesomeIcon icon={faRotateLeft} />
-              </Button>
-              <Button type='submit'>
-                <FontAwesomeIcon icon={faMagnifyingGlass} />
-              </Button>
-            </div>
-          </div>
+    <Box component="form" className='TagSearch' onSubmit={searchByTag}>
+      <Container maxWidth="xl">
+        <div className='title'>
+          <h3>태그로 찾는 나만의 캠핑장</h3>
+        </div>
+        <div className={isTagOpen ? "mobileMoreDiv open" : "mobileMoreDiv" } >
           <ul>
             {search_tags.map((tag) => 
               <li key={tag.id}>
@@ -55,18 +54,22 @@ const TagSearch = () => {
               </li>
             )}
           </ul>
-
-        </Container>
-      </Box>
+        </div>
+        <p className='btn_more' onClick={() => tagToggle(isTagOpen)}><FontAwesomeIcon icon={faAngleDown} /><span>더보기</span></p>
+        <div className='btnBox'>
+          <Button className="btn_refresh">
+            <FontAwesomeIcon icon={faRotateLeft} />
+            <span>초기화</span>
+          </Button>
+          <Button className="btn_tagSearch" type="submit">
+            <FontAwesomeIcon icon={faMagnifyingGlass} />
+            <span>검색</span>
+          </Button>
+        </div>
+      </Container>
+    </Box>
   )
 }
 
 export default TagSearch
-
-
-
-// <div class="checkbox-wrapper-8">
-//   <input class="tgl tgl-skewed" id="cb3-8" type="checkbox"/>
-//   <label class="tgl-btn" data-tg-off="OFF" data-tg-on="ON" for="cb3-8"></label>
-// </div>
 
