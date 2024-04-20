@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Footer.style.css";
-import logo from "../../../assets/whatAboutCampingLogo.png";
+import logo from "../../../assets/howAboutCampingLogo.png";
 import { infoProject, infoMember } from "../../../constants/info";
 import { useMemeberGithubInfoQuery } from "../../../hooks/useMemberGithubInfo";
 

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import logo from "../../assets/whatAboutCampingLogo.png";
+import logo from "../../assets/howAboutCampingLogo.png";
 import styled from "styled-components";
 import { StylesProvider } from "@material-ui/core/styles";
 import {
