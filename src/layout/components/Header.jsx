@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import logo from "../../assets/whatAboutCampingLogo.png";
+import logo from "../../assets/howAboutCampingLogo.png";
 import styled from "styled-components";
 import { StylesProvider } from "@material-ui/core/styles";
 import {
@@ -22,8 +22,8 @@ import { authenticateAction } from "../../redux/actions/authencticateAction";
 const drawerWidth = 260;
 const navItems = [
   ["캠핑장 찾기🔍", "/search"],
-  ["행사✨", "/event"],
-  ["공공 우수 야영장⛺", "/bestCamp"],
+  ["주변 구경거리✨", "/event"],
+  ["테마별 우수 캠핑장⛺", "/bestCamp"],
 ];
 
 const GnbItemMobile = styled.li`
@@ -61,10 +61,13 @@ const LoginPc = styled.div`
   right: 0px;
   top: 1em;
   a,
-  buton {
-    padding: 8px 16px;
+  button {
+    display: inline-block;
+    padding: 0 16px;
+    height: 36px;
+    line-height: 36px;
     font-family: "Spoqa Han Sans Neo", sans-serif;
-    font-size: 0.9em;
+    font-size: 14px;
     color: #fff;
     text-decoration: none;
     background: var(--key-color);
@@ -85,11 +88,12 @@ const LoginMo = styled.div`
   text-align: center;
   a,
   button {
-    display: block;
-    width: 100%;
-    padding: 8px 16px;
+    display:block;
+    width: 100%; 
+    height: 36px;
+    line-height: 36px;
     font-family: "Spoqa Han Sans Neo", sans-serif;
-    font-size: 0.9em;
+    font-size: 14px;
     color: #fff;
     text-decoration: none;
     background: var(--key-color);
@@ -137,8 +141,8 @@ const Header = (props) => {
       </Typography>
       <List>
         {navItems.map((item) => (
-          <StylesProvider injectFirst>
-            <GnbItemMobile key={item}>
+          <StylesProvider key={item.id} injectFirst>
+            <GnbItemMobile>
               <Link to={item[1]}>{item[0]}</Link>
             </GnbItemMobile>
           </StylesProvider>
@@ -227,7 +231,6 @@ const Header = (props) => {
                 <button onClick={(event) => logout(event)}>로그아웃</button>
               )}
             </LoginPc>
-
             <Box
               component="ul"
               sx={{
@@ -237,7 +240,7 @@ const Header = (props) => {
                 padding: "0",
               }}>
               {navItems.map((item) => (
-                <StylesProvider injectFirst>
+                <StylesProvider key={`navItem${item.id}`} injectFirst>
                   <GnbItemPC key={item}>
                     <Link to={item[1]}>{item[0]}</Link>
                   </GnbItemPC>

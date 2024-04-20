@@ -1,14 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Footer.style.css";
-import logo from "../../../assets/whatAboutCampingLogo.png";
+import logo from "../../../assets/howAboutCampingLogo.png";
 import { infoProject, infoMember } from "../../../constants/info";
-import { useMemeberGithubInfoQuery } from "../../../hooks/useMemberGithubInfo";
-
 import { Container, Tooltip, Avatar } from "@mui/material";
 
 const Footer = () => {
   // 맴버 깃허브 정보 가져오기
-  const { data: memberGithubData } = useMemeberGithubInfoQuery(infoMember);
+  // const { data: memberGithubData } = useMemeberGithubInfoQuery(infoMember);
 
   return (
     <footer className="footer">
@@ -18,7 +16,7 @@ const Footer = () => {
             <img src={logo} alt="" />
           </h2>
           <div className="footer-sns">
-            {memberGithubData?.map((data, idx) => (
+            {infoMember?.map((data, idx) => (
               <a
                 className="footer-sns-item"
                 key={idx}
@@ -26,7 +24,7 @@ const Footer = () => {
                 target="_blank"
                 rel="noreferrer">
                 <Tooltip title={data?.name} arrow>
-                  <Avatar alt={data?.login} src={data?.avatar_url} />
+                  <Avatar alt={data?.name} src={data?.avatar_url} />
                 </Tooltip>
               </a>
             ))}
