@@ -16,6 +16,8 @@ import {
 } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { useSelector, useDispatch } from "react-redux";
+import { authenticateAction } from "../../redux/actions/authencticateAction";
 
 const drawerWidth = 260;
 const navItems = [
@@ -54,7 +56,57 @@ const GnbItemPC = styled.li`
   }
 `;
 
+const LoginPc = styled.div`
+  position: absolute;
+  right: 0px;
+  top: 1em;
+  a,
+  buton {
+    padding: 8px 16px;
+    font-family: "Spoqa Han Sans Neo", sans-serif;
+    font-size: 0.9em;
+    color: #fff;
+    text-decoration: none;
+    background: var(--key-color);
+    border: 0px;
+    border-radius: 4px;
+    &:hover {
+      background: var(--button-hover-color);
+    }
+  }
+
+  @media (max-width: 900px) {
+    display: none;
+  }
+`;
+
+const LoginMo = styled.div`
+  padding: 16px;
+  text-align: center;
+  a,
+  button {
+    display: block;
+    width: 100%;
+    padding: 8px 16px;
+    font-family: "Spoqa Han Sans Neo", sans-serif;
+    font-size: 0.9em;
+    color: #fff;
+    text-decoration: none;
+    background: var(--key-color);
+    border: 0px;
+    border-radius: 4px;
+  }
+`;
+
 const Header = (props) => {
+  // 로그인 관련
+  const authenticate = useSelector((state) => state.auth.authenticate);
+  const dispatch = useDispatch();
+  const logout = (event) => {
+    event.preventDefault();
+    dispatch(authenticateAction.logout());
+  };
+
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const handleDrawerToggle = () => {
@@ -69,8 +121,7 @@ const Header = (props) => {
           backgroundColor: "var(--key-color)",
           marginBottom: "10px",
           padding: "20px 0",
-        }}
-      >
+        }}>
         <Link to="/">
           <Box
             component="img"
@@ -93,6 +144,13 @@ const Header = (props) => {
           </StylesProvider>
         ))}
       </List>
+      <LoginMo>
+        {!authenticate ? (
+          <Link to="/login">로그인</Link>
+        ) : (
+          <button onClick={(event) => logout(event)}>로그아웃</button>
+        )}
+      </LoginMo>
     </Box>
   );
 
@@ -114,8 +172,7 @@ const Header = (props) => {
           },
           backgroundColor: "var(--main-background-color)",
           boxShadow: "0 5px 20px rgba(0,0,0,0.1)",
-        }}
-      >
+        }}>
         <Container maxWidth="xl">
           <Toolbar
             sx={{
@@ -123,8 +180,7 @@ const Header = (props) => {
               flexDirection: "column",
               alignItems: "center",
               justifyContent: "center",
-            }}
-          >
+            }}>
             <IconButton
               color="inherit"
               aria-label="open drawer"
@@ -139,8 +195,7 @@ const Header = (props) => {
                   md: "none",
                   color: "var(--color-darkGray)",
                 },
-              }}
-            >
+              }}>
               <FontAwesomeIcon icon={faBars} />
             </IconButton>
             <Typography component="h1">
@@ -164,6 +219,15 @@ const Header = (props) => {
                 />
               </Link>
             </Typography>
+
+            <LoginPc>
+              {!authenticate ? (
+                <Link to="/login">로그인</Link>
+              ) : (
+                <button onClick={(event) => logout(event)}>로그아웃</button>
+              )}
+            </LoginPc>
+
             <Box
               component="ul"
               sx={{
@@ -171,8 +235,7 @@ const Header = (props) => {
                 gap: "20px",
                 margin: "15px 0 10px",
                 padding: "0",
-              }}
-            >
+              }}>
               {navItems.map((item) => (
                 <StylesProvider injectFirst>
                   <GnbItemPC key={item}>
@@ -199,8 +262,7 @@ const Header = (props) => {
               boxSizing: "border-box",
               width: drawerWidth,
             },
-          }}
-        >
+          }}>
           {drawer}
         </Drawer>
       </nav>

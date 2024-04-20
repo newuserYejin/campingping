@@ -1,0 +1,11 @@
+.login-form-wrap {
+  max-width: 600px;
+  height: calc(100vh - 135px - 372px - 8em);
+}
+
+.login-form-wrap .button-login {
+  margin-top: 16px;
+  padding: 12px 0;
+  font-size: 1em;
+  background: var(--key-color);
+}
