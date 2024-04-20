@@ -37,7 +37,7 @@ const ListGalleryItem = ({ isConnect = false, isLink = false, item }) => {
                 }
               })}
             </span>
-            <span>#칠곡군</span>
+            {/* <span>#칠곡군</span> */}
           </div>
           <h3 className="title">{item.title}</h3>
           <ul>
