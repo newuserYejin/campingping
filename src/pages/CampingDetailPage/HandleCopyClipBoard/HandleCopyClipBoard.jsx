@@ -18,7 +18,7 @@ const HandleCopyClipBoard = ({ data }) => {
       className="clip-board-copy-button"
         onClick={() =>
           copyURLToClipboard(
-            `http://localhost:3002/campings/${data?.contentId}?keyword=${data?.facltNm}&lat=${data?.mapY}&lon=${data?.mapX}`
+            `http://localhost:3003/campings/${data?.contentId}?keyword=${data?.facltNm}&lat=${data?.mapY}&lon=${data?.mapX}`
           )
         }
       >

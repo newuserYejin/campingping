@@ -3,7 +3,7 @@ import "./CampingDetailPageKakao.style.css";
 const { Kakao } = window;
 
 const CampingDetailPageKakao = ({ data }) => {
-  const realUrl = "http://localhost:3002/";
+  const realUrl = "http://localhost:3003/";
   const resultUrl = window.location.href;
 
   useEffect(() => {
