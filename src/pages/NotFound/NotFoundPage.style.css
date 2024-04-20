@@ -1,10 +1,5 @@
-@font-face {
-  font-family: "iceJaram-Rg";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-2@1.0/iceJaram-Rg.woff2")
-    format("woff2");
-  font-weight: normal;
-  font-style: 600;
-}
+@import url(../../fonts.css);
+
 .not-found-page {
   height: 100vh;
   background-image: url(https://i.pinimg.com/originals/e9/de/32/e9de3284fe20c29fff9a8f3756826adf.jpg);

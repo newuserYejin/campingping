@@ -1,9 +1,4 @@
-@font-face {
-  font-family: "TTHakgyoansimMoheomgaB";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2402_keris@1.0/TTHakgyoansimMoheomgaB.woff2") format("woff2");
-  font-weight: 700;
-  font-style: normal;
-}
+@import url(../../fonts.css);
 
 .camping-detail-main {
   margin-top: 80px;
