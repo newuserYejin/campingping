@@ -4,24 +4,22 @@ import './BestCampTypeList.style.css'
 
 const BestCampTypeList = ({list}) => {
   return (
-    <>
-      {list && list.map((item) => 
-        <section key={item.contentId} className='bestCampTypeList'>
-          <article className='textBox'>
+    <section className='bestCampTypeList'>
+    {list && list.map((item) => 
+      <div key={item.contentId} className='bestCampTypeListItem'>
+        <article className='textBox'>
+          <div>
             <h3>{item.facltNm}</h3>
             <p className='lineIntro'>{item.lineIntro}</p>
-            {item.addr1 &&
-              <p>{item.addr1}</p>
-            }
-            {item.tel && 
-              <a href={`tel:${item.tel}`}>{item.tel}</a>
-            }
-            <Link to={`/campings/${item.contentId}?keyword=${item.facltNm}&lat=${item.mapY}&lon=${item.mapX}`} className='btn_more'>자세히 보기</Link>
-          </article>
-          <p className='imgBox'><img src={item.firstImageUrl} alt={`${item.facltNm} 이미지`} /></p>
-        </section>
-      )}
-    </>
+          </div>
+          <p className='btn_more'>
+            <Link to={`/campings/${item.contentId}?keyword=${item.facltNm}&lat=${item.mapY}&lon=${item.mapX}`}>자세히 보기</Link>
+          </p>
+        </article>
+        <p className='imgBox'><img src={item.firstImageUrl} alt={`${item.facltNm} 이미지`} /></p>
+      </div>
+    )}
+    </section>
   )
 }
 

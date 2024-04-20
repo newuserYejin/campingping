@@ -49,6 +49,7 @@
       max-width:unset;
       font-size:1rem;
       font-weight:800;
+      word-break: keep-all;
       &:not(:first-child){
         border-left:1px solid #d3d3d3;
       }
@@ -81,7 +82,7 @@
         left:0;
         transform:none;
         h2{
-          font-size:1.75rem;
+          font-size:2rem;
           line-height:1;
         }
         p{

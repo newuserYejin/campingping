@@ -61,7 +61,7 @@ const BestCampContents = (props) => {
         <section>
           <h2>"엄마아빠! 우리도 캠핑 가요!"</h2>
           <BestCampTypeList list={familyFriendlyList.slice(0,listCount)} />
-          <BestCampMap list={familyFriendlyList.slice(0,listCount)} />
+          <BestCampMap list={familyFriendlyList.slice(0,listCount)}/>
         </section>
       }
       {petFriendlyList && props.title.id === 'petFriendly' && 
