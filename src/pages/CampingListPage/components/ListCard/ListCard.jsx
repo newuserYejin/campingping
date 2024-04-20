@@ -4,6 +4,7 @@ import FacilityIcon from "../../../../components/FacilityIcon/FacilityIcon";
 import { Link } from "react-router-dom";
 
 const ListCard = ({ data, facilityData, index }) => {
+
   return (
     <div className="list-item">
       <div className="list-thumb">
