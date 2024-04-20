@@ -61,10 +61,13 @@ const LoginPc = styled.div`
   right: 0px;
   top: 1em;
   a,
-  buton {
-    padding: 8px 16px;
+  button {
+    display: inline-block;
+    padding: 0 16px;
+    height: 36px;
+    line-height: 36px;
     font-family: "Spoqa Han Sans Neo", sans-serif;
-    font-size: 0.9em;
+    font-size: 14px;
     color: #fff;
     text-decoration: none;
     background: var(--key-color);
@@ -85,11 +88,12 @@ const LoginMo = styled.div`
   text-align: center;
   a,
   button {
-    display: block;
-    width: 100%;
-    padding: 8px 16px;
+    display:block;
+    width: 100%; 
+    height: 36px;
+    line-height: 36px;
     font-family: "Spoqa Han Sans Neo", sans-serif;
-    font-size: 0.9em;
+    font-size: 14px;
     color: #fff;
     text-decoration: none;
     background: var(--key-color);
