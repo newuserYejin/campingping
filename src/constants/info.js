@@ -269,16 +269,8 @@ export const search_tags = [
     text: "여유있는",
   },
   {
-    id: "search_tag20",
-    text: "별 보기 좋은",
-  },
-  {
     id: "search_tag21",
     text: "온수 잘 나오는",
-  },
-  {
-    id: "search_tag22",
-    text: "사이트 간격이 넓은",
   },
   {
     id: "search_tag23",
@@ -307,10 +299,6 @@ export const search_tags = [
   {
     id: "search_tag29",
     text: "겨울",
-  },
-  {
-    id: "search_tag30",
-    text: "생태교육",
   },
   {
     id: "search_tag31",
