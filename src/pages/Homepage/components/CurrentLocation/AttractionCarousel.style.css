@@ -24,6 +24,7 @@
 .carousel-item {
     height: 100%;
     cursor: pointer;
+    margin-bottom: 10px;
 }
 
 .active.carousel-item {
@@ -43,7 +44,7 @@
 }
 
 .contentItem .title {
-    margin: 10px 0;
+    margin: 5px 0;
     font-weight: bold;
     font-size: 1.1em;
 }
@@ -74,6 +75,45 @@
     color: white;
 }
 
+/*아이템 꾸미기*/
+.contentItem {
+    height: 19vw;
+
+    img {
+        position: absolute;
+        top: 0;
+        z-index: 2;
+    }
+
+    .RectangleBox {
+        min-width: 18%;
+        max-width: 18%;
+        top: 5vw;
+        height: calc(100% - 5vw);
+        position: absolute;
+
+        display: flex;
+        align-items: end;
+        justify-content: center;
+
+        background-color: #23489d;
+    }
+
+    .ItemInfo {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        color: white;
+        height: 100%;
+        padding-top: calc(5vw + 10px);
+    }
+
+    .title .address {
+        display: flex;
+        justify-content: center;
+    }
+}
 
 /* 아래버튼 */
 .carousel-indicators {
@@ -90,46 +130,81 @@
 }
 
 .ReccomendSurroungingCarousel {
-    max-height: 38vh;
+    /* max-height: 38vh; */
     margin-bottom: 10px;
 }
 
-@media (max-width:770px) {
+@media (max-width:1024px) {
+    .ItemInfo {
+        font-size: 0.9em;
+        width: 95%;
+        text-align: center;
+    }
 
     .contentItem {
-        font-size: 0.8em;
+        height: 24vw;
+    }
+}
+
+
+@media (max-width:900px) {
+    .contentItem {
+        height: 24vw;
     }
 
-    .contentItem .title {
-        font-size: 0.9em;
+    .AttractionTitle {
+        font-size: 1.2em;
     }
 
-    .contentItem .address {
-        max-width: 100%;
-    }
-
-    .contentItem img {
-        width: 15vw;
-        height: 15vw;
-        border-radius: 50%;
+    .ItemInfo {
+        font-size: 0.7em;
+        max-width: 95%;
     }
 
     .ReccomendSurroungingCarousel {
-        max-height: 25vh;
+        /* max-height: 25vh; */
         margin-bottom: 10px;
     }
 }
 
-@media (max-width: 464px) {
+@media (max-width:600px) {
+    .miniTitle {
+        display: none;
+    }
 
     .contentItem {
-        width: 30%;
+        .title {
+            padding-bottom: 0;
+        }
+
+        .ItemInfo {
+            font-size: 0.5em;
+            padding-top: calc(5vw);
+        }
+    }
+}
+
+@media (max-width: 464px) {
+    .miniTitle {
+        display: block;
+    }
+
+    .contentItem {
+        height: 28vw;
+        width: 40%;
         font-size: 0.5em;
+
+        .RectangleBox {
+            display: none;
+        }
     }
 
     .contentItem .title {
-        margin: 5px 0;
+        width: 80%;
+        color: black;
         font-size: 1.5em;
+        margin-top: calc(16vw + 10px);
+
     }
 
     .contentItem .address {

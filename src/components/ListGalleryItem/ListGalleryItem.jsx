@@ -1,7 +1,6 @@
 import React from "react";
 import "./ListGalleryItem.style.css";
 import { useAreaCode } from "../../hooks/useAreaCode";
-import { Masonry } from "@mui/lab";
 
 const ListGalleryItem = ({ isConnect = false, isLink = false, item }) => {
   const { data: AreaData } = useAreaCode();
