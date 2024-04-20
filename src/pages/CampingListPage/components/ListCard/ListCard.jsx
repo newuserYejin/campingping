@@ -8,7 +8,7 @@ const ListCard = ({ data, facilityData, index }) => {
     <div className="list-item">
       <div className="list-thumb">
         <Link
-          to={`/campings/${data.contentId}?keyword=${data.facltNm}&lat=${data.mapY}&lon=${data.mapX}`}
+          to={`/campings/${data?.contentId}?keyword=${data?.facltNm}&lat=${data?.mapY}&lon=${data?.mapX}`}
         >
           <img
             src={
@@ -25,7 +25,7 @@ const ListCard = ({ data, facilityData, index }) => {
         <hgroup className="lit-title">
           <h3 className="list-facltNm">
             <Link
-              to={`/campings/${data.contentId}?keyword=${data.facltNm}&lat=${data.mapY}&lon=${data.mapX}`}
+              to={`/campings/${data?.contentId}?keyword=${data?.facltNm}&lat=${data?.mapY}&lon=${data?.mapX}`}
             >
               {data?.facltNm}
             </Link>

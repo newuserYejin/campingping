@@ -1,8 +1,16 @@
 import React from "react";
 import ListCard from "../ListCard/ListCard";
 import { Pagination } from "@mui/material";
+import { useCampingDetailQuery } from "./../../../../hooks/useCampingDetail";
 
 const ListCardPage = () => {
+  const pageNo = 1;
+  const { data } = useCampingDetailQuery(pageNo);
+
+  const facilityData = data?.items.item?.map((item, index) =>
+    item.sbrsCl.split(",")
+  );
+
   return (
     <>
       <p>
@@ -10,10 +18,14 @@ const ListCardPage = () => {
       </p>
 
       <div className="camping-list">
+        {data &&
+          data.item.map((value, index) => (
+            <ListCard data={value} facilityData={facilityData} index={index} />
+          ))}
+        {/* <ListCard data={data} index={index} />
         <ListCard />
         <ListCard />
-        <ListCard />
-        <ListCard />
+        <ListCard /> */}
       </div>
 
       <Pagination
