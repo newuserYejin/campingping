@@ -22,8 +22,8 @@ import { authenticateAction } from "../../redux/actions/authencticateAction";
 const drawerWidth = 260;
 const navItems = [
   ["캠핑장 찾기🔍", "/search"],
-  ["행사✨", "/event"],
-  ["공공 우수 야영장⛺", "/bestCamp"],
+  ["주변 구경거리✨", "/event"],
+  ["테마별 우수 캠핑장⛺", "/bestCamp"],
 ];
 
 const GnbItemMobile = styled.li`
@@ -141,8 +141,8 @@ const Header = (props) => {
       </Typography>
       <List>
         {navItems.map((item) => (
-          <StylesProvider injectFirst>
-            <GnbItemMobile key={item}>
+          <StylesProvider key={item.id} injectFirst>
+            <GnbItemMobile>
               <Link to={item[1]}>{item[0]}</Link>
             </GnbItemMobile>
           </StylesProvider>
@@ -231,7 +231,6 @@ const Header = (props) => {
                 <button onClick={(event) => logout(event)}>로그아웃</button>
               )}
             </LoginPc>
-
             <Box
               component="ul"
               sx={{
@@ -241,7 +240,7 @@ const Header = (props) => {
                 padding: "0",
               }}>
               {navItems.map((item) => (
-                <StylesProvider injectFirst>
+                <StylesProvider key={`navItem${item.id}`} injectFirst>
                   <GnbItemPC key={item}>
                     <Link to={item[1]}>{item[0]}</Link>
                   </GnbItemPC>

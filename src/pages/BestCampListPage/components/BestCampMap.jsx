@@ -23,10 +23,16 @@ const BestCampMap = ({ list }) => {
         title: item.facltNm,
       })
     ))
+    // list.map((item) => (
+    //   new kakao.maps.InfoWindow({
+    //     position: new kakao.maps.LatLng(item.mapY, item.mapX),
+    //     content:`<div style="padding:5px;">Hello World! ${item.facltNm} <br><a href="https://map.kakao.com/link/map/Hello World!,33.450701,126.570667" style="color:blue" target="_blank">큰지도보기</a> <a href="https://map.kakao.com/link/to/Hello World!,33.450701,126.570667" style="color:blue" target="_blank">길찾기</a></div>`,
+    //   })
+    // ))
   };
 
   return (
-    <Box id="map" sx={{width:'60%', height:'auto', aspectRatio:'1/1.8'}}></Box>
+    <Box id="map" sx={{width:'100%', height:'auto', aspectRatio:'100/30'}}></Box>
   );
 }
 
