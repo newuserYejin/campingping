@@ -2,12 +2,10 @@ import React from "react";
 import { Typography } from "@mui/material";
 import "./MainTitle.style.css";
 
-const TitleMain = ({ component = "h3", title }) => {
+const TitleMain = ({ title }) => {
   return (
     <div className="main-title">
-      <Typography className="main-title-lv1" component={component}>
-        {title}
-      </Typography>
+      <h3 className="main-title-lv1">{title}</h3>
     </div>
   );
 };
