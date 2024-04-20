@@ -56,7 +56,7 @@ const EventListPage = () => {
         검색되었습니다.
       </p>
       <div className="list-gallery-wrap">
-        <Masonry columns={4} spacing={2}>
+        <Masonry columns={3} spacing={2}>
           {realList?.map((item) => {
             return (
               <ListGalleryItem
