@@ -42,7 +42,6 @@ const BestCampListPage = () => {
           <h2>캠핑어때가 뽑은<br />테마별 우수 캠핑장</h2>
           <p>캠핑족들의 취향에 맞춘 다양한 테마의 야영장을 뽑아봤어요. <span>다음에는 어디로 캠핑을 떠나볼까요?</span></p>
         </div>
-        {/* 시간날때 slider로 바꾸기 */}
         <div className="imgBox">
           <img src={titleBgImg} alt="" />
         </div>
