@@ -63,27 +63,15 @@
   margin-top: 3em;
   text-align: center;
 
-  /* .ReccomendSurroungingCarousel {
-    width: 100%;
-  } */
+  max-width: 100%;
 
-  .active.carousel-item-end,
-  .carousel-item-next:not(.carousel-item-start) {
-    min-width: 100%;
-    /* transform: translateX(-100%); */
+  .carousel-inner {
+    max-width: 100%;
   }
 
-  /* .carousel-item-next,
-  .carousel-item-prev,
-  .carousel-item.active {
-    display: flex;
-  } */
-
-
-  .carousel-item {
-    transition: none;
+  .contentItem {
+    max-width: 100%;
   }
-
 }
 
 .camping-detail-second-line {
