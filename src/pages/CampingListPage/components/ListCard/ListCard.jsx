@@ -7,7 +7,9 @@ const ListCard = ({ data, facilityData, index }) => {
   return (
     <div className="list-item">
       <div className="list-thumb">
-        <Link to="">
+        <Link
+          to={`/campings/${data?.contentId}?keyword=${data?.facltNm}&lat=${data?.mapY}&lon=${data?.mapX}`}
+        >
           <img
             src={
               data?.firstImageUrl == ""
@@ -22,7 +24,11 @@ const ListCard = ({ data, facilityData, index }) => {
       <div className="list-details">
         <hgroup className="lit-title">
           <h3 className="list-facltNm">
-            <Link to="#">{data?.facltNm}</Link>
+            <Link
+              to={`/campings/${data?.contentId}?keyword=${data?.facltNm}&lat=${data?.mapY}&lon=${data?.mapX}`}
+            >
+              {data?.facltNm}
+            </Link>
           </h3>
           {data?.featureNm && (
             <h4 className="list-lineIntro">

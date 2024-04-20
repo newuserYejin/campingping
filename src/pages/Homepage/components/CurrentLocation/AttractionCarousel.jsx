@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Carousel } from "react-bootstrap";
 import CircularProgress from "@mui/material/CircularProgress";
 import "./AttractionCarousel.style.css";
+import MainTitle from "../../../../components/Title/MainTitle";
 
 const AttractionCarousel = ({ attractData, title }) => {
   const [itemsPerPage, setItemsPerPage] = useState(5);
@@ -30,7 +31,8 @@ const AttractionCarousel = ({ attractData, title }) => {
 
   return (
     <div className="ReccomendSurroungingCarousel">
-      <div className="AttractionTitle">{title}</div>
+      <MainTitle title={title} />
+
       {attractData && attractData.length > 0 ? (
         <Carousel interval={null}>
           {[
@@ -51,15 +53,19 @@ const AttractionCarousel = ({ attractData, title }) => {
                         src={`${
                           item.firstimage ||
                           item.firstimage2 ||
-                          require("../../../../assets/whatAboutCampingLogo.png")
+                          require("../../../../assets/Lovepik_com-400231965-camping.jpg")
                         }`}
                         alt="대표 이미지"
                       />
-                      <div className="title">{item.title}</div>
-                      {item.addr1 && (
-                        <div className="address">{item.addr1}</div>
-                      )}
-                      {/* <div>ContentID: {item.contentid}</div> */}
+                      <div className="RectangleBox">
+                        <div className="ItemInfo">
+                          <div className="title">{item.title}</div>
+                          {item.addr1 && (
+                            <div className="address">{item.addr1}</div>
+                          )}
+                        </div>
+                      </div>
+                      <div className="title miniTitle">{item.title}</div>
                     </div>
                   ))}
               </div>

@@ -43,7 +43,10 @@
   text-decoration: underline;
   color: rgb(22, 22, 144);
 }
-
+.kakao-talk-area{
+  display: flex;
+  justify-content: flex-end;
+}
 .camping-detail-map-line {
   border-top: 2px solid #4b494c36;
   padding-top: 3em;
@@ -63,27 +66,15 @@
   margin-top: 3em;
   text-align: center;
 
-  /* .ReccomendSurroungingCarousel {
-    width: 100%;
-  } */
+  width: 100%;
 
-  .active.carousel-item-end,
-  .carousel-item-next:not(.carousel-item-start) {
-    min-width: 100%;
-    /* transform: translateX(-100%); */
+  .carousel-inner {
+    max-width: 100%;
   }
 
-  /* .carousel-item-next,
-  .carousel-item-prev,
-  .carousel-item.active {
-    display: flex;
-  } */
-
-
-  .carousel-item {
-    transition: none;
+  .contentItem {
+    max-width: 100%;
   }
-
 }
 
 .camping-detail-second-line {
@@ -158,8 +149,8 @@
     /* 한글 기준으로 줄 바꿈 */
     word-break: keep-all;
   }
-
-  .camping-detail-second-grid {
-    padding-left: 2em;
+  .css-mhc70k-MuiGrid-root{
+    margin-left: auto !important;
+    width: 100% !important;
   }
 }

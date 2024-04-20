@@ -1,7 +1,6 @@
 import React from "react";
 import "./ListGalleryItem.style.css";
 import { useAreaCode } from "../../hooks/useAreaCode";
-import { Masonry } from "@mui/lab";
 
 const ListGalleryItem = ({ isConnect = false, isLink = false, item }) => {
   const { data: AreaData } = useAreaCode();
@@ -23,7 +22,7 @@ const ListGalleryItem = ({ isConnect = false, isLink = false, item }) => {
             src={
               item.firstimage ||
               item.firstimage2 ||
-              "../../../src/assets/whatAboutCampingLogo.png"
+              "../../../src/assets/howAboutCampingLogo.png"
             }
             alt={item.title + "사진"}
           />
@@ -38,7 +37,7 @@ const ListGalleryItem = ({ isConnect = false, isLink = false, item }) => {
                 }
               })}
             </span>
-            <span>#칠곡군</span>
+            {/* <span>#칠곡군</span> */}
           </div>
           <h3 className="title">{item.title}</h3>
           <ul>

@@ -5,6 +5,7 @@ import ListGalleryItem from "../../components/ListGalleryItem/ListGalleryItem";
 import { useFetchEvent } from "../../hooks/useFetchEvent";
 import { useAreaCode } from "../../hooks/useAreaCode";
 import CircularProgress from "@mui/material/CircularProgress";
+import Masonry from "@mui/lab/Masonry";
 
 const EventListPage = () => {
   let [CurrentPage, setCurrentPage] = useState(1);
@@ -55,18 +56,18 @@ const EventListPage = () => {
         검색되었습니다.
       </p>
       <div className="list-gallery-wrap">
-        {realList?.map((item) => {
-          return (
-            <ListGalleryItem
-              isConnect={item.tel ? true : false}
-              isLink={item.addr1 ? true : false}
-              item={item}
-            />
-          );
-        })}
-        {/* <ListGalleryItem isLink={true} />
-        <ListGalleryItem isConnect={true} />
-        <ListGalleryItem /> */}
+        <Masonry columns={3} spacing={2}>
+          {realList?.map((item) => {
+            return (
+              <ListGalleryItem
+                isConnect={item.tel ? true : false}
+                isLink={item.addr1 ? true : false}
+                item={item}
+                sx={{ height: "auto" }}
+              />
+            );
+          })}
+        </Masonry>
       </div>
 
       <Pagination

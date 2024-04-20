@@ -10,7 +10,7 @@ const Homepage = () => {
     <section>
       <TopBanner />
       <MainSearchForm />
-      <TagSearch/>
+      <TagSearch />
       <Container maxWidth="xl">
         <CurrentLocation />
       </Container>

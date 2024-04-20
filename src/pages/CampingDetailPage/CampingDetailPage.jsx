@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./CampingDetailPage.style.css";
 import { useCampingKeywordQuery } from "../../hooks/useCampingDetail";
 import { useSearchParams } from "react-router-dom";
 import Grid from "@mui/material/Grid";
@@ -17,6 +16,10 @@ import { Button } from "@mui/base/Button";
 import AttractionCarousel from "../Homepage/components/CurrentLocation/AttractionCarousel";
 import { useFetchLocation } from "../../hooks/useFetchLocation";
 import CampingDetailMap from "./CampingDetailMap/CampingDetailMap";
+import "./CampingDetailPage.style.css";
+import CampingDetailPageKakao from "./CampingDetailPageKakao/CampingDetailPageKakao";
+import HandleCopyClipBoard from "./HandleCopyClipBoard/HandleCopyClipBoard";
+
 
 const CampingDetailPage = () => {
   const [searchParams] = useSearchParams();
@@ -81,17 +84,20 @@ const CampingDetailPage = () => {
     return <div>{campingRecommendError.message}</div>;
   }
 
-  console.log("campingRecommendData:", campingRecommendData);
+  // console.log("campingRecommendData:", campingRecommendData);
 
   let CampingRecommendAttractData = [];
   let CampingRecommendItemList = [];
   CampingRecommendAttractData = campingRecommendData.data?.response;
   CampingRecommendItemList = CampingRecommendAttractData?.body.items?.item;
 
-  console.log("camping Location lat:", lat, "Camping Location lot:", lon);
-  console.log("CampingRecommendAttractData:", CampingRecommendAttractData);
-  console.log("CampingRecommendItemList:", CampingRecommendItemList);
-
+  // console.log("camping Location lat:", lat, "Camping Location lot:", lon);
+  // console.log("CampingRecommendAttractData:", CampingRecommendAttractData);
+  // console.log("CampingRecommendItemList:", CampingRecommendItemList);
+  console.log(
+    "campingDetail.tel",
+    campingDetail.tel.charAt(campingDetail.tel.length - 1)
+  );
   return (
     <div className="camping-detail-main">
       {campingDetail ? (
@@ -100,13 +106,22 @@ const CampingDetailPage = () => {
             <Grid container spacing={2}>
               <Grid xs={12} md={8}>
                 <div className="camping-detail-main-img">
-                  <div
-                    style={{
-                      backgroundImage:
-                        "url(" + `${campingDetail.firstImageUrl}` + ")",
-                    }}
-                    className="img"
-                  ></div>
+                  {campingDetail.firstImageUrl ? (
+                    <div
+                      style={{
+                        backgroundImage:
+                          "url(" + `${campingDetail.firstImageUrl}` + ")",
+                      }}
+                      className="img"
+                    />
+                  ) : (
+                    <div
+                      style={{
+                        backgroundImage: `url("https://search.pstatic.net/sunny/?src=https%3A%2F%2Fwatermark.lovepik.com%2Fphoto%2F40023%2F1965.jpg_wh1200.jpg&type=sc960_832")`,
+                      }}
+                      className="img"
+                    />
+                  )}
                 </div>
               </Grid>
               <Grid xs={12} md={4}>
@@ -119,8 +134,13 @@ const CampingDetailPage = () => {
                   </h5>
                   <div>{campingDetail.addr1}</div>
                   <div>
+                    {/* 전화번호 마지막이 "-"로 끝나는 경우에는 "-"를 빼고 보여주기 */}
                     {campingDetail.tel
-                      ? `문의처 : ${campingDetail.tel}`
+                      ? campingDetail.tel.charAt(
+                          campingDetail.tel.length - 1
+                        ) == "-"
+                        ? `문의처 : ${campingDetail.tel.slice(0, -1)}`
+                        : `문의처 : ${campingDetail.tel}`
                       : "문의번호가 없습니다"}
                   </div>
                   <div>
@@ -162,6 +182,11 @@ const CampingDetailPage = () => {
                     )}
                   </div>
                   <div>
+                    <div>
+                      {campingDetail.siteBottomCl4 > 0
+                        ? `바닥형태(단위:면) : 자갈(${campingDetail.siteBottomCl4})`
+                        : ""}
+                    </div>
                     {campingDetail.siteBottomCl1 > 0
                       ? `바닥형태(단위:면) : 잔디(${campingDetail.siteBottomCl1})`
                       : ""}
@@ -177,19 +202,13 @@ const CampingDetailPage = () => {
                       : ""}
                   </div>
                   <div>
-                    {campingDetail.siteBottomCl4 > 0
-                      ? `바닥형태(단위:면) : 자갈(${campingDetail.siteBottomCl4})`
-                      : ""}
-                  </div>
-                  <div>
                     {campingDetail.siteBottomCl5 > 0
                       ? `바닥형태(단위:면) : 맨흙(${campingDetail.siteBottomCl5})`
                       : ""}
                   </div>
-                  <div>
-                    {campingDetail.siteBottomCl1 > 0
-                      ? `잔디데크 : ${campingDetail.siteBottomCl1}개`
-                      : ""}
+                  <div className="kakao-talk-area">
+                    <HandleCopyClipBoard data={campingDetail}/>
+                    <CampingDetailPageKakao data={campingDetail} />
                   </div>
                 </div>
               </Grid>

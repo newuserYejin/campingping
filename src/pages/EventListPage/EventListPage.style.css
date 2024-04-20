@@ -6,7 +6,7 @@
 }
 
 .list-gallery-wrap .list-gallery-item {
-  width: 48%;
+  width: 32%;
   margin: 1%;
 }
 
@@ -26,5 +26,15 @@
   .list-gallery-wrap .list-gallery-item {
     width: auto;
     margin: 2em 0;
+  }
+
+  .list-gallery-wrap .list-gallery-item {
+    width: 49.5%;
+  }
+}
+
+@media screen and (max-width: 460px) {
+  .list-gallery-wrap .list-gallery-item {
+    width: 100%;
   }
 }
