@@ -41,7 +41,7 @@ const Footer = () => {
               </li>
             ))}
             <p className="footer-info-copy">
-              <span>Copyrights(c) 2024 캠핑어때 ALL RIGHTS RESERVED.</span>
+              <span>Copyrights&copy; 2024 캠핑어때 ALL RIGHTS RESERVED.</span>
             </p>
           </ul>
         </address>

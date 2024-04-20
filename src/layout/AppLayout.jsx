@@ -21,6 +21,10 @@ const AppLayout = () => {
       <Header />
       <Box component="section"
         sx={{
+          minHeight: {
+            xs:'calc(100vh - 70px)',
+            md:'calc(100vh - 135px)'
+          },
           paddingTop: {
             xs:'70px',
             md:'135px'
