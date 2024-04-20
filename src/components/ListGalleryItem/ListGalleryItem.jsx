@@ -66,7 +66,7 @@ const ListGalleryItem = ({ isConnect = false, isLink = false, item }) => {
         // isConnect=true 일 때 전화, 지도 버튼 노출
         isConnect && (
           <div className="gallery-item-connect">
-            <a className="connect connect-call" href={item.tel}>
+            <a className="connect connect-call" href={`tel:${item.tel}`}>
               전화
             </a>
             <a

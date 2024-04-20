@@ -418,5 +418,3 @@ export const search_tags = [
     text: "익스트림",
   },
 ];
-
-];

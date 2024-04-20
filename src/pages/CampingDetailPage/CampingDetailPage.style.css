@@ -81,101 +81,102 @@
     text-align: center;
 
     width: 100%;
-
-    .carousel-inner {
-      max-width: 100%;
-    }
-
-    .contentItem {
-      max-width: 100%;
-    }
   }
 
-  .camping-detail-second-line {
-    margin-top: 3em;
-    text-align: center;
-    border-top: 2px solid #4b494c36;
-    border-bottom: 2px solid #4b494c36;
-    padding-top: 3em;
-    padding-bottom: 3em;
-    font-size: 1.5em;
+  .carousel-inner {
+    max-width: 100%;
+  }
+
+  .contentItem {
+    max-width: 100%;
+  }
+}
+
+.camping-detail-second-line {
+  margin-top: 3em;
+  text-align: center;
+  border-top: 2px solid #4b494c36;
+  border-bottom: 2px solid #4b494c36;
+  padding-top: 3em;
+  padding-bottom: 3em;
+  font-size: 1.5em;
+}
+
+
+.camping-detail-second-line-count {
+  margin-top: 3em;
+  text-align: center;
+  width: 50%;
+}
+
+
+.camping-detail-second-line-count div {
+  border-top: 1px solid #4b494cb4;
+  display: flex;
+  justify-content: space-around;
+}
+
+
+.camping-detail-second-line-count span {
+  margin: 10px;
+}
+
+
+.camping-detail-second-line-count-first {
+  border-top: 1px solid #4b494cb4;
+}
+
+.comping-detail-table-area {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+
+.comping-detail-table-area-inside {
+  width: 60%;
+}
+
+
+.comping-detail-table-area-title {
+  padding-bottom: 15px;
+  border-bottom: 2px solid #4b494cd9;
+  font-size: 20px;
+  font-weight: 800;
+  text-align: center;
+}
+
+
+.comping-detail-table-area-footer {
+  padding-top: 10px;
+  border-top: 2px solid #4b494cd9;
+  font-size: 12px;
+  color: #4b494ce7;
+}
+
+
+@media screen and (max-width: 600px) {
+  .camping-detail-main {
+    margin-top: 30px;
   }
 
 
-  .camping-detail-second-line-count {
-    margin-top: 3em;
-    text-align: center;
-    width: 50%;
-  }
-
-
-  .camping-detail-second-line-count div {
-    border-top: 1px solid #4b494cb4;
-    display: flex;
-    justify-content: space-around;
-  }
-
-
-  .camping-detail-second-line-count span {
-    margin: 10px;
-  }
-
-
-  .camping-detail-second-line-count-first {
-    border-top: 1px solid #4b494cb4;
-  }
-
-  .comping-detail-table-area {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 30px;
+  .camping-detail-main-img .img {
+    width: 100%;
+    background-size: cover;
   }
 
 
   .comping-detail-table-area-inside {
-    width: 60%;
+    width: 100%;
+    /* 한글 기준으로 줄 바꿈 */
+    word-break: keep-all;
   }
 
-
-  .comping-detail-table-area-title {
-    padding-bottom: 15px;
-    border-bottom: 2px solid #4b494cd9;
-    font-size: 20px;
-    font-weight: 800;
-    text-align: center;
+  .css-mhc70k-MuiGrid-root {
+    margin-left: auto !important;
+    width: 100% !important;
   }
-
-
-  .comping-detail-table-area-footer {
-    padding-top: 10px;
-    border-top: 2px solid #4b494cd9;
-    font-size: 12px;
-    color: #4b494ce7;
-  }
-
-
-  @media screen and (max-width: 600px) {
-    .camping-detail-main {
-      margin-top: 30px;
-    }
-
-
-    .camping-detail-main-img .img {
-      width: 100%;
-      background-size: cover;
-    }
-
-
-    .comping-detail-table-area-inside {
-      width: 100%;
-      /* 한글 기준으로 줄 바꿈 */
-      word-break: keep-all;
-    }
-
-    .css-mhc70k-MuiGrid-root {
-      margin-left: auto !important;
-      width: 100% !important;
-    }
-  }
+}
