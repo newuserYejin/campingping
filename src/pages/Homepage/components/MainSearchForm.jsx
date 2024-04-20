@@ -1,7 +1,7 @@
 import React, { useState }from 'react';
 import './MainSearchForm.style.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEarthAsia, faLocationDot, faTree, faMagnifyingGlass, faPlus, faPenNib } from "@fortawesome/free-solid-svg-icons";
+import { faEarthAsia, faLocationDot, faTree, faMagnifyingGlass, faPlus, faPenNib, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { Container, Box, Input, Select, MenuItem, Stack, Button } from '@mui/material';
 import { Dialog, DialogTitle, DialogContent } from '@mui/material';
 import { FormGroup, FormControlLabel, Checkbox } from '@mui/material';
@@ -126,7 +126,10 @@ const MainSearchForm = () => {
             marginBottom:"2rem",
           }}
         >
-          원하는 캠핑장을 좀 더 상세하게 검색해보세요.
+          원하는 캠핑장을<br />상세하게 검색해보세요.
+          <span className='btn_modalClose' onClick={() => handleClickClose()}>
+            <FontAwesomeIcon icon={faXmark} />
+          </span>
         </DialogTitle>
         <DialogContent>
           {search_detail_filters.map((filter) => 
