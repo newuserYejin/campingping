@@ -4,6 +4,7 @@ import TopBanner from "./components/TopBanner";
 import MainSearchForm from "./components/MainSearchForm";
 import CurrentLocation from "./components/CurrentLocation/CurrentLocation";
 import TagSearch from "./components/TagSearch";
+import Video from "./components/Video/Video";
 
 const Homepage = () => {
   return (
@@ -13,6 +14,7 @@ const Homepage = () => {
       <TagSearch />
       <Container maxWidth="xl">
         <CurrentLocation />
+        <Video></Video>
       </Container>
     </section>
   );

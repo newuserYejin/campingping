@@ -52,7 +52,7 @@ const EventListPage = () => {
       }}
     >
       <p>
-        총 <strong>{EventList.body.totalCount}</strong>개 행사장이
+        총 <strong>{EventList?.body.totalCount}</strong>개 행사장이
         검색되었습니다.
       </p>
       <div className="list-gallery-wrap">

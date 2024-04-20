@@ -1,0 +1,31 @@
+* {
+    font-family: 'Spoqa Han Sans Neo', sans-serif;
+}
+
+.videoArea {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    .videoItem {
+        width: 24%;
+        min-height: 30vh;
+        margin-bottom: 20px;
+    }
+}
+
+.moveYoutubeSite {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+
+    a {
+        font-size: 1.2em;
+        font-weight: bold;
+        color: #3360c9;
+    }
+
+    a:hover {
+        color: #193470;
+    }
+}
