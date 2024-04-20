@@ -1,0 +1,10 @@
+.bestCampContents{
+  padding:2.5rem 0;
+  h2{
+    margin: 3rem 0 5rem;;
+    font-family: 'iceJaram-Rg';
+    font-size: 3rem;
+    font-weight:800;
+    text-align:center;
+  }
+}
