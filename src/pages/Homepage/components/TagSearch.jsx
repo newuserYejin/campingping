@@ -6,6 +6,7 @@ import { Container, Box, Button } from '@mui/material';
 import { search_tags } from '../../../constants/info';
 import { useTagSearchQuery } from '../../../hooks/useTagSearch';
 import { useNavigate } from 'react-router-dom';
+import MainTitle from '../../../components/Title/MainTitle'
 
 const TagSearch = () => {
 //searchTag의 id와 selectedTag의
@@ -41,9 +42,7 @@ const TagSearch = () => {
   return (
     <Box component="form" className='TagSearch' onSubmit={searchByTag}>
       <Container maxWidth="xl">
-        <div className='title'>
-          <h3>태그로 찾는 나만의 캠핑장</h3>
-        </div>
+        <MainTitle title="태그로 찾는 나만의 캠핑장" />
         <div className={isTagOpen ? "mobileMoreDiv open" : "mobileMoreDiv" } >
           <ul>
             {search_tags.map((tag) => 

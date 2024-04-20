@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Carousel } from "react-bootstrap";
 import CircularProgress from "@mui/material/CircularProgress";
 import "./AttractionCarousel.style.css";
+import MainTitle from "../../../../components/Title/MainTitle";
 
 const AttractionCarousel = ({ attractData, title }) => {
   const [itemsPerPage, setItemsPerPage] = useState(5);
@@ -30,7 +31,8 @@ const AttractionCarousel = ({ attractData, title }) => {
 
   return (
     <div className="ReccomendSurroungingCarousel">
-      <div className="AttractionTitle">{title}</div>
+      <MainTitle title={title} />
+
       {attractData && attractData.length > 0 ? (
         <Carousel interval={null}>
           {[
