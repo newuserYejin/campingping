@@ -105,9 +105,12 @@
   @media (max-width: 600px) {
     margin-bottom:2rem;
     .bestCampTypeListItem{
+      margin-top: 2rem;
       padding:0;
+      background-position:50% 50%;
+      background-size:cover;
       .textBox{
-        bottom:0;
+        position:static;
         width:100%;
         background:rgba(0,0,0,0.4);
         aspect-ratio:2/1;
@@ -129,7 +132,7 @@
         }
       }
       .imgBox{
-        width:100%;
+        display:none;
       }
     }
   }
