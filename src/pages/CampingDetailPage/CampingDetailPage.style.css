@@ -73,6 +73,7 @@
 
 .camping-detail-attraction-line {
   border-top: 2px solid #4b494c36;
+  width: 100%;
 
   .camping-detail-attraction-line {
     border-top: 2px solid #4b494c36;
@@ -89,6 +90,10 @@
 
   .contentItem {
     max-width: 100%;
+  }
+
+  .main-title {
+    margin-top: 20px;
   }
 }
 

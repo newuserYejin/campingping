@@ -13,7 +13,7 @@ const fetchBestCamping = () => {
 export const useBestCampListQuery = () => {
   return useQuery({
     queryKey: ["camping_detail"],
-    queryFn: fetchCampingDetail,
+    queryFn: fetchBestCamping,
     select: (result) => result?.data.response?.body.items.item,
   });
 };

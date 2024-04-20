@@ -1,6 +1,5 @@
-
-import React from 'react';
-import './BestCampContents.style.css';
+import React from "react";
+import "./BestCampContents.style.css";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useBestCampListQuery } from "../../../hooks/useBestCampList";
 import BestCampMap from "./BestCampMap";
@@ -55,7 +54,7 @@ const BestCampContents = (props) => {
 
   // 차박하기 좋은
   const carCampingList = data?.filter((d) => {
-    const list = d.firstImageUrl && d.induty.includes('자동차야영장');
+    const list = d.firstImageUrl && d.induty.includes("자동차야영장");
     return list;
   });
 
@@ -90,7 +89,7 @@ const BestCampContents = (props) => {
           <BestCampTypeList list={carCampingList.slice(0, listCount)} />
           <BestCampMap list={carCampingList.slice(0, listCount)} />
         </section>
-      }
+      )}
     </section>
   );
 };
