@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./TopButton.style.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleUp } from "@fortawesome/free-regular-svg-icons";
 
 const TopButton = () => {
   let [top, setTop] = useState(false);
@@ -30,7 +32,7 @@ const TopButton = () => {
       className={`TopButton ${top ? "on" : ""}`}
       onClick={moveTop}
     >
-      top
+      <FontAwesomeIcon className="TopButtonIcon" icon={faCircleUp} />
     </button>
   );
 };

@@ -1,5 +1,4 @@
 .TopButton {
-    background-color: pink;
     position: fixed;
     bottom: 15vh;
     right: 10px;
@@ -11,9 +10,18 @@
     height: 50px;
     border-radius: 50%;
     font-weight: bold;
-    border-bottom: solid 2px black;
+    border: none;
 }
 
 .on {
-    display: block;
+    display: flex;
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+}
+
+.TopButtonIcon {
+    width: 110%;
+    height: 110%;
+    color: #B197FC;
 }
