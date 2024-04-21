@@ -45,9 +45,9 @@ const LoginPage = () => {
               margin="normal"
               required
               fullWidth
-              id="이름"
-              label="이름"
-              name="이름"
+              id="아이디"
+              label="아이디"
+              name="아이디"
               autoFocus
             />
             <TextField
