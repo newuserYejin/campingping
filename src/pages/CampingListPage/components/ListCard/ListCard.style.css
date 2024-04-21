@@ -117,3 +117,30 @@
     padding: 1em;
   }
 }
+
+
+@media screen and (max-width: 460px) {
+  .list-info dl{
+    display: block;
+  }
+
+  .list-info dt{
+    position: relative;
+    margin: auto;
+    z-index: 9;
+  }
+
+  .list-info dd{
+    width: 100%;
+    margin-top: -16px;
+    padding: 24px 0 12px 0;
+    text-align:center;
+    background:#fafafa;
+    border-radius: 16px;
+  }
+
+  .list-sbrsCl ul{
+    margin: 0px;
+  }
+
+}
