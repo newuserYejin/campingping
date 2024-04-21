@@ -21,7 +21,7 @@ import { authenticateAction } from "../../redux/actions/authencticateAction";
 
 const drawerWidth = 260;
 const navItems = [
-  ["캠핑장 찾기🔍", "/search"],
+  ["캠핑장 찾기🔍", "/search?q=&province=&city=&theme=&selectedDetailTag="],
   ["주변 구경거리✨", "/event"],
   ["테마별 우수 캠핑장⛺", "/bestCamp"],
 ];
