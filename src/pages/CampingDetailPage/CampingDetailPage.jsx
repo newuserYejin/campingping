@@ -70,19 +70,13 @@ const CampingDetailPage = () => {
     );
   }
 
-  // if (campingRecommendIsLoading) {
-  //   return (
-
-  //   );
-  // }
-
   if (campingRecommendIsError) {
     return <div>{campingRecommendError.message}</div>;
   }
 
   let CampingRecommendAttractData = [];
   let CampingRecommendItemList = [];
-  CampingRecommendAttractData = campingRecommendData.data?.response;
+  CampingRecommendAttractData = campingRecommendData?.data?.response;
   CampingRecommendItemList = CampingRecommendAttractData?.body.items?.item;
 
   // 페이지 이동 시 화면 최상단으로 보여주는 함수
