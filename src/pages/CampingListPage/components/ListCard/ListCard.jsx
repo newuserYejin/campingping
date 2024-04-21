@@ -32,7 +32,11 @@ const ListCard = ({ data, facilityData, index }) => {
           </h3>
           {data?.featureNm && (
             <h4 className="list-lineIntro">
-              <Link to="#">{data?.featureNm.substring(0, 120)}...</Link>
+              <Link 
+                to={`/campings/${data?.contentId}?keyword=${data?.facltNm}&lat=${data?.mapY}&lon=${data?.mapX}`}
+              >
+                {data?.featureNm.substring(0, 120)}...
+              </Link>
             </h4>
           )}
         </hgroup>
