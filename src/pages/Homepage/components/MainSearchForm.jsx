@@ -25,7 +25,7 @@ const MainSearchForm = () => {
 
   const searchByKeyword = (e) => {
     e.preventDefault()//폼 제출시 새로고침 막음
-      navigate(`/search?q=${keyword}&province=${selectedProvince}&city=${selectedCity}&theme=${selectedTheme}`)
+    navigate(`/search?q=${keyword}&province=${selectedProvince}&city=${selectedCity}&theme=${selectedTheme}&selectedDetailTag=${selectedDetailTag}`)
       setKeyword("")
   }
   const handleProvinceChange = (e) => {
