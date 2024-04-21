@@ -29,7 +29,7 @@ const SearchDataPage = () => {
     isLoading,
     isError,
     error,
-  } = useSearchDataQuery({ keyword, page });
+  } = useSearchDataQuery({ keyword, page, province, city, theme, selectedTag, selectedDetailTag });
   console.log("data?", searchData);
   console.log("selectedTag? :", selectedTag);
 
@@ -45,17 +45,6 @@ const SearchDataPage = () => {
   if (isError) {
     return <h3>Error: {error.message}</h3>;
   }
-
-  //selectedTag가 null이면 키워드검색으로 인식
-  //selectedTag가 ""빈 문자열이면 emptykeyword search와 동일
-  //selectedTag가 "반려견동반"을 포함한다면 item.animalCmgCl이 "불가능"이 아닌 값 리턴
-  //selectedTag가 "봄"을 포함한다면 item.operPdCl이 "봄"을 포함하는 값 리턴
-  //selectedTag가 "여름"을 포함한다면 item.operPdCl이 "여름"을 포함하는 값 리턴
-  //selectedTag가 "가을"을 포함한다면 item.operPdCl이 "가을"을 포함하는 값 리턴
-  //selectedTag가 "겨울"을 포함한다면 item.operPdCl이 "겨울"을 포함하는 값 리턴
-  //selectedTag가 "바다가보이는"을 포함한다면 item.lctCl이 "해변"을 포함하는 값 리턴
-  //selectedTag가 "수영장있는"을 포함한다면 item.sbrsCl이 "물놀이장"을 포함하는 값 리턴
-  //selectedTag가 "온수 잘 나오는"을 포함한다면  item.sbrsCl이 "온수"를 포함하는 값 리턴
 
   let filteredData = data?.items.item?.filter((item) => {
     if (selectedTag == null || selectedTag == "") {
