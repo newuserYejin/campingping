@@ -17,8 +17,8 @@ const Homepage = () => {
       <TagSearch />
       <Container maxWidth="xl">
         <CurrentLocation />
-        <Video />
         <BestCamp />
+        <Video />
       </Container>
       <TopButton />
     </section>
