@@ -17,10 +17,8 @@ const MainSearchForm = () => {
   const [selectedCity, setSelectedCity] = useState('');
   const [selectedTheme, setSelectedTheme] = useState('');
   const [selectedDetailTag, setSelectedDetailTag] = useState([])
-  console.log("modalOpen222:", modalOpen,)
 
   useEffect(()=>{
-    console.log(selectedDetailTag)
   },[selectedDetailTag])
 
   const searchByKeyword = (e) => {

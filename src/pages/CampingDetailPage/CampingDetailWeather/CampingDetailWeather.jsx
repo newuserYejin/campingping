@@ -11,8 +11,6 @@ const CampingDetailWeather = ({ lat, lon, name }) => {
   // const { data, isLoading } = useWeatherQuery(lat, lon);
   const { data, isLoading } = useFiveDaysWeatherQuery(lat, lon);
 
-  console.log("weather-data", data);
-
   if (isLoading) {
     return <div className="loading_wrap">{/* <CircularProgress /> */}</div>;
   }

@@ -223,6 +223,7 @@
 .carousel-indicators {
     display: none;
     bottom: -20px;
+    margin-bottom:0;
 
     button {
         background-color: var(--color-darkGray) !important;

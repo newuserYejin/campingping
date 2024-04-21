@@ -43,9 +43,6 @@ const Current = ({ userLat, userLot }) => {
 
   RecommandItemList = RecommandData?.data.response;
   RecommendAttractData = RecommandItemList?.body.items?.item;
-  console.log("apiData: ", apiData);
-  console.log("itemList:", itemList);
-  console.log("RecommandItemList:", RecommandItemList);
 
   return (
     <div className="AttractionCarousel">
