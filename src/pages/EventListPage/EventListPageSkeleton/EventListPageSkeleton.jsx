@@ -31,10 +31,11 @@ const EventListPageSkeleton = () => {
           padding: "30px 0",
           "@media(max-width:900px)": {
             marginTop: "10px",
+            maxHeight: "80vh",
           },
 
           "@media(max-width:460px)": {
-            maxHeight: "70vh",
+            maxHeight: "82vh",
           },
         }}
       >
@@ -51,7 +52,6 @@ const EventListPageSkeleton = () => {
                 width: "100%",
                 // height: "auto",
                 minHeight: "20px",
-                margin: "auto 0",
               },
             },
           }}

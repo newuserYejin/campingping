@@ -62,7 +62,7 @@ const CampingDetailPage = () => {
     ),
   ];
 
-  if (isLoading) {
+  if (isLoading || data) {
     return (
       <div className="loading_wrap">
         <CampingDetailSkeleton />

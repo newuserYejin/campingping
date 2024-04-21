@@ -38,3 +38,55 @@
     }
 
 }
+
+@media (max-width:900px) {
+
+    .bestCampingSkeleton1,
+    .bestCampingSkeleton2 {
+
+        margin-bottom: 100px;
+
+        .bestCampingSkeletonImg1,
+        .bestCampingSkeletonImg2 {
+            height: 250px;
+            width: 80%;
+        }
+
+        .bestCampingSkeletonMap1,
+        .bestCampingSkeletonMap2 {
+            height: 200px;
+            width: 70%;
+        }
+    }
+
+    .bestCampingSkeleton1 {
+        .bestCampingSkeletonMap1 {
+            left: 35%;
+            bottom: -23%;
+        }
+    }
+
+    .bestCampingSkeleton2 {
+        .bestCampingSkeletonMap2 {
+            bottom: -23%;
+        }
+    }
+}
+
+@media (max-width:460px) {
+
+    .bestCampingSkeleton1,
+    .bestCampingSkeleton2 {
+        margin-bottom: 30px;
+
+        .bestCampingSkeletonMap1,
+        .bestCampingSkeletonMap2 {
+            display: none;
+        }
+
+        .bestCampingSkeletonImg1,
+        .bestCampingSkeletonImg2 {
+            width: 100%;
+        }
+    }
+}
