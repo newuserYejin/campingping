@@ -45,8 +45,6 @@ const SearchDataPage = () => {
     selectedTagLength,
     selectedDetailTag,
   });
-  console.log("data?", searchData);
-  console.log("selectedTag? :", selectedTag);
 
   let data = searchData?.response?.body;
 

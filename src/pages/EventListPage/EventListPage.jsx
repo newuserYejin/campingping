@@ -31,16 +31,11 @@ const EventListPage = () => {
   if (isError) {
     return <div>{error.message}</div>;
   }
-
-  console.log("Event List:", EventList);
-  console.log("AreaData:", AreaData);
-
   let realList = [];
   let Arealist = [];
   realList = EventList?.body?.items?.item;
   Arealist = AreaData?.item;
-  console.log("realList:", realList);
-
+  
   const changePage = (event, page) => {
     setCurrentPage(page);
   };

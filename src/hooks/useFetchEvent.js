@@ -7,11 +7,8 @@ const fetchEvent = ({ CurrentPage }) => {
         numOfRows: 20 // 출력 개수 조정,
     }
 
-    console.log("CurrentPage:", CurrentPage)
-
     if (typeof CurrentPage !== 'undefined' && CurrentPage !== 0) {
         params.pageNo = CurrentPage;
-        console.log(CurrentPage);
     }
 
     return apiEvent.get(`/KorService1/searchFestival1`, { params })

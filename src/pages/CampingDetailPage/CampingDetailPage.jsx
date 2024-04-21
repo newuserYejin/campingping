@@ -82,7 +82,6 @@ const CampingDetailPage = () => {
   // 페이지 이동 시 화면 최상단으로 보여주는 함수
   const PageScrollTop = () => {
     const { pathname } = useLocation();
-    console.log("pathname", pathname);
 
     useEffect(() => {
       window.scrollTo(0, 0);

@@ -43,11 +43,7 @@ const Video = () => {
 
   const playList = selectVideo(videoIDarray, 5);
 
-  console.log(
-    playList.map((item) => {
-      console.log(item);
-    })
-  );
+
 
   return (
     <div>

@@ -22,7 +22,6 @@ const TagSearch = () => {
   const [selectedTag, setSelectedTag] = useState([]);
 
   useEffect(() => {
-    console.log(selectedTag);
   }, [selectedTag]);
 
   const searchByTag = (e) => {
