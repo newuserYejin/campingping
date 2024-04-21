@@ -266,7 +266,6 @@ const SearchDataPage = () => {
         }}
         onChange={changePage}
       />
-      <TopButton />
     </>
   );
 };

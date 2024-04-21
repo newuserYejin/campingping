@@ -19,6 +19,10 @@
     justify-content: space-between;
     align-items: baseline;
 
+    .main-title {
+        min-width: max-content;
+    }
+
     a {
         font-size: 1.2em;
         font-weight: bold;
@@ -27,5 +31,53 @@
 
     a:hover {
         color: #193470;
+    }
+}
+
+@media (max-width:900px) {
+    .videoArea {
+        .videoItem {
+            width: 49%;
+            min-height: 23vh;
+            margin-bottom: 10px;
+        }
+    }
+
+    .moveYoutubeSite {
+        a {
+            width: 100%;
+            font-size: 0.9em;
+            display: flex;
+            justify-content: end;
+            margin-bottom: 10px;
+        }
+    }
+}
+
+@media (max-width:460px) {
+    .videoArea {
+        .videoItem {
+            width: 100%;
+        }
+    }
+
+    .moveYoutubeSite {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+
+        .main-title {
+            padding-bottom: 1.5em;
+        }
+
+        a {
+            width: 100%;
+            font-size: 0.9em;
+            display: flex;
+            justify-content: end;
+            margin-bottom: 10px;
+        }
     }
 }
