@@ -27,7 +27,6 @@ const TagSearch = () => {
 
   const searchByTag = (e) => {
     e.preventDefault(); //폼 제출시 새로고침 막음
-    navigate(`/search?q=`);
     navigate(`/search?q=&selectedTag=${selectedTag}`);
   };
 
@@ -36,6 +35,14 @@ const TagSearch = () => {
   const tagToggle = (isTagOpen) => {
     setIsTagOpen(!isTagOpen);
   };
+
+  const resetTags = () => {
+    setSelectedTag([])
+    document.querySelectorAll('[name="search_tags"]').forEach(checkbox => {
+      checkbox.checked = false
+    })
+  }
+
 
   return (
     <Box component="form" className="TagSearch" onSubmit={searchByTag}>
@@ -72,12 +79,7 @@ const TagSearch = () => {
           <span>{isTagOpen == false ? "더보기" : "닫기"}</span>
         </p>
         <div className="btnBox">
-          <Button
-            onClick={() => {
-              setSelectedTag([]);
-            }}
-            className="btn_refresh"
-          >
+        <Button onClick={resetTags} className="btn_refresh">
             <FontAwesomeIcon icon={faRotateLeft} />
             <span>초기화</span>
           </Button>
