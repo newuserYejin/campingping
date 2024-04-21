@@ -1,0 +1,23 @@
+.BestListWholeBox {
+    width: 100;
+}
+
+.BestListMent {
+    width: 100%;
+    max-width: none !important;
+    min-height: 200px;
+    padding: 2.5rem 0 3.5rem;
+
+    .main-title {
+        visibility: visible;
+
+        h3 {
+            color: white;
+        }
+
+        :after {
+            background-color: white;
+        }
+    }
+
+}

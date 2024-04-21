@@ -4,13 +4,18 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { useBestCampListQuery } from "../../../hooks/useBestCampList";
 import BestCampMap from "./BestCampMap";
 import BestCampTypeList from "./BestCampTypeList";
+import BestListSkeleton from "../BestListSkeleton/BestListSkeleton";
 
 const BestCampContents = (props) => {
   const { data, isLoading, isError, error } = useBestCampListQuery();
   const listCount = 10;
 
-  if (isLoading) {
-    return <div className="loadingSpinner">{/* <CircularProgress /> */}</div>;
+  if (isLoading || data) {
+    return (
+      <div>
+        <BestListSkeleton />
+      </div>
+    );
   }
   if (isError) {
     return <div>{error.message}</div>;
@@ -48,7 +53,8 @@ const BestCampContents = (props) => {
 
   // 차박하기 좋은
   const carCampingList = data?.filter((d) => {
-    const list = d.firstImageUrl && d.lineIntro && d.induty.includes("자동차야영장");
+    const list =
+      d.firstImageUrl && d.lineIntro && d.induty.includes("자동차야영장");
     return list;
   });
 
