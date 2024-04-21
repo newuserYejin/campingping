@@ -10,7 +10,7 @@ const BestCampContents = (props) => {
   const { data, isLoading, isError, error } = useBestCampListQuery();
   const listCount = 10;
 
-  if (isLoading || data) {
+  if (isLoading) {
     return (
       <div>
         <BestListSkeleton />
