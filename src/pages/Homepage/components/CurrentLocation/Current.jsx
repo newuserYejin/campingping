@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import AttractionCarousel from "./AttractionCarousel";
 import "./Current.style.css";
 import CircularProgress from "@mui/material/CircularProgress";
-import WeatherSummary from "../../../../components/WeatherSummary/WeatherSummary";
+import { Skeleton } from "@mui/material";
 
 const Current = ({ userLat, userLot }) => {
   const {
@@ -23,13 +23,9 @@ const Current = ({ userLat, userLot }) => {
     error: RecommandError,
   } = useFetchLocation(37.4594355, 126.364195, 20000);
 
-  if (isLoading) {
-    return (
-      <div className="loading_Zone">
-        <CircularProgress />
-      </div>
-    );
-  }
+  // if (isLoading) {
+  //   return <div className="loading_Zone"></div>;
+  // }
 
   console.log("Current userLat", userLat, "Current userLot:", userLot);
   console.log("apiData:", apiData);
@@ -51,7 +47,9 @@ const Current = ({ userLat, userLot }) => {
 
   return (
     <div className="AttractionCarousel">
-      {itemList?.body.items === "" ? null : (
+      {itemList?.body.items === "" ? (
+        <Skeleton variant="rectangular" width={210} height={118} />
+      ) : (
         <section className="AttractionCarouselSection">
           <AttractionCarousel
             attractData={attractData}

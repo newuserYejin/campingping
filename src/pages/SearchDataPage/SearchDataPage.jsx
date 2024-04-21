@@ -11,8 +11,12 @@ import { Pagination } from "@mui/material";
 import DetailPageSearchBox from "./components/DetailPageSearchBox";
 import { CircularProgress } from "@mui/material";
 import TitleMain from "../../components/Title/MainTitle";
+import SearchDataPgeSkeleton from "./SearchDataPgeSkeleton/SearchDataPgeSkeleton";
 import TopButton from "../../components/TopButton/TopButton";
 import { search_detail_filters } from "../../constants/info";
+import MainSearchForm from "../Homepage/components/MainSearchForm";
+import TopBanner from "../Homepage/components/TopBanner";
+
 const SearchDataPage = () => {
   const [page, setPage] = useState(1);
   const [query, setQuery] = useSearchParams();
@@ -23,22 +27,23 @@ const SearchDataPage = () => {
   const theme = query.get("theme");
   const selectedTag = query.get("selectedTag");
   const selectedDetailTag = query.get("selectedDetailTag");
-
+  const selectedTagArray = selectedTag?.split(',')
+  const selectedTagLength = selectedTagArray?.length
   const {
     data: searchData,
     isLoading,
     isError,
     error,
-  } = useSearchDataQuery({ keyword, page, province, city, theme, selectedTag, selectedDetailTag });
+  } = useSearchDataQuery({ keyword, page, province, city, theme, selectedTag, selectedTagLength, selectedDetailTag });
   console.log("data?", searchData);
   console.log("selectedTag? :", selectedTag);
-
+ 
   let data = searchData?.response?.body;
 
   if (isLoading) {
     return (
       <div className="loading_search_wrap">
-        <CircularProgress />
+        <SearchDataPgeSkeleton />
       </div>
     );
   }
@@ -264,13 +269,20 @@ const SearchDataPage = () => {
 
   return (
     <>
-      <DetailPageSearchBox />
+    
+      <TopBanner/>
+      <MainSearchForm/>
       <Container maxWidth="lg">
         <div>
           <div className="search-result-title">
             <h2>
               <TitleMain title={title} />
             </h2>
+            <div className="tag-container">
+      {selectedTagArray?.map((tag, index) => (
+        <div key={index} className="tag-item"># {tag}</div>
+      ))}
+    </div>
           </div>
 
           {filteredData.map((searchData, index) => (

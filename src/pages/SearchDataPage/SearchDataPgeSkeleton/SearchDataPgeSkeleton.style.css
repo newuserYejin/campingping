@@ -1,0 +1,13 @@
+.SearchDataPgeSkeletonContainer {
+    width: 100%;
+    max-width: 1200px;
+
+    >span {
+        margin: 3em 0;
+        height: 300px;
+    }
+
+    .skeletonItemBox:last-child {
+        margin-bottom: 30px;
+    }
+}

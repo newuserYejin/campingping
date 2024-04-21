@@ -4,12 +4,20 @@ import apiGocamping from "../utils/apiGocamping";
 const API_KEY = process.env.REACT_APP_API_KEY_EN_JIN;
 const PARAMS = process.env.REACT_APP_PARAMS_DEFAULT;
 
-const fetchSearchData = ({ keyword, page, province, city, theme, selectedTag, selectedDetailTag }) => {
-    //selected태그가 null이 아니면  basedlist에서 50개
-    if(selectedTag != null){
+const fetchSearchData = ({ keyword, page, province, city, theme, selectedTag ,selectedTagLength, selectedDetailTag }) => {
+    //selected태그가 1개면 basedlist에서 30개
+    if(selectedTag != null && selectedTagLength == 1){
+        return apiGocamping.get(
+            `basedList?numOfRows=25&pageNo=${page}&serviceKey=${API_KEY}&${PARAMS}`)
+    }else if(selectedTag != null && selectedTagLength == 2){
         return apiGocamping.get(
             `basedList?numOfRows=50&pageNo=${page}&serviceKey=${API_KEY}&${PARAMS}`)
+    }else if(selectedTag != null && selectedTagLength >= 3){
+        return apiGocamping.get(
+            `basedList?numOfRows=90&pageNo=${page}&serviceKey=${API_KEY}&${PARAMS}`)
     }
+
+
     //keyword는 있고 필터가 모두 없다면 searchList에서 10개 검색
     if (keyword != "" && province == "" && city == "" && theme == "" && selectedDetailTag == "") {
         return apiGocamping.get(
@@ -30,10 +38,10 @@ const fetchSearchData = ({ keyword, page, province, city, theme, selectedTag, se
     
 }
 
-export const useSearchDataQuery = ({ keyword, page, province, city, theme, selectedTag, selectedDetailTag }) => {
+export const useSearchDataQuery = ({ keyword, page, province, city, theme, selectedTag, selectedTagLength, selectedDetailTag }) => {
     return useQuery({
-        queryKey: ['search-data', { keyword, page, province, city, theme, selectedTag, selectedDetailTag }],
-        queryFn: () => fetchSearchData({ keyword, page, province, city, theme, selectedTag, selectedDetailTag }),
+        queryKey: ['search-data', { keyword, page, province, city, theme, selectedTag, selectedTagLength, selectedDetailTag }],
+        queryFn: () => fetchSearchData({ keyword, page, province, city, theme, selectedTag, selectedTagLength, selectedDetailTag }),
         select: (result) => result.data
     });
 };
