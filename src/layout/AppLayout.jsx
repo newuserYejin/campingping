@@ -29,6 +29,7 @@ const AppLayout = () => {
             xs: "70px",
             md: "135px",
           },
+          paddingBottom: '12rem'
         }}
       >
         <Outlet />
