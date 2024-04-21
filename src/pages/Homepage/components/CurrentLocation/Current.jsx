@@ -30,10 +30,6 @@ const Current = ({ userLat, userLot }) => {
     );
   }
 
-  console.log("Current userLat", userLat, "Current userLot:", userLot);
-  console.log("apiData:", apiData);
-  console.log("RecommandData:", RecommandData);
-
   let itemList = [];
   let attractData = [];
   let RecommandItemList = [];
