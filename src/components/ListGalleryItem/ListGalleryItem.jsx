@@ -32,7 +32,7 @@ const ListGalleryItem = ({ isConnect = false, isLink = false, item }) => {
             <div className="flag">
               <span>
                 #
-                {AreaList.map((area) => {
+                {AreaList?.map((area) => {
                   if (area.code == item.areacode) {
                     return area.name;
                   }
