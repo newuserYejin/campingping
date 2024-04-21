@@ -7,6 +7,7 @@ import TagSearch from "./components/TagSearch";
 import Video from "./components/Video/Video";
 import BestCamp from "./components/BestCamp/BestCamp";
 import TopButton from "../../components/TopButton/TopButton";
+import WeatherSummary from "../../components/WeatherSummary/WeatherSummary";
 
 
 const Homepage = () => {

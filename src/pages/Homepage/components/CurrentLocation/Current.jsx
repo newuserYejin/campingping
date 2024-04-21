@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import AttractionCarousel from "./AttractionCarousel";
 import "./Current.style.css";
 import CircularProgress from "@mui/material/CircularProgress";
+import WeatherSummary from "../../../../components/WeatherSummary/WeatherSummary";
 
 const Current = ({ userLat, userLot }) => {
   const {
