@@ -69,6 +69,7 @@ const Current = ({ userLat, userLot }) => {
           // itemsPerPage={itemsPerPage}
         />
       </section>
+      <hr></hr>
     </div>
   );
 };
