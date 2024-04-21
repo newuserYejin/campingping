@@ -13,8 +13,9 @@
 
 .carousel-inner {
     height: 100%;
-    width: 95%;
+    width: 100%;
     display: flex;
+    gap:20px;
     justify-content: start;
     align-items: start;
     overflow: hidden;
@@ -33,12 +34,12 @@
 }
 
 .contentItem {
-    min-width: 20%;
+    width:calc((100% - (20px * 4)) / 5);
     height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 0 10px;
+    /* padding: 0 10px; */
     font-size: 1em;
 
     img {
@@ -50,44 +51,38 @@
         max-width:200px;
         aspect-ratio: 1/1;
         border-radius:100%;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.15);
     }
 
     .RectangleBox {
         width:100%;
         height:100%;
-        padding:45% 20px 20px 20px;
+        min-height:280px;
+        padding:45% 20px 1rem 20px;
         margin-top:-40%;
         z-index:-1;
         text-align:center;
         background-color: var(--key-color);
-    }
-
-
-    .ItemInfo {
         display: flex;
         flex-direction: column;
         align-items: center;
         text-align: center;
-
-        color: white;
-        height: 100%;
-    }
-
-    .title {
-        margin: 5px 0;
-        font-weight: bold;
-        font-size: 1.1em;
-        .address {
-            display: flex;
-            justify-content: center;
-            overflow: hidden;
-        text-overflow: ellipsis;
-        padding: 0;
-        margin: 0;
-        max-width: 75%;
-        text-align: center;
+        color: var(--main-background-color);
+        .title {    
+            font-size: 1.5em;
+            margin:0.2rem 0 1rem;
         }
-    
+        .address {
+            width: 75%;
+            padding: 0;
+            margin: 0;
+            font-size:1rem;
+            font-weight:300;
+            text-align: center;
+            word-break: keep-all;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
     }
 }
 
@@ -96,6 +91,11 @@
 .carousel-control-next {
     width: 5%;
 }
+
+.carousel-control-prev{
+    justify-content: flex-start;
+}
+
 
 .carousel-control-prev span,
 .carousel-control-next span {
@@ -115,7 +115,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 20px;
     margin-top: 0;
 }
 

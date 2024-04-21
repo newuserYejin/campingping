@@ -32,7 +32,6 @@ const AttractionCarousel = ({ attractData, title }) => {
   return (
     <div className="ReccomendSurroungingCarousel">
       <MainTitle title={title} />
-
       {attractData && attractData.length > 0 ? (
         <Carousel interval={null}>
           {[
@@ -59,18 +58,19 @@ const AttractionCarousel = ({ attractData, title }) => {
                         alt="대표 이미지"
                       />
                       <div className="RectangleBox">
-                        <div className="ItemInfo">
-                          <div className="title">
-                            {/* 괄호 안에 문자 제거 */}
-                            {item.title.includes(`(`) || item.title.includes(`[`) 
-                              ? item.title.split(`(`)[0] || item.title.split(`[`)[0] 
-                              : item.title
-                            }
-                            </div>
-                          {item.addr1 && (
-                            <div className="address">{item.addr1}</div>
-                          )}
+                        <div className="title">
+                          {/* 괄호 안에 문자 제거 */}
+                          { item.title.includes(`(`)
+                            ? item.title.split(`(`)[0] 
+                            : item.title
+                          || item.title.includes(`[`) 
+                            ? item.title.split(`[`)[0] 
+                            : item.title
+                          }
                         </div>
+                        {item.addr1 && (
+                          <div className="address">{item.addr1}</div>
+                        )}
                       </div>
                       <div className="title miniTitle">{item.title}</div>
                     </div>
