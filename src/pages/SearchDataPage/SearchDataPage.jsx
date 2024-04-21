@@ -8,7 +8,7 @@ import { faCloudDownloadAlt } from "@fortawesome/free-solid-svg-icons";
 import ListCard from "../CampingListPage/components/ListCard/ListCard";
 import { Container } from "react-bootstrap";
 import { Pagination } from "@mui/material";
-import TopBanner from "../Homepage/components/TopBanner";
+import DetailPageSearchBox from "./components/DetailPageSearchBox";
 import { CircularProgress } from "@mui/material";
 import TitleMain from "../../components/Title/MainTitle";
 import TopButton from "../../components/TopButton/TopButton";
@@ -235,7 +235,7 @@ const SearchDataPage = () => {
 
   return (
     <>
-      <TopBanner />
+      <DetailPageSearchBox />
       <Container maxWidth="lg">
         <div>
           <div className="search-result-title">
