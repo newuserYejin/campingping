@@ -16,7 +16,10 @@ const AttractionCarousel = ({ attractData, title }) => {
       if (window.innerWidth <= 600) {
         newItemsPerPage = 2;
       }
-      else if (600 < window.innerWidth && window.innerWidth <= 1200) {
+      else if (600 < window.innerWidth && window.innerWidth <= 900) {
+        newItemsPerPage = 3;
+      }
+      else if (900 < window.innerWidth && window.innerWidth <= 1200) {
         newItemsPerPage = 4;
       }
       else {
@@ -54,7 +57,7 @@ const AttractionCarousel = ({ attractData, title }) => {
       <MainTitle title={title} />
       {attractData && attractData.length > 0 ? (
         <>
-          <Carousel interval={null}onSelect={handleSelect} ref={ref}>
+          <Carousel interval={null} indicators={true} onSelect={handleSelect} ref={ref}>
             {[
               ...Array(
                 Math.ceil(
@@ -93,7 +96,6 @@ const AttractionCarousel = ({ attractData, title }) => {
                             <div className="address">{item.addr1}</div>
                           )}
                         </div>
-                        <div className="title miniTitle">{item.title}</div>
                       </div>
                     ))}
                 </div>
