@@ -30,8 +30,8 @@ const AppLayout = () => {
             md: "135px",
           },
           paddingBottom: {
-            xs: "6rem",
-            md: "12rem",
+            xs: "3rem",
+            md: "6rem",
           },
         }}
       >

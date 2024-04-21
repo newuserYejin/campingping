@@ -1,6 +1,6 @@
 import React from "react";
 import YouTube from "react-youtube";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import "./Video.style.css";
 
 const opts = {
@@ -51,9 +51,6 @@ const Video = () => {
 
   return (
     <div>
-      <div className="moveYoutubeSite">
-        <Link to="https://www.youtube.com/@gocamping_official/videos" target="_blank">@gocamping_official</Link>
-      </div>
       <div className="videoArea">
         {playList.map((item) => {
           return (
@@ -66,7 +63,14 @@ const Video = () => {
           );
         })}
       </div>
-
+      <div className="moveYoutubeSite">
+        <Link
+          to="https://www.youtube.com/@gocamping_official/videos"
+          target="_blank"
+        >
+          @gocamping_official
+        </Link>
+      </div>
     </div>
   );
 };
