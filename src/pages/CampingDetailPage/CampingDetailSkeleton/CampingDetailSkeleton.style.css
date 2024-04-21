@@ -12,7 +12,7 @@
 
     .SkeletonDetailTopInfoBox {
         width: 35%;
-        height: 500px;
+        height: 350px;
     }
 
     .SkeletonDetailTopInfo {
@@ -60,7 +60,7 @@
 }
 
 .DetailSkeletonAttract {
-    display: flex;
+    display: flex !important;
     flex-direction: column;
     align-items: center;
 
@@ -107,4 +107,74 @@
         width: 60%;
         height: 15em;
     }
+}
+
+@media (max-width:900px) {
+    .SkeletonDetailTopBox {
+        flex-direction: column;
+
+        .SkeletonDetailImg {
+            width: 100%;
+            margin-bottom: 30px;
+        }
+
+        .SkeletonDetailTopInfoBox {
+            width: 100%;
+        }
+
+    }
+
+    .DetailSkeletonAttract {
+
+        .AttractionSkeleton {
+            width: 17vw;
+            height: 150px;
+        }
+
+        .SkeletonDetailWeatherE {
+            width: 100%;
+        }
+    }
+}
+
+@media (max-width:460px) {
+    .SkeletonDetailTopBox {
+        margin-top: 0;
+
+        .SkeletonDetailImg {
+            height: 400px;
+        }
+
+        .SkeletonDetailTopInfo:first-child {
+            height: 2em;
+            width: 60%;
+        }
+
+        .SkeletonDetailTopInfo:nth-child(2) {
+            height: 6em;
+        }
+
+        .SkeletonDetailTopInfo {
+            margin-bottom: 10px;
+        }
+    }
+
+    .SkeletonDetailTopBox {
+
+        .SkeletonDetailImg {
+            margin-bottom: 15px;
+        }
+    }
+
+    .DetailSkeletonAttract {
+        .SkeletonDetailWeatherItem {
+            height: 5em;
+        }
+
+        .SkeletonDetailMap {
+            width: 100%;
+            height: 300px;
+        }
+    }
+
 }

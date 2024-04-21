@@ -5,7 +5,7 @@ import { useAreaCode } from "../../hooks/useAreaCode";
 const ListGalleryItem = ({ isConnect = false, isLink = false, item }) => {
   const { data: AreaData } = useAreaCode();
   let AreaList = [];
-  AreaList = AreaData.item;
+  AreaList = AreaData?.item;
 
   const sampleFn = () => {
     // isLink=true 링크가 있을 때 (상세페이지)
