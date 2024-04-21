@@ -1,4 +1,4 @@
-import React, { useState }from 'react';
+import { useState, useEffect } from "react";
 import './MainSearchForm.style.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEarthAsia, faLocationDot, faTree, faMagnifyingGlass, faPlus, faPenNib, faXmark } from "@fortawesome/free-solid-svg-icons";
@@ -16,11 +16,16 @@ const MainSearchForm = () => {
   const [selectedProvince, setSelectedProvince] = useState('');
   const [selectedCity, setSelectedCity] = useState('');
   const [selectedTheme, setSelectedTheme] = useState('');
+  const [selectedDetailTag, setSelectedDetailTag] = useState([])
   console.log("modalOpen222:", modalOpen,)
+
+  useEffect(()=>{
+    console.log(selectedDetailTag)
+  },[selectedDetailTag])
 
   const searchByKeyword = (e) => {
     e.preventDefault()//폼 제출시 새로고침 막음
-      navigate(`/search?q=${keyword}&province=${selectedProvince}&city=${selectedCity}&theme=${selectedTheme}`)
+    navigate(`/search?q=${keyword}&province=${selectedProvince}&city=${selectedCity}&theme=${selectedTheme}&selectedDetailTag=${selectedDetailTag}`)
       setKeyword("")
   }
   const handleProvinceChange = (e) => {
@@ -37,6 +42,12 @@ const MainSearchForm = () => {
   }
   const handleClickOpen = () => setModalOpen(true);
   const handleClickClose = () => setModalOpen(false);
+
+  const searchByDetailTag = (e) =>{
+    e.preventDefault()
+    navigate(`/search?q=${keyword}&province=${selectedProvince}&city=${selectedCity}&theme=${selectedTheme}&selectedDetailTag=${selectedDetailTag}`)
+    setSelectedDetailTag([])
+  }
 
   return (
     <>
@@ -131,6 +142,7 @@ const MainSearchForm = () => {
             <FontAwesomeIcon icon={faXmark} />
           </span>
         </DialogTitle>
+        <Box component="form" onSubmit={searchByDetailTag}>
         <DialogContent>
           {search_detail_filters.map((filter) => 
             <FormGroup key={filter.id}>
@@ -140,7 +152,16 @@ const MainSearchForm = () => {
                   <li key={label.id}>
                     <FormControlLabel
                       label={label.name}
-                      control={<Checkbox />}
+                      control={<Checkbox onClick={()=>{
+                        setSelectedDetailTag(prevTags => {
+                          const index = prevTags.indexOf(label.name);
+                          if (index > -1) {
+                              return prevTags.filter((_, i) => i !== index)
+                          } else {
+                              return [...prevTags, label.name]
+                          }
+                      });
+                      }}/>}
                       name={filter.id}
                       id={label.id}
                     />
@@ -150,10 +171,11 @@ const MainSearchForm = () => {
             </FormGroup>
           )}
           <Stack spacing={2} direction="row" className='formBtnDiv'>
-            <Button type="button" className='btn_search'>검색</Button>
+          <Button type="submit" className='btn_search'>검색</Button>
             <Button type="button" className='btn_reset'>초기화</Button>
           </Stack>
         </DialogContent>
+        </Box>
       </Dialog>
     </>
   )

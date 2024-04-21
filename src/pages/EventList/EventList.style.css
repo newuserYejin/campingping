@@ -1,9 +1,0 @@
-.eventItem {
-    border: solid 1px blue;
-    margin-bottom: 10px;
-    display: flex;
-}
-
-.eventItem img {
-    width: 200px;
-}

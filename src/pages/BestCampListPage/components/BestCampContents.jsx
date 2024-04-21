@@ -17,7 +17,6 @@ const BestCampContents = (props) => {
   }
 
   // 친환경
-
   // 데이터가 너무 적아서 삭제ㅠㅠ
   // const ecoFriendlyList = data?.filter((d) => {
   //   const list = d.firstImageUrl && d.lineIntro && (d.intro.includes('친환경') || d.lineIntro.includes('친환경'));
@@ -40,7 +39,6 @@ const BestCampContents = (props) => {
   });
 
   // 무장애
-
   // 데이터가 너무 적아서 삭제ㅠㅠ
   // const barrierFreeList = data?.filter((d) => {
   //   // 장애인 친화 캠핑장은 2000개 중에 2개밖에 없어서 사진 및 설명글 유/무 필터링 걸지 않았음
@@ -50,14 +48,13 @@ const BestCampContents = (props) => {
 
   // 차박하기 좋은
   const carCampingList = data?.filter((d) => {
-    const list = d.firstImageUrl && d.induty.includes("자동차야영장");
+    const list = d.firstImageUrl && d.lineIntro && d.induty.includes("자동차야영장");
     return list;
   });
 
   // 반려동물 친화
   const petFriendlyList = data?.filter((d) => {
     const list = d.firstImageUrl && d.lineIntro && d.animalCmgCl === "가능";
-    console.log("반려동물:", list);
     return list;
   });
 
