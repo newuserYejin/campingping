@@ -60,7 +60,13 @@ const AttractionCarousel = ({ attractData, title }) => {
                       />
                       <div className="RectangleBox">
                         <div className="ItemInfo">
-                          <div className="title">{item.title}</div>
+                          <div className="title">
+                            {/* 괄호 안에 문자 제거 */}
+                            {item.title.includes(`(`) || item.title.includes(`[`) 
+                              ? item.title.split(`(`)[0] || item.title.split(`[`)[0] 
+                              : item.title
+                            }
+                            </div>
                           {item.addr1 && (
                             <div className="address">{item.addr1}</div>
                           )}
