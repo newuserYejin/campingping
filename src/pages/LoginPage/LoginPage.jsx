@@ -31,12 +31,11 @@ const LoginPage = () => {
 
   return (
     <Container
-      className="login-form-wrap"
       sx={{
         margin: "4em auto",
       }}>
       {!authenticate ? (
-        <>
+        <div className="login-form-wrap">
           <MainTitle title="Login" />
           <form onSubmit={(event) => loginUser(event)}>
             <TextField
@@ -46,10 +45,9 @@ const LoginPage = () => {
               margin="normal"
               required
               fullWidth
-              id="이름"
-              label="이름"
-              name="이름"
-              autoFocus
+              id="아이디"
+              label="아이디"
+              name="아이디"
             />
             <TextField
               inputRef={passwordInputRef}
@@ -76,7 +74,7 @@ const LoginPage = () => {
               로그인
             </Button>
           </form>
-        </>
+        </div>
       ) : (
         "이미 로그인을 하셨습니다."
       )}

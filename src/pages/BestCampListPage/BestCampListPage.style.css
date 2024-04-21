@@ -41,12 +41,15 @@
     border: 1px solid #d3d3d3;
     height: 60px;
     div[role="tablist"]{
+      justify-content: space-between;
       height:100%;
     }
     button{
-      width:25%;
+      width:33.3%;
+      max-width:unset;
       font-size:1rem;
       font-weight:800;
+      word-break: keep-all;
       &:not(:first-child){
         border-left:1px solid #d3d3d3;
       }
@@ -79,7 +82,7 @@
         left:0;
         transform:none;
         h2{
-          font-size:1.75rem;
+          font-size:2rem;
           line-height:1;
         }
         p{

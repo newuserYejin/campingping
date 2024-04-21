@@ -22,10 +22,6 @@ const CurrentLocation = () => {
     getCurrentLocation();
   }, []);
 
-  // useEffect(() => {
-  //   console.log("userLat:", userLat, "userLot:", userLot);
-  // }, [userLat, userLot]);
-
   return (
     <div className="attractionArea">
       {userLat && userLot && <Current userLat={userLat} userLot={userLot} />}

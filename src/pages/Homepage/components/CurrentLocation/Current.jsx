@@ -6,6 +6,8 @@ import { useState, useEffect } from "react";
 import AttractionCarousel from "./AttractionCarousel";
 import "./Current.style.css";
 import CircularProgress from "@mui/material/CircularProgress";
+import { Skeleton } from "@mui/material";
+import AttractSkelton from "./AttractSkelton/AttractSkelton";
 
 const Current = ({ userLat, userLot }) => {
   const {
@@ -22,17 +24,14 @@ const Current = ({ userLat, userLot }) => {
     error: RecommandError,
   } = useFetchLocation(37.4594355, 126.364195, 20000);
 
-  if (isLoading) {
+  if (isLoading || RecommandIsLoading) {
     return (
-      <div className="loading_Zone">
-        <CircularProgress />
+      <div>
+        <AttractSkelton />
+        <AttractSkelton />
       </div>
     );
   }
-
-  console.log("Current userLat", userLat, "Current userLot:", userLot);
-  console.log("apiData:", apiData);
-  console.log("RecommandData:", RecommandData);
 
   let itemList = [];
   let attractData = [];
@@ -50,11 +49,13 @@ const Current = ({ userLat, userLot }) => {
 
   return (
     <div className="AttractionCarousel">
-      {itemList?.body.items === "" ? null : (
+      {itemList?.body.items === "" ? (
+        <Skeleton variant="rectangular" width={210} height={118} />
+      ) : (
         <section className="AttractionCarouselSection">
           <AttractionCarousel
             attractData={attractData}
-            title="내 위치 주변 관광지"
+            title="우리집 근처 여긴 어때"
             // itemsPerPage={itemsPerPage}
           />
         </section>
@@ -64,10 +65,11 @@ const Current = ({ userLat, userLot }) => {
       <section className="AttractionCarouselSection">
         <AttractionCarousel
           attractData={RecommendAttractData}
-          title="요즘 추천 관광지"
+          title="캠핑장 근처 가볼만한 곳"
           // itemsPerPage={itemsPerPage}
         />
       </section>
+      <hr></hr>
     </div>
   );
 };

@@ -25,22 +25,33 @@ export const infoMember = [
   {
     id: "doheeing",
     name: "한도희",
+    html_url: "https://github.com/doheeing",
+    avatar_url:"https://avatars.githubusercontent.com/u/140877307?v=4"
+    
   },
   {
     id: "alim-ui-developer",
     name: "정아림",
+    html_url:"https://github.com/alim-ui-developer",
+    avatar_url:"https://avatars.githubusercontent.com/u/70739908?v=4"
   },
   {
     id: "hellojoyworldz",
     name: "곽선아",
+    html_url:"https://github.com/hellojoyworldz",
+    avatar_url:"https://avatars.githubusercontent.com/u/116714457?v=4"
   },
   {
     id: "newuserYejin",
     name: "정예진",
+    html_url:"https://github.com/newuserYejin",
+    avatar_url:"https://avatars.githubusercontent.com/u/112992178?v=4"
   },
   {
     id: "sanggyeol1",
     name: "한상결",
+    html_url:"https://github.com/sanggyeol1",
+    avatar_url:"https://avatars.githubusercontent.com/u/126740335?v=4"
   },
 ];
 
@@ -66,6 +77,10 @@ export const infoFacility = [
     icon: "tramp",
   },
   {
+    name: "트렘폴린",
+    icon: "tramp",
+  },
+  {
     name: "물놀이장",
     icon: "pool",
   },
@@ -82,8 +97,24 @@ export const infoFacility = [
     icon: "ground",
   },
   {
+    name: "산책로",
+    icon: "walk",
+  },
+  {
+    name: "운동장",
+    icon: "ground",
+  },
+  {
     name: "운동시설",
     icon: "sports",
+  },
+  {
+    name: "마트.편의점",
+    icon: "mart",
+  },
+  {
+    name: "덤프스테이션",
+    icon: "dumpstation",
   },
   {
     name: "마트.편의점",
@@ -209,10 +240,6 @@ export const search_tags = [
     text: "문화유적",
   },
   {
-    id: "search_tag5",
-    text: "가을",
-  },
-  {
     id: "search_tag6",
     text: "바다가 보이는",
   },
@@ -245,18 +272,6 @@ export const search_tags = [
     text: "축제",
   },
   {
-    id: "search_tag14",
-    text: "가을",
-  },
-  {
-    id: "search_tag15",
-    text: "자전거 타기 좋은",
-  },
-  {
-    id: "search_tag16",
-    text: "봄",
-  },
-  {
     id: "search_tag17",
     text: "물놀이 하기 좋은",
   },
@@ -267,10 +282,6 @@ export const search_tags = [
   {
     id: "search_tag19",
     text: "여유있는",
-  },
-  {
-    id: "search_tag21",
-    text: "온수 잘 나오는",
   },
   {
     id: "search_tag23",
@@ -289,12 +300,12 @@ export const search_tags = [
     text: "봄",
   },
   {
-    id: "search_tag27",
-    text: "차대기 편한",
-  },
-  {
     id: "search_tag28",
     text: "여름",
+  },
+  {
+    id: "search_tag14",
+    text: "가을",
   },
   {
     id: "search_tag29",
@@ -311,5 +322,9 @@ export const search_tags = [
   {
     id: "search_tag33",
     text: "익스트림",
+  },
+  {
+    id: "search_tag27",
+    text: "차대기 편한",
   },
 ];

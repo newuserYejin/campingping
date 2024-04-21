@@ -6,6 +6,7 @@ import { Provider } from "react-redux";
 import store from "./redux/store";
 import App from "./App";
 import CssBaseline from "@mui/material/CssBaseline";
+import ScrollRestoration from "./components/ScrollRestoration/ScrollRestoration";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 const queryClient = new QueryClient();
@@ -14,6 +15,7 @@ root.render(
   <Provider store={store}>
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
+        <ScrollRestoration />
         <CssBaseline />
         <App />
       </BrowserRouter>

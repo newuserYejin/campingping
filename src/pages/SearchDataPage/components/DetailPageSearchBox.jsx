@@ -1,20 +1,19 @@
 import React, { useState }from 'react';
-import './MainSearchForm.style.css';
-import { Box, Input, Select, MenuItem, Stack, Button } from '@mui/material';
+import './DetailPageSearchBox.style.css';
+import { Container, Box, Input, Select, MenuItem, Stack, Button } from '@mui/material';
 import { Dialog, DialogTitle, DialogContent } from '@mui/material';
 import {  FormGroup, FormControlLabel, Checkbox } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { regions } from '../../../constants/sigungu';
 import { search_detail_filters } from '../../../constants/info';
 
-const MainSearchForm = () => {
+const DetailPageSearchBox = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [keyword, setKeyword] = useState("")
   const navigate = useNavigate();
   const [selectedProvince, setSelectedProvince] = useState('');
   const [selectedCity, setSelectedCity] = useState('');
   const [selectedTheme, setSelectedTheme] = useState('');
-  console.log("modalOpen222:", modalOpen,)
 
   const searchByKeyword = (e) => {
     e.preventDefault()//폼 제출시 새로고침 막음
@@ -37,8 +36,8 @@ const MainSearchForm = () => {
   const handleClickClose = () => setModalOpen(false);
 
   return (
-    <>
-      <Box component="form" noValidate="false" className='mainSearchForm' onSubmit={searchByKeyword}>
+    <Container sx={{background:'#000'}}>
+      <Box component="form" noValidate="false" className='detailPageSearchForm' onSubmit={searchByKeyword}>
         <h3>캠핑장 검색</h3>
         <div className='formDiv'>
           <Select value={selectedProvince} onChange={handleProvinceChange} displayEmpty>
@@ -115,8 +114,8 @@ const MainSearchForm = () => {
           </Stack>
         </DialogContent>
       </Dialog>
-    </>
+    </Container>
   )
 }
 
-export default MainSearchForm
+export default DetailPageSearchBox

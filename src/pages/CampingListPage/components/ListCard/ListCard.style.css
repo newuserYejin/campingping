@@ -29,10 +29,12 @@
 .list-facltNm {
   margin: 0 0 0.2em 0;
   font-size: 2em;
+
   a {
     color: var(--main-font-color);
     text-decoration: none;
   }
+
   &:hover {
     text-decoration: underline;
   }
@@ -41,10 +43,12 @@
 .list-lineIntro {
   margin: 0px 0 1.5em 0;
   font-size: 1.2em;
+
   a {
     color: var(--main-font-color);
     text-decoration: none;
   }
+
   &:hover {
     text-decoration: underline;
   }
@@ -78,6 +82,10 @@
   width: calc(100% - 120px);
 }
 
+.list-info .list-tel a {
+  word-break: break-word;
+}
+
 .list-sbrsCl ul {
   margin: -8px;
   padding: 0px;
@@ -108,4 +116,48 @@
     width: auto;
     padding: 1em;
   }
+}
+
+
+@media screen and (max-width: 460px) {
+
+  .list-details{
+    padding: 16px 0;
+  }
+
+  .list-facltNm{
+    text-align:center;
+    font-size:1.6em;
+    word-break: keep-all;
+  }
+
+  .list-lineIntro{
+    font-size: 1em;
+  }
+
+  .list-info 
+  dl{
+    display: block;
+  }
+
+  .list-info dt{
+    position: relative;
+    margin: auto;
+    z-index: 9;
+  }
+
+  .list-info dd{
+    width: 100%;
+    margin-top: -16px;
+    padding: 24px 8px 12px 8px;
+    text-align:center;
+    background:#fafafa;
+    border-radius: 16px;
+    
+  }
+
+  .list-sbrsCl ul{
+    margin: 0px;
+  }
+
 }

@@ -5,7 +5,6 @@ import { Button } from "@mui/base/Button";
 const { kakao } = window;
 
 const CampingDetailMap = ({ lat, lon, name }) => {
-  console.log("name", name);
   useEffect(() => {
     mapscript();
   }, []);

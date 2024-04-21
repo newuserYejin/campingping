@@ -9,25 +9,39 @@ const BestCampMap = ({ list }) => {
   }, []);
 
   const mapscript = () => {
-    let container = document.getElementById("map");
+    let container = document.getElementById("bestCampMap");
     let options = {
       center: new kakao.maps.LatLng(36.20100495752048, 127.87511530605462),
       level: 12,
     };
     const map = new kakao.maps.Map(container, options);
 
-    list.map((item) => (
-      new kakao.maps.Marker({
-        map: map,
-        position: new kakao.maps.LatLng(item.mapY, item.mapX),
-        title: item.facltNm,
-      })
-    ))
+    list?.map(
+      (item) =>
+        new kakao.maps.Marker({
+          map: map,
+          position: new kakao.maps.LatLng(item.mapY, item.mapX),
+          title: item.facltNm,
+        })
+    );
+    // list.map((item) => (
+    //   new kakao.maps.InfoWindow({
+    //     position: new kakao.maps.LatLng(item.mapY, item.mapX),
+    //     content:`<div style="padding:5px;">Hello World! ${item.facltNm} <br><a href="https://map.kakao.com/link/map/Hello World!,33.450701,126.570667" style="color:blue" target="_blank">큰지도보기</a> <a href="https://map.kakao.com/link/to/Hello World!,33.450701,126.570667" style="color:blue" target="_blank">길찾기</a></div>`,
+    //   })
+    // ))
   };
 
   return (
-    <Box id="map" sx={{width:'60%', height:'auto', aspectRatio:'1/1.8'}}></Box>
+    <Box id="bestCampMap" sx={{
+      width:'100%', 
+      height:'auto', 
+      aspectRatio:{
+        xs: '100/45',
+        sm:'100/30'
+      }
+    }}></Box>
   );
-}
+};
 
-export default BestCampMap
+export default BestCampMap;

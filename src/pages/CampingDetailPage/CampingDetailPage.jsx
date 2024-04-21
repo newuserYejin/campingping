@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useCampingKeywordQuery } from "../../hooks/useCampingDetail";
-import { useSearchParams } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import CircularProgress from "@mui/material/CircularProgress";
 import { Container } from "@mui/material";
@@ -9,7 +9,6 @@ import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Button } from "@mui/base/Button";
@@ -19,7 +18,7 @@ import CampingDetailMap from "./CampingDetailMap/CampingDetailMap";
 import "./CampingDetailPage.style.css";
 import CampingDetailPageKakao from "./CampingDetailPageKakao/CampingDetailPageKakao";
 import HandleCopyClipBoard from "./HandleCopyClipBoard/HandleCopyClipBoard";
-
+import CampingDetailSkeleton from "./CampingDetailSkeleton/CampingDetailSkeleton";
 
 const CampingDetailPage = () => {
   const [searchParams] = useSearchParams();
@@ -29,7 +28,6 @@ const CampingDetailPage = () => {
   const { data = [], isLoading } = useCampingKeywordQuery(keyword);
 
   const campingDetail = data[0];
-  // console.log("campingDetail", campingDetail);
 
   const {
     data: campingRecommendData,
@@ -67,15 +65,7 @@ const CampingDetailPage = () => {
   if (isLoading) {
     return (
       <div className="loading_wrap">
-        <CircularProgress />
-      </div>
-    );
-  }
-
-  if (campingRecommendIsLoading) {
-    return (
-      <div>
-        <CircularProgress />
+        <CampingDetailSkeleton />
       </div>
     );
   }
@@ -84,20 +74,22 @@ const CampingDetailPage = () => {
     return <div>{campingRecommendError.message}</div>;
   }
 
-  // console.log("campingRecommendData:", campingRecommendData);
-
   let CampingRecommendAttractData = [];
   let CampingRecommendItemList = [];
-  CampingRecommendAttractData = campingRecommendData.data?.response;
+  CampingRecommendAttractData = campingRecommendData?.data?.response;
   CampingRecommendItemList = CampingRecommendAttractData?.body.items?.item;
 
-  // console.log("camping Location lat:", lat, "Camping Location lot:", lon);
-  // console.log("CampingRecommendAttractData:", CampingRecommendAttractData);
-  // console.log("CampingRecommendItemList:", CampingRecommendItemList);
-  console.log(
-    "campingDetail.tel",
-    campingDetail.tel.charAt(campingDetail.tel.length - 1)
-  );
+  // 페이지 이동 시 화면 최상단으로 보여주는 함수
+  const PageScrollTop = () => {
+    const { pathname } = useLocation();
+    console.log("pathname", pathname);
+
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, [pathname]);
+    return null;
+  };
+
   return (
     <div className="camping-detail-main">
       {campingDetail ? (
@@ -207,7 +199,7 @@ const CampingDetailPage = () => {
                       : ""}
                   </div>
                   <div className="kakao-talk-area">
-                    <HandleCopyClipBoard data={campingDetail}/>
+                    <HandleCopyClipBoard data={campingDetail} />
                     <CampingDetailPageKakao data={campingDetail} />
                   </div>
                 </div>
