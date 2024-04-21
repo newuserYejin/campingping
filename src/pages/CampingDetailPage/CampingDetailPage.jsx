@@ -272,7 +272,9 @@ const CampingDetailPage = () => {
           </Container>
         </div>
       ) : (
-        <div>존재하지 않는 캠핑장입니다.</div>
+        <div>
+          <CampingDetailSkeleton />
+        </div>
       )}
     </div>
   );
