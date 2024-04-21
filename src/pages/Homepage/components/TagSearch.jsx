@@ -27,7 +27,12 @@ const TagSearch = () => {
 
   const searchByTag = (e) => {
     e.preventDefault(); //폼 제출시 새로고침 막음
-    navigate(`/search?q=&selectedTag=${selectedTag}`);
+    if(selectedTag.length == 0){
+      alert("태그를 선택하세요")
+    }else{
+      navigate(`/search?q=&selectedTag=${selectedTag}`);
+    }
+    
   };
 
   // 모바일 태그 더보기 버튼
