@@ -135,17 +135,6 @@
     width: 100%;
     display: flex;
     justify-content: center;
-
-    .SkeletonBox {
-        width: 100%;
-        display: flex;
-        justify-content: space-around;
-    }
-
-    .AttractionSkeleton {
-        width: 16vw;
-        height: 18vw;
-    }
 }
 
 @media (max-width:1024px) {

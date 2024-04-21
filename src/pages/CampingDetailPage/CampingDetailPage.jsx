@@ -18,6 +18,7 @@ import CampingDetailMap from "./CampingDetailMap/CampingDetailMap";
 import "./CampingDetailPage.style.css";
 import CampingDetailPageKakao from "./CampingDetailPageKakao/CampingDetailPageKakao";
 import HandleCopyClipBoard from "./HandleCopyClipBoard/HandleCopyClipBoard";
+import CampingDetailSkeleton from "./CampingDetailSkeleton/CampingDetailSkeleton";
 
 const CampingDetailPage = () => {
   const [searchParams] = useSearchParams();
@@ -62,12 +63,18 @@ const CampingDetailPage = () => {
   ];
 
   if (isLoading) {
-    return <div className="loading_wrap">{/* <CircularProgress /> */}</div>;
+    return (
+      <div className="loading_wrap">
+        <CampingDetailSkeleton />
+      </div>
+    );
   }
 
-  if (campingRecommendIsLoading) {
-    return <div>{/* <CircularProgress /> */}</div>;
-  }
+  // if (campingRecommendIsLoading) {
+  //   return (
+
+  //   );
+  // }
 
   if (campingRecommendIsError) {
     return <div>{campingRecommendError.message}</div>;
