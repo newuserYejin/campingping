@@ -40,7 +40,7 @@ const BestCamp = () => {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    arrow:false,
+    arrow: false,
   };
 
   return (
