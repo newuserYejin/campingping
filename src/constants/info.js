@@ -240,10 +240,6 @@ export const search_tags = [
     text: "문화유적",
   },
   {
-    id: "search_tag5",
-    text: "가을",
-  },
-  {
     id: "search_tag6",
     text: "바다가 보이는",
   },
@@ -276,18 +272,6 @@ export const search_tags = [
     text: "축제",
   },
   {
-    id: "search_tag14",
-    text: "가을",
-  },
-  {
-    id: "search_tag15",
-    text: "자전거 타기 좋은",
-  },
-  {
-    id: "search_tag16",
-    text: "봄",
-  },
-  {
     id: "search_tag17",
     text: "물놀이 하기 좋은",
   },
@@ -298,10 +282,6 @@ export const search_tags = [
   {
     id: "search_tag19",
     text: "여유있는",
-  },
-  {
-    id: "search_tag21",
-    text: "온수 잘 나오는",
   },
   {
     id: "search_tag23",
@@ -320,12 +300,12 @@ export const search_tags = [
     text: "봄",
   },
   {
-    id: "search_tag27",
-    text: "차대기 편한",
-  },
-  {
     id: "search_tag28",
     text: "여름",
+  },
+  {
+    id: "search_tag14",
+    text: "가을",
   },
   {
     id: "search_tag29",
@@ -342,5 +322,9 @@ export const search_tags = [
   {
     id: "search_tag33",
     text: "익스트림",
+  },
+  {
+    id: "search_tag27",
+    text: "차대기 편한",
   },
 ];
