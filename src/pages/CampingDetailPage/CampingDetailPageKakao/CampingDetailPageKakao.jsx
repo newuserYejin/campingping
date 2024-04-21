@@ -3,14 +3,14 @@ import "./CampingDetailPageKakao.style.css";
 const { Kakao } = window;
 
 const CampingDetailPageKakao = ({ data }) => {
-  const realUrl = "http://localhost:3003/";
+  const realUrl = "https://how-about-camping.netlify.app/";
   const resultUrl = window.location.href;
 
   useEffect(() => {
     Kakao.cleanup();
     Kakao.init("e6966fe6f29013116d47d4706ca708a8");
     // 잘 적용되면 true 를 뱉는다.
-    console.log(Kakao.isInitialized());
+    //console.log(Kakao.isInitialized());
   }, []);
 
   const shareKakao = () => {
