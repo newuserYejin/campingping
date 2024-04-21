@@ -7,6 +7,7 @@ import AttractionCarousel from "./AttractionCarousel";
 import "./Current.style.css";
 import CircularProgress from "@mui/material/CircularProgress";
 import { Skeleton } from "@mui/material";
+import AttractSkelton from "./AttractSkelton/AttractSkelton";
 
 const Current = ({ userLat, userLot }) => {
   const {
@@ -23,9 +24,14 @@ const Current = ({ userLat, userLot }) => {
     error: RecommandError,
   } = useFetchLocation(37.4594355, 126.364195, 20000);
 
-  // if (isLoading) {
-  //   return <div className="loading_Zone"></div>;
-  // }
+  if (isLoading || RecommandIsLoading) {
+    return (
+      <div>
+        <AttractSkelton />
+        <AttractSkelton />
+      </div>
+    );
+  }
 
   console.log("Current userLat", userLat, "Current userLot:", userLot);
   console.log("apiData:", apiData);

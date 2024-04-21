@@ -4,7 +4,7 @@ import { Carousel } from "react-bootstrap";
 import CircularProgress from "@mui/material/CircularProgress";
 import "./AttractionCarousel.style.css";
 import MainTitle from "../../../../components/Title/MainTitle";
-import { Skeleton } from "@mui/material";
+import AttractSkelton from "./AttractSkelton/AttractSkelton";
 
 const AttractionCarousel = ({ attractData, title }) => {
   const [itemsPerPage, setItemsPerPage] = useState(5);
@@ -76,13 +76,7 @@ const AttractionCarousel = ({ attractData, title }) => {
         </Carousel>
       ) : (
         <div className="AttractionNo">
-          <div className="SkeletonBox">
-            <Skeleton className="AttractionSkeleton" variant="rectangular" />
-            <Skeleton className="AttractionSkeleton" variant="rectangular" />
-            <Skeleton className="AttractionSkeleton" variant="rectangular" />
-            <Skeleton className="AttractionSkeleton" variant="rectangular" />
-            <Skeleton className="AttractionSkeleton" variant="rectangular" />
-          </div>
+          <AttractSkelton />
         </div>
       )}
     </div>
