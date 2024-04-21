@@ -8,7 +8,6 @@ import Video from "./components/Video/Video";
 import BestCamp from "./components/BestCamp/BestCamp";
 import TopButton from "../../components/TopButton/TopButton";
 
-
 const Homepage = () => {
   return (
     <section>
@@ -16,8 +15,8 @@ const Homepage = () => {
       <MainSearchForm />
       <TagSearch />
       <Container maxWidth="xl">
-        <CurrentLocation />
         <BestCamp />
+        <CurrentLocation />
         <Video />
       </Container>
       <TopButton />
