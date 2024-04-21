@@ -1,7 +1,7 @@
 import React from "react";
 import YouTube from "react-youtube";
+import { Link } from 'react-router-dom';
 import "./Video.style.css";
-import TitleMain from "../../../../components/Title/MainTitle";
 
 const opts = {
   height: "100%",
@@ -41,7 +41,7 @@ const Video = () => {
     event.target.pauseVideo();
   };
 
-  const playList = selectVideo(videoIDarray, 4);
+  const playList = selectVideo(videoIDarray, 5);
 
   console.log(
     playList.map((item) => {
@@ -52,10 +52,7 @@ const Video = () => {
   return (
     <div>
       <div className="moveYoutubeSite">
-        <TitleMain title={'"고캠핑" 추천 영상'}></TitleMain>
-        <a href="https://www.youtube.com/@gocamping_official/videos">
-          &#43; &#43; 더 보러가기 &#43; &#43;
-        </a>
+        <Link to="https://www.youtube.com/@gocamping_official/videos" target="_blank">@gocamping_official</Link>
       </div>
       <div className="videoArea">
         {playList.map((item) => {
@@ -69,6 +66,7 @@ const Video = () => {
           );
         })}
       </div>
+
     </div>
   );
 };

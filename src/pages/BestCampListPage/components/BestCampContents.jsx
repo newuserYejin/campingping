@@ -36,10 +36,8 @@ const BestCampContents = (props) => {
       (d.exprnProgrm.includes("어린이") ||
         d.exprnProgrm.includes("유아") ||
         d.posblFcltyCl.includes("어린이") ||
-        d.posblFcltyCl.includes("유아"));
-
-    console.log("가족 친화:", list);
-
+        d.posblFcltyCl.includes("유아")
+      );
     return list;
   });
 
@@ -63,8 +61,6 @@ const BestCampContents = (props) => {
     const list = d.firstImageUrl && d.lineIntro && d.animalCmgCl === "가능";
     return list;
   });
-
-  console.log(familyFriendlyList, petFriendlyList, carCampingList);
 
   return (
     <section className="bestCampContents">

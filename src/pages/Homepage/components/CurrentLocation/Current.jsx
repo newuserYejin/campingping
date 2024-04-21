@@ -33,10 +33,6 @@ const Current = ({ userLat, userLot }) => {
     );
   }
 
-  console.log("Current userLat", userLat, "Current userLot:", userLot);
-  console.log("apiData:", apiData);
-  console.log("RecommandData:", RecommandData);
-
   let itemList = [];
   let attractData = [];
   let RecommandItemList = [];
@@ -59,7 +55,7 @@ const Current = ({ userLat, userLot }) => {
         <section className="AttractionCarouselSection">
           <AttractionCarousel
             attractData={attractData}
-            title="내 위치 주변 관광지"
+            title="우리집 근처 여긴 어때"
             // itemsPerPage={itemsPerPage}
           />
         </section>
@@ -69,7 +65,7 @@ const Current = ({ userLat, userLot }) => {
       <section className="AttractionCarouselSection">
         <AttractionCarousel
           attractData={RecommendAttractData}
-          title="요즘 추천 관광지"
+          title="캠핑장 근처 가볼만한 곳"
           // itemsPerPage={itemsPerPage}
         />
       </section>
