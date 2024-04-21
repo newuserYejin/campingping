@@ -61,7 +61,7 @@ const SearchDataPage = () => {
       if (selectedTag == null || selectedTag == "") {
         return (
           (!province || item.doNm === province) &&
-          (!city || item.SigunguNm === city) &&
+          (!city || item.sigunguNm === city) &&
           (!theme || item.themaEnvrnCl.includes(theme))
         );
       } else {
