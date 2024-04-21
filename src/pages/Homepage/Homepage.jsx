@@ -4,7 +4,8 @@ import TopBanner from "./components/TopBanner";
 import MainSearchForm from "./components/MainSearchForm";
 import CurrentLocation from "./components/CurrentLocation/CurrentLocation";
 import TagSearch from "./components/TagSearch";
-import NewsPage from "../NewsPage/NewsPage";
+import Video from "./components/Video/Video";
+import TopButton from "../../components/TopButton/TopButton";
 
 const Homepage = () => {
   return (
@@ -14,8 +15,10 @@ const Homepage = () => {
       <TagSearch />
       <Container maxWidth="xl">
         <CurrentLocation />
-        <NewsPage/>
+        <Video></Video>
       </Container>
+
+      <TopButton />
     </section>
   );
 };

@@ -29,10 +29,12 @@
 .list-facltNm {
   margin: 0 0 0.2em 0;
   font-size: 2em;
+
   a {
     color: var(--main-font-color);
     text-decoration: none;
   }
+
   &:hover {
     text-decoration: underline;
   }
@@ -41,10 +43,12 @@
 .list-lineIntro {
   margin: 0px 0 1.5em 0;
   font-size: 1.2em;
+
   a {
     color: var(--main-font-color);
     text-decoration: none;
   }
+
   &:hover {
     text-decoration: underline;
   }
@@ -76,6 +80,10 @@
   margin: 0;
   padding: 4px 0px 4px 16px;
   width: calc(100% - 120px);
+}
+
+.list-info .list-tel a {
+  word-break: break-word;
 }
 
 .list-sbrsCl ul {

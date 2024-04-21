@@ -1,29 +1,35 @@
 import React from 'react';
-import { useCampingDetailQuery } from '../../../hooks/useCampingDetail';
 import { Link } from 'react-router-dom';
+import { Box } from '@mui/material';
+import './BestCampTypeList.style.css'
 
 const BestCampTypeList = ({list}) => {
-  const pageNo = 1;
-  const { data } = useCampingDetailQuery(pageNo);
-
   return (
-    <>
-      {list && list.map((item, index) => 
-        <section key={item.contentId}>
-          <Link to={`/campings/${item.contentId}?keyword=${item.facltNm}&lat=${item.mapY}&lon=${item.mapX}`}>
+    <section className='bestCampTypeList'>
+    {list && list.map((item) => 
+      <Box 
+        key={item.contentId}
+        className='bestCampTypeListItem' 
+        sx={{
+          backgroundImage:{
+            xs: `url(${item.firstImageUrl})`,
+            sm: 'none'
+          }
+        }}
+      >
+        <article className='textBox'>
+          <div>
             <h3>{item.facltNm}</h3>
-            <p>{item.lineIntro}</p>
-            {item.addr1 &&
-              <p>주소: {item.addr1}</p>
-            }
-            {item.tel && 
-              <a href={`tel:${item.tel}`}>{item.tel}</a>
-            }
-            <p><img src={item.firstImageUrl} alt={`${item.facltNm} 이미지`} /></p>
-          </Link>
-        </section>
-      )}
-    </>
+            <p className='lineIntro'>{item.lineIntro}</p>
+          </div>
+          <p className='btn_more'>
+            <Link to={`/campings/${item.contentId}?keyword=${item.facltNm}&lat=${item.mapY}&lon=${item.mapX}`}>자세히 보기</Link>
+          </p>
+        </article>
+        <p className='imgBox'><img src={item.firstImageUrl} alt={`${item.facltNm} 이미지`} /></p>
+      </Box>
+    )}
+    </section>
   )
 }
 

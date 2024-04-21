@@ -1,0 +1,139 @@
+.bestCampTypeList{
+  margin-bottom:5rem;
+  .bestCampTypeListItem{
+    position:relative;
+    width:100%;
+    display:flex;
+    justify-content: space-between;
+    margin-top:3rem;
+    padding:3rem 0;
+    &:nth-of-type(even){
+      flex-direction: row-reverse;
+      .textBox{
+        left:0;
+      }
+    }
+    &:nth-of-type(odd){
+      .textBox{
+        right:0;
+      }
+    }
+    .textBox{
+      position:absolute;
+      bottom:-1rem;
+      display:flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width:45%;
+      height:auto;
+      background:#f1f1f1;
+      aspect-ratio:10/6;
+      padding:2rem;
+      box-sizing: border-box;
+      h3{
+        margin-bottom:0.75rem;
+        font-size:3rem;
+        font-weight:300;
+        word-break: auto-phrase;
+      }
+      .lineIntro{
+        margin-bottom:2.5rem;
+        font-size:1.25rem;
+        line-height:1.15;
+        font-weight:300;
+      }
+      .btn_more{
+        margin:0;
+        a{
+          display:inline-block;
+          width:140px;
+          height:45px;
+          border:1px solid var(--color-darkGray);
+          box-sizing:border-box;
+          font-size:0.85rem;
+          line-height:45px;
+          text-align:center;
+          text-decoration:none;
+          color:var(--color-darkGray);
+          &:hover{
+            border-color:var(--key-color);
+            color:var(--key-color);
+            background:rgba(255,255,255,0.5);
+          }
+        }
+      }
+    }
+    .imgBox{
+      width:70%;
+      height:auto;
+      aspect-ratio:2/1;
+      overflow:hidden;
+      margin:0;
+      img{
+        width:100%;
+        height:100%;
+        object-fit:cover;
+      }
+    }
+  }
+  @media (max-width: 900px) {
+    .bestCampTypeListItem{
+      .textBox{
+        width:55%;
+        padding:1.5rem;
+        aspect-ratio:10/5.5;
+        h3{
+          font-size:2.25rem;
+        }
+        .lineIntro{
+          margin-bottom:2rem;
+          font-size:1rem;
+        }
+        .btn_more{
+          a{
+            width:120px;
+            height:40px;
+            line-height:40px;
+          }
+        }
+      }
+      .imgBox{
+        width:80%;
+      }
+    }
+  }
+  @media (max-width: 600px) {
+    margin-bottom:2rem;
+    .bestCampTypeListItem{
+      margin-top: 2rem;
+      padding:0;
+      background-position:50% 50%;
+      background-size:cover;
+      .textBox{
+        position:static;
+        width:100%;
+        background:rgba(0,0,0,0.4);
+        aspect-ratio:2/1;
+        h3{
+          padding-top:1rem;
+          font-size:2rem;
+          color:var(--main-background-color);
+        }
+        .lineIntro{
+          margin-bottom:1.5rem;
+          color:var(--main-background-color);
+        }
+        .btn_more{
+          text-align:right;
+          a{
+            border-color:var(--main-background-color);
+            color:var(--main-background-color);
+          }
+        }
+      }
+      .imgBox{
+        display:none;
+      }
+    }
+  }
+}

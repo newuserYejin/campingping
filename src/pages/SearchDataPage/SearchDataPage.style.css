@@ -1,15 +1,20 @@
-.search-data-box{
+.search-data-box {
     border: none;
     border-radius: 16px;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.493);
 }
 
-.loading_search_wrap{
+.loading_search_wrap {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.search-result-title{
+.search-result-title {
     padding: 20px;
+    padding-bottom: 0;
+
+    h2 .main-title {
+        padding-bottom: 0;
+    }
 }
