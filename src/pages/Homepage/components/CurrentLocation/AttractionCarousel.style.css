@@ -122,15 +122,6 @@
     display: none;
 }
 
-.AttractionNo {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 20px;
-    margin-top: 0;
-}
-
 .ReccomendSurroungingCarousel {
     /* max-height: 38vh; */
     margin-bottom: 10px;
@@ -138,6 +129,23 @@
 
 .miniTitle {
     display: none;
+}
+
+.AttractionNo {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    .SkeletonBox {
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .AttractionSkeleton {
+        width: 16vw;
+        height: 18vw;
+    }
 }
 
 @media (max-width:1024px) {

@@ -1,0 +1,103 @@
+.skeletonItemBox {
+    padding: 1em 0;
+    display: flex;
+    justify-content: space-between;
+
+    .SkeletonListImg {
+        width: 40%;
+        min-height: 300px;
+    }
+
+    .SkeletonListInfoBox {
+        width: calc(60% - 3em);
+        margin-bottom: 30px;
+    }
+
+    .SkeletonListInfo {
+        height: 35px;
+        margin-bottom: 15px;
+        width: 80%;
+    }
+
+    .SkeletonListInfo:first-child {
+        width: 40%;
+        height: 50px;
+    }
+
+    .SkeletonListInfo:nth-child(2) {
+        height: 120px;
+    }
+
+    .SkeletonListInfoCircleBox {
+        display: flex;
+        width: 100%;
+    }
+
+    .SkeletonListInfoCircleBox .SkeletonListInfoCircle {
+        width: 5vw;
+        height: 5vw;
+        margin-right: 10px;
+    }
+}
+
+@media (max-width:900px) {
+    .skeletonItemBox {
+        flex-direction: column;
+        align-items: center;
+        padding: 0;
+
+        .SkeletonListImg {
+            width: 80%;
+            margin-bottom: 30px;
+            /* min-height: 30px; */
+        }
+
+        .SkeletonListInfoBox {
+            width: 80%;
+            margin-bottom: 3em;
+        }
+
+        .SkeletonListInfo:first-child {
+            width: 40%;
+            height: 30px;
+        }
+
+        .SkeletonListInfo {
+            width: 100%;
+        }
+
+        .SkeletonListInfoCircleBox .SkeletonListInfoCircle {
+            width: 8vw;
+            height: 8vw;
+        }
+    }
+}
+
+@media (max-width:460px) {
+    .skeletonItemBox {
+        .SkeletonListImg {
+            width: 100%;
+            margin-bottom: 30px;
+        }
+
+        .SkeletonListInfo {
+            height: 25px;
+            margin-bottom: 15px;
+            width: 100%;
+        }
+
+        .SkeletonListInfoBox {
+            width: 100%;
+            margin-bottom: 3em;
+        }
+
+        .SkeletonListInfo:nth-child(2) {
+            height: 90px;
+        }
+
+        .SkeletonListInfoCircleBox .SkeletonListInfoCircle {
+            width: 15vw;
+            height: 15vw;
+        }
+    }
+}

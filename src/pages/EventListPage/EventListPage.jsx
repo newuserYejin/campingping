@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, Suspense } from "react";
 import "./EventListPage.style.css";
 import { Container, Pagination } from "@mui/material";
 import ListGalleryItem from "../../components/ListGalleryItem/ListGalleryItem";
@@ -6,6 +6,7 @@ import { useFetchEvent } from "../../hooks/useFetchEvent";
 import { useAreaCode } from "../../hooks/useAreaCode";
 import CircularProgress from "@mui/material/CircularProgress";
 import Masonry from "@mui/lab/Masonry";
+import EventListPageSkeleton from "./EventListPageSkeleton/EventListPageSkeleton";
 
 const EventListPage = () => {
   let [CurrentPage, setCurrentPage] = useState(1);
@@ -22,7 +23,7 @@ const EventListPage = () => {
   if (isLoading) {
     return (
       <div className="loading_Zone">
-        <CircularProgress />
+        <EventListPageSkeleton />
       </div>
     );
   }

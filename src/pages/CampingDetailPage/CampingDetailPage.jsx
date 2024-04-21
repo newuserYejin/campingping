@@ -62,19 +62,11 @@ const CampingDetailPage = () => {
   ];
 
   if (isLoading) {
-    return (
-      <div className="loading_wrap">
-        <CircularProgress />
-      </div>
-    );
+    return <div className="loading_wrap">{/* <CircularProgress /> */}</div>;
   }
 
   if (campingRecommendIsLoading) {
-    return (
-      <div>
-        <CircularProgress />
-      </div>
-    );
+    return <div>{/* <CircularProgress /> */}</div>;
   }
 
   if (campingRecommendIsError) {
