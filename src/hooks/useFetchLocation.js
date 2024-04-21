@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 const fetchCurrentLocation = (userLat, userLot, radius) => {
     // 고정된 값으로 mapX와 mapY를 설정
 
-    console.log("recv Lat:", userLat, "recv Lot:", userLot);
+    // console.log("recv Lat:", userLat, "recv Lot:", userLot);
 
     const mapX = userLot;
     const mapY = userLat;
