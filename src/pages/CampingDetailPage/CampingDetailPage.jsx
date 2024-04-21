@@ -70,12 +70,6 @@ const CampingDetailPage = () => {
     );
   }
 
-  // if (campingRecommendIsLoading) {
-  //   return (
-
-  //   );
-  // }
-
   if (campingRecommendIsError) {
     return <div>{campingRecommendError.message}</div>;
   }
