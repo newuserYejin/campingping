@@ -13,6 +13,9 @@ import { CircularProgress } from "@mui/material";
 import TitleMain from "../../components/Title/MainTitle";
 import TopButton from "../../components/TopButton/TopButton";
 import { search_detail_filters } from "../../constants/info";
+import MainSearchForm from "../Homepage/components/MainSearchForm";
+import TopBanner from "../Homepage/components/TopBanner";
+
 const SearchDataPage = () => {
   const [page, setPage] = useState(1);
   const [query, setQuery] = useSearchParams();
@@ -23,16 +26,17 @@ const SearchDataPage = () => {
   const theme = query.get("theme");
   const selectedTag = query.get("selectedTag");
   const selectedDetailTag = query.get("selectedDetailTag");
-
+  const selectedTagArray = selectedTag?.split(',')
+  const selectedTagLength = selectedTagArray?.length
   const {
     data: searchData,
     isLoading,
     isError,
     error,
-  } = useSearchDataQuery({ keyword, page, province, city, theme, selectedTag, selectedDetailTag });
+  } = useSearchDataQuery({ keyword, page, province, city, theme, selectedTag, selectedTagLength, selectedDetailTag });
   console.log("data?", searchData);
   console.log("selectedTag? :", selectedTag);
-
+ 
   let data = searchData?.response?.body;
 
   if (isLoading) {
@@ -264,7 +268,9 @@ const SearchDataPage = () => {
 
   return (
     <>
-      <DetailPageSearchBox />
+    
+      <TopBanner/>
+      <MainSearchForm/>
       <Container maxWidth="lg">
         <div>
           <div className="search-result-title">
