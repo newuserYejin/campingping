@@ -277,6 +277,11 @@ const SearchDataPage = () => {
             <h2>
               <TitleMain title={title} />
             </h2>
+            <div className="tag-container">
+      {selectedTagArray?.map((tag, index) => (
+        <div key={index} className="tag-item"># {tag}</div>
+      ))}
+    </div>
           </div>
 
           {filteredData.map((searchData, index) => (
