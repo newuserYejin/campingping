@@ -5,7 +5,7 @@ import {
   useWeatherQuery,
 } from "../../../hooks/useWeather";
 import CircularProgress from "@mui/material/CircularProgress";
-import weatherDescKo from './../../../constants/WeatherDescKo';
+import weatherDescKo from "./../../../constants/WeatherDescKo";
 
 const CampingDetailWeather = ({ lat, lon, name }) => {
   // const { data, isLoading } = useWeatherQuery(lat, lon);
@@ -14,11 +14,7 @@ const CampingDetailWeather = ({ lat, lon, name }) => {
   // console.log("data", data);
 
   if (isLoading) {
-    return (
-      <div className="loading_wrap">
-        <CircularProgress />
-      </div>
-    );
+    return <div className="loading_wrap">{/* <CircularProgress /> */}</div>;
   }
 
   return (

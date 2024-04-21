@@ -11,7 +11,7 @@ import { Pagination } from "@mui/material";
 import DetailPageSearchBox from "./components/DetailPageSearchBox";
 import { CircularProgress } from "@mui/material";
 import TitleMain from "../../components/Title/MainTitle";
-import TopButton from "../../components/TopButton/TopButton";
+import SearchDataPgeSkeleton from "./SearchDataPgeSkeleton/SearchDataPgeSkeleton";
 
 const SearchDataPage = () => {
   const [page, setPage] = useState(1);
@@ -37,7 +37,7 @@ const SearchDataPage = () => {
   if (isLoading) {
     return (
       <div className="loading_search_wrap">
-        <CircularProgress />
+        <SearchDataPgeSkeleton />
       </div>
     );
   }
