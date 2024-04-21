@@ -12,9 +12,6 @@ const CurrentLocation = () => {
     navigator.geolocation.getCurrentPosition((position) => {
       let lat = position.coords.latitude;
       let lon = position.coords.longitude;
-
-      setUserLat(lat);
-      setUserLot(lon);
     });
   };
 
