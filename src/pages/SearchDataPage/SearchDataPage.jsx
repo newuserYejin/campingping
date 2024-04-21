@@ -14,8 +14,9 @@ import TitleMain from "../../components/Title/MainTitle";
 import SearchDataPgeSkeleton from "./SearchDataPgeSkeleton/SearchDataPgeSkeleton";
 import TopButton from "../../components/TopButton/TopButton";
 import { search_detail_filters } from "../../constants/info";
-import MainSearchForm from "../Homepage/components/MainSearchForm";
-import TopBanner from "../Homepage/components/TopBanner";
+// import MainSearchForm from "../Homepage/components/MainSearchForm";
+// import TopBanner from "../Homepage/components/TopBanner";
+import DetailPageSearchBox2 from "./components/DetailPageSearchBox2";
 
 const SearchDataPage = () => {
   const [page, setPage] = useState(1);
@@ -279,8 +280,9 @@ const SearchDataPage = () => {
 
   return (
     <>
-      <TopBanner />
-      <MainSearchForm />
+      {/* <TopBanner />
+      <MainSearchForm /> */}
+      <DetailPageSearchBox2 />
       <Container maxWidth="lg">
         <div>
           <div className="search-result-title">
