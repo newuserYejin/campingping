@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import apiTour from "../utils/apiTour";
 
-const API_KEY = process.env.REACT_APP_KEY_ENCODING_SA;
+const API_KEY = process.env.REACT_APP_API_KEY_EN_SANG
 const PARAMS = process.env.REACT_APP_PARAMS_DEFAULT;
 
 const fetchTourImage = (contentId) => {
