@@ -6,8 +6,9 @@ import CampingListPage from "./pages/CampingListPage/CampingListPage";
 import CampingDetailPage from "./pages/CampingDetailPage/CampingDetailPage";
 import SearchDataPage from "./pages/SearchDataPage/SearchDataPage";
 import EventListPage from "./pages/EventListPage/EventListPage";
-import BestCampListPage from "./pages/BestCampListPage/BestCampListPage"
-import LoginPage from "./pages/LoginPage/LoginPage"
+import BestCampListPage from "./pages/BestCampListPage/BestCampListPage";
+import LoginPage from "./pages/LoginPage/LoginPage";
+import MyPage from "./pages/MyPage/MyPage";
 
 function App() {
   return (
@@ -32,6 +33,9 @@ function App() {
         </Route>
         <Route path="/campingsdetail">
           <Route path=":contentId" element={<CampingDetailPage />} />
+        </Route>
+        <Route path="/mypage">
+          <Route index element={<MyPage />} />
         </Route>
       </Route>
       <Route path="*" element={<NotFoundPage />} />

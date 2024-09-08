@@ -1,12 +1,10 @@
-import React from "react";
 import { Container } from "@mui/material";
 import TopBanner from "./components/TopBanner";
 import MainSearchForm from "./components/MainSearchForm";
-import CurrentLocation from "./components/CurrentLocation/CurrentLocation";
 import TagSearch from "./components/TagSearch";
-import Video from "./components/Video/Video";
-import BestCamp from "./components/BestCamp/BestCamp";
 import TopButton from "../../components/TopButton/TopButton";
+import BestCamp from "./components/BestCamp/BestCamp";
+import Widget from "./components/Widget/Widget";
 
 const Homepage = () => {
   return (
@@ -16,8 +14,7 @@ const Homepage = () => {
       <TagSearch />
       <Container maxWidth="xl">
         <BestCamp />
-        <CurrentLocation />
-        <Video />
+        <Widget />
       </Container>
       <TopButton />
     </section>
