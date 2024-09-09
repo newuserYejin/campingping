@@ -15,6 +15,7 @@ import RecommendListPage from "./pages/CommunityPage/RecommendListPage";
 import MarketDetailPage from "./pages/CommunityPage/MarketDetailPage";
 import CookDetailPage from "./pages/CommunityPage/CookDetailPage";
 import RecommendDetailPage from "./pages/CommunityPage/RecommendDetailPage";
+import CommunityWritePage from "./pages/CommunityPage/CommunityWritePage";
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
           <Route index element={<MyPage />} />
         </Route>
         <Route path="/">
+          <Route path="write" element={<CommunityWritePage />} />
           <Route path="market" element={<MarketListPage />} />
           <Route path="market/:id" element={<MarketDetailPage />} />
           <Route path="cook" element={<CookListPage />} />
