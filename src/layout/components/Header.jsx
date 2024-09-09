@@ -18,6 +18,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { useSelector, useDispatch } from "react-redux";
 import { authenticateAction } from "../../redux/actions/authencticateAction";
+import { useUser } from "../../hooks/useUser";
 
 const drawerWidth = 260;
 const navItems = [
@@ -60,6 +61,9 @@ const LoginPc = styled.div`
   position: absolute;
   right: 0px;
   top: 1em;
+  display: flex;
+  align-items: center;
+
   a,
   button {
     display: inline-block;
@@ -76,6 +80,10 @@ const LoginPc = styled.div`
     &:hover {
       background: var(--button-hover-color);
     }
+    margin-left: 5px;
+  }
+  .nickname {
+    color: #3586ff;
   }
 
   @media (max-width: 900px) {
@@ -84,12 +92,15 @@ const LoginPc = styled.div`
 `;
 
 const LoginMo = styled.div`
+  .nickname {
+    color: #3586ff;
+  }
   padding: 16px;
   text-align: center;
   a,
   button {
-    display:block;
-    width: 100%; 
+    display: block;
+    width: 100%;
     height: 36px;
     line-height: 36px;
     font-family: "Spoqa Han Sans Neo", sans-serif;
@@ -111,6 +122,8 @@ const Header = (props) => {
     dispatch(authenticateAction.logout());
   };
 
+  const { data: user, isLoading, isError, refetch } = useUser();
+
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const handleDrawerToggle = () => {
@@ -125,7 +138,8 @@ const Header = (props) => {
           backgroundColor: "var(--key-color)",
           marginBottom: "10px",
           padding: "20px 0",
-        }}>
+        }}
+      >
         <Link to="/">
           <Box
             component="img"
@@ -149,10 +163,13 @@ const Header = (props) => {
         ))}
       </List>
       <LoginMo>
-        {!authenticate ? (
+        {!user ? (
           <Link to="/login">로그인</Link>
         ) : (
-          <button onClick={(event) => logout(event)}>로그아웃</button>
+          <>
+            <div className="nickname">{user.nickname}님</div>
+            <button onClick={(event) => logout(event)}>로그아웃</button>
+          </>
         )}
       </LoginMo>
     </Box>
@@ -176,7 +193,8 @@ const Header = (props) => {
           },
           backgroundColor: "var(--main-background-color)",
           boxShadow: "0 5px 20px rgba(0,0,0,0.1)",
-        }}>
+        }}
+      >
         <Container maxWidth="xl">
           <Toolbar
             sx={{
@@ -184,7 +202,8 @@ const Header = (props) => {
               flexDirection: "column",
               alignItems: "center",
               justifyContent: "center",
-            }}>
+            }}
+          >
             <IconButton
               color="inherit"
               aria-label="open drawer"
@@ -199,7 +218,8 @@ const Header = (props) => {
                   md: "none",
                   color: "var(--color-darkGray)",
                 },
-              }}>
+              }}
+            >
               <FontAwesomeIcon icon={faBars} />
             </IconButton>
             <Typography component="h1">
@@ -225,10 +245,13 @@ const Header = (props) => {
             </Typography>
 
             <LoginPc>
-              {!authenticate ? (
+              {!user ? (
                 <Link to="/login">로그인</Link>
               ) : (
-                <button onClick={(event) => logout(event)}>로그아웃</button>
+                <>
+                  <div className="nickname">{user.nickname}님</div>
+                  <button onClick={(event) => logout(event)}>로그아웃</button>
+                </>
               )}
             </LoginPc>
             <Box
@@ -238,7 +261,8 @@ const Header = (props) => {
                 gap: "20px",
                 margin: "15px 0 10px",
                 padding: "0",
-              }}>
+              }}
+            >
               {navItems.map((item) => (
                 <StylesProvider key={`navItem${item.id}`} injectFirst>
                   <GnbItemPC key={item}>
@@ -265,7 +289,8 @@ const Header = (props) => {
               boxSizing: "border-box",
               width: drawerWidth,
             },
-          }}>
+          }}
+        >
           {drawer}
         </Drawer>
       </nav>
