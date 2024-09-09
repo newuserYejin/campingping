@@ -9,6 +9,12 @@ import EventListPage from "./pages/EventListPage/EventListPage";
 import BestCampListPage from "./pages/BestCampListPage/BestCampListPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import MyPage from "./pages/MyPage/MyPage";
+import MarketListPage from "./pages/CommunityPage/MarketListPage";
+import CookListPage from "./pages/CommunityPage/CookListPage";
+import RecommendListPage from "./pages/CommunityPage/RecommendListPage";
+import MarketDetailPage from "./pages/CommunityPage/MarketDetailPage";
+import CookDetailPage from "./pages/CommunityPage/CookDetailPage";
+import RecommendDetailPage from "./pages/CommunityPage/RecommendDetailPage";
 
 function App() {
   return (
@@ -36,6 +42,14 @@ function App() {
         </Route>
         <Route path="/mypage">
           <Route index element={<MyPage />} />
+        </Route>
+        <Route path="/">
+          <Route path="market" element={<MarketListPage />} />
+          <Route path="market/:id" element={<MarketDetailPage />} />
+          <Route path="cook" element={<CookListPage />} />
+          <Route path="cook/:id" element={<CookDetailPage />} />
+          <Route path="recommend" element={<RecommendListPage />} />
+          <Route path="recommend/:id" element={<RecommendDetailPage />} />
         </Route>
       </Route>
       <Route path="*" element={<NotFoundPage />} />

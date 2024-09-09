@@ -1,5 +1,6 @@
-import styled from 'styled-components';
-import { formatNumberWithCommas } from '../../../utils/common.js';
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+import { formatNumberWithCommas } from "../../utils/common.js";
 
 const TableComponent = styled.table`
   width: 100%;
@@ -16,9 +17,10 @@ const TheadTd = styled.th`
   position: relative;
   font-size: 18px;
   font-weight: 500;
+  text-align: center;
 
   &:before {
-    content: '';
+    content: "";
     position: absolute;
     margin-top: -8px;
     top: 50%;
@@ -50,19 +52,33 @@ const TbodyTd = styled.td`
   max-width: 0;
   font-size: 18px;
   font-weight: normal;
-  text-align: ${props => props.$align || 'center'};
+  text-align: ${(props) => props.$align || "center"};
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+
+  a {
+    text-decoration: none;
+    color: #000;
+  }
 `;
 
-export const Table = ({ th, td, alignments = {}, colgroup }) => {
-  const tdKeys = Array.from(new Set(td.flatMap(obj => Object.keys(obj))));
+const Table = ({ th, td, alignments = {}, colgroup }) => {
+  const tdKeys = Array.from(new Set(td.flatMap((obj) => Object.keys(obj))));
 
-  const formatTd = value => {
-    if (typeof value === 'number') {
+  const formatTd = (value, key) => {
+    if (key === "comment" && value > 999) {
+      return "999+";
+    }
+
+    if (typeof value === "number") {
       return formatNumberWithCommas(value);
     }
+
+    if (key === "title") {
+      return <Link to="/">{value}</Link>;
+    }
+
     return value;
   };
 
@@ -71,17 +87,17 @@ export const Table = ({ th, td, alignments = {}, colgroup }) => {
       {colgroup}
       <Thead>
         <tr>
-          {th.map(item => (
+          {th.map((item) => (
             <TheadTd key={item}>{item}</TheadTd>
           ))}
         </tr>
       </Thead>
       <Tbody>
-        {td.map(item => (
+        {td.map((item) => (
           <tr key={item.id}>
-            {tdKeys.map(key => (
+            {tdKeys.map((key) => (
               <TbodyTd key={key + item.id} $align={alignments[key]}>
-                {formatTd(item[key])}
+                {formatTd(item[key], key)}
               </TbodyTd>
             ))}
           </tr>
@@ -90,3 +106,5 @@ export const Table = ({ th, td, alignments = {}, colgroup }) => {
     </TableComponent>
   );
 };
+
+export default Table;
