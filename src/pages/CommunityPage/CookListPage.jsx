@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Container } from "@mui/material";
 import { Pagination } from "@mui/material";
@@ -74,6 +75,7 @@ const CookListPage = () => {
             marginTop: "2em",
           }}
         />
+        <Link to="/cook/write">글작성</Link>
       </Container>
     </>
   );

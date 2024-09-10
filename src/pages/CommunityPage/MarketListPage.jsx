@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Container } from "@mui/material";
 import { Pagination } from "@mui/material";
@@ -75,6 +76,7 @@ const MarketListPage = () => {
             marginTop: "2em",
           }}
         />
+        <Link to="/recommend/write">글작성</Link>
       </Container>
 
       <Container
@@ -134,6 +136,7 @@ const MarketListPage = () => {
             marginTop: "2em",
           }}
         />
+        <Link to="/market/write">글작성</Link>
       </Container>
     </>
   );

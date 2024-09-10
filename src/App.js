@@ -10,11 +10,14 @@ import BestCampListPage from "./pages/BestCampListPage/BestCampListPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import MyPage from "./pages/MyPage/MyPage";
 import MarketListPage from "./pages/CommunityPage/MarketListPage";
-import CookListPage from "./pages/CommunityPage/CookListPage";
-import RecommendListPage from "./pages/CommunityPage/RecommendListPage";
 import MarketDetailPage from "./pages/CommunityPage/MarketDetailPage";
+import MarketWritePage from "./pages/CommunityPage/MarketWritePage";
+import CookListPage from "./pages/CommunityPage/CookListPage";
 import CookDetailPage from "./pages/CommunityPage/CookDetailPage";
+import CookWritePage from "./pages/CommunityPage/CookWritePage";
+import RecommendListPage from "./pages/CommunityPage/RecommendListPage";
 import RecommendDetailPage from "./pages/CommunityPage/RecommendDetailPage";
+import RecommendWritePage from "./pages/CommunityPage/RecommendWritePage";
 
 function App() {
   return (
@@ -46,10 +49,13 @@ function App() {
         <Route path="/">
           <Route path="market" element={<MarketListPage />} />
           <Route path="market/:id" element={<MarketDetailPage />} />
+          <Route path="market/write" element={<MarketWritePage />} />
           <Route path="cook" element={<CookListPage />} />
           <Route path="cook/:id" element={<CookDetailPage />} />
+          <Route path="cook/write" element={<CookWritePage />} />
           <Route path="recommend" element={<RecommendListPage />} />
           <Route path="recommend/:id" element={<RecommendDetailPage />} />
+          <Route path="recommend/write" element={<RecommendWritePage />} />
         </Route>
       </Route>
       <Route path="*" element={<NotFoundPage />} />
