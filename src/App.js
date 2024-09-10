@@ -10,12 +10,12 @@ import BestCampListPage from "./pages/BestCampListPage/BestCampListPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import MyPage from "./pages/MyPage/MyPage";
 import MarketListPage from "./pages/CommunityPage/MarketListPage";
+import MarketWritePage from "./pages/CommunityPage/MarketWritePage";
 import CookListPage from "./pages/CommunityPage/CookListPage";
 import RecommendListPage from "./pages/CommunityPage/RecommendListPage";
 import MarketDetailPage from "./pages/CommunityPage/MarketDetailPage";
 import CookDetailPage from "./pages/CommunityPage/CookDetailPage";
 import RecommendDetailPage from "./pages/CommunityPage/RecommendDetailPage";
-import CommunityWritePage from "./pages/CommunityPage/CommunityWritePage";
 
 function App() {
   return (
@@ -45,9 +45,9 @@ function App() {
           <Route index element={<MyPage />} />
         </Route>
         <Route path="/">
-          <Route path="write" element={<CommunityWritePage />} />
           <Route path="market" element={<MarketListPage />} />
           <Route path="market/:id" element={<MarketDetailPage />} />
+          <Route path="market/write" element={<MarketWritePage />} />
           <Route path="cook" element={<CookListPage />} />
           <Route path="cook/:id" element={<CookDetailPage />} />
           <Route path="recommend" element={<RecommendListPage />} />

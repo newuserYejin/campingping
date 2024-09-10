@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import CommunityCategory from "./CommunityCategory";
-import { Container } from "@mui/material";
+import { Container, Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import ico_member from "../../../assets/images/ico_member.png";
 import ico_calendar from "../../../assets/images/ico_calendar2.png";
@@ -51,6 +51,15 @@ const HeaderDate = styled.span`
 
 const Contents = styled.div`
   padding: 50px 0;
+`;
+
+const ButtonBox = styled.div`
+  margin: 24px 0;
+  text-align: right;
+
+  .edit {
+    margin: 0 4px;
+  }
 `;
 
 const Footer = styled.span`
@@ -120,6 +129,19 @@ const CommunityDetail = ({ data, link }) => {
         </Header>
 
         <Contents>{data?.contents}</Contents>
+
+        <ButtonBox>
+          <Link to={link + `/write`} id={data?.id}>
+            수정
+          </Link>
+          <Button
+            className="remove"
+            type="submit"
+            variant="outlined"
+            color="error">
+            삭제
+          </Button>
+        </ButtonBox>
 
         <Footer>
           {data?.prev && (
