@@ -75,7 +75,7 @@ const CookListPage = () => {
             marginTop: "2em",
           }}
         />
-        <Link to="/cook/whire">글작성</Link>
+        <Link to="/cook/write">글작성</Link>
       </Container>
     </>
   );

@@ -75,7 +75,7 @@ const RecommendListPage = () => {
             marginTop: "2em",
           }}
         />
-        <Link to="/recommend/whire">글작성</Link>
+        <Link to="/recommend/write">글작성</Link>
       </Container>
     </>
   );

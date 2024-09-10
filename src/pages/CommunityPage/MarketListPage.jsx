@@ -76,7 +76,7 @@ const MarketListPage = () => {
             marginTop: "2em",
           }}
         />
-        <Link to="/recommend/whire">글작성</Link>
+        <Link to="/recommend/write">글작성</Link>
       </Container>
 
       <Container
@@ -136,7 +136,7 @@ const MarketListPage = () => {
             marginTop: "2em",
           }}
         />
-        <Link to="/market/whire">글작성</Link>
+        <Link to="/market/write">글작성</Link>
       </Container>
     </>
   );
