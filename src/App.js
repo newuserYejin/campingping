@@ -18,6 +18,7 @@ import CookWritePage from "./pages/CommunityPage/CookWritePage";
 import RecommendListPage from "./pages/CommunityPage/RecommendListPage";
 import RecommendDetailPage from "./pages/CommunityPage/RecommendDetailPage";
 import RecommendWritePage from "./pages/CommunityPage/RecommendWritePage";
+import SignUpPage from "./pages/JoinPage/SignUpPage";
 
 function App() {
   return (
@@ -36,6 +37,9 @@ function App() {
         </Route>
         <Route path="/login">
           <Route index element={<LoginPage />} />
+        </Route>
+        <Route path="/signup">
+          <Route index element={<SignUpPage />} />
         </Route>
         <Route path="/bestCamp">
           <Route index element={<BestCampListPage />} />
