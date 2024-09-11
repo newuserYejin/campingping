@@ -3,13 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { authenticateAction } from "../../redux/actions/authencticateAction";
 
-import {
-  Container,
-  FormControlLabel,
-  Checkbox,
-  TextField,
-  Button,
-} from "@mui/material";
+import { Container, FormControlLabel, Checkbox, TextField, Button } from "@mui/material";
 import MainTitle from "../../components/Title/MainTitle";
 import "./LoginPage.style.css";
 
@@ -62,15 +56,8 @@ const LoginPage = () => {
               id="비밀번호"
               autoComplete="current-password"
             />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="자동 로그인"
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              className="button-login">
+            <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="자동 로그인" />
+            <Button type="submit" fullWidth variant="contained" className="button-login">
               로그인
             </Button>
           </form>
