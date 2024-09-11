@@ -28,6 +28,7 @@ const SignUpPage = () => {
     level: "",
     contact: "",
     profileImg: "",
+    campingName: "",
   });
 
   const navigate = useNavigate();
@@ -176,14 +177,6 @@ const SignUpPage = () => {
           error={!!errors.password}
           helperText={errors.password}
         />
-        <FormControl fullWidth margin="normal" required error={!!errors.level}>
-          <InputLabel>회원레벨</InputLabel>
-          <Select name="level" value={formData.level} onChange={handleChange}>
-            <MenuItem value="admin">관리자</MenuItem>
-            <MenuItem value="user">일반 사용자</MenuItem>
-          </Select>
-          {errors.level && <FormHelperText>{errors.level}</FormHelperText>}
-        </FormControl>
         <TextField
           fullWidth
           required
@@ -196,7 +189,38 @@ const SignUpPage = () => {
           error={!!errors.contact}
           helperText={errors.contact}
         />
+        {/* 파일선택 */}
         <input type="file" accept="image/*" onChange={handleFileChange} />
+
+        <FormControl fullWidth margin="normal" required error={!!errors.level}>
+          <InputLabel>회원레벨</InputLabel>
+          <Select
+            name="level"
+            value={formData.level ? formData.level : "customer"}
+            onChange={handleChange}
+          >
+            <MenuItem value="unsigned">사장님</MenuItem>
+            <MenuItem value="customer" selected="true">
+              일반 사용자
+            </MenuItem>
+          </Select>
+          {errors.level && <FormHelperText>{errors.level}</FormHelperText>}
+        </FormControl>
+
+        <TextField
+          fullWidth
+          required
+          margin="normal"
+          label="캠핑장 이름"
+          name="campingName"
+          placeholder="캠핑장 명을 입력하세요"
+          value={formData.campingName}
+          onChange={handleChange}
+          // error={!!errors.nickname}
+          // helperText={errors.nickname}
+          // inputProps={{ maxLength: 8 }}
+        />
+
         <Button type="submit" variant="contained" color="primary" fullWidth>
           가입하기
         </Button>
