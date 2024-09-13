@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   TextField,
@@ -9,7 +9,11 @@ import {
   MenuItem,
   Container,
   FormHelperText,
+  List,
+  ListItem,
+  ListItemText,
 } from "@mui/material";
+
 import MainTitle from "../../components/Title/MainTitle";
 import {
   validateEmail,
@@ -19,6 +23,7 @@ import {
 } from "../../utils/common";
 import { useNavigate } from "react-router-dom";
 import api from "../../utils/api";
+import { useSearchCampingName } from "../../hooks/useSearchOwnerCamping";
 
 const SignUpPage = () => {
   const [formData, setFormData] = useState({
@@ -28,10 +33,12 @@ const SignUpPage = () => {
     level: "",
     contact: "",
     profileImg: "",
+    campingName: "",
   });
 
   const navigate = useNavigate();
 
+  const [searchCampingName, setSearchCampingName] = useState("");
   const [errors, setErrors] = useState({});
 
   const handleChange = (event) => {
@@ -126,6 +133,25 @@ const SignUpPage = () => {
     }
   };
 
+  const {
+    data: searchResultData,
+    isLoading,
+    isError,
+    error,
+  } = useSearchCampingName(searchCampingName.trim());
+
+  useEffect(() => {
+    if (searchCampingName) {
+      console.log("검색 결과 data", searchResultData);
+    } else if (searchCampingName == "" || searchCampingName == " ") {
+    }
+  }, [searchCampingName]);
+
+  // // 검색 결과 리스트
+  // const Demo = styled("div")(({ theme }) => ({
+  //   backgroundColor: theme.palette.background.paper,
+  // }));
+
   return (
     <Container
       sx={{
@@ -176,14 +202,6 @@ const SignUpPage = () => {
           error={!!errors.password}
           helperText={errors.password}
         />
-        <FormControl fullWidth margin="normal" required error={!!errors.level}>
-          <InputLabel>회원레벨</InputLabel>
-          <Select name="level" value={formData.level} onChange={handleChange}>
-            <MenuItem value="admin">관리자</MenuItem>
-            <MenuItem value="user">일반 사용자</MenuItem>
-          </Select>
-          {errors.level && <FormHelperText>{errors.level}</FormHelperText>}
-        </FormControl>
         <TextField
           fullWidth
           required
@@ -196,7 +214,60 @@ const SignUpPage = () => {
           error={!!errors.contact}
           helperText={errors.contact}
         />
+        {/* 파일선택 */}
         <input type="file" accept="image/*" onChange={handleFileChange} />
+
+        <FormControl fullWidth margin="normal" required error={!!errors.level}>
+          <InputLabel>회원레벨</InputLabel>
+          <Select
+            name="level"
+            value={formData.level ? formData.level : "customer"}
+            onChange={handleChange}
+          >
+            <MenuItem value="unsigned">사장님</MenuItem>
+            <MenuItem value="customer" selected="true">
+              일반 사용자
+            </MenuItem>
+          </Select>
+          {errors.level && <FormHelperText>{errors.level}</FormHelperText>}
+        </FormControl>
+
+        <div
+          style={{ display: formData.level == "customer" ? "none" : "block" }}
+        >
+          <TextField
+            fullWidth
+            required
+            margin="normal"
+            label="캠핑장 이름"
+            name="campingName"
+            placeholder="캠핑장 명을 입력하세요"
+            value={formData.campingName}
+            onChange={(event) => {
+              setSearchCampingName(event.target.value);
+              handleChange(event);
+            }}
+            // error={!!errors.nickname}
+            // helperText={errors.nickname}
+            // inputProps={{ maxLength: 8 }}
+          />
+
+          <List
+            style={{
+              display: formData.campingName.trim() != "" ? "block" : "none",
+            }}
+          >
+            {searchResultData?.item?.map((item) => (
+              <ListItem id={item.contentId}>
+                <ListItemText
+                  primary={item.facltNm}
+                  secondary={searchResultData ? item.addr1 : null}
+                />
+              </ListItem>
+            ))}
+          </List>
+        </div>
+
         <Button type="submit" variant="contained" color="primary" fullWidth>
           가입하기
         </Button>
