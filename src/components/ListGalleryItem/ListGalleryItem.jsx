@@ -23,7 +23,7 @@ const ListGalleryItem = ({ isConnect = false, isLink = false, item }) => {
               src={
                 item.firstimage ||
                 item.firstimage2 ||
-                "../../../src/assets/howAboutCampingLogo.png"
+                "../../../src/assets/campingpingLogo.png"
               }
               alt={item.title + "사진"}
             />
