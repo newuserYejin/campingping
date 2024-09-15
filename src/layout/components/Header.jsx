@@ -1,6 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import logo from "../../assets/howAboutCampingLogo.png";
+import logo from "../../assets/campingpingLogo.png";
+import logo2 from "../../assets/campingpingLogo_grayscale.png";
+import memberIcon from "../../assets/icon/ico_member.png";
+import lockIcon from "../../assets/icon/ico_lock.png";
+import unlockIcon from "../../assets/icon/ico_unlock.png";
 import styled from "styled-components";
 import { StylesProvider } from "@material-ui/core/styles";
 import {
@@ -22,9 +26,36 @@ import { useUser } from "../../hooks/useUser";
 
 const drawerWidth = 260;
 const navItems = [
-  ["캠핑장 찾기🔍", "/search?q=&province=&city=&theme=&selectedDetailTag="],
-  ["주변 구경거리✨", "/event"],
-  ["테마별 우수 캠핑장⛺", "/bestCamp"],
+  {
+    id: 'gnb1',
+    kor: "검색하기",
+    eng: "Campsite",
+    url:"/search?q=&province=&city=&theme=&selectedDetailTag="
+  },
+  {
+    id: 'gnb2',
+    kor: "지역행사",
+    eng: "Local Event",
+    url:"/event"
+  },
+  {
+    id: 'gnb3',
+    kor: "중고장터",
+    eng: "Market",
+    url:"/community/market"
+  },
+  {
+    id: 'gnb4',
+    kor: "캠핑요리",
+    eng: "Food",
+    url:"/community/food"
+  },
+  {
+    id: 'gnb5',
+    kor: "추천용품",
+    eng: "Recommend",
+    url:"/community/recommend"
+  }
 ];
 
 const GnbItemMobile = styled.li`
@@ -44,11 +75,16 @@ const GnbItemMobile = styled.li`
   }
 `;
 
+const GnbMobileText = styled.span`
+display:block;`
+
 const GnbItemPC = styled.li`
   list-style: none;
   a {
-    padding: 5px 10px;
+    display:block;
+    min-width:90px;
     font-family: "Spoqa Han Sans Neo", sans-serif;
+    text-align:center;
     color: var(--main-font-color);
     text-decoration: none;
     &:hover {
@@ -57,31 +93,44 @@ const GnbItemPC = styled.li`
   }
 `;
 
-const LoginPc = styled.div`
-  position: absolute;
-  right: 0px;
-  top: 1em;
-  display: flex;
-  align-items: center;
-
-  a,
-  button {
-    display: inline-block;
-    padding: 0 16px;
-    height: 36px;
-    line-height: 36px;
-    font-family: "Spoqa Han Sans Neo", sans-serif;
-    font-size: 14px;
-    color: #fff;
-    text-decoration: none;
-    background: var(--key-color);
-    border: 0px;
-    border-radius: 4px;
-    &:hover {
-      background: var(--button-hover-color);
-    }
-    margin-left: 5px;
+const headerButton = styled.a`
+  display: inline-block;
+  padding: 0 0 0 16px;
+  height: 15px;
+  font-size:12px;
+  line-height: 15px;
+  font-family: "Spoqa Han Sans Neo", sans-serif;
+  font-size: 14px;
+  color: var(--color-gray);
+  text-decoration: none;
+  cursor:pointer;
+  &:hover {
+    color: var(--button-hover-color);
   }
+`
+const LoginButton = styled(headerButton)`
+  background:url(${memberIcon}) 0% 40% no-repeat;
+`
+
+const SignUpButton = styled(headerButton)`
+  background:url(${lockIcon}) 0% 40% no-repeat;
+`
+const UserName = styled(headerButton)`
+  color: var(--main-font-color);
+  em{
+    font-style:normal;
+    color: var(--key-color);
+  }
+`
+
+const LogOutButton = styled(headerButton)`
+  background:url(${unlockIcon}) 0% 40% no-repeat;
+`
+
+const LoginPc = styled.div`
+  display: flex;
+  gap:35px;
+  align-items: center;
   .nickname {
     color: #3586ff;
   }
@@ -92,25 +141,15 @@ const LoginPc = styled.div`
 `;
 
 const LoginMo = styled.div`
+ display: flex;
+  gap:35px;
+  align-items: center;
+  justify-content: center;
   .nickname {
     color: #3586ff;
   }
   padding: 16px;
   text-align: center;
-  a,
-  button {
-    display: block;
-    width: 100%;
-    height: 36px;
-    line-height: 36px;
-    font-family: "Spoqa Han Sans Neo", sans-serif;
-    font-size: 14px;
-    color: #fff;
-    text-decoration: none;
-    background: var(--key-color);
-    border: 0px;
-    border-radius: 4px;
-  }
 `;
 
 const Header = (props) => {
@@ -120,6 +159,8 @@ const Header = (props) => {
   const navigate = useNavigate();
 
   const { data: user, isLoading, isError, refetch } = useUser();
+  const { window } = props;
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   const logout = async () => {
     localStorage.removeItem("token");
@@ -135,10 +176,18 @@ const Header = (props) => {
     refetch();
   }, [user, token]);
 
-  const { window } = props;
-  const [mobileOpen, setMobileOpen] = React.useState(false);
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
+  };
+
+  const [gnbItemText, setGnbItemText] = useState({});
+
+  const onGnbMouseEnter = (id) => {
+    setGnbItemText(prevState => ({ ...prevState, [id]: true }));
+  };
+
+  const onGnbMouseLeave = (id) => {
+    setGnbItemText(prevState => ({ ...prevState, [id]: false }));
   };
 
   const drawer = (
@@ -160,7 +209,7 @@ const Header = (props) => {
               filter: "brightness(0%) contrast(100%) invert(1)",
             }}
             alt="캠핑 어때"
-            src={logo}
+            src={logo2}
           />
         </Link>
       </Typography>
@@ -168,18 +217,23 @@ const Header = (props) => {
         {navItems.map((item) => (
           <StylesProvider key={item.id} injectFirst>
             <GnbItemMobile>
-              <Link to={item[1]}>{item[0]}</Link>
+              <Link to={item.url}>
+                <GnbMobileText>{item.kor}</GnbMobileText>
+              </Link>
             </GnbItemMobile>
           </StylesProvider>
         ))}
       </List>
       <LoginMo>
         {!user ? (
-          <Link to="/login">로그인</Link>
+          <>
+            <LoginButton to="/login">로그인</LoginButton>
+            <SignUpButton to="/signup">회원가입</SignUpButton>
+          </>
         ) : (
           <>
-            <div className="nickname">{user?.nickname}님</div>
-            <button onClick={logout}>로그아웃</button>
+            <UserName className="nickname"><em>{user?.nickname}</em>님</UserName>
+            <LogOutButton onClick={logout}>로그아웃</LogOutButton>
           </>
         )}
       </LoginMo>
@@ -197,7 +251,7 @@ const Header = (props) => {
         sx={{
           height: {
             xs: "70px",
-            md: "135px",
+            md: "100px",
           },
           justifyContent: {
             xs: "center",
@@ -206,13 +260,16 @@ const Header = (props) => {
           boxShadow: "0 5px 20px rgba(0,0,0,0.1)",
         }}
       >
-        <Container maxWidth="xl">
+        <Container 
+          maxWidth="xl"
+        >
           <Toolbar
             sx={{
               position: "relative",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
+              width:'100%',
+              justifyContent: { xs: "center", md: "space-between" },
+              padding:'0 !important',
+              alignItems: 'flex-end'
             }}
           >
             <IconButton
@@ -233,55 +290,66 @@ const Header = (props) => {
             >
               <FontAwesomeIcon icon={faBars} />
             </IconButton>
-            <Typography component="h1">
-              <Link to="/">
-                <Box
-                  component="img"
-                  sx={{
-                    display: "block",
-                    width: {
-                      xs: "90px",
-                      md: "120px",
-                    },
-                    height: "auto",
-                    padding: {
-                      xs: "0",
-                      md: "15px 0 5px",
-                    },
-                  }}
-                  alt="캠핑 어때"
-                  src={logo}
-                />
-              </Link>
-            </Typography>
-
+            
+            <Box
+              component="div"
+              sx={{
+                display:'flex',
+                alignItems: 'flex-end'
+              }}
+            >
+              <Typography component="h1">
+                <Link to="/">
+                  <Box
+                    component="img"
+                    sx={{
+                      display: "block",
+                      width: {
+                        xs: "90px",
+                        md: "110px",
+                      },
+                      height: "auto",
+                      padding:"0"
+                    }}
+                    alt="캠핑 어때"
+                    src={logo}
+                  />
+                </Link>
+              </Typography>
+              <Box
+                component="ul"
+                sx={{
+                  display: { xs: "none", md: "flex" },
+                  gap: "20px",
+                  margin: "0 0 0 70px",
+                  padding: "0",
+                }}
+              >
+                {navItems.map((item) => (
+                  <StylesProvider key={`navItem${item.id}`} injectFirst>
+                    <GnbItemPC key={item}>
+                      <Link to={item.url} onMouseEnter={() => onGnbMouseEnter(item.id)} onMouseLeave={() => onGnbMouseLeave(item.id)}>
+                      {gnbItemText[item.id] ? <GnbMobileText>{item.eng}</GnbMobileText> : <GnbMobileText>{item.kor}</GnbMobileText>}
+                      </Link>
+                    </GnbItemPC>
+                  </StylesProvider>
+                ))}
+              </Box>
+              </Box>
+                        
             <LoginPc>
               {!user ? (
-                <Link to="/login">로그인</Link>
+                <>
+                  <LoginButton to="/login">로그인</LoginButton>
+                  <SignUpButton to="/signup">회원가입</SignUpButton>
+                </>
               ) : (
                 <>
-                  <div className="nickname">{user?.nickname}님</div>
-                  <button onClick={logout}>로그아웃</button>
+                  <UserName className="nickname"><em>{user?.nickname}</em>님 안녕하세요!</UserName>
+                  <LogOutButton onClick={logout}>로그아웃</LogOutButton>
                 </>
               )}
             </LoginPc>
-            <Box
-              component="ul"
-              sx={{
-                display: { xs: "none", md: "flex" },
-                gap: "20px",
-                margin: "15px 0 10px",
-                padding: "0",
-              }}
-            >
-              {navItems.map((item) => (
-                <StylesProvider key={`navItem${item.id}`} injectFirst>
-                  <GnbItemPC key={item}>
-                    <Link to={item[1]}>{item[0]}</Link>
-                  </GnbItemPC>
-                </StylesProvider>
-              ))}
-            </Box>
           </Toolbar>
         </Container>
       </AppBar>
