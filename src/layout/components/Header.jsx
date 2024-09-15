@@ -40,7 +40,7 @@ const navItems = [
   },
   {
     id: 'gnb3',
-    kor: "지역행사",
+    kor: "중고장터",
     eng: "Market",
     url:"/community/market"
   },
