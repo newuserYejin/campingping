@@ -7,10 +7,11 @@ import BestCamp from "./components/BestCamp/BestCamp";
 import Widget from "./components/Widget/Widget";
 
 const Homepage = () => {
+  
   return (
     <section>
       <TopBanner />
-      <MainSearchForm />
+      <MainSearchForm isMainPage={true} />
       <TagSearch />
       <Container maxWidth="xl">
         <BestCamp />
