@@ -118,11 +118,11 @@ const TagSearch = () => {
         <div className="btnBox">
         <Button onClick={resetTags} className="btn_refresh">
             <FontAwesomeIcon icon={faRotateLeft} />
-            <span>초기화</span>
+            <span>reset</span>
           </Button>
           <Button className="btn_tagSearch" type="submit">
             <FontAwesomeIcon icon={faMagnifyingGlass} />
-            <span>검색</span>
+            <span>search</span>
           </Button>
         </div>
       </Container>
