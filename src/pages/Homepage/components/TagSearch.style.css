@@ -7,57 +7,52 @@
   margin-top: -30px;
   margin-bottom:4rem;
   background: #f5f5f5;
-
   ul {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 8px;
-    justify-content: flex-start;
-    gap: 8px;
-    justify-content: flex-start;
+    gap: 5px;
     margin: 0;
     padding: 0;
-
     li {
       display: flex;
       list-style: none;
       margin: 0;
       padding: 0;
-      border-radius: 5px;
-      border: 1px solid #d1d1d1;
-      box-sizing: border-box;
-
       input[type='checkbox'] {
-        /* position:absolute; */
-        /* top:0; */
-        /* left:0; */
         width: 0;
         height: 0;
         opacity: 0.5;
-
         &:checked+label {
-          background: var(--color-darkGray);
-          color: #fff;
-          border-radius: 5px;
+          font-weight:500;
+          color:var(--key-color);
         }
-
-        &:hover+label {
-          background: silver;
+        &:checked+label img{
+          filter:grayscale(0);
+        }
+        &:hover+label img{
+          filter:grayscale(0);
         }
       }
-
       label {
         position: relative;
         display: flex;
-        padding: 5px 15px;
+        flex-direction: column;
+        align-items: center;
+        min-width:90px;
+        padding: 5px 0;
         cursor: pointer;
-        transition: all linear 200ms;
-
-        &::before {
-          content: "#";
-          display: block;
-          margin-right: 3px;
+        img{
+          display:block;
+          width:50px;
+          height:auto;
+          filter:grayscale(1);
+          transition: all linear 200ms;
+        }
+        span{
+          display:block;
+          font-size:13px;
+          margin-top:8px;
         }
       }
     }
@@ -128,11 +123,11 @@
   }
 
   @media screen and (max-width:600px) {
-    padding: 1rem 0 2.5rem;
+    padding: 0 0 2rem 0;
     margin-top: 0;
 
     .mobileMoreDiv {
-      max-height: 110px;
+      max-height: 95px;
       overflow: hidden;
       transition: max-height linear 400ms;
 
@@ -155,6 +150,9 @@
         font-size: 0.75rem;
         padding-left: 5px;
       }
+    }
+    .btnBox {
+      margin-top: 0.5rem;
     }
   }
 }

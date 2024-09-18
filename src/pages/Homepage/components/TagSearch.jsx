@@ -14,6 +14,18 @@ import { useNavigate } from "react-router-dom";
 import MainTitle from "../../../components/Title/MainTitle";
 import { useEffect } from "react";
 
+import imgFilterPet from '../../../assets/img_filter_pet.png';
+import imgFilterBeach from '../../../assets/img_filter_beach.png';
+import imgFilterRoad from '../../../assets/img_filter_road.png';
+import imgFilterPool from '../../../assets/img_filter_pool.png';
+import imgFilterCampingCar from '../../../assets/img_filter_campingCar.png';
+import imgFilterFamily from '../../../assets/img_filter_family.png';
+import imgFilterBicycle from '../../../assets/img_filter_bicycle.png';
+import imgFilterValley from '../../../assets/img_filter_valley.png';
+import imgFilterKids from '../../../assets/img_filter_kids.png';
+import imgFilterExtreme from '../../../assets/img_filter_extreme.png';
+import imgFilterCar from '../../../assets/img_filter_car.png';
+
 const TagSearch = () => {
   //searchTag의 id와 selectedTag의
 
@@ -47,33 +59,54 @@ const TagSearch = () => {
     })
   }
 
+  const images = {
+    img_filter_pet: imgFilterPet,
+    img_filter_beach: imgFilterBeach,
+    img_filter_road: imgFilterRoad,
+    img_filter_pool: imgFilterPool,
+    img_filter_campingCar: imgFilterCampingCar,
+    img_filter_family: imgFilterFamily,
+    img_filter_bicycle: imgFilterBicycle,
+    img_filter_valley: imgFilterValley,
+    img_filter_kids: imgFilterKids,
+    img_filter_extreme: imgFilterExtreme,
+    img_filter_car: imgFilterCar,
+  };
 
   return (
     <Box component="form" className="TagSearch" onSubmit={searchByTag}>
       <Container maxWidth="xl">
-        <MainTitle title="태그로 찾는 나만의 캠핑장" />
+        {/* <MainTitle title="태그로 찾는 나만의 캠핑장" /> */}
         <div className={isTagOpen ? "mobileMoreDiv open" : "mobileMoreDiv"}>
           <ul>
-            {search_tags.map((tag) => (
-              <li key={tag.id}>
-                <input
-                  type="checkbox"
-                  name="search_tags"
-                  id={tag.id}
-                  onClick={() => {
-                    setSelectedTag((prevTags) => {
-                      const index = prevTags.indexOf(tag.text);
-                      if (index > -1) {
-                        return prevTags.filter((_, i) => i !== index);
-                      } else {
-                        return [...prevTags, tag.text];
-                      }
-                    });
-                  }}
-                />
-                <label htmlFor={tag.id}>{tag.text}</label>
-              </li>
-            ))}
+            {search_tags.map((tag) => {
+              const imageUrl = images[tag.image];
+              return (
+                <li key={tag.id}>
+                  <input
+                    type="checkbox"
+                    name="search_tags"
+                    id={tag.id}
+                    onClick={() => {
+                      setSelectedTag((prevTags) => {
+                        const index = prevTags.indexOf(tag.text);
+                        if (index > -1) {
+                          return prevTags.filter((_, i) => i !== index);
+                        } else {
+                          return [...prevTags, tag.text];
+                        }
+                      });
+                    }}
+                  />
+                  <label htmlFor={tag.id}>
+                    <img 
+                      src={imageUrl} 
+                      alt={tag.text}  
+                    />
+                    <span>{tag.text}</span>
+                  </label>
+                </li>
+              )})}
           </ul>
         </div>
         <p className="btn_more" onClick={() => tagToggle(isTagOpen)}>
