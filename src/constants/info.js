@@ -224,9 +224,59 @@ export const search_detail_filters = [
 
 export const search_tags = [
   {
+    id: "search_tag24",
+    text: "가족과 함께",
+    image:'img_filter_family',
+  },
+  {
+    id: "search_tag32",
+    text: "아이들 놀기 좋은",
+    image:'img_filter_kids',
+  },
+  {
     id: "search_tag1",
     text: "반려견 동반",
     image:'img_filter_pet',
+  },
+  {
+    id: "search_tag12",
+    text: "캠핑카",
+    image:'img_filter_campingCar',
+  },
+  {
+    id: "search_tag10",
+    text: "수영장 있는",
+    image:'img_filter_pool',
+  },
+  {
+    id: "search_tag31",
+    text: "계곡 옆",
+    image:'img_filter_valley',
+  },
+  {
+    id: "search_tag6",
+    text: "바다가 보이는",
+    image:'img_filter_beach',
+  },
+  {
+    id: "search_tag8",
+    text: "둘레길 근처",
+    image:'img_filter_road',
+  },
+  {
+    id: "search_tag25",
+    text: "자전거 타기 좋은",
+    image:'img_filter_bicycle',
+  },
+  {
+    id: "search_tag33",
+    text: "익스트림",
+    image:'img_filter_extreme',
+  },
+  {
+    id: "search_tag27",
+    text: "차대기 편한",
+    image:'img_filter_car',
   },
   // {
   //   id: "search_tag2",
@@ -240,38 +290,18 @@ export const search_tags = [
   //   id: "search_tag4",
   //   text: "문화유적",
   // },
-  {
-    id: "search_tag6",
-    text: "바다가 보이는",
-    image:'img_filter_beach',
-  },
   // {
   //   id: "search_tag7",
   //   text: "재미있는",
   // },
-  {
-    id: "search_tag8",
-    text: "둘레길 근처",
-    image:'img_filter_road',
-  },
   // {
   //   id: "search_tag9",
   //   text: "물맑은",
   // },
-  {
-    id: "search_tag10",
-    text: "수영장 있는",
-    image:'img_filter_pool',
-  },
   // {
   //   id: "search_tag11",
   //   text: "온수 잘 나오는",
   // },
-  {
-    id: "search_tag12",
-    text: "캠핑카",
-    image:'img_filter_campingCar',
-  },
   // {
   //   id: "search_tag13",
   //   text: "축제",
@@ -292,16 +322,6 @@ export const search_tags = [
   //   id: "search_tag23",
   //   text: "그늘이 많은",
   // },
-  {
-    id: "search_tag24",
-    text: "가족과 함께",
-    image:'img_filter_family',
-  },
-  {
-    id: "search_tag25",
-    text: "자전거 타기 좋은",
-    image:'img_filter_bicycle',
-  },
   // {
   //   id: "search_tag26",
   //   text: "봄",
@@ -318,24 +338,4 @@ export const search_tags = [
   //   id: "search_tag29",
   //   text: "겨울",
   // },
-  {
-    id: "search_tag31",
-    text: "계곡 옆",
-    image:'img_filter_valley',
-  },
-  {
-    id: "search_tag32",
-    text: "아이들 놀기 좋은",
-    image:'img_filter_kids',
-  },
-  {
-    id: "search_tag33",
-    text: "익스트림",
-    image:'img_filter_extreme',
-  },
-  {
-    id: "search_tag27",
-    text: "차대기 편한",
-    image:'img_filter_car',
-  },
 ];
