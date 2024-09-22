@@ -162,7 +162,7 @@
     margin-top: 0;
 
     .mobileMoreDiv {
-      max-height: 95px;
+      max-height: 110px;
       overflow: hidden;
       transition: max-height linear 400ms;
 
