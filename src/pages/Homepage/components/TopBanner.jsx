@@ -206,15 +206,8 @@ const TopBanner = () => {
     height:auto;
     filter: blur(40px);
   `
-
-
-
   const { data, isLoading, isError, error } = useBestCampListQuery();
-
   const slickRef = useRef(null);
-
-  const previous = useCallback(() => slickRef.current.slickPrev(), []);
-  const next = useCallback(() => slickRef.current.slickNext(), []);
 
   if (isLoading) {
     return (
@@ -244,8 +237,8 @@ const TopBanner = () => {
     slidesToShow: 1,
     slidesToScroll: 1,
     arrow: false,
-    // autoplay: true,
-    autoplaySpeed: 4000,
+    autoplay: true,
+    autoplaySpeed: 5000,
   };
 
   console.log(BestCampList)
