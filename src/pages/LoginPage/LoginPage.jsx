@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { authenticateAction } from "../../redux/actions/authencticateAction";
 import api from "../../utils/api.js";
@@ -113,10 +113,13 @@ const LoginPage = () => {
               id="비밀번호"
               autoComplete="current-password"
             />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="자동 로그인"
-            />
+            <div className="BeforeLogin">
+              <FormControlLabel
+                control={<Checkbox value="remember" color="primary" />}
+                label="자동 로그인"
+              />
+              <Link to={"/signup"}>회원가입 -&gt;</Link>
+            </div>
             <Button
               type="submit"
               fullWidth

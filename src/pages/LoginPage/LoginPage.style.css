@@ -1,7 +1,7 @@
 .login-form-wrap {
   max-width: 600px;
   margin: auto;
-  
+
 }
 
 .login-form-wrap .button-login {
@@ -11,11 +11,17 @@
   background: var(--key-color);
 }
 
-@media screen and (max-width: 900px) {
+.BeforeLogin {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
-  
+  a {
+    color: var(--key-color);
+    text-decoration: none;
+  }
 }
 
-@media screen and (max-width: 600px) {
- 
-}
+@media screen and (max-width: 900px) {}
+
+@media screen and (max-width: 600px) {}

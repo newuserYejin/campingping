@@ -23,11 +23,11 @@ const AppLayout = () => {
         sx={{
           minHeight: {
             xs: "calc(100vh - 70px)",
-            md: "calc(100vh - 135px)",
+            md: "calc(100vh - 100px)",
           },
           paddingTop: {
             xs: "70px",
-            md: "135px",
+            md: "100px",
           },
           paddingBottom: {
             xs: "3rem",
