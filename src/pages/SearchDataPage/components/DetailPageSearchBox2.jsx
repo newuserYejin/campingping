@@ -8,7 +8,7 @@ const DetailPageSearchBox2 = () => {
       <div className="titleBox">
         <h3>캠핑장 찾기</h3>
       </div>
-      <MainSearchForm />
+      <MainSearchForm isMainPage={false}/>
     </section>
   )
 }

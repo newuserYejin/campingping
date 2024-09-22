@@ -1,6 +1,5 @@
 .list-gallery-item {
-  border-radius: 1em;
-  box-shadow: 4px 4px 12px 3px #dddddd7a;
+  border: solid 1.5px #d6d6d6
 }
 
 .gallery-item-top {
@@ -13,7 +12,6 @@
 }
 
 .gallery-item-thumb {
-  border-radius: 1em;
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -30,7 +28,7 @@
 }
 
 .gallery-item-info {
-  padding: 1.5em 1.5em 0 1.5em;
+  padding: 1.5em 1.2em 0 1.2em;
 }
 
 .gallery-item-info .flag {
@@ -53,6 +51,19 @@
 .gallery-item-info ul {
   padding: 0px;
   margin: 0px;
+
+  .linkBtn {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+
+    a {
+      color: black;
+      text-decoration: none;
+      font-size: 0.8em;
+    }
+  }
 }
 
 .gallery-item-info li {
@@ -76,15 +87,14 @@
   color: #000;
   font-weight: 500;
   text-decoration: none;
-  border-radius: 2em;
 }
 
 .gallery-item-connect .connect-map {
   color: #fff;
-  background: var(--key-color);
+  background: #3586ff;
 }
 
 .gallery-item-connect .connect-call {
-  color: var(--key-color);
-  border: 1px solid var(--key-color);
+  color: #3586ff;
+  border: 1px solid #3586ff;
 }

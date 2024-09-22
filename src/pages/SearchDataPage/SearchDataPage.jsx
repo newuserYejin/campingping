@@ -7,7 +7,7 @@ import "./SearchDataPage.style.css";
 import { faCloudDownloadAlt } from "@fortawesome/free-solid-svg-icons";
 import ListCard from "../CampingListPage/components/ListCard/ListCard";
 import { Container } from "react-bootstrap";
-import { Pagination } from "@mui/material";
+import { Pagination, Box } from "@mui/material";
 import DetailPageSearchBox from "./components/DetailPageSearchBox";
 import { CircularProgress } from "@mui/material";
 import TitleMain from "../../components/Title/MainTitle";
@@ -276,6 +276,7 @@ const SearchDataPage = () => {
     title = "전체 캠핑장";
   }
 
+
   return (
     <>
       {/* <TopBanner />
@@ -296,7 +297,23 @@ const SearchDataPage = () => {
             </div>
           </div>
 
-          {filteredData.map((searchData, index) => (
+          {filteredData.length <= 0 && 
+            <Box sx={{ 
+              display:'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              minHeight:{
+                xs:'300px',
+                sm:'500px',
+              },
+              textAlign:'center'
+
+            }}>
+              <p>{keyword}로 검색된 결과가 없습니다</p>
+            </Box>
+          }
+
+          {filteredData && filteredData.map((searchData, index) => (
             <ListCard
               data={searchData}
               facilityData={facilityData}
@@ -305,19 +322,21 @@ const SearchDataPage = () => {
           ))}
         </div>
       </Container>
-      <Pagination
-        count={12}
-        page={page}
-        defaultPage={1}
-        siblingCount={0}
-        size="large"
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          marginTop: "2em",
-        }}
-        onChange={changePage}
-      />
+      {filteredData && filteredData.length !== 0 && 
+        <Pagination
+          count={12}
+          page={page}
+          defaultPage={1}
+          siblingCount={0}
+          size="large"
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            marginTop: "2em",
+          }}
+          onChange={changePage}
+        />
+      }
     </>
   );
 };
