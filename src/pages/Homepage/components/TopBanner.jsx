@@ -205,6 +205,9 @@ const TopBanner = () => {
     width:100%;
     height:auto;
     filter: blur(40px);
+    @media (max-width: 1488px) {
+      display:none !important;
+    }
   `
   const { data, isLoading, isError, error } = useBestCampListQuery();
   const slickRef = useRef(null);
