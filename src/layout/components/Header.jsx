@@ -76,7 +76,7 @@ const GnbItemMobile = styled.li`
 `;
 
 const GnbMobileText = styled.span`
-display:block;`
+  display:block;`
 
 const GnbItemPC = styled.li`
   list-style: none;
@@ -84,11 +84,16 @@ const GnbItemPC = styled.li`
     display:block;
     min-width:90px;
     font-family: "Spoqa Han Sans Neo", sans-serif;
+    font-size:16px;
     text-align:center;
     color: var(--main-font-color);
     text-decoration: none;
     &:hover {
       color: var(--key-color);
+    }
+    @media (max-width: 1200px) {
+
+      font-size:15px
     }
   }
 `;
@@ -97,10 +102,9 @@ const headerButton = styled.a`
   display: inline-block;
   padding: 0 0 0 16px;
   height: 15px;
-  font-size:12px;
+  font-size:13px;
   line-height: 15px;
   font-family: "Spoqa Han Sans Neo", sans-serif;
-  font-size: 14px;
   color: var(--color-gray);
   text-decoration: none;
   cursor:pointer;
@@ -110,10 +114,12 @@ const headerButton = styled.a`
 `
 const LoginButton = styled(headerButton)`
   background:url(${memberIcon}) 0% 40% no-repeat;
+  background-size:auto 13px;
 `
 
 const SignUpButton = styled(headerButton)`
   background:url(${lockIcon}) 0% 40% no-repeat;
+  background-size:auto 13px;
 `
 const UserName = styled(headerButton)`
   color: var(--main-font-color);
@@ -125,6 +131,7 @@ const UserName = styled(headerButton)`
 
 const LogOutButton = styled(headerButton)`
   background:url(${unlockIcon}) 0% 40% no-repeat;
+  background-size:auto 13px;
 `
 
 const LoginPc = styled.div`
@@ -134,14 +141,16 @@ const LoginPc = styled.div`
   .nickname {
     color: #3586ff;
   }
-
+  @media (max-width: 1200px) {
+    gap:30px;
+  }
   @media (max-width: 900px) {
     display: none;
   }
 `;
 
 const LoginMo = styled.div`
- display: flex;
+  display: flex;
   gap:35px;
   align-items: center;
   justify-content: center;
@@ -208,7 +217,7 @@ const Header = (props) => {
               height: "auto",
               filter: "brightness(0%) contrast(100%) invert(1)",
             }}
-            alt="캠핑 어때"
+            alt="campingping"
             src={logo2}
           />
         </Link>
@@ -232,7 +241,7 @@ const Header = (props) => {
           </>
         ) : (
           <>
-            <UserName className="nickname"><em>{user?.nickname}</em>님</UserName>
+            <UserName><em>{user?.nickname}</em>님</UserName>
             <LogOutButton onClick={logout}>로그아웃</LogOutButton>
           </>
         )}
@@ -305,8 +314,9 @@ const Header = (props) => {
                     sx={{
                       display: "block",
                       width: {
+                        xl: "110px",
+                        md: "100px",
                         xs: "90px",
-                        md: "110px",
                       },
                       height: "auto",
                       padding:"0"
@@ -320,23 +330,32 @@ const Header = (props) => {
                 component="ul"
                 sx={{
                   display: { xs: "none", md: "flex" },
-                  gap: "20px",
-                  margin: "0 0 0 70px",
+                  gap:{
+                    xl:"20px",
+                    md:"15px",
+                  },
+                  margin:{
+                    xl: "0 0 0 70px",
+                    md: "0 0 0 50px"
+                  },
                   padding: "0",
                 }}
               >
                 {navItems.map((item) => (
                   <StylesProvider key={`navItem${item.id}`} injectFirst>
                     <GnbItemPC key={item}>
-                      <Link to={item.url} onMouseEnter={() => onGnbMouseEnter(item.id)} onMouseLeave={() => onGnbMouseLeave(item.id)}>
-                      {gnbItemText[item.id] ? <GnbMobileText>{item.eng}</GnbMobileText> : <GnbMobileText>{item.kor}</GnbMobileText>}
+                      <Link 
+                        to={item.url} 
+                        onMouseEnter={() => onGnbMouseEnter(item.id)}
+                        onMouseLeave={() => onGnbMouseLeave(item.id)}
+                      >
+                        {gnbItemText[item.id] ? <GnbMobileText>{item.eng}</GnbMobileText> : <GnbMobileText>{item.kor}</GnbMobileText>}
                       </Link>
                     </GnbItemPC>
                   </StylesProvider>
                 ))}
               </Box>
-              </Box>
-                        
+            </Box>
             <LoginPc>
               {!user ? (
                 <>
@@ -345,7 +364,7 @@ const Header = (props) => {
                 </>
               ) : (
                 <>
-                  <UserName className="nickname"><em>{user?.nickname}</em>님 안녕하세요!</UserName>
+                  <UserName><em>{user?.nickname}</em>님 안녕하세요!</UserName>
                   <LogOutButton onClick={logout}>로그아웃</LogOutButton>
                 </>
               )}
