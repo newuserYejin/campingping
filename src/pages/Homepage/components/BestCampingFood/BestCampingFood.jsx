@@ -13,11 +13,12 @@ const arrowButtonWidth = '70px';
 const CampingFood = styled.section`
   position: relative;
   background: #f5f5f5;
-  margin-bottom: 5rem;
+
+  margin-top: 3rem;
   @media (max-width: 900px) {
     aspect-ratio: 100/48;
     overflow: hidden;
-    margin-bottom: 3rem;
+    margin-top: 2rem;
   }
   @media (max-width: 600px) {
     aspect-ratio: 100/60;
@@ -207,12 +208,12 @@ const ArrowBtnBox = styled.nav`
   left: 50%;
   transform: translateX(-50%);
   width: calc(98vw);
-  max-width: calc(1536px + (var(--arrow-button-width) * 2 + 3rem));
+  max-width: calc(1536px + (${arrowButtonWidth} * 2 + 3rem));
   height: 0;
   button {
     position: absolute;
-    width: var(--arrow-button-width);
-    height: var(--arrow-button-width);
+    width: ${arrowButtonWidth};
+    height: ${arrowButtonWidth};
     font-size: 2rem;
     color: var(--color-gray);
     border: 1px solid var(--color-gray);

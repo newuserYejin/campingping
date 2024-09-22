@@ -15,8 +15,8 @@ const Homepage = () => {
       <MainSearchForm isMainPage={true} />
       <TagSearch />
       <Container maxWidth="xl">
-        <BestCampingFood />
         <Widget />
+        <BestCampingFood />
       </Container>
       <TopButton />
     </section>
