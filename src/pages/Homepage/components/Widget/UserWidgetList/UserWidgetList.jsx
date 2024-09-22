@@ -9,7 +9,6 @@ const ListItem = styled.li`
   display: flex;
   align-items: center;
   border-bottom: 1px solid #eeeeee;
-
   &:first-child {
     border-top: 1px solid #eeeeee;
   }
@@ -56,6 +55,10 @@ const InfoTitle = styled.h3`
   line-height: 100%;
   font-weight: normal;
   color: #000;
+  display: -webkit-box;
+  -webkit-line-clamp:1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 `;
 
 const InfoArea = styled.p`
@@ -109,7 +112,7 @@ const UserWidgetList = ({ title }) => {
                   <Ranking>{item.ranking}</Ranking>
                   <div>
                     <InfoTitle>{item.title}</InfoTitle>
-                    <InfoArea>{item.area}</InfoArea>{" "}
+                    <InfoArea>{item.area}</InfoArea>
                   </div>
                 </ItemBox>
               </Link>

@@ -1,23 +1,22 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination } from "swiper/modules";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import UserWidgetBox from "../UserWidgetBox/UserWidgetBox";
 import img from "../../../../../assets/images/bannerLocal01png.png";
 import styled from "styled-components";
 
-const Component = styled.div`
-  .swiper-button-prev,
-  .swiper-button-next {
-  }
-`;
+
 const Item = styled.div`
   text-align: center;
 
   .thumb {
     margin: 0 auto;
-    width: 250px;
-    height: 360px;
+    width:100%;
+    max-width: 250px;
+    height:auto;
     img {
-      object-fit: cover;
+      // object-fit: cover;
+      width:100%;
+      height:auto;
     }
   }
 
@@ -27,6 +26,10 @@ const Item = styled.div`
     font-size: 18px;
     font-weight: normal;
     color: #000000;
+    display: -webkit-box;
+    -webkit-line-clamp:1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   .date {
@@ -52,7 +55,7 @@ const items = [
   {
     id: 2,
     thumb: img,
-    title: "별바다부산 나이트 페스타2",
+    title: "별바다부산 나이트 페스타 별바다부산 나이트 페스타",
     date: "2024.07.01~2024.10.31",
     location: "부산 사하구",
   },
@@ -60,31 +63,48 @@ const items = [
 
 export const UserWidgetGallery = ({ title }) => {
   return (
-    <Component>
-      <UserWidgetBox title={title}>
-        <Swiper
-          modules={[Navigation, Pagination]}
-          slidesPerView={1}
-          loop={true}
-          navigation>
-          {items.map((item) => (
-            <SwiperSlide>
-              <Item>
-                <div className="thumb">
-                  <img src={item.thumb} alt="" />
-                </div>
-                <strong className="title">{item.title}</strong>
-                <span className="date">
-                  {item.date}
-                  <br />
-                  {item.location}
-                </span>
-              </Item>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </UserWidgetBox>
-    </Component>
+    <UserWidgetBox title={title}>
+      <Swiper
+        modules={[Navigation, Pagination, Autoplay]}
+        slidesPerView={1}
+        loop={true}
+        autoplay={{
+          delay: 5000
+        }}
+        navigation={{
+          nextEl: '.button-next',
+          prevEl: '.button-prev',
+        }} 
+      >
+        {items.map((item) => (
+          <SwiperSlide>
+            <Item>
+              <div className="thumb">
+                <img src={item.thumb} alt="" />
+              </div>
+              <strong className="title">{item.title}</strong>
+              <span className="date">
+                {item.date}
+                <br />
+                {item.location}
+              </span>
+            </Item>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+      <div className="swiper-button-box">
+      <button className="button-prev">
+          <svg class="feather feather-chevron-left" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+            <polyline points="15 18 9 12 15 6"/>
+          </svg>
+        </button>
+        <button className="button-next">
+          <svg class="feather feather-chevron-right" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+            <polyline points="9 18 15 12 9 6"/>
+          </svg>
+        </button>
+      </div>
+    </UserWidgetBox>
   );
 };
 
