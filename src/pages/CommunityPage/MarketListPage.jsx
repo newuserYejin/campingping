@@ -9,48 +9,29 @@ import Table from "../../components/Table/Table";
 import noimage from "../../assets/images/noimage.png";
 import bannerCook01 from "../../assets/images/bannerCook01.jpg";
 import noimage2 from "../../assets/images/noimage2.png";
+import { useEffect } from "react";
 
-const items = [
-  {
-    id: 1,
-    title: "제목제목제목제목제목제목제목제목제목제목제목제목",
-    thumb: noimage,
-    nickname: "닉네임",
-    comment: "999",
-    date: "20241212",
-    views: "999999",
-  },
-  {
-    id: 2,
-    title: "제목2",
-    thumb: bannerCook01,
-    nickname: "닉네임",
-    comment: "999",
-    date: "20241212",
-    views: "999999",
-  },
-  {
-    id: 3,
-    title: "제목제목제목제목제목제목제목제목제목제목제목제목",
-    thumb: noimage2,
-    nickname: "닉네임",
-    comment: "999",
-    date: "20241212",
-    views: "999999",
-  },
-  {
-    id: 4,
-    title: "제목2",
-    thumb: noimage2,
-    nickname: "닉네임",
-    comment: "999",
-    date: "20241212",
-    views: "999999",
-  },
-];
 
 const MarketListPage = () => {
   const [keyword, setKeyword] = useState("");
+  const [items, setItems] = useState([]);
+
+  const fetchPosts = async () => {
+    try {
+      const response = await fetch("http://campingping.ap-northeast-2.elasticbeanstalk.com/api/post");
+      if (!response.ok) {
+        throw new Error("데이터를 불러오는데 실패했습니다.");
+      }
+      const data = await response.json();
+      setItems(data.data)
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchPosts(); // 컴포넌트가 마운트될 때 API 요청을 보냄
+  }, []);
   return (
     <>
       <CommunityCategory />

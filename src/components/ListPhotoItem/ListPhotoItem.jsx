@@ -97,7 +97,7 @@ const ItemInfo = styled.span`
 
 const ListPhotoItem = ({ data, link }) => {
   return (
-    <Item to={link + `/${data.id}`} className="link">
+    <Item to={link + `/${data._id}`} className="link">
       <ItemThumb className="thumb">
         <img src={data.thumb || noimage2} alt="" />
       </ItemThumb>
