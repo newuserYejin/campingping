@@ -1,6 +1,6 @@
 import React from "react";
 import "./Footer.style.css";
-import logo from "../../../assets/howAboutCampingLogo.png";
+import logo from "../../../assets/campingpingLogo.png";
 import { infoProject, infoMember } from "../../../constants/info";
 import { Container, Tooltip, Avatar } from "@mui/material";
 

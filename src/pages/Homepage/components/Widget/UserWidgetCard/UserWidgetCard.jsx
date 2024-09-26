@@ -8,25 +8,6 @@ import UserWidgetBox from "../UserWidgetBox/UserWidgetBox";
 import styled from "styled-components";
 import nolimage from "../../../../../assets/images/noimage.svg";
 
-const Component = styled.div`
-  .swiper-pagination {
-    position: relative;
-    top: 0;
-    bottom: 0;
-    line-height: 0;
-  }
-
-  .swiper-pagination-bullet {
-    width: 10px;
-    height: 10px;
-    background: #b6b6b6;
-  }
-
-  .swiper-pagination-bullet-active {
-    background: #5a5a5a;
-  }
-`;
-
 const ListItem = styled.div`
   height: 100px;
   margin-bottom: 23px;
@@ -36,13 +17,21 @@ const ListItem = styled.div`
 
   .item {
     display: flex;
+    align-items: flex-start;
     justify-content: space-between;
     text-decoration: none;
   }
 
   .thumb {
+    display:block;
+    max-width:90px;
+    width:65%;
+    aspect-ratio: 1/1;
     img {
       display: block;
+      width:100%;
+      height:100%;
+      object-fit: cover;
     }
   }
 
@@ -51,8 +40,9 @@ const ListItem = styled.div`
 
     &__title {
       display: -webkit-box;
+      -webkit-line-clamp:1;
       -webkit-box-orient: vertical;
-      -webkit-line-clamp: 1;
+      overflow: hidden;
       margin: 4px 0 0 0;
       font-size: 18px;
       line-height: 100%;
@@ -102,10 +92,28 @@ const ListItem = styled.div`
   }
 `;
 
+const EmptyBox = styled.div`
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio:100/112;
+  background:#f5f5f5;
+  svg{
+    width:60px;
+    height:auto;
+    margin-bottom:5px;
+    opacity:0.5;
+  }
+  p{
+    font-size:14px;
+  }
+`;
+
 const items = [
   {
     id: 1,
-    image: nolimage,
+    image: 'https://cdn.imweb.me/thumbnail/20230214/476eb6735c88b.jpg',
     title: "루이비통 텐트 팔아요",
     name: "최대여덟글자까지",
     data: "2024.12.25",
@@ -114,7 +122,7 @@ const items = [
   },
   {
     id: 2,
-    image: nolimage,
+    image: '',
     title: "루이비통 텐트 팔아요2",
     name: "최대여덟글자까지",
     data: "2024.12.25",
@@ -123,7 +131,7 @@ const items = [
   },
   {
     id: 3,
-    image: nolimage,
+    image: '',
     title: "루이비통 텐트 팔아요3",
     name: "최대여덟글자까지",
     data: "2024.12.25",
@@ -132,7 +140,7 @@ const items = [
   },
   {
     id: 4,
-    image: nolimage,
+    image: '',
     title: "루이비통 텐트 팔아요4",
     name: "최대여덟글자까지",
     data: "2024.12.25",
@@ -152,46 +160,61 @@ const groupItems = (items, size) => {
 export const UserWidgetCard = ({ title }) => {
   const groupedItems = groupItems(items, 3);
   return (
-    <Component>
-      <UserWidgetBox title={title}>
-        {items ? (
-          <Swiper
-            modules={[Pagination]}
-            spaceBetween={20}
-            slidesPerView={1}
-            pagination={{
-              clickable: true,
-              renderBullet: (index, className) => {
-                return `<span class="${className} bullet"></span>`;
-              },
-            }}>
-            <>
-              {groupedItems.map((group, groupIndex) => (
-                <SwiperSlide key={groupIndex}>
-                  {group.map((item) => (
-                    <ListItem key={item.id}>
-                      <Link to={item.link} className="item">
-                        <div className="thumb">
-                          <img src={item.image} alt="" />
-                        </div>
-                        <div className="info">
-                          <h3 className="info__title">{item.title}</h3>
-                          <span className="info__name">
-                            <span>{item.name}</span>
-                            <span>{item.data}</span>
-                          </span>
-                          <p className="info__content">{item.content}</p>
-                        </div>
-                      </Link>
-                    </ListItem>
-                  ))}
-                </SwiperSlide>
-              ))}
-            </>
-          </Swiper>
-        ) : null}
-      </UserWidgetBox>
-    </Component>
+    <UserWidgetBox title={title}>
+      {items && items.length > 0 ? (
+        <Swiper
+          modules={[Pagination]}
+          spaceBetween={20}
+          slidesPerView={1}
+          pagination={{
+            clickable: true,
+            renderBullet: (index, className) => {
+              return `<span class="${className} bullet"></span>`;
+            },
+          }}>
+          <>
+            {groupedItems.map((group, groupIndex) => (
+              <SwiperSlide key={groupIndex}>
+                {group.map((item) => (
+                  <ListItem key={item.id}>
+                    <Link to={item.link} className="item">
+                      <div className="thumb">
+                        {item.image ? 
+                          <img src={item.image} alt="" /> : 
+                          <img src={nolimage} alt="" />
+                        }
+                      </div>
+                      <div className="info">
+                        <h3 className="info__title">{item.title}</h3>
+                        <span className="info__name">
+                          <span>{item.name}</span>
+                          <span>{item.data}</span>
+                        </span>
+                        <p className="info__content">{item.content}</p>
+                      </div>
+                    </Link>
+                  </ListItem>
+                ))}
+              </SwiperSlide>
+            ))}
+          </>
+        </Swiper>
+      ) : 
+      <EmptyBox>
+        <svg version="1.1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <g id="grid_system"/>
+            <g id="_icons">
+              <g>
+                <path d="M21.2,16.5L14.6,4.7c-0.5-1-1.5-1.5-2.6-1.5S9.9,3.7,9.4,4.7L2.8,16.5c-0.5,0.9-0.5,2.1,0,3S4.3,21,5.4,21h13.2    c1.1,0,2-0.6,2.6-1.5S21.7,17.5,21.2,16.5z M19.5,18.5c-0.1,0.1-0.3,0.5-0.9,0.5H5.4c-0.5,0-0.8-0.3-0.9-0.5s-0.3-0.5,0-1    l6.6-11.9c0.3-0.5,0.7-0.5,0.9-0.5s0.6,0,0.9,0.5l6.6,11.9C19.7,18,19.5,18.4,19.5,18.5z"/>
+                <path d="M12,9c-0.6,0-1,0.4-1,1v3c0,0.6,0.4,1,1,1s1-0.4,1-1v-3C13,9.4,12.6,9,12,9z"/>
+                <circle cx="12" cy="16" r="1"/>
+              </g>
+            </g>
+        </svg>
+        <p>등록된 글이 없습니다</p>
+      </EmptyBox>
+      }
+    </UserWidgetBox>
   );
 };
 
