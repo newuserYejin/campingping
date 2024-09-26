@@ -19,6 +19,7 @@ import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { useSelector, useDispatch } from "react-redux";
 import { authenticateAction } from "../../redux/actions/authencticateAction";
 import { useUser } from "../../hooks/useUser";
+import { useQueryClient } from "@tanstack/react-query";
 
 const drawerWidth = 260;
 const navItems = [
@@ -120,13 +121,14 @@ const Header = (props) => {
   const navigate = useNavigate();
 
   const { data: user, isLoading, isError, refetch } = useUser();
+  const queryClient = useQueryClient();
 
   const logout = async () => {
     localStorage.removeItem("token");
-    await refetch(); // refetch가 완료될 때까지 기다림
-
+    console.log("삭제함");
+    queryClient.setQueryData(["userData"], null);
     // window.location.reload(); // 새로고침
-    // navigate("/login"); // 로그인 페이지로/ 리다이렉션
+    navigate("/login"); // 로그인 페이지로/ 리다이렉션
   };
 
   const token = localStorage.getItem("token");
@@ -179,6 +181,9 @@ const Header = (props) => {
         ) : (
           <>
             <div className="nickname">{user?.nickname}님</div>
+            <button style={{ display: user ? "block" : "none" }} onClick>
+              마이페이지
+            </button>
             <button onClick={logout}>로그아웃</button>
           </>
         )}

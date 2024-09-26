@@ -12,6 +12,7 @@ import {
   List,
   ListItem,
   ListItemText,
+  ListItemButton,
 } from "@mui/material";
 
 import MainTitle from "../../components/Title/MainTitle";
@@ -24,6 +25,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import api from "../../utils/api";
 import { useSearchCampingName } from "../../hooks/useSearchOwnerCamping";
+import "./SignUpPage.style.css";
 
 const SignUpPage = () => {
   const [formData, setFormData] = useState({
@@ -34,6 +36,10 @@ const SignUpPage = () => {
     contact: "",
     profileImg: "",
     campingName: "",
+    campingData: {
+      contendID: "",
+      address: "",
+    },
   });
 
   const navigate = useNavigate();
@@ -152,6 +158,10 @@ const SignUpPage = () => {
   //   backgroundColor: theme.palette.background.paper,
   // }));
 
+  useEffect(() => {
+    console.log(formData);
+  }, [formData]);
+
   return (
     <Container
       sx={{
@@ -233,11 +243,11 @@ const SignUpPage = () => {
         </FormControl>
 
         <div
-          style={{ display: formData.level == "customer" ? "none" : "block" }}
+          className="search_campingName"
+          style={{ display: formData.level == "unsigned" ? "block" : "none" }}
         >
           <TextField
             fullWidth
-            required
             margin="normal"
             label="캠핑장 이름"
             name="campingName"
@@ -259,10 +269,23 @@ const SignUpPage = () => {
           >
             {searchResultData?.item?.map((item) => (
               <ListItem id={item.contentId}>
-                <ListItemText
-                  primary={item.facltNm}
-                  secondary={searchResultData ? item.addr1 : null}
-                />
+                <ListItemButton
+                  onClick={() =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      campingName: item.facltNm,
+                      campingData: {
+                        contendID: item.contentId,
+                        address: item.addr1,
+                      },
+                    }))
+                  }
+                >
+                  <ListItemText
+                    primary={item.facltNm}
+                    secondary={searchResultData ? item.addr1 : null}
+                  />
+                </ListItemButton>
               </ListItem>
             ))}
           </List>
