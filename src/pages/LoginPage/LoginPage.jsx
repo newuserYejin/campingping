@@ -99,6 +99,8 @@ const LoginPage = () => {
               id="id"
               label="아이디"
               name="아이디"
+              error={loginIdError ? loginIdError : null}
+              helperText={loginIdError ? loginIdError : null}
             />
             <TextField
               inputRef={passwordInputRef}
@@ -112,6 +114,8 @@ const LoginPage = () => {
               type="password"
               id="비밀번호"
               autoComplete="current-password"
+              error={loginPwError ? loginPwError : null}
+              helperText={loginPwError ? loginPwError : null}
             />
             <div className="BeforeLogin">
               <FormControlLabel

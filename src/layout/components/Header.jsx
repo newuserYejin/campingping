@@ -23,6 +23,7 @@ import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { useSelector, useDispatch } from "react-redux";
 import { authenticateAction } from "../../redux/actions/authencticateAction";
 import { useUser } from "../../hooks/useUser";
+import { useQueryClient } from "@tanstack/react-query";
 
 const drawerWidth = 260;
 const navItems = [
@@ -168,15 +169,16 @@ const Header = (props) => {
   const navigate = useNavigate();
 
   const { data: user, isLoading, isError, refetch } = useUser();
+  const queryClient = useQueryClient();
   const { window } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const logout = async () => {
     localStorage.removeItem("token");
-    await refetch(); // refetch가 완료될 때까지 기다림
-
+    console.log("삭제함");
+    queryClient.setQueryData(["userData"], null);
     // window.location.reload(); // 새로고침
-    // navigate("/login"); // 로그인 페이지로/ 리다이렉션
+    navigate("/login"); // 로그인 페이지로/ 리다이렉션
   };
 
   const token = localStorage.getItem("token");
@@ -241,8 +243,11 @@ const Header = (props) => {
           </>
         ) : (
           <>
-            <UserName><em>{user?.nickname}</em>님</UserName>
-            <LogOutButton onClick={logout}>로그아웃</LogOutButton>
+            <div className="nickname">{user?.nickname}님</div>
+            <Link to={user.level == "admin" ? `/admin` : `/mypage`}>
+              마이페이지
+            </Link>
+            <button onClick={logout}>로그아웃</button>
           </>
         )}
       </LoginMo>
@@ -364,8 +369,11 @@ const Header = (props) => {
                 </>
               ) : (
                 <>
-                  <UserName><em>{user?.nickname}</em>님 안녕하세요!</UserName>
-                  <LogOutButton onClick={logout}>로그아웃</LogOutButton>
+                  <div className="nickname">{user?.nickname}님</div>
+                  <Link to={user.level == "admin" ? `/admin` : `/mypage`}>
+                    마이페이지
+                  </Link>
+                  <button onClick={logout}>로그아웃</button>
                 </>
               )}
             </LoginPc>
