@@ -181,9 +181,9 @@ const Header = (props) => {
         ) : (
           <>
             <div className="nickname">{user?.nickname}님</div>
-            <button style={{ display: user ? "block" : "none" }} onClick>
+            <Link to={user.level == "admin" ? `/admin` : `/mypage`}>
               마이페이지
-            </button>
+            </Link>
             <button onClick={logout}>로그아웃</button>
           </>
         )}
@@ -266,6 +266,9 @@ const Header = (props) => {
               ) : (
                 <>
                   <div className="nickname">{user?.nickname}님</div>
+                  <Link to={user.level == "admin" ? `/admin` : `/mypage`}>
+                    마이페이지
+                  </Link>
                   <button onClick={logout}>로그아웃</button>
                 </>
               )}
