@@ -28,35 +28,35 @@ import { useQueryClient } from "@tanstack/react-query";
 const drawerWidth = 260;
 const navItems = [
   {
-    id: 'gnb1',
+    id: "gnb1",
     kor: "검색하기",
     eng: "Campsite",
-    url:"/search?q=&province=&city=&theme=&selectedDetailTag="
+    url: "/search?q=&province=&city=&theme=&selectedDetailTag=",
   },
   {
-    id: 'gnb2',
+    id: "gnb2",
     kor: "지역행사",
     eng: "Local Event",
-    url:"/event"
+    url: "/event",
   },
   {
-    id: 'gnb3',
+    id: "gnb3",
     kor: "중고장터",
     eng: "Market",
-    url:"/community/market"
+    url: "/community/market",
   },
   {
-    id: 'gnb4',
+    id: "gnb4",
     kor: "캠핑요리",
     eng: "Food",
-    url:"/community/food"
+    url: "/community/food",
   },
   {
-    id: 'gnb5',
+    id: "gnb5",
     kor: "추천용품",
     eng: "Recommend",
-    url:"/community/recommend"
-  }
+    url: "/community/recommend",
+  },
 ];
 
 const GnbItemMobile = styled.li`
@@ -77,24 +77,24 @@ const GnbItemMobile = styled.li`
 `;
 
 const GnbMobileText = styled.span`
-  display:block;`
+  display: block;
+`;
 
 const GnbItemPC = styled.li`
   list-style: none;
   a {
-    display:block;
-    min-width:90px;
+    display: block;
+    min-width: 90px;
     font-family: "Spoqa Han Sans Neo", sans-serif;
-    font-size:16px;
-    text-align:center;
+    font-size: 16px;
+    text-align: center;
     color: var(--main-font-color);
     text-decoration: none;
     &:hover {
       color: var(--key-color);
     }
     @media (max-width: 1200px) {
-
-      font-size:15px
+      font-size: 15px;
     }
   }
 `;
@@ -103,47 +103,52 @@ const headerButton = styled.a`
   display: inline-block;
   padding: 0 0 0 16px;
   height: 15px;
-  font-size:13px;
+  font-size: 13px;
   line-height: 15px;
   font-family: "Spoqa Han Sans Neo", sans-serif;
   color: var(--color-gray);
   text-decoration: none;
-  cursor:pointer;
+  cursor: pointer;
   &:hover {
     color: var(--button-hover-color);
   }
-`
+`;
 const LoginButton = styled(headerButton)`
-  background:url(${memberIcon}) 0% 40% no-repeat;
-  background-size:auto 13px;
-`
+  background: url(${memberIcon}) 0% 40% no-repeat;
+  background-size: auto 13px;
+`;
 
 const SignUpButton = styled(headerButton)`
-  background:url(${lockIcon}) 0% 40% no-repeat;
-  background-size:auto 13px;
-`
+  background: url(${lockIcon}) 0% 40% no-repeat;
+  background-size: auto 13px;
+`;
+
+const MyPageButton = styled(headerButton)`
+  background-size: auto 13px;
+`;
+
 const UserName = styled(headerButton)`
   color: var(--main-font-color);
-  em{
-    font-style:normal;
+  em {
+    font-style: normal;
     color: var(--key-color);
   }
-`
+`;
 
 const LogOutButton = styled(headerButton)`
-  background:url(${unlockIcon}) 0% 40% no-repeat;
-  background-size:auto 13px;
-`
+  background: url(${unlockIcon}) 0% 40% no-repeat;
+  background-size: auto 13px;
+`;
 
 const LoginPc = styled.div`
   display: flex;
-  gap:35px;
+  gap: 35px;
   align-items: center;
   .nickname {
     color: #3586ff;
   }
   @media (max-width: 1200px) {
-    gap:30px;
+    gap: 30px;
   }
   @media (max-width: 900px) {
     display: none;
@@ -152,7 +157,7 @@ const LoginPc = styled.div`
 
 const LoginMo = styled.div`
   display: flex;
-  gap:35px;
+  gap: 35px;
   align-items: center;
   justify-content: center;
   .nickname {
@@ -194,11 +199,11 @@ const Header = (props) => {
   const [gnbItemText, setGnbItemText] = useState({});
 
   const onGnbMouseEnter = (id) => {
-    setGnbItemText(prevState => ({ ...prevState, [id]: true }));
+    setGnbItemText((prevState) => ({ ...prevState, [id]: true }));
   };
 
   const onGnbMouseLeave = (id) => {
-    setGnbItemText(prevState => ({ ...prevState, [id]: false }));
+    setGnbItemText((prevState) => ({ ...prevState, [id]: false }));
   };
 
   const drawer = (
@@ -238,16 +243,16 @@ const Header = (props) => {
       <LoginMo>
         {!user ? (
           <>
-            <LoginButton to="/login">로그인</LoginButton>
-            <SignUpButton to="/signup">회원가입</SignUpButton>
+            <LoginButton href="/login">로그인</LoginButton>
+            <SignUpButton href="/signup">회원가입</SignUpButton>
           </>
         ) : (
           <>
-            <div className="nickname">{user?.nickname}님</div>
-            <Link to={user.level == "admin" ? `/admin` : `/mypage`}>
+            <UserName>{user?.nickname}님</UserName>
+            <MyPageButton href={user.level == "admin" ? `/admin` : `/mypage`}>
               마이페이지
-            </Link>
-            <button onClick={logout}>로그아웃</button>
+            </MyPageButton>
+            <LogOutButton onClick={logout}>로그아웃</LogOutButton>
           </>
         )}
       </LoginMo>
@@ -274,16 +279,14 @@ const Header = (props) => {
           boxShadow: "0 5px 20px rgba(0,0,0,0.1)",
         }}
       >
-        <Container 
-          maxWidth="xl"
-        >
+        <Container maxWidth="xl">
           <Toolbar
             sx={{
               position: "relative",
-              width:'100%',
+              width: "100%",
               justifyContent: { xs: "center", md: "space-between" },
-              padding:'0 !important',
-              alignItems: 'flex-end'
+              padding: "0 !important",
+              alignItems: "flex-end",
             }}
           >
             <IconButton
@@ -304,12 +307,12 @@ const Header = (props) => {
             >
               <FontAwesomeIcon icon={faBars} />
             </IconButton>
-            
+
             <Box
               component="div"
               sx={{
-                display:'flex',
-                alignItems: 'flex-end'
+                display: "flex",
+                alignItems: "flex-end",
               }}
             >
               <Typography component="h1">
@@ -324,7 +327,7 @@ const Header = (props) => {
                         xs: "90px",
                       },
                       height: "auto",
-                      padding:"0"
+                      padding: "0",
                     }}
                     alt="캠핑 어때"
                     src={logo}
@@ -335,13 +338,13 @@ const Header = (props) => {
                 component="ul"
                 sx={{
                   display: { xs: "none", md: "flex" },
-                  gap:{
-                    xl:"20px",
-                    md:"15px",
+                  gap: {
+                    xl: "20px",
+                    md: "15px",
                   },
-                  margin:{
+                  margin: {
                     xl: "0 0 0 70px",
-                    md: "0 0 0 50px"
+                    md: "0 0 0 50px",
                   },
                   padding: "0",
                 }}
@@ -349,12 +352,16 @@ const Header = (props) => {
                 {navItems.map((item) => (
                   <StylesProvider key={`navItem${item.id}`} injectFirst>
                     <GnbItemPC key={item}>
-                      <Link 
-                        to={item.url} 
+                      <Link
+                        to={item.url}
                         onMouseEnter={() => onGnbMouseEnter(item.id)}
                         onMouseLeave={() => onGnbMouseLeave(item.id)}
                       >
-                        {gnbItemText[item.id] ? <GnbMobileText>{item.eng}</GnbMobileText> : <GnbMobileText>{item.kor}</GnbMobileText>}
+                        {gnbItemText[item.id] ? (
+                          <GnbMobileText>{item.eng}</GnbMobileText>
+                        ) : (
+                          <GnbMobileText>{item.kor}</GnbMobileText>
+                        )}
                       </Link>
                     </GnbItemPC>
                   </StylesProvider>
@@ -364,16 +371,18 @@ const Header = (props) => {
             <LoginPc>
               {!user ? (
                 <>
-                  <LoginButton to="/login">로그인</LoginButton>
-                  <SignUpButton to="/signup">회원가입</SignUpButton>
+                  <LoginButton href="/login">로그인</LoginButton>
+                  <SignUpButton href="/signup">회원가입</SignUpButton>
                 </>
               ) : (
                 <>
-                  <div className="nickname">{user?.nickname}님</div>
-                  <Link to={user.level == "admin" ? `/admin` : `/mypage`}>
+                  <UserName>{user?.nickname}님</UserName>
+                  <MyPageButton
+                    href={user.level == "admin" ? `/admin` : `/mypage`}
+                  >
                     마이페이지
-                  </Link>
-                  <button onClick={logout}>로그아웃</button>
+                  </MyPageButton>
+                  <LogOutButton onClick={logout}>로그아웃</LogOutButton>
                 </>
               )}
             </LoginPc>
