@@ -9,21 +9,23 @@ const Item = styled.div`
   text-align: center;
 
   .thumb {
-    margin: 0 auto;
-    width:100%;
+    margin: 0.5rem auto 0;
+    width:90%;
     max-width: 250px;
     height:auto;
     img {
-      // object-fit: cover;
       width:100%;
       height:auto;
+    }
+    @media (max-width: 900px) {
+      width:75%;
     }
   }
 
   .title {
     display: block;
-    margin: 12px 0 7px;
-    font-size: 18px;
+    margin: 1rem 0 0.25rem;
+    font-size: 1.125rem;
     font-weight: normal;
     color: #000000;
     display: -webkit-box;
@@ -34,8 +36,8 @@ const Item = styled.div`
 
   .date {
     display: block;
-    font-size: 12px;
-    line-height: 16px;
+    font-size: 0.75rem;
+    line-height: 1;
     color: #757575;
   }
 

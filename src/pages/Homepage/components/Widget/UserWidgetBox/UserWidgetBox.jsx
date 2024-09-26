@@ -2,20 +2,21 @@ import UserWidgetTitle from "../UserWidgeTitle/UserWidgetTitle";
 import styled from "styled-components";
 
 const WidgetBox = styled.div`
-  // width: 356px;
-  // height: 556px;
   position:relative;
   width:calc((100% - (15px * 3)) / 4);
   height:auto;
   padding: 27px 1.75rem;
   border: 1px solid #d6d6d6;
   box-sizing: border-box;
-  /* aspect-ratio: 100/156; */
+  @media (max-width: 1200px) {
+    padding: 25px 1.5rem;
+  }
   .swiper-pagination {
     position: relative;
     top: 0;
     bottom: 0;
     line-height: 0;
+    margin-top:1rem;
   }
   .swiper-pagination-bullet {
     width: 10px;

@@ -16,7 +16,8 @@ const ListItem = styled.li`
   .link {
     position: relative;
     display: block;
-    padding: 26px 29px 23px;
+    // padding: 26px 29px 23px;
+    padding: 1.25rem 1rem;
     width: 100%;
     text-decoration: none;
 
@@ -37,13 +38,13 @@ const ListItem = styled.li`
 
 const ItemBox = styled.div`
   display: flex;
+  gap:20px;
 `;
 
 const Ranking = styled.strong`
   display: flex;
   align-items: center;
-  margin-right: 21px;
-  font-size: 22px;
+  font-size:1.375rem;
   line-height: 100%;
   font-weight: normal;
   color: #3586ff;
@@ -51,7 +52,7 @@ const Ranking = styled.strong`
 
 const InfoTitle = styled.h3`
   margin: 0;
-  font-size: 18px;
+  font-size: 1.125rem;
   line-height: 100%;
   font-weight: normal;
   color: #000;
@@ -63,7 +64,7 @@ const InfoTitle = styled.h3`
 
 const InfoArea = styled.p`
   margin: 8px 0 0 0;
-  font-size: 12px;
+  font-size: 0.75rem;
   line-height: 100%;
   color: #757575;
 `;
