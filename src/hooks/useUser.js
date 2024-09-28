@@ -10,9 +10,12 @@ const fetchUser = async () => {
 };
 
 export const useUser = () => {
+    const token = localStorage.getItem('token');
+
     return useQuery({
         queryKey: ['userData'],
         queryFn: fetchUser,
+        enabled: !!token, // 토큰이 있을 때만 쿼리 실행
     })
 };
 
