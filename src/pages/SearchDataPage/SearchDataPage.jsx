@@ -265,7 +265,6 @@ const SearchDataPage = () => {
 
   return (
     <>
-
       <DetailPageSearchBox2 />
       <Container maxWidth="xl">
         <SearchDataPageTitle selectedTags={selectedTagArray} dataLength={filteredData.length} />
@@ -279,7 +278,6 @@ const SearchDataPage = () => {
               sm:'500px',
             },
             textAlign:'center'
-
           }}>
             <p>{keyword}로 검색된 결과가 없습니다</p>
           </Box>

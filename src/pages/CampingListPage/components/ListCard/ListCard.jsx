@@ -25,6 +25,15 @@ const Card = styled.article`
   padding:25px;
   border:1px solid #d6d6d6;
   box-sizing:border-box;
+  @media (max-width: 1200px) {
+    width:calc((100% - (15px * 1)) / 2);
+  }
+  @media (max-width: 900px) {
+    padding:20px;
+  }
+  @media (max-width: 600px) {
+    width:100%;
+  }
 `;
 
 const Box = styled.div``;
@@ -44,6 +53,9 @@ const Location = styled.p`
   padding:0;
   font-size:1.375rem;
   line-height:1;
+  @media (max-width: 900px) {
+    font-size:1.15rem;
+  }
 `;
 
 
@@ -52,6 +64,9 @@ const Name = styled.h4`
   font-size:1.875rem;
   line-height:1;
   font-weight:400;
+  @media (max-width: 900px) {
+    font-size:1.65rem;
+  }
 `;
 
 const InfoBox = styled.div`
@@ -79,6 +94,10 @@ const Item = styled.div`
     font-size:0.875rem;
     line-height:20px;
     color:var(--color-gray);
+    word-break: break-all;
+    @media (max-width: 900px) {
+      font-size:0.75rem;
+    }
     a{
       font-size:inherit;
       line-height:inherit;
@@ -94,6 +113,9 @@ const FacilityList = styled.ul`
   gap:15px 0;
   margin:20px 0 0 0;
   padding:0;
+  @media (max-width: 900px) {
+    margin-top:15px;
+  }
 `;
 
 const FacilityItem = styled.li`
@@ -101,7 +123,7 @@ const FacilityItem = styled.li`
   flex-direction: column;
   align-items: center;
   width:calc(100% / 5);
-  font-size:0.875rem;
+  font-size:0.75rem;
   line-height:1;
   text-align:center;
   list-style:none;
@@ -115,6 +137,9 @@ const DetailButton = styled.button`
   border:1px solid #000;
   box-sizing:border-box;
   background:#fff;
+  @media (max-width: 900px) {
+    margin-top:2.5rem;
+  }
   a{
     display:block;
     width:100%;

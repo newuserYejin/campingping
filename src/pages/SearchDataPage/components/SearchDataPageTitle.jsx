@@ -11,6 +11,7 @@ const SearchResultTitle = styled.div`
 
 const TagList = styled.ul`
   display:flex;
+  flex-wrap: wrap;
   margin:0;
   padding:0;
 `;
@@ -22,7 +23,7 @@ const Tag = styled.li`
   margin:0;
   padding:0;
   font-size:1.875rem;
-  line-height:1;
+  line-height:1.25;
   font-weight:400;
   @media screen and (max-width:900px) {
     font-size:1.75rem;
@@ -42,7 +43,7 @@ const SubTitle = styled.h3`
   margin:0;
   padding:0;
   font-size:1.875rem;
-  line-height:1;
+  line-height:1.25;
   font-weight:400;
   @media screen and (max-width:900px) {
     font-size:1.75rem;
