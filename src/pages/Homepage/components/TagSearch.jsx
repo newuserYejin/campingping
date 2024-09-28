@@ -9,9 +9,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Container, Box, Button } from "@mui/material";
 import { search_tags } from "../../../constants/info";
-import { useTagSearchQuery } from "../../../hooks/useTagSearch";
 import { useNavigate } from "react-router-dom";
-import MainTitle from "../../../components/Title/MainTitle";
 import { useEffect } from "react";
 
 import imgFilterPet from '../../../assets/img_filter_pet.png';

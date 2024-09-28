@@ -90,7 +90,7 @@ export const infoFacility = [
   },
   {
     name: "산책로",
-    icon: "walk",
+    icon: "walk", //
   },
   {
     name: "운동장",
