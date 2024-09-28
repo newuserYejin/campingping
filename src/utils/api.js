@@ -1,11 +1,12 @@
 import axios from 'axios';
 
-// const LOCAL_BACKEND = import.meta.env.REACT_APP_LOCAL_BACKEND;
+const MONGO_URL = process.env.REACT_APP_MONGO_URL;
 const LOCAL_BACKEND = process.env.REACT_APP_LOCAL_BACKEND;
 
 const api = axios.create({
     // baseURL: `${REACT_APP_PROD_BACKEND}/api`,
     baseURL: LOCAL_BACKEND,
+    // baseURL: MONGO_URL,
     headers: {
         'Content-Type': 'application/json',
         authorization: `Bearer ${localStorage.getItem('token')}`,

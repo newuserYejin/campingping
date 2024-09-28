@@ -96,16 +96,25 @@ const ItemInfo = styled.span`
 `;
 
 const ListPhotoItem = ({ data, link }) => {
+  // console.log(data)
+  const date = new Date(data.createdAt)
+
+  const formattedDate = date.toLocaleDateString("ko-KR", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit"
+  });
+
   return (
     <Item to={link + `/${data._id}`} className="link">
       <ItemThumb className="thumb">
         <img src={data.thumb || noimage2} alt="" />
       </ItemThumb>
       {data.title && <ItemTitle>{data.title}</ItemTitle>}
-      {data.nickname && <ItemName>{data.nickname}</ItemName>}
+      {data.userId.nickname && <ItemName>{data.userId.nickname}</ItemName>}
       <ItemInfo>
-        <span className="review">{data.comment}</span>
-        <span className="date">{data.date}</span>
+        <span className="review">{data.commentCount}</span>
+        <span className="date">{formattedDate}</span>
       </ItemInfo>
     </Item>
   );

@@ -115,20 +115,28 @@ const Footer = styled.span`
 `;
 
 const CommunityDetail = ({ data, link }) => {
+  console.log(data)
+  const date = new Date(data.createdAt)
+
+  const formattedDate = date.toLocaleDateString("ko-KR", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit"
+  });
   return (
     <>
       <CommunityCategory />
       <Container>
         <Header>
-          <HeaderCate>{data?.cate}</HeaderCate>
+          <HeaderCate>{data?.category}</HeaderCate>
           <HeaderTitle>{data?.title} </HeaderTitle>
           <HeaderInfo>
-            <HeaderName>{data?.nickname}</HeaderName>
-            <HeaderDate>{data?.date}</HeaderDate>
+            <HeaderName>{data?.userId?.nickname}</HeaderName>
+            <HeaderDate>{formattedDate}</HeaderDate>
           </HeaderInfo>
         </Header>
 
-        <Contents>{data?.contents}</Contents>
+        <Contents>{data?.content}</Contents>
 
         <ButtonBox>
           <Link to={link + `/write`} id={data?.id}>
@@ -144,7 +152,9 @@ const CommunityDetail = ({ data, link }) => {
         </ButtonBox>
 
         <Footer>
-          {data?.prev && (
+
+          댓글
+          {/* {data?.prev && (
             <Link className="prev" to={link + `${data?.prev.id}`}>
               <span className="arrow">이전글</span>
               <p className="title">{data?.prev.title}</p>
@@ -155,7 +165,7 @@ const CommunityDetail = ({ data, link }) => {
               <span className="arrow">다음글</span>
               <p className="title">{data?.next.title}</p>
             </Link>
-          )}
+          )} */}
         </Footer>
       </Container>
     </>
