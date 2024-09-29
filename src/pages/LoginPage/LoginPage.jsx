@@ -97,7 +97,7 @@ const LoginPage = () => {
               required
               fullWidth
               id="id"
-              label="아이디"
+              label="아이디(이메일)"
               name="아이디"
               error={loginIdError ? loginIdError : null}
               helperText={loginIdError ? loginIdError : null}

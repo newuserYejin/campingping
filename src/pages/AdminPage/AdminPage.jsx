@@ -1,29 +1,40 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { Container } from "@mui/material";
-import { UserCircle } from "lucide-react";
-import styled from "styled-components";
 import SubVisual from "../../components/SubVisual/SubVisual";
-// import MyPageItem from "./component/MyPageItem/MyPageItem";
-// import MyPageSubTitle from "./component/MyPageSubTitle/MyPageSubTitle";
-// import ContentBox from "../../components/ContentBox/ContentBox";
-// import Button from "../../components/Button/Button";
-// import FormItem from "../../components/FormItem/FormItem";
-// import InputText from "../../components/InputText/InputText";
-// import Modal from "../../components/Modal/Modal";
 
-const ProfileCircle = styled.div`
-  margin: auto;
-  width: 128px;
-  height: 128px;
+import { styled } from "@mui/material/styles";
+import RadioGroup, { useRadioGroup } from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Radio from "@mui/material/Radio";
+import UserListItem from "./component/UserListItem";
 
-  img {
-    width: 100%;
-    height: 100%;
+import "./AdminPage.style.css";
 
-    object-fit: cover;
-  }
-`;
+import { useUserList } from "../../hooks/useUserList";
+
+const StyledFormControlLabel = styled((props) => (
+  <FormControlLabel {...props} />
+))(({ theme }) => ({
+  variants: [
+    {
+      props: { checked: true },
+      style: {
+        ".MuiFormControlLabel-label": {
+          color: theme.palette.primary.main,
+        },
+
+        // ".MuiButtonBase-root": {
+        //   display: "none",
+        // },
+
+        // ".css-vqmohf-MuiButtonBase-root-MuiRadio-root":{
+        //   display:"none",
+        // }
+      },
+    },
+  ],
+}));
 
 const MyPage = () => {
   const [profilePhoto, setProfilePhoto] = useState(null);
@@ -31,17 +42,31 @@ const MyPage = () => {
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
   const [isNameModalOpen, setIsNameModalOpen] = useState(false);
 
-  // 프로필 사진 변경
-  const handleProfilePhotoChange = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setProfilePhoto(reader.result);
-      };
-      reader.readAsDataURL(file);
+  const [level, setLevel] = useState("unsigned");
+
+  const { data: userList, isLoading, error } = useUserList(level);
+
+  useEffect(() => {
+    if (userList) {
+      console.log("회원 리스트 정보: ", userList.data);
     }
-  };
+
+    console.log("현재 선택 level: ", level);
+  }, [userList, level]);
+
+  function MyFormControlLabel(props) {
+    const radioGroup = useRadioGroup();
+
+    let checked = false;
+
+    if (radioGroup) {
+      checked = radioGroup.value === props.value;
+    }
+
+    setLevel(radioGroup.value);
+
+    return <StyledFormControlLabel checked={checked} {...props} />;
+  }
 
   return (
     <>
@@ -52,90 +77,33 @@ const MyPage = () => {
         }}
       >
         <div>관리자 페이지 내용 출력</div>
-        {/* <MyPageSubTitle>프로필 변경</MyPageSubTitle>
-        <ContentBox>
-          <MyPageItem align="center">
-            <span>프로필 사진 변경</span>
-            <Button onClick={() => setIsProfileModalOpen(true)}>변경</Button>
-          </MyPageItem>
-          <Modal
-            isFooter={true}
-            isOpen={isProfileModalOpen}
-            onClose={() => {
-              setIsProfileModalOpen(false);
-              setProfilePhoto(null);
-            }}
-            onSave={() => {
-              alert("저장되었습니다.");
-              setIsProfileModalOpen(false);
-            }}
-            title="프로필 사진 변경"
-          >
-            <ProfileCircle>
-              {profilePhoto ? (
-                <img src={profilePhoto} alt="프로필사진" />
-              ) : (
-                <UserCircle size={128} />
-              )}
-            </ProfileCircle>
-            <label>
-              <input
-                type="file"
-                accept="image/*"
-                onChange={handleProfilePhotoChange}
+        <div>
+          <div className="userList_header">
+            <div>회원 목록</div>
+            <RadioGroup
+              className="buttons"
+              name="use-radio-group"
+              defaultValue={level}
+            >
+              <MyFormControlLabel
+                value="unsigned"
+                label="사장님"
+                control={<Radio />}
               />
-            </label>
-          </Modal>
-        </ContentBox>
-
-        <MyPageSubTitle>정보변경</MyPageSubTitle>
-        <ContentBox>
-          <MyPageItem align="center">
-            <span>이름 변경</span>
-            <Button onClick={() => setIsNameModalOpen(true)}>변경</Button>
-          </MyPageItem>
-          <Modal
-            isFooter={true}
-            isOpen={isNameModalOpen}
-            onClose={() => setIsNameModalOpen(false)}
-            title="이름 변경"
-          >
-            <FormItem>
-              <FormItem.Title>이름 변경</FormItem.Title>
-              <InputText value="" />
-            </FormItem>
-          </Modal>
-
-          <MyPageItem align="center">
-            <span>비밀번호 변경</span>
-            <Button onClick={() => setIsModalOpen(true)}>변경</Button>
-          </MyPageItem>
-          <Modal
-            isFooter={true}
-            isOpen={isModalOpen}
-            onClose={() => setIsModalOpen(false)}
-            title="예시 모달"
-          >
-            <FormItem>
-              <FormItem.Title>현재 비밀번호</FormItem.Title>
-              <FormItem.Field>
-                <InputText value="" type="password" />
-              </FormItem.Field>
-            </FormItem>
-            <FormItem>
-              <FormItem.Title>비밀번호</FormItem.Title>
-              <FormItem.Field>
-                <InputText value="" type="password" />
-              </FormItem.Field>
-            </FormItem>
-            <FormItem>
-              <FormItem.Title>비밀번호 확인</FormItem.Title>
-              <FormItem.Field>
-                <InputText value="" type="password" />
-              </FormItem.Field>
-            </FormItem>
-          </Modal>
-        </ContentBox> */}
+              <MyFormControlLabel
+                value="customer"
+                label="일반 회원"
+                control={<Radio />}
+              />
+            </RadioGroup>
+          </div>
+          <div className="userList_main">
+            {userList?.data.map((item) => (
+              // <div key={item.id}>{item.nickname}</div>
+              <UserListItem user={item}></UserListItem>
+            ))}
+          </div>
+        </div>
       </Container>
     </>
   );
