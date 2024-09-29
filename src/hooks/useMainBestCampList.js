@@ -4,14 +4,14 @@ import apiGocamping from "../utils/apiGocamping";
 const API_KEY = process.env.REACT_APP_API_KEY_EN_SANG;
 const PARAMS = process.env.REACT_APP_PARAMS_DEFAULT;
 
-const fetchBestCamping = () => {
-  return apiGocamping.get(`basedList?serviceKey=${API_KEY}&${PARAMS}&numOfRows=500`);
+const fetchBestCamping = (numOfRows) => {
+  return apiGocamping.get(`basedList?serviceKey=${API_KEY}&${PARAMS}&numOfRows=${numOfRows}`);
 };
 
-export const useBestCampListQuery = () => {
+export const useMainBestCampListQuery = (numOfRows) => {
   return useQuery({
-    queryKey: ["camping_detail"],
-    queryFn: fetchBestCamping,
+    queryKey: ["bestCampList", numOfRows],
+    queryFn: () => fetchBestCamping(numOfRows),
     select: (result) => result?.data.response?.body.items.item,
   });
 };

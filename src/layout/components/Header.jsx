@@ -7,17 +7,7 @@ import lockIcon from "../../assets/icon/ico_lock.png";
 import unlockIcon from "../../assets/icon/ico_unlock.png";
 import styled from "styled-components";
 import { StylesProvider } from "@material-ui/core/styles";
-import {
-  Container,
-  Box,
-  AppBar,
-  Drawer,
-  IconButton,
-  List,
-  Toolbar,
-  Typography,
-  Button,
-} from "@mui/material";
+import { Container, Box, AppBar, Drawer, IconButton, List, Toolbar, Typography, Button } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { useSelector, useDispatch } from "react-redux";
@@ -43,19 +33,19 @@ const navItems = [
     id: "gnb3",
     kor: "중고장터",
     eng: "Market",
-    url: "/community/market",
+    url: "/market",
   },
   {
     id: "gnb4",
     kor: "캠핑요리",
     eng: "Food",
-    url: "/community/food",
+    url: "/cook",
   },
   {
     id: "gnb5",
     kor: "추천용품",
     eng: "Recommend",
-    url: "/community/recommend",
+    url: "/recommend",
   },
 ];
 
@@ -214,8 +204,7 @@ const Header = (props) => {
           backgroundColor: "var(--key-color)",
           marginBottom: "10px",
           padding: "20px 0",
-        }}
-      >
+        }}>
         <Link to="/">
           <Box
             component="img"
@@ -259,8 +248,7 @@ const Header = (props) => {
     </Box>
   );
 
-  const container =
-    window !== undefined ? () => window().document.body : undefined;
+  const container = window !== undefined ? () => window().document.body : undefined;
 
   return (
     <header>
@@ -277,8 +265,7 @@ const Header = (props) => {
           },
           backgroundColor: "var(--main-background-color)",
           boxShadow: "0 5px 20px rgba(0,0,0,0.1)",
-        }}
-      >
+        }}>
         <Container maxWidth="xl">
           <Toolbar
             sx={{
@@ -287,8 +274,7 @@ const Header = (props) => {
               justifyContent: { xs: "center", md: "space-between" },
               padding: "0 !important",
               alignItems: "flex-end",
-            }}
-          >
+            }}>
             <IconButton
               color="inherit"
               aria-label="open drawer"
@@ -303,8 +289,7 @@ const Header = (props) => {
                   md: "none",
                   color: "var(--color-darkGray)",
                 },
-              }}
-            >
+              }}>
               <FontAwesomeIcon icon={faBars} />
             </IconButton>
 
@@ -313,8 +298,7 @@ const Header = (props) => {
               sx={{
                 display: "flex",
                 alignItems: "flex-end",
-              }}
-            >
+              }}>
               <Typography component="h1">
                 <Link to="/">
                   <Box
@@ -347,16 +331,14 @@ const Header = (props) => {
                     md: "0 0 0 50px",
                   },
                   padding: "0",
-                }}
-              >
+                }}>
                 {navItems.map((item) => (
                   <StylesProvider key={`navItem${item.id}`} injectFirst>
                     <GnbItemPC key={item}>
                       <Link
                         to={item.url}
                         onMouseEnter={() => onGnbMouseEnter(item.id)}
-                        onMouseLeave={() => onGnbMouseLeave(item.id)}
-                      >
+                        onMouseLeave={() => onGnbMouseLeave(item.id)}>
                         {gnbItemText[item.id] ? (
                           <GnbMobileText>{item.eng}</GnbMobileText>
                         ) : (
@@ -404,8 +386,7 @@ const Header = (props) => {
               boxSizing: "border-box",
               width: drawerWidth,
             },
-          }}
-        >
+          }}>
           {drawer}
         </Drawer>
       </nav>
