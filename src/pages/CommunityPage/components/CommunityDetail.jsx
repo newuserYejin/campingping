@@ -1,11 +1,13 @@
 import styled from "styled-components";
 import CommunityCategory from "./CommunityCategory";
-import { Container, Button } from "@mui/material";
+import { Container } from "@mui/material";
 import { Link } from "react-router-dom";
 import ico_member from "../../../assets/images/ico_member.png";
 import ico_calendar from "../../../assets/images/ico_calendar2.png";
 import ico_arrow_prev from "../../../assets/images/ico_arrow_prev.png";
 import ico_arrow_next from "../../../assets/images/ico_arrow_next.png";
+import ReplyBox from "./ReplyBox";
+import { useUser } from "../../../hooks/useUser";
 
 const Header = styled.div`
   padding: 85px 0 50px;
@@ -53,14 +55,7 @@ const Contents = styled.div`
   padding: 50px 0;
 `;
 
-const ButtonBox = styled.div`
-  margin: 24px 0;
-  text-align: right;
 
-  .edit {
-    margin: 0 4px;
-  }
-`;
 
 const Footer = styled.span`
   display: flex;
@@ -114,37 +109,77 @@ const Footer = styled.span`
   }
 `;
 
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  
+`;
+
+const Button = styled.button`
+  padding: 5px 10px;
+  font-size: 12px;
+  color: white;
+  background-color: ${(props) => (props.delete ? '#e74c3c' : '#23489d')};
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: ${(props) => (props.delete ? '#c0392b' : '#0056b3')};
+  }
+`;
+
+
+
 const CommunityDetail = ({ data, link }) => {
+  const date = new Date(data.createdAt)
+
+  const formattedDate = date.toLocaleDateString("ko-KR", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit"
+  });
+
+  const { data: currentUser, error, isLoading } = useUser();
+  const currentUserId = currentUser?._id
+
   return (
     <>
       <CommunityCategory />
       <Container>
         <Header>
-          <HeaderCate>{data?.cate}</HeaderCate>
+          <HeaderCate>{data?.category}</HeaderCate>
           <HeaderTitle>{data?.title} </HeaderTitle>
           <HeaderInfo>
-            <HeaderName>{data?.nickname}</HeaderName>
-            <HeaderDate>{data?.date}</HeaderDate>
+            <HeaderName>{data?.userId?.nickname}</HeaderName>
+            <HeaderDate>{formattedDate}</HeaderDate>
           </HeaderInfo>
         </Header>
 
-        <Contents>{data?.contents}</Contents>
+        <Contents><pre>{data?.content}</pre></Contents>
 
-        <ButtonBox>
-          <Link to={link + `/write`} id={data?.id}>
-            수정
-          </Link>
-          <Button
-            className="remove"
-            type="submit"
-            variant="outlined"
-            color="error">
-            삭제
-          </Button>
-        </ButtonBox>
 
+        {
+          currentUserId == data.userId._id ?
+            <ButtonContainer>
+              <Link to={link + `/write`} id={data?.id}>
+                수정
+              </Link>
+              <Button delete>
+                삭제
+              </Button>
+            </ButtonContainer> : null
+        }
+
+        <ReplyBox currentUserId={currentUserId}/>
         <Footer>
-          {data?.prev && (
+
+
+
+
+
+          {/* {data?.prev && (
             <Link className="prev" to={link + `${data?.prev.id}`}>
               <span className="arrow">이전글</span>
               <p className="title">{data?.prev.title}</p>
@@ -155,7 +190,7 @@ const CommunityDetail = ({ data, link }) => {
               <span className="arrow">다음글</span>
               <p className="title">{data?.next.title}</p>
             </Link>
-          )}
+          )} */}
         </Footer>
       </Container>
     </>

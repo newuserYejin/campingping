@@ -3,13 +3,16 @@ import { Container, TextField, Button } from "@mui/material";
 import ReactQuill, { Quill } from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import ImageResize from "quill-image-resize";
+import api from "../../../utils/api";
+import { useNavigate, useParams } from "react-router-dom"
 
 Quill.register("modules/ImageResize", ImageResize);
 
-const CommunityWritePage = ({ onSubmit, maxImageSize = 2 * 1024 * 1024 }) => {
+const CommunityWritePage = ({category, onSubmit, maxImageSize = 2 * 1024 * 1024 }) => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const quillRef = React.useRef();
+  const navigate = useNavigate()
 
   const imageHandler = useCallback(() => {
     const input = document.createElement("input");
@@ -67,9 +70,39 @@ const CommunityWritePage = ({ onSubmit, maxImageSize = 2 * 1024 * 1024 }) => {
     "image",
   ];
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
+  const handleSubmit = async(e) => {
+
+    e.preventDefault()
+
+    if (!title || !content) {
+      alert("제목과 내용을 모두 입력해주세요.");
+      return;
+    }
+
+    // 게시글 데이터
+    const postData = {
+      title: title,
+      content: content,
+      category : category,
+    };
+
+   
+    try {
+      const response = await api.post("/post", postData)
+  
+      // 응답 처리
+      if (response.status === 200) {
+        alert("게시글이 성공적으로 등록되었습니다!")
+        setTitle("")
+        setContent("")
+      }
+    } catch (error) {
+      console.error("Error posting data:", error)
+      alert(`게시글 등록 중 오류가 발생했습니다: ${error.message}`)
+    }
+
+    navigate("/market")
+  }
 
   return (
     <>
@@ -107,6 +140,7 @@ const CommunityWritePage = ({ onSubmit, maxImageSize = 2 * 1024 * 1024 }) => {
             </div>
 
             <Button
+              onClick={handleSubmit}
               type="submit"
               variant="contained"
               sx={{

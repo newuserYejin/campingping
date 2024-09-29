@@ -64,6 +64,8 @@ const LoginPage = () => {
         console.log("로그인 성공:", response.data);
         // 성공 시 처리 로직 추가 (알림 띄우기)
         const { user, token } = response.data;
+
+        dispatch(authenticateAction.login(user)); // 사용자 정보 저장
         console.log("사용자 정보:", user);
         console.log("토큰:", token);
 
