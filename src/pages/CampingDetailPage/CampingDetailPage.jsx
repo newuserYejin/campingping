@@ -19,6 +19,7 @@ import "./CampingDetailPage.style.css";
 import CampingDetailPageKakao from "./CampingDetailPageKakao/CampingDetailPageKakao";
 import HandleCopyClipBoard from "./HandleCopyClipBoard/HandleCopyClipBoard";
 import CampingDetailSkeleton from "./CampingDetailSkeleton/CampingDetailSkeleton";
+import ReplyBox from "../CommunityPage/components/ReplyBox";
 
 const CampingDetailPage = () => {
   const [searchParams] = useSearchParams();
@@ -262,6 +263,9 @@ const CampingDetailPage = () => {
                   위해 꼭 필요한 사항은 해당 캠핑장에 미리 확인하시기 바랍니다
                 </div>
               </div>
+
+              
+
               <div className="camping-detail-attraction-line">
                 <AttractionCarousel
                   attractData={CampingRecommendItemList}
@@ -269,6 +273,7 @@ const CampingDetailPage = () => {
                 />
               </div>
             </div>
+            <ReplyBox/>
           </Container>
         </div>
       ) : (

@@ -112,6 +112,11 @@ const SignUpButton = styled(headerButton)`
   background: url(${lockIcon}) 0% 40% no-repeat;
   background-size: auto 13px;
 `;
+
+const MyPageButton = styled(headerButton)`
+  background-size: auto 13px;
+`;
+
 const UserName = styled(headerButton)`
   color: var(--main-font-color);
   em {
@@ -232,9 +237,10 @@ const Header = (props) => {
           </>
         ) : (
           <>
-            <UserName>
-              <em>{user?.nickname}</em>님
-            </UserName>
+            <UserName>{user?.nickname}님</UserName>
+            <MyPageButton href={user.level == "admin" ? `/admin` : `/mypage`}>
+              마이페이지
+            </MyPageButton>
             <LogOutButton onClick={logout}>로그아웃</LogOutButton>
           </>
         )}
@@ -352,9 +358,12 @@ const Header = (props) => {
                 </>
               ) : (
                 <>
-                  <UserName>
-                    <em>{user?.nickname}</em>님 안녕하세요!
-                  </UserName>
+                  <UserName>{user?.nickname}님</UserName>
+                  <MyPageButton
+                    href={user.level == "admin" ? `/admin` : `/mypage`}
+                  >
+                    마이페이지
+                  </MyPageButton>
                   <LogOutButton onClick={logout}>로그아웃</LogOutButton>
                 </>
               )}
