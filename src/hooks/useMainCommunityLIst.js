@@ -15,6 +15,6 @@ export const useFetchMainCommunityList = ({ category, page, limit }) => {
   return useQuery({
     queryKey: ["CommunityList", { category }],
     queryFn: () => fetchMainCommunityList({ category, page, limit }),
-    select: (result) => result,
+    select: (result) => result.data.data,
   });
 };

@@ -10,7 +10,7 @@ export const formatNumberWithCommas = (num) => {
 // 날짜 필터링
 export const formatDateDot = (dateString) => {
   if (!/^\d{8}$/.test(dateString)) {
-    throw new Error("Invalid input format. Expected 'YYYYMMDD'.");
+    return dateString;
   }
 
   return dateString.replace(/(\d{4})(\d{2})(\d{2})/, "$1.$2.$3");

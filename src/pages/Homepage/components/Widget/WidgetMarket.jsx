@@ -1,8 +1,8 @@
 import { useFetchMainCommunityList } from "../../../../hooks/useMainCommunityLIst";
 import UserWidgetBox from "./UserWidgetBox/UserWidgetBox";
-import UserWidgetCard from "./UserWidgetGallery/UserWidgetGallery";
+import UserWidgetCard from "./UserWidgetCard/UserWidgetCard";
 
-const WidgetCook = ({ title }) => {
+const WidgetMarket = ({ title }) => {
   const { data, isLoading, isError, error } = useFetchMainCommunityList({ category: "cook" });
 
   if (isLoading) {
@@ -19,4 +19,4 @@ const WidgetCook = ({ title }) => {
   }
 };
 
-export default WidgetCook;
+export default WidgetMarket;
