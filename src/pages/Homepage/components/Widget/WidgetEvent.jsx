@@ -15,7 +15,6 @@ const WidgetEvent = () => {
   let items = {};
   if (!isLoading && !isError) {
     items = eventList?.body.items.item;
-    console.log(items);
     return <UserWidgetGallery title={{ title: "가볼만한 지역 행사", link: "/" }} items={items} />;
   }
 };

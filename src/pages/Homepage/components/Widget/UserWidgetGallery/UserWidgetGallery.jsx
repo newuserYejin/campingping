@@ -9,10 +9,10 @@ const Item = styled.div`
 
   a {
     text-decoration: none;
+    color: var(--main-font-color);
 
     &:hover {
       text-decoration: underline;
-      color: var(--main-font-color);
     }
   }
 

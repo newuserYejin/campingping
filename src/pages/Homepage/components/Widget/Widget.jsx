@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import UserWidgetList from "./UserWidgetList/UserWidgetList";
 import UserWidgetCard from "./UserWidgetCard/UserWidgetCard";
 import WidgetEvent from "./WidgetEvent";
+import WidgetBest from "./WidgetBest";
 
 const Component = styled.div`
   display: flex;
@@ -17,7 +17,7 @@ const Component = styled.div`
 const Widget = () => {
   return (
     <Component>
-      <UserWidgetList title={{ title: "요즘 인기있는 캠핑장", link: "/recommend" }} />
+      <WidgetBest title={{ title: "요즘 인기있는 캠핑장", link: "/recommend" }} />
       <WidgetEvent title={{ title: "가볼만한 지역 행사", link: "/event" }} />
       <UserWidgetCard title={{ title: "중고거래", link: "/market" }} />
       <UserWidgetCard title={{ title: "캠핑 요리 추천", link: "/cook" }} />

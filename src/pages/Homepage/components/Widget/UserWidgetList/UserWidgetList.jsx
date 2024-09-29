@@ -38,13 +38,13 @@ const ListItem = styled.li`
 
 const ItemBox = styled.div`
   display: flex;
-  gap:20px;
+  gap: 20px;
 `;
 
 const Ranking = styled.strong`
   display: flex;
   align-items: center;
-  font-size:1.375rem;
+  font-size: 1.375rem;
   line-height: 100%;
   font-weight: normal;
   color: #3586ff;
@@ -57,7 +57,7 @@ const InfoTitle = styled.h3`
   font-weight: normal;
   color: #000;
   display: -webkit-box;
-  -webkit-line-clamp:1;
+  -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   overflow: hidden;
 `;
@@ -69,51 +69,22 @@ const InfoArea = styled.p`
   color: #757575;
 `;
 
-const items = [
-  {
-    id: 1,
-    ranking: 1,
-    title: "메이플글램핑&카라반",
-    area: "경기도포천",
-  },
-  {
-    id: 2,
-    ranking: 2,
-    title: "메이플글램핑&카라반",
-    area: "경기도포천",
-  },
-  {
-    id: 3,
-    ranking: 3,
-    title: "메이플글램핑&카라반",
-    area: "경기도포천",
-  },
-  {
-    id: 4,
-    ranking: 4,
-    title: "메이플글램핑&카라반",
-    area: "경기도포천",
-  },
-  {
-    id: 5,
-    ranking: 5,
-    title: "메이플글램핑&카라반",
-    area: "경기도포천",
-  },
-];
-const UserWidgetList = ({ title }) => {
+const UserWidgetList = ({ title, items }) => {
+  console.log(items);
   return (
     <UserWidgetBox title={title}>
       {items ? (
         <List>
-          {items.map((item) => (
-            <ListItem key={item.id}>
-              <Link to="" className="link">
+          {items.map((item, idx) => (
+            <ListItem key={item.contentId}>
+              <Link
+                to={`/campings/${item.contentId}?keyword=${item.facltNm}&lat=${item.mapX}&lon=${item.mapY}`}
+                className="link">
                 <ItemBox>
-                  <Ranking>{item.ranking}</Ranking>
+                  <Ranking>{idx + 1}</Ranking>
                   <div>
-                    <InfoTitle>{item.title}</InfoTitle>
-                    <InfoArea>{item.area}</InfoArea>
+                    <InfoTitle>{item.facltNm}</InfoTitle>
+                    <InfoArea>{item.addr1}</InfoArea>
                   </div>
                 </ItemBox>
               </Link>
