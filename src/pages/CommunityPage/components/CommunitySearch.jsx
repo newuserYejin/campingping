@@ -21,7 +21,7 @@ const Search = styled.div`
   flex-wrap: nowrap;
   flex-direction: row;
   padding: 0 20px;
-  width: 400px;
+  width: 300px;
   height: 40px;
   line-height: 40px;
   font-size: 14px;
@@ -72,16 +72,12 @@ const Search = styled.div`
   }
 `;
 
-const CommunitySearch = ({ title, keyword, setKeyword }) => {
+
+const CommunitySearch = ({ title, keyword, setKeyword, handleSearch}) => {
   return (
     <Component>
       {title && <Title>{title}</Title>}
-      <Search>
-        <select>
-          <option value="">전체</option>
-          <option value="">제목</option>
-          <option value="">작성자</option>
-        </select>
+      <Search as="form" onSubmit={handleSearch}>
         <input
           type="text"
           value={keyword}

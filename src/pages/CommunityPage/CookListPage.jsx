@@ -8,27 +8,46 @@ import CommunitySearch from "./components/CommunitySearch";
 import noimage from "../../assets/images/noimage.png";
 import bannerCook01 from "../../assets/images/bannerCook01.jpg";
 import noimage2 from "../../assets/images/noimage2.png";
+import api from "../../utils/api";
 
 const CookListPage = () => {
   const [keyword, setKeyword] = useState("");
   const [items, setItems] = useState([]);
+  const [page, setPage] = useState(1); // 현재 페이지 상태
+  const [totalPages, setTotalPages] = useState(1); // 총 페이지 수 상태
+  const itemsPerPage = 9; // 한 페이지에 표시할 게시물 수
 
-  const fetchPosts = async () => {
+  const fetchPosts = async (pageNumber, searchKeyword= "") => {
     try {
-      const response = await fetch("http://campingping.ap-northeast-2.elasticbeanstalk.com/api/post");
-      if (!response.ok) {
-        throw new Error("데이터를 불러오는데 실패했습니다.");
-      }
-      const data = await response.json();
-      setItems(data.data)
+      const response = await api.get("/post", {
+        params: { 
+          category: "cook",
+          page: pageNumber, // 현재 페이지 번호를 쿼리 파라미터로 전달
+          limit: itemsPerPage, // 페이지당 항목 수 전달
+          keyword: searchKeyword, // 키워드도 함께 전달
+         },
+      });
+
+      // 성공적으로 데이터를 가져오면 state에 저장
+      setItems(response.data.data);
+      setTotalPages(response.data.totalPages)
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
 
   useEffect(() => {
-    fetchPosts(); // 컴포넌트가 마운트될 때 API 요청을 보냄
-  }, []);
+    fetchPosts(page); // 컴포넌트가 마운트될 때 API 요청을 보냄
+  }, [page]);
+
+  const handlePageChange = (event, value) => {
+    setPage(value);
+  };
+
+  const handleSearch = (e) => {
+    e.preventDefault(); 
+    fetchPosts(1, keyword); // 페이지를 1로 초기화하고 검색어로 데이터 요청
+  };
 
   return (
     <>
@@ -41,12 +60,13 @@ const CookListPage = () => {
           title={"캠핑요리"}
           keyword={keyword}
           setKeyword={setKeyword}
+          handleSearch={handleSearch}
         />
         <CommunityListPhoto data={items} link="/cook" /> {/* 받아온 데이터를 사용 */}
         <Pagination
-          count={12}
-          page={1}
-          defaultPage={1}
+          count={totalPages}
+          page={page}
+          onChange={handlePageChange}
           siblingCount={0}
           size="large"
           sx={{
@@ -60,5 +80,6 @@ const CookListPage = () => {
     </>
   );
 };
+
 
 export default CookListPage;

@@ -5,8 +5,8 @@ const LOCAL_BACKEND = process.env.REACT_APP_LOCAL_BACKEND;
 
 const api = axios.create({
     // baseURL: `${REACT_APP_PROD_BACKEND}/api`,
-    // baseURL: LOCAL_BACKEND,
-    baseURL: MONGO_URL,
+    baseURL: LOCAL_BACKEND,
+    // baseURL: MONGO_URL,
     headers: {
         'Content-Type': 'application/json',
         authorization: `Bearer ${localStorage.getItem('token')}`,
