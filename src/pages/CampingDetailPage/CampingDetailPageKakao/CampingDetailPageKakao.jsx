@@ -3,7 +3,7 @@ import "./CampingDetailPageKakao.style.css";
 const { Kakao } = window;
 
 const CampingDetailPageKakao = ({ data }) => {
-  const realUrl = "https://how-about-camping.netlify.app/";
+  const realUrl = "https://campingping.netlify.apps";
   const resultUrl = window.location.href;
 
   useEffect(() => {

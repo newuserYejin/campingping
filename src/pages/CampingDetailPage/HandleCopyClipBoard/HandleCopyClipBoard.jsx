@@ -18,7 +18,7 @@ const HandleCopyClipBoard = ({ data }) => {
         className="clip-board-copy-button"
         onClick={() =>
           copyURLToClipboard(
-            `https://how-about-camping.netlify.app/campings/${data?.contentId}?keyword=${data?.facltNm}&lat=${data?.mapY}&lon=${data?.mapX}`
+            `https://campingping.netlify.app/campings/${data?.contentId}?keyword=${data?.facltNm}&lat=${data?.mapY}&lon=${data?.mapX}`
           )
         }
       >
