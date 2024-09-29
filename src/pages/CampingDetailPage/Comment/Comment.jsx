@@ -102,8 +102,8 @@ const ReplyButton = styled.button`
   color: white;
   border: none;
   border-radius: 15px;
-  width: 60px;
-   height : 35px;
+  width: 100px;
+  height: 35px;
   padding: 5px 10px;
   cursor: pointer;
   &:hover {
@@ -119,6 +119,7 @@ const CommentInputField = styled.textarea`
   font-size: 16px;
   border-radius: 5px;
   resize: none;
+  margin-top : 10px
 `;
 
 const ReplyContainer = styled.div`
@@ -201,7 +202,7 @@ const Comment = ({ comment, onEdit, onDelete, onReply }) => {
             </DeleteButton>
             {!isReplying && (
               <ReplyButton onClick={() => setIsReplying(true)}>
-                답글
+                답글 달기
               </ReplyButton>
             )}
           </>
@@ -211,12 +212,12 @@ const Comment = ({ comment, onEdit, onDelete, onReply }) => {
       {isReplying && (
         <div>
           <CommentInputField
-            placeholder="대댓글을 입력하세요 (최대 100자)"
+            placeholder="답변을 입력하세요 (최대 100자)"
             maxLength={100}
             value={replyText}
             onChange={(e) => setReplyText(e.target.value)}
           />
-          <ReplyButton onClick={handleReplySubmit}>대댓글 등록</ReplyButton>
+          <ReplyButton onClick={handleReplySubmit}>등록</ReplyButton>
         </div>
       )}
 
