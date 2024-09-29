@@ -7,6 +7,15 @@ export const formatNumberWithCommas = (num) => {
   return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
 
+// 날짜 필터링
+export const formatDateDot = (dateString) => {
+  if (!/^\d{8}$/.test(dateString)) {
+    throw new Error("Invalid input format. Expected 'YYYYMMDD'.");
+  }
+
+  return dateString.replace(/(\d{4})(\d{2})(\d{2})/, "$1.$2.$3");
+};
+
 // 이메일 유효성 검사
 export const validateEmail = (email) => {
   const re = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
