@@ -5,7 +5,7 @@ import { Button } from "@mui/base/Button";
 
 const { kakao } = window;
 
-const CampingDetailMap = ({ lat, lon, name }) => {
+const CampingDetailMap = ({ lat, lon, name, address }) => {
   useEffect(() => {
     mapscript();
   }, []);
@@ -50,6 +50,9 @@ const CampingDetailMap = ({ lat, lon, name }) => {
           </Button>
         </div>
       </div>
+      <div className="address">
+ {`${address}`}
+        </div>
     </div>
   );
 };
