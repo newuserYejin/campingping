@@ -16,7 +16,7 @@ const ListPhotoBox = styled.div`
 const CommunityListPhoto = ({ data, link }) => {
   return (
     <ListPhoto>
-      {data.map((item) => (
+      {data?.map((item) => (
         <ListPhotoBox key={item.id}>
           <ListPhotoItem data={item} link={link} />
         </ListPhotoBox>

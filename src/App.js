@@ -19,6 +19,7 @@ import RecommendListPage from "./pages/CommunityPage/RecommendListPage";
 import RecommendDetailPage from "./pages/CommunityPage/RecommendDetailPage";
 import RecommendWritePage from "./pages/CommunityPage/RecommendWritePage";
 import SignUpPage from "./pages/JoinPage/SignUpPage";
+import AdminPage from "./pages/AdminPage/AdminPage";
 
 function App() {
   return (
@@ -49,6 +50,9 @@ function App() {
         </Route>
         <Route path="/mypage">
           <Route index element={<MyPage />} />
+        </Route>
+        <Route path="/admin">
+          <Route index element={<AdminPage />} />
         </Route>
         <Route path="/">
           <Route path="market" element={<MarketListPage />} />

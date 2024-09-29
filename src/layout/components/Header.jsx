@@ -13,6 +13,7 @@ import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { useSelector, useDispatch } from "react-redux";
 import { authenticateAction } from "../../redux/actions/authencticateAction";
 import { useUser } from "../../hooks/useUser";
+import { useQueryClient } from "@tanstack/react-query";
 
 const drawerWidth = 260;
 const navItems = [
@@ -111,6 +112,11 @@ const SignUpButton = styled(headerButton)`
   background: url(${lockIcon}) 0% 40% no-repeat;
   background-size: auto 13px;
 `;
+
+const MyPageButton = styled(headerButton)`
+  background-size: auto 13px;
+`;
+
 const UserName = styled(headerButton)`
   color: var(--main-font-color);
   em {
@@ -158,15 +164,16 @@ const Header = (props) => {
   const navigate = useNavigate();
 
   const { data: user, isLoading, isError, refetch } = useUser();
+  const queryClient = useQueryClient();
   const { window } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const logout = async () => {
     localStorage.removeItem("token");
-    await refetch(); // refetch가 완료될 때까지 기다림
-
+    console.log("삭제함");
+    queryClient.setQueryData(["userData"], null);
     // window.location.reload(); // 새로고침
-    // navigate("/login"); // 로그인 페이지로/ 리다이렉션
+    navigate("/login"); // 로그인 페이지로/ 리다이렉션
   };
 
   const token = localStorage.getItem("token");
@@ -225,14 +232,15 @@ const Header = (props) => {
       <LoginMo>
         {!user ? (
           <>
-            <LoginButton to="/login">로그인</LoginButton>
-            <SignUpButton to="/signup">회원가입</SignUpButton>
+            <LoginButton href="/login">로그인</LoginButton>
+            <SignUpButton href="/signup">회원가입</SignUpButton>
           </>
         ) : (
           <>
-            <UserName>
-              <em>{user?.nickname}</em>님
-            </UserName>
+            <UserName>{user?.nickname}님</UserName>
+            <MyPageButton href={user.level == "admin" ? `/admin` : `/mypage`}>
+              마이페이지
+            </MyPageButton>
             <LogOutButton onClick={logout}>로그아웃</LogOutButton>
           </>
         )}
@@ -345,14 +353,17 @@ const Header = (props) => {
             <LoginPc>
               {!user ? (
                 <>
-                  <LoginButton to="/login">로그인</LoginButton>
-                  <SignUpButton to="/signup">회원가입</SignUpButton>
+                  <LoginButton href="/login">로그인</LoginButton>
+                  <SignUpButton href="/signup">회원가입</SignUpButton>
                 </>
               ) : (
                 <>
-                  <UserName>
-                    <em>{user?.nickname}</em>님 안녕하세요!
-                  </UserName>
+                  <UserName>{user?.nickname}님</UserName>
+                  <MyPageButton
+                    href={user.level == "admin" ? `/admin` : `/mypage`}
+                  >
+                    마이페이지
+                  </MyPageButton>
                   <LogOutButton onClick={logout}>로그아웃</LogOutButton>
                 </>
               )}

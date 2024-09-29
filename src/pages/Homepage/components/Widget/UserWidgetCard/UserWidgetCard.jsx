@@ -9,23 +9,29 @@ import styled from "styled-components";
 import nolimage from "../../../../../assets/images/noimage.svg";
 
 const ListItem = styled.div`
-  height: 100px;
-  margin-bottom: 23px;
-  padding-bottom: 23px;
+  display:flex;
+  align-items: center;
+  min-height:100px;
+  padding: 1.25rem 0;
   border-bottom: 1px solid #e5e5e5;
   overflow: hidden;
+  
+  &:first-of-type{
+    padding-top:0.2rem;
+  }
 
   .item {
     display: flex;
     align-items: flex-start;
-    justify-content: space-between;
+    justify-content: flex-start;
+    gap:14px;
     text-decoration: none;
   }
 
   .thumb {
     display:block;
+    width:28%;
     max-width:90px;
-    width:65%;
     aspect-ratio: 1/1;
     img {
       display: block;
@@ -36,39 +42,46 @@ const ListItem = styled.div`
   }
 
   .info {
-    margin-left: 14px;
-
+    width:72%;
     &__title {
       display: -webkit-box;
       -webkit-line-clamp:1;
       -webkit-box-orient: vertical;
       overflow: hidden;
       margin: 4px 0 0 0;
-      font-size: 18px;
-      line-height: 100%;
+      font-size: 1.25rem;
+      line-height: 1;
       font-weight: normal;
       color: #000000;
+      @media (max-width: 900px) {
+        font-size: 1rem;
+      }
     }
 
     &__name {
-      margin: 0;
-      font-size: 12px;
+      display:flex;
+      align-items: center;
+      margin: 5px 0 0 0;
+      font-size: 0.75rem;
+      line-height:1.15;
       line-height: 100%;
       color: #757575;
-
-      & > span:first-child {
-        position: relative;
-        margin-right: 8px;
-        padding-right: 8px;
-
+      span{
+        display:block;
+      }
+      .date{
+        display:flex;
+        align-items: center;
         &:before {
+          display:block;
           content: "";
-          position: absolute;
-          top: 1px;
-          right: 0;
           width: 1px;
-          height: 12px;
+          height: 10px;
+          margin:0 5px;
           background: #d6d6d6;
+        }
+        @media (max-width: 600px) {
+          display:none;
         }
       }
     }
@@ -78,9 +91,14 @@ const ListItem = styled.div`
       -webkit-box-orient: vertical;
       -webkit-line-clamp: 2;
       overflow: hidden;
-      margin: 4px 0 0 0;
-      font-size: 14px;
+      margin: 10px 0 0 0;
+      font-size: 0.875rem;
+      line-height:1.25;
       color: #000000;
+      @media (max-width: 900px) {
+
+      
+    font-size: 0.85rem;}
     }
   }
 
@@ -187,8 +205,8 @@ export const UserWidgetCard = ({ title }) => {
                       <div className="info">
                         <h3 className="info__title">{item.title}</h3>
                         <span className="info__name">
-                          <span>{item.name}</span>
-                          <span>{item.data}</span>
+                          <span class="name">{item.name}</span>
+                          <span class="date">{item.data}</span>
                         </span>
                         <p className="info__content">{item.content}</p>
                       </div>

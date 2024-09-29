@@ -13,7 +13,6 @@ const arrowButtonWidth = '70px';
 const CampingFood = styled.section`
   position: relative;
   background: #f5f5f5;
-
   margin-top: 3rem;
   @media (max-width: 900px) {
     aspect-ratio: 100/48;
@@ -59,7 +58,7 @@ const TextBox = styled.div`
   }
   @media (max-width: 600px) {
     width: 100%;
-    padding: 0 0 0 1rem;
+    padding: 0 1rem;
   }
 `;
 
@@ -80,6 +79,7 @@ const BannerTitle = styled.h3`
   }
   @media (max-width: 600px) {
     font-size: 0.85rem;
+    line-height:1;
   }
 `;
 
@@ -103,6 +103,8 @@ const ItemTitle = styled.h4`
     text-shadow: 1px 1px 2px #f5f5f5;
   }
   @media (max-width: 600px) {
+    -webkit-line-clamp:1;
+    margin-bottom: 0;
     font-size: 1.5rem;
   }
 `;
@@ -128,7 +130,11 @@ const ItemDesc = styled.p`
     padding: 0 20px 0 0;
     color: var(--color-darkGray);
     text-shadow: 1px 1px 2px #f5f5f5;
+    -webkit-line-clamp: 2;
   }
+  @media (max-width: 600px) {
+    margin-top: 0.5rem;
+    }
 `;
 
 const MoreBtn = styled.p`
@@ -159,12 +165,12 @@ const MoreBtn = styled.p`
     }
   }
   @media (max-width: 600px) {
-    margin-top: 1rem;
+    margin-top: 0.75rem;
     a {
-      width: 100px;
-      height: 35px;
+      width: 90px;
+      height: 32px;
       font-size: 0.75rem;
-      line-height: 33px;
+      line-height: 30px;
     }
   }
 `;
