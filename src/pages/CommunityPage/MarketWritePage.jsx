@@ -5,6 +5,8 @@ import CommunityCategory from "./components/CommunityCategory";
 import CommunityWritePage from "./components/CommunityWrite";
 
 const MarketWritePage = () => {
+  const [category, setCategory] = useState("market")
+
   return (
     <>
       <CommunityCategory />
@@ -12,7 +14,7 @@ const MarketWritePage = () => {
         sx={{
           margin: "4em auto",
         }}>
-        <CommunityWritePage />
+        <CommunityWritePage category={category} />
       </Container>
     </>
   );

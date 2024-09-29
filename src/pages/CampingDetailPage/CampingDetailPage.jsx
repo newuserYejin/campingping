@@ -20,6 +20,7 @@ import CampingDetailPageKakao from "./CampingDetailPageKakao/CampingDetailPageKa
 import HandleCopyClipBoard from "./HandleCopyClipBoard/HandleCopyClipBoard";
 import CampingDetailSkeleton from "./CampingDetailSkeleton/CampingDetailSkeleton";
 import Comments from "./Comments/Comments";
+import ReplyBox from "../CommunityPage/components/ReplyBox";
 
 const CampingDetailPage = () => {
   const [searchParams] = useSearchParams();
@@ -253,6 +254,7 @@ const CampingDetailPage = () => {
             <div className="camping-detail-comments">
               <Comments />
             </div>
+            <ReplyBox/>
           </Container>
         </div>
       ) : (
