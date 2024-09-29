@@ -1,15 +1,16 @@
 import { useMainBestCampListQuery } from "../../../../hooks/useMainBestCampList";
+import UserWidgetBox from "./UserWidgetBox/UserWidgetBox";
 import UserWidgetList from "./UserWidgetList/UserWidgetList";
 
 const WidgetBest = ({ title }) => {
   const { data, isLoading, isError, error } = useMainBestCampListQuery(5);
 
   if (isLoading) {
-    return <></>;
+    return <UserWidgetBox title={title} />;
   }
 
   if (isError) {
-    return <div>{error.message}</div>;
+    return <UserWidgetBox title={title}>{error.message}</UserWidgetBox>;
   }
 
   if (!isLoading && !isError) {

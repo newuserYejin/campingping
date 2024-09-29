@@ -1,21 +1,22 @@
 import { useFetchEvent } from "../../../../hooks/useFetchEvent";
+import UserWidgetBox from "./UserWidgetBox/UserWidgetBox";
 import UserWidgetGallery from "./UserWidgetGallery/UserWidgetGallery";
 
-const WidgetEvent = () => {
+const WidgetEvent = ({ title }) => {
   const { data: eventList, isLoading, isError, error } = useFetchEvent({ CurrentPage: 1, numOfRows: 3 });
 
   if (isLoading) {
-    return <></>;
+    return <UserWidgetBox title={title} />;
   }
 
   if (isError) {
-    return <div>{error.message}</div>;
+    return <UserWidgetBox title={title}>{error.message}</UserWidgetBox>;
   }
 
   let items = {};
   if (!isLoading && !isError) {
     items = eventList?.body.items.item;
-    return <UserWidgetGallery title={{ title: "가볼만한 지역 행사", link: "/" }} items={items} />;
+    return <UserWidgetGallery title={title} items={items} />;
   }
 };
 

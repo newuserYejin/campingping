@@ -70,7 +70,6 @@ const InfoArea = styled.p`
 `;
 
 const UserWidgetList = ({ title, items }) => {
-  console.log(items);
   return (
     <UserWidgetBox title={title}>
       {items ? (
