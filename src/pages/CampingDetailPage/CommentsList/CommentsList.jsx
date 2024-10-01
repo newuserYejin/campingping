@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Comment from '../Comment/Comment';
 
-const CommentsList = ({ comments, onEdit, onDelete, onReply }) => {
+const CommentsList = ({ comments, onEdit, onDelete, onReply, currentUser }) => {
   const [visibleCount, setVisibleCount] = useState(3); // 처음엔 3개만 보이게
 
   const handleShowMore = () => {
@@ -12,6 +12,7 @@ const CommentsList = ({ comments, onEdit, onDelete, onReply }) => {
     <div>
       {comments.slice(0, visibleCount).map((comment, index) => (
         <Comment
+          currentUser={currentUser}
           key={index}
           comment={comment}
           onEdit={onEdit}

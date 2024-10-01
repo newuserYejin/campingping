@@ -61,7 +61,7 @@ const TextArea = styled.textarea`
   font-size: 14px;
 `;
 
-const ReplyCard = ({ reply, fetchReply, currentUserId }) => {
+const ReplyCard = ({ reply, fetchReply, currentUserId, campingId }) => {
     const [reReplies, setReReplies] = useState([]); // 대댓글 상태
     const [loadingReReplies, setLoadingReReplies] = useState(false); // 로딩 상태
     const [errorReReplies, setErrorReReplies] = useState(null); // 에러 상태
@@ -76,6 +76,13 @@ const ReplyCard = ({ reply, fetchReply, currentUserId }) => {
         month: '2-digit',
         day: '2-digit',
     });
+    const formattedTime = date.toLocaleTimeString('ko-KR', {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false,
+    });
+
+    const formattedDateTime = `${formattedDate} ${formattedTime}`;
 
 
 
@@ -83,7 +90,7 @@ const ReplyCard = ({ reply, fetchReply, currentUserId }) => {
     const fetchReReplies = async () => {
         try {
             setLoadingReReplies(true);
-            const response = await api.get(`/re_reply/${reply._id}`);
+            const response = await api.get(`/${campingId ? 're_review' : 're_reply'}/${reply._id}`);
             setReReplies(response.data.data);
             setLoadingReReplies(false);
         } catch (error) {
@@ -99,17 +106,25 @@ const ReplyCard = ({ reply, fetchReply, currentUserId }) => {
     // 대댓글 작성 함수
     const handleReReplySubmit = async (e) => {
         e.preventDefault();
+        if (!currentUserId) {
+            alert("로그인 후 사용해주세요.");
+            return;
+        }
         if (!newReReply) return;
 
         try {
-            const response = await api.post(`/re_reply/${reply._id}`, {
+            const requestBody = {
                 content: newReReply,
-                postId: id
-            });
+                ...(campingId ? { campingId: campingId } : { postId: id }) // campingId가 있을 때는 campingId, 없을 때는 postId 추가
+            };
+
+            const endpoint = `/${campingId ? 're_review' : 're_reply'}/${reply._id}`;
+            const response = await api.post(endpoint, requestBody);
+
             setReReplies([...reReplies, response.data.data]);
             setNewReReply(''); // 입력 필드 초기화
             setShowReReplyForm(false); // 대댓글 폼 숨기기
-            fetchReReplies();
+            fetchReReplies(); // 대댓글 목록을 다시 불러오기
         } catch (error) {
             console.log('Failed to post re-reply:', error);
         }
@@ -123,7 +138,7 @@ const ReplyCard = ({ reply, fetchReply, currentUserId }) => {
             if (!confirmDelete) {
                 return
             }
-            await api.delete(`/reply/${reply._id}`);
+            await api.delete(`/${campingId ? 'review' : 'reply'}/${reply._id}`);
             fetchReply()
         } catch (error) {
             console.log('Failed to delete reply:', error);
@@ -135,10 +150,11 @@ const ReplyCard = ({ reply, fetchReply, currentUserId }) => {
         <ReplyCardBody>
             <Nickname>{reply?.userId?.nickname}</Nickname>
             <Content>{reply?.content}</Content>
-            <CreatedAt>{formattedDate}</CreatedAt>
+            <CreatedAt>{formattedDateTime}</CreatedAt>
 
             {/* 대댓글 작성 버튼 및 삭제 버튼 */}
             <ButtonContainer>
+               
                 <Button onClick={() => setShowReReplyForm(!showReReplyForm)}>
                     대댓글 달기
                 </Button>
@@ -178,11 +194,12 @@ const ReplyCard = ({ reply, fetchReply, currentUserId }) => {
             {reReplies && reReplies.length > 0 && (
                 <div>
                     {reReplies.map((reReply) => (
-                        <ReReply 
+                        <ReReply
                             key={reReply._id}
                             reReply={reReply}
-                            fetchReReplies={fetchReReplies} 
+                            fetchReReplies={fetchReReplies}
                             currentUserId={currentUserId}
+                            campingId={campingId}
                         />
                     ))}
                 </div>

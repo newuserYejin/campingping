@@ -129,13 +129,27 @@ const ReplyContainer = styled.div`
   margin-bottom: 10px;
 `;
 
-const Comment = ({ comment, onEdit, onDelete, onReply }) => {
+const Comment = ({ comment, onEdit, onDelete, onReply, currentUser }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [isReplying, setIsReplying] = useState(false);
   const [editedText, setEditedText] = useState(comment.text);
   const [replyText, setReplyText] = useState('');
   const [likes, setLikes] = useState(comment.likes || 0);
   const [liked, setLiked] = useState(false);
+
+  const date = new Date(comment.createdAt);
+  const formattedDate = date.toLocaleDateString('ko-KR', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  });
+  const formattedTime = date.toLocaleTimeString('ko-KR', {
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+  });
+
+  const formattedDateTime = `${formattedDate} ${formattedTime}`;
 
   const handleLike = () => {
     if (liked) {
@@ -168,7 +182,7 @@ const Comment = ({ comment, onEdit, onDelete, onReply }) => {
     <CommentContainer>
       <CommentHeader>
         <div>
-          <strong>{comment.username}</strong>
+          <strong>{comment?.userId?.nickname}</strong>
         </div>
         <CommentDetails>
           <ThumbsUpContainer>
@@ -185,21 +199,30 @@ const Comment = ({ comment, onEdit, onDelete, onReply }) => {
           onChange={(e) => setEditedText(e.target.value)}
         />
       ) : (
-        <CommentText>{comment.text}</CommentText>
+        <CommentText>{comment.content}</CommentText>
       )}
       <RatingDateContainer>
-        <span>{comment.date}</span>
-        <span>{comment.rating && "⭐".repeat(comment.rating)}</span>
+        <span>{formattedDateTime}</span>
+        <span>{comment.score && "⭐".repeat(comment.score)}</span>
       </RatingDateContainer>
       <ButtonContainer>
         {isEditing ? (
           <EditButton onClick={handleEditSubmit}>수정 완료</EditButton>
         ) : (
           <>
-            <EditButton onClick={() => setIsEditing(true)}>수정</EditButton>
-            <DeleteButton onClick={() => onDelete(comment.id)}>
-              삭제
-            </DeleteButton>
+
+            {/* {
+              currentUser?._id == comment?.userId?._id ?
+                <EditButton onClick={() => setIsEditing(true)}>수정</EditButton>
+                : null
+            } */}
+            {
+              currentUser?._id == comment?.userId?._id ?
+              <DeleteButton onClick={() => onDelete(comment._id)}>
+                삭제
+              </DeleteButton>: null
+            }
+
             {!isReplying && (
               <ReplyButton onClick={() => setIsReplying(true)}>
                 답글 달기

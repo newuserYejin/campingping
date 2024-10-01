@@ -42,16 +42,16 @@ const SubmitButton = styled.button`
   }
 `;
 
-const ReplyBox = ({currentUserId}) => {
+const ReplyBox = ({replyTitle, currentUserId, campingId}) => {
   const { id } = useParams()
   const [replies, setReplies] = useState([]); // 댓글 목록
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [newReply, setNewReply] = useState(''); // 새 댓글 내용
-
+  
   const fetchReply = async () => {
     try {
-      const response = await api.get(`/reply/${id}`);
+      const response = await api.get(`/${campingId ? 'review' : 'reply'}/${campingId ? campingId.contentId : id}`);
       setReplies(response.data.data || [])
       setLoading(false)
     } catch (error) {
@@ -62,10 +62,13 @@ const ReplyBox = ({currentUserId}) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!currentUserId) alert("로그인 후 사용해주세요")
     if (!newReply) return;
 
     try {
-      const response = await api.post(`/reply/${id}`, {
+      const response = await api.post(`/${campingId ? 'review' : 'reply'}/${campingId ? "": id}`, {
+        campingId : campingId,
+        score: "4",
         content: newReply,
       });
       setReplies([...replies, response.data]);
@@ -93,7 +96,7 @@ const ReplyBox = ({currentUserId}) => {
 
   return (
     <ReplyBoxWrapper>
-      <h3>댓글</h3>
+      <h3>{replyTitle}</h3>
 
       {/* 댓글 작성 폼 */}
       <ReplyForm onSubmit={handleSubmit}>
@@ -113,6 +116,7 @@ const ReplyBox = ({currentUserId}) => {
             reply={reply} 
             fetchReply={fetchReply}
             currentUserId={currentUserId}
+            campingId={campingId}
         />
       ))}
     </ReplyBoxWrapper>
