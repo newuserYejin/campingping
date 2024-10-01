@@ -24,6 +24,10 @@ const Item = styled(Paper)(({ theme }) => ({
 const UserListItem = ({ user, onUserChange }) => {
   const [updateLevel, setLevel] = useState(user.level);
 
+  useEffect(() => {
+    setLevel(user.level); // user.level이 변경될 때마다 updateLevel을 업데이트
+  }, [user.level]); // user.level이 변경될 때만 실행
+
   const handleChange = (event) => {
     const newLevel = event.target.value;
     setLevel(newLevel); // 상태를 업데이트
@@ -34,7 +38,7 @@ const UserListItem = ({ user, onUserChange }) => {
 
   return (
     <>
-      {user.level == "unsigned" ? (
+      {user.level == "unsigned" || user.level == "owner" ? (
         <Grid container spacing={1}>
           <Grid item xs={1.5}>
             <Item>{user.nickname}</Item>

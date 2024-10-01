@@ -1,11 +1,18 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { Container } from "@mui/material";
+import {
+  Container,
+  FormGroup,
+  FormControlLabel,
+  Checkbox,
+  Grid,
+  Paper,
+  MenuItem,
+} from "@mui/material";
 import SubVisual from "../../components/SubVisual/SubVisual";
 
 import { styled } from "@mui/material/styles";
 import RadioGroup, { useRadioGroup } from "@mui/material/RadioGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
 import Radio from "@mui/material/Radio";
 import UserListItem from "./component/UserListItem";
 
@@ -26,17 +33,19 @@ const StyledFormControlLabel = styled((props) => (
         ".MuiFormControlLabel-label": {
           color: theme.palette.primary.main,
         },
-
-        // ".MuiButtonBase-root": {
-        //   display: "none",
-        // },
-
-        // ".css-vqmohf-MuiButtonBase-root-MuiRadio-root":{
-        //   display:"none",
-        // }
       },
     },
   ],
+}));
+
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: "#6c757d",
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: "center",
+  color: "white",
+  marginBottom: "10px",
+  marginTop: "10px",
 }));
 
 const MyPage = () => {
@@ -46,11 +55,18 @@ const MyPage = () => {
   const [isNameModalOpen, setIsNameModalOpen] = useState(false);
 
   const [level, setLevel] = useState("unsigned");
+  const [sublevel, setSubLevel] = useState("unsigned");
+  const [isUnsignedChecked, setIsUnsignedChecked] = useState(true);
+  const [isOwnerChecked, setIsOwnerChecked] = useState(false);
 
-  const { data: userList, isLoading, error } = useUserList(level);
+  const {
+    data: userList,
+    isLoading,
+    error,
+    refetch,
+  } = useUserList(level, sublevel);
 
   let [changedUsers, setChangedUsers] = useState([]); // 변경된 유저 저장
-  const { mutate: signUser } = useSign();
 
   useEffect(() => {
     if (userList) {
@@ -58,6 +74,12 @@ const MyPage = () => {
     }
   }, [userList, level]);
 
+  useEffect(() => {
+    console.log("level: ", level);
+    console.log("subLevel: ", sublevel);
+  }, [level, sublevel]);
+
+  // 라디오버튼
   function MyFormControlLabel(props) {
     const radioGroup = useRadioGroup();
 
@@ -71,6 +93,29 @@ const MyPage = () => {
 
     return <StyledFormControlLabel checked={checked} {...props} />;
   }
+
+  // 체크박스
+  const handleCheckboxChange = (event) => {
+    const { name, checked } = event.target;
+
+    if (name === "unsigned") {
+      setIsUnsignedChecked(checked);
+    } else if (name === "owner") {
+      setIsOwnerChecked(checked);
+    }
+  };
+
+  useEffect(() => {
+    if (isUnsignedChecked && isOwnerChecked) {
+      setSubLevel("all");
+    } else if (isUnsignedChecked) {
+      setSubLevel("unsigned");
+    } else if (isOwnerChecked) {
+      setSubLevel("owner");
+    } else {
+      setSubLevel("all"); // 둘 다 체크 해제
+    }
+  }, [isUnsignedChecked, isOwnerChecked]);
 
   // 자식 컴포넌트로부터 변경된 유저 정보를 받아오는 함수
   const handleUserChange = (updatedUser) => {
@@ -90,15 +135,18 @@ const MyPage = () => {
 
   // 저장 버튼 클릭 시 변경된 유저들 업데이트
   const handleSave = async () => {
-    changedUsers = changedUsers.filter((user) => user.level === "owner");
+    // 승인했다가 다시 변경할 수 있도록 주석 처리
+    // changedUsers = changedUsers.filter((user) => user.level === "owner");
 
-    console.log("필터링 후 변경될 유저 데이터:", changedUsers);
+    console.log("변경될 유저 데이터:", changedUsers);
 
     try {
       for (const user of changedUsers) {
         const response = await api.put(`/user/sign`, user);
         console.log("응답 데이터:", response);
         // 필요하다면 응답 데이터 처리
+
+        refetch();
       }
     } catch (error) {
       console.error("API 호출 중 오류 발생:", error);
@@ -139,7 +187,58 @@ const MyPage = () => {
               />
             </RadioGroup>
           </div>
+          {level == "unsigned" && (
+            <FormGroup
+              className="level_checkbox"
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "end",
+              }}
+            >
+              <FormControlLabel
+                sx={{ maxWidth: "fit-content" }}
+                control={
+                  <Checkbox
+                    name="unsigned"
+                    checked={isUnsignedChecked}
+                    onChange={handleCheckboxChange}
+                    defaultChecked
+                  />
+                }
+                label="미승인"
+              />
+              <FormControlLabel
+                sx={{ maxWidth: "fit-content" }}
+                control={
+                  <Checkbox
+                    name="owner"
+                    checked={isOwnerChecked}
+                    onChange={handleCheckboxChange}
+                  />
+                }
+                label="승인"
+              />
+            </FormGroup>
+          )}
           <div className="userList_main">
+            <Grid container spacing={1}>
+              <Grid item xs={1.5}>
+                <Item>닉네임</Item>
+              </Grid>
+              <Grid item xs={3.5}>
+                <Item>캠핑장 명</Item>
+              </Grid>
+              <Grid item xs={2}>
+                <Item>연락처</Item>
+              </Grid>
+              <Grid item xs={3.5}>
+                <Item>캠핑장 주소</Item>
+              </Grid>
+              <Grid item xs={1.5}>
+                <Item>승인 상태</Item>
+              </Grid>
+            </Grid>
             {userList?.data.map((item) => (
               // <div key={item.id}>{item.nickname}</div>
               <UserListItem
