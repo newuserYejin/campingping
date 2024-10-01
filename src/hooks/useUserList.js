@@ -13,8 +13,6 @@ const fetchUserList = async (level) => {
 export const useUserList = (level) => {
     const token = localStorage.getItem('token');
 
-    console.log("백 보내기 전:", level)
-
     return useQuery({
         queryKey: ['userList', { level }],
         queryFn: () => fetchUserList(level),
