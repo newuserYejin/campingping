@@ -45,6 +45,7 @@ const MyPage = () => {
   const [reUpdatePW, setReUpdatePW] = useState("");
   const [errors, setErrors] = useState({});
   const [updateError, setUpdateError] = useState("");
+  const [updateOk, setUpdateOk] = useState(false);
 
   const { data: userData, isLoading, isError, refetch } = useUser();
 
@@ -95,13 +96,13 @@ const MyPage = () => {
 
       const response = await api.put(`/user/me/${userData._id}`, payload); // 닉네임을 서버로 전송합니다.
       console.log("업데이트 response: ", response);
+      setUpdateOk(true);
       setUpdateDataName("");
       setUpdateDataPW("");
-
-      // refetch();
     } catch (error) {
       setUpdateError(error.error);
       console.error("업데이트 실패:", error.error);
+      setUpdateOk(false);
     }
   };
 
@@ -167,9 +168,11 @@ const MyPage = () => {
                 return;
               } else {
                 await userUpdate(undefined, updateDataName, "nickname");
-                setIsNameModalOpen(false);
-                refetch();
-                setUpdateError("");
+                if (updateOk) {
+                  setIsNameModalOpen(false);
+                  refetch();
+                  setUpdateError("");
+                }
               }
             }}
           >
