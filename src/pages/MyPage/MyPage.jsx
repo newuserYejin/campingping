@@ -1,7 +1,6 @@
 import React from "react";
 import { useState } from "react";
 import { Container } from "@mui/material";
-import { UserCircle } from "lucide-react";
 import styled from "styled-components";
 import SubVisual from "../../components/SubVisual/SubVisual";
 import MyPageItem from "./component/MyPageItem/MyPageItem";
@@ -14,18 +13,9 @@ import Modal from "../../components/Modal/Modal";
 import { useUser } from "../../hooks/useUser";
 import api from "../../utils/api.js";
 
-const ProfileCircle = styled.div`
-  margin: auto;
-  width: 128px;
-  height: 128px;
-
-  img {
-    width: 100%;
-    height: 100%;
-
-    object-fit: cover;
-  }
-`;
+import { validatePassword } from "../../utils/common.js";
+import { useNavigate } from "react-router-dom";
+import { useQueryClient } from "@tanstack/react-query";
 
 const ErrorMessage = styled.div`
   margin-top: 10px;
@@ -49,60 +39,93 @@ const MyPage = () => {
 
   const { data: userData, isLoading, isError, refetch } = useUser();
 
-  // 프로필 사진 변경
-  const handleProfilePhotoChange = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setProfilePhoto(reader.result);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
+  // 비밀번호관련 오류
+  const [presentError, setPresentError] = useState("");
+  const [newPwError, setNewPwError] = useState("");
+
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   // 유효성 검사
   const handleChange = (event) => {
     const { name, value } = event.target;
 
     // 실시간 유효성 검사
-    let error = "";
-    if (name === "password" && !updateDataPW(value)) {
-      error =
-        "비밀번호는 8자 이상이며, 문자, 숫자, 특수문자를 포함해야 합니다.";
+    if (name === "password" && !validatePassword(value)) {
+      setNewPwError(
+        "비밀번호는 8자 이상이며, 문자, 숫자, 특수문자를 포함해야 합니다."
+      );
+    } else {
+      setNewPwError("");
     }
-
-    setErrors((prevErrors) => ({
-      ...prevErrors,
-      [name]: error,
-    }));
   };
 
-  const userUpdate = async (updateDataPW, updateDataName, column) => {
+  const userUpdate = async (
+    updateDataPW,
+    updateDataName,
+    column,
+    presentPW
+  ) => {
     try {
       console.log("출력:", userData);
 
       if (column === "password") {
         if (updateDataPW != reUpdatePW) {
-          return console.log("변경 비밀번호와 재입력 비밀번호 불일치");
+          console.log("변경 비밀번호와 재입력 비밀번호 불일치");
+          return setNewPwError(
+            "비밀번호와 재입력 비밀번호가 일치하지 않습니다."
+          );
         }
       }
+
+      console.log("프론트 presentPW: ", presentPW);
 
       let payload = {
         ...userData, // userData 객체의 모든 필드를 복사
         nickname: column === "nickname" ? updateDataName : userData.nickname, // 닉네임만 덮어씌움
         password: column === "password" ? updateDataPW : undefined, // 비밀번호만 덮어씌움, 없으면 undefined
+        presentPW: column === "password" ? presentPW : undefined,
       };
 
-      const response = await api.put(`/user/me/${userData._id}`, payload); // 닉네임을 서버로 전송합니다.
+      let response;
+      if (column === "nickname") {
+        response = await api.put(`/user/me/nickname/${userData._id}`, payload); // 닉네임을 서버로 전송합니다.
+      } else if (column === "password") {
+        response = await api.put(`/user/me/${userData._id}`, payload);
+      }
+
       console.log("업데이트 response: ", response);
       setUpdateOk(true);
       setUpdateDataName("");
+      setIsNameModalOpen(false);
+      setUpdateError("");
+      setIsModalOpen(false);
       setUpdateDataPW("");
+      setNewPwError("");
+      setPresentError("");
+      setPresentPW("");
+      setReUpdatePW("");
+      refetch();
+
+      if (column === "password") {
+        localStorage.removeItem("token");
+        queryClient.setQueryData(["userData"], null);
+        navigate("/login");
+      }
     } catch (error) {
       setUpdateError(error.error);
       console.error("업데이트 실패:", error.error);
       setUpdateOk(false);
+      setUpdateDataName("");
+      setPresentPW("");
+      setUpdateDataPW("");
+      setReUpdatePW("");
+
+      if (error.status === "present") {
+        setPresentError(error.error);
+      } else {
+        setPresentError("");
+      }
     }
   };
 
@@ -114,42 +137,6 @@ const MyPage = () => {
           margin: "4em auto",
         }}
       >
-        {/* <MyPageSubTitle>프로필 변경</MyPageSubTitle>
-        <ContentBox>
-          <MyPageItem align="center">
-            <span>프로필 사진 변경</span>
-            <Button onClick={() => setIsProfileModalOpen(true)}>변경</Button>
-          </MyPageItem>
-          <Modal
-            isFooter={true}
-            isOpen={isProfileModalOpen}
-            onClose={() => {
-              setIsProfileModalOpen(false);
-              setProfilePhoto(null);
-            }}
-            onSave={() => {
-              alert("저장되었습니다.");
-              setIsProfileModalOpen(false);
-            }}
-            title="프로필 사진 변경"
-          >
-            <ProfileCircle>
-              {profilePhoto ? (
-                <img src={profilePhoto} alt="프로필사진" />
-              ) : (
-                <UserCircle size={128} />
-              )}
-            </ProfileCircle>
-            <label>
-              <input
-                type="file"
-                accept="image/*"
-                onChange={handleProfilePhotoChange}
-              />
-            </label>
-          </Modal>
-        </ContentBox> */}
-
         <MyPageSubTitle>정보변경</MyPageSubTitle>
         <ContentBox>
           <MyPageItem align="center">
@@ -159,7 +146,10 @@ const MyPage = () => {
           <Modal
             isFooter={true}
             isOpen={isNameModalOpen}
-            onClose={() => setIsNameModalOpen(false)}
+            onClose={() => {
+              setIsNameModalOpen(false);
+              setUpdateError(""); // 모달이 닫힐 때 updateError 초기화
+            }}
             title="이름 변경"
             onSave={async () => {
               if (updateDataName.trim() === "") {
@@ -167,12 +157,12 @@ const MyPage = () => {
                 setUpdateError("닉네임을 입력해주세요.");
                 return;
               } else {
-                await userUpdate(undefined, updateDataName, "nickname");
-                if (updateOk) {
-                  setIsNameModalOpen(false);
-                  refetch();
-                  setUpdateError("");
-                }
+                await userUpdate(
+                  undefined,
+                  updateDataName,
+                  "nickname",
+                  undefined
+                );
               }
             }}
           >
@@ -199,10 +189,35 @@ const MyPage = () => {
           <Modal
             isFooter={true}
             isOpen={isModalOpen}
-            onClose={() => setIsModalOpen(false)}
+            onClose={() => {
+              setIsModalOpen(false);
+              setNewPwError("");
+              setPresentError("");
+              setPresentPW("");
+              setUpdateDataPW("");
+              setReUpdatePW("");
+            }}
             title="예시 모달"
-            onSave={() => {
-              userUpdate(updateDataPW, undefined, "password");
+            onSave={async () => {
+              if (presentPW.trim() === "") {
+                setPresentError("현재 비밀번호를 입력해주세요.");
+                setNewPwError("");
+                return;
+              } else if (
+                updateDataPW.trim() === "" ||
+                reUpdatePW.trim() === ""
+              ) {
+                setNewPwError("비밀번호를 입력해주세요");
+                setPresentError("");
+                return;
+              } else {
+                await userUpdate(
+                  updateDataPW,
+                  undefined,
+                  "password",
+                  presentPW
+                );
+              }
             }}
           >
             <FormItem>
@@ -211,16 +226,16 @@ const MyPage = () => {
                 <InputText
                   value={presentPW}
                   type="password"
-                  onChange={(e) => setPresentPW(e.target.values)}
+                  onChange={(e) => setPresentPW(e.target.value)}
                 />
-                <div
+                <ErrorMessage
                   className="error"
                   style={{
-                    display: updateError ? "block" : "none",
+                    display: presentError ? "block" : "none",
                   }}
                 >
-                  {updateError}
-                </div>
+                  {presentError}
+                </ErrorMessage>
               </FormItem.Field>
             </FormItem>
             <FormItem>
@@ -230,8 +245,19 @@ const MyPage = () => {
                   value={updateDataPW}
                   type="password"
                   name="password"
-                  onChange={(e) => setUpdateDataPW(e.target.value)}
+                  onChange={(e) => {
+                    setUpdateDataPW(e.target.value); // 비밀번호 값 설정
+                    handleChange(e); // 실시간 유효성 검사
+                  }}
                 />
+                <ErrorMessage
+                  className="error"
+                  style={{
+                    display: newPwError ? "block" : "none",
+                  }}
+                >
+                  {newPwError}
+                </ErrorMessage>
               </FormItem.Field>
             </FormItem>
             <FormItem>
@@ -240,8 +266,20 @@ const MyPage = () => {
                 <InputText
                   value={reUpdatePW}
                   type="password"
-                  onChange={(e) => setReUpdatePW(e.target.value)}
+                  name="password"
+                  onChange={(e) => {
+                    setReUpdatePW(e.target.value); // 비밀번호 값 설정
+                    handleChange(e); // 실시간 유효성 검사
+                  }}
                 />
+                <ErrorMessage
+                  className="error"
+                  style={{
+                    display: newPwError ? "block" : "none",
+                  }}
+                >
+                  {newPwError}
+                </ErrorMessage>
               </FormItem.Field>
             </FormItem>
           </Modal>
