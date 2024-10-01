@@ -1,9 +1,0 @@
-.MuiSelect-standard::before,
-.MuiSelect-standard,
-.MuiSelect-root::before {
-    border: none;
-}
-
-.MuiSelect-standard {
-    border: none;
-}
