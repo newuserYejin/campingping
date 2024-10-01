@@ -1,0 +1,41 @@
+.main-title {
+  padding-bottom: 3rem;
+  text-align: center;
+}
+
+.main-title-lv1 {
+  display: inline-block;
+  margin: 0;
+  font-family: "TTHakgyoansimMoheomgaB";
+  text-align: center;
+  font-size: 2rem;
+  color: var(--main-font-color);
+
+  &::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 3px;
+    background: var(--main-font-color);
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .main-title {
+    padding-bottom: 2rem;
+  }
+
+  .main-title-lv1 {
+    font-size: 1.75rem;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .title {
+    padding-bottom: 1.5rem;
+  }
+
+  .main-title-lv1 {
+    font-size: 1.5rem;
+  }
+}
