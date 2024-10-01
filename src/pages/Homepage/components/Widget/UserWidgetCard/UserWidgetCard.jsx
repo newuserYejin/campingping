@@ -7,6 +7,7 @@ import "swiper/css/pagination";
 import UserWidgetBox from "../UserWidgetBox/UserWidgetBox";
 import styled from "styled-components";
 import nolimage from "../../../../../assets/images/noimage.svg";
+import extractFirstImageFromContent from "../../../../../utils/extractFirstImageFromContent";
 
 const ListItem = styled.div`
   display: flex;
@@ -25,6 +26,7 @@ const ListItem = styled.div`
     align-items: flex-start;
     justify-content: flex-start;
     gap: 14px;
+    width: 100%;
     text-decoration: none;
   }
 
@@ -98,6 +100,18 @@ const ListItem = styled.div`
       @media (max-width: 900px) {
         font-size: 0.85rem;
       }
+
+      & * {
+        margin: 0;
+        padding: 0;
+        display: inline;
+        font-weight: normal;
+        text-decoration: none;
+      }
+
+      img {
+        display: none;
+      }
     }
   }
 
@@ -137,6 +151,7 @@ const groupItems = (items, size) => {
 
 export const UserWidgetCard = ({ title, items }) => {
   const groupedItems = groupItems(items, 3);
+
   return (
     <UserWidgetBox title={title}>
       {items && items.length > 0 ? (
@@ -155,17 +170,21 @@ export const UserWidgetCard = ({ title, items }) => {
               <SwiperSlide key={groupIndex}>
                 {group.map((item) => (
                   <ListItem key={item.id}>
-                    <Link to={item.link} className="item">
+                    <Link to={`${item.category}/${item._id}`} className="item">
                       <div className="thumb">
-                        {item.image ? <img src={item.image} alt="" /> : <img src={nolimage} alt="" />}
+                        {item.image ? (
+                          <img src={extractFirstImageFromContent(item.content)} alt="" />
+                        ) : (
+                          <img src={nolimage} alt="" />
+                        )}
                       </div>
                       <div className="info">
                         <h3 className="info__title">{item.title}</h3>
                         <span className="info__name">
-                          <span class="name">{item.name}</span>
-                          <span class="date">{item.data}</span>
+                          <span class="name">{item.userId.nickname}</span>
+                          <span class="date">{item.createdAt.slice(0, 10)}</span>
                         </span>
-                        <p className="info__content">{item.content}</p>
+                        <p className="info__content" dangerouslySetInnerHTML={{ __html: item.content }} />
                       </div>
                     </Link>
                   </ListItem>

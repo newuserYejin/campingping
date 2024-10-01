@@ -1,6 +1,7 @@
 import React from "react";
 import "./ListGalleryItem.style.css";
 import { useAreaCode } from "../../hooks/useAreaCode";
+import noImage from "../../assets/images/noimage2.png";
 
 const ListGalleryItem = ({ isConnect = false, isLink = false, item }) => {
   const { data: AreaData } = useAreaCode();
@@ -20,11 +21,7 @@ const ListGalleryItem = ({ isConnect = false, isLink = false, item }) => {
         >
           <div className="gallery-item-thumb tnumb">
             <img
-              src={
-                item.firstimage ||
-                item.firstimage2 ||
-                "../../../src/assets/campingpingLogo.png"
-              }
+              src={item.firstimage || item.firstimage2 || noImage}
               alt={item.title + "사진"}
             />
           </div>

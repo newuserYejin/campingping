@@ -1,5 +1,8 @@
+import { useEffect, useState } from "react";
 import { styled } from "@mui/material/styles";
-import Box from "@mui/material/Box";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 
@@ -18,37 +21,65 @@ const Item = styled(Paper)(({ theme }) => ({
   marginTop: "10px",
 }));
 
-const UserListItem = (props) => {
+const UserListItem = ({ user, onUserChange }) => {
+  const [updateLevel, setLevel] = useState(user.level);
+
+  useEffect(() => {
+    setLevel(user.level); // user.level이 변경될 때마다 updateLevel을 업데이트
+  }, [user.level]); // user.level이 변경될 때만 실행
+
+  const handleChange = (event) => {
+    const newLevel = event.target.value;
+    setLevel(newLevel); // 상태를 업데이트
+    const updatedUser = { ...user, level: newLevel };
+    console.log("업데이트 될 사장님 1명씩: ", updatedUser);
+    onUserChange(updatedUser);
+  };
+
   return (
     <>
-      {props.user.level == "unsigned" ? (
+      {user.level == "unsigned" || user.level == "owner" ? (
         <Grid container spacing={1}>
           <Grid item xs={1.5}>
-            <Item>{props.user.nickname}</Item>
+            <Item>{user.nickname}</Item>
           </Grid>
           <Grid item xs={3.5}>
-            <Item>{props.user.campingName}</Item>
+            <Item>{user.campingName}</Item>
           </Grid>
           <Grid item xs={2}>
-            <Item>{props.user.contact}</Item>
+            <Item>{user.contact}</Item>
           </Grid>
           <Grid item xs={3.5}>
-            <Item>{props.user.campingData.address}</Item>
+            <Item>{user.campingData.address}</Item>
           </Grid>
           <Grid item xs={1.5}>
-            <Item>{props.user.level}</Item>
+            <Item>
+              <FormControl fullWidth>
+                <Select
+                  value={updateLevel}
+                  variant="standard"
+                  onChange={handleChange}
+                  displayEmpty
+                  style={{ fontSize: "12px" }}
+                >
+                  <MenuItem value="unsigned">미승인</MenuItem>
+                  <MenuItem value="owner">승인</MenuItem>
+                </Select>
+              </FormControl>
+            </Item>
+            {/* <Item>{user.level}</Item> */}
           </Grid>
         </Grid>
       ) : (
         <Grid container spacing={1}>
           <Grid item xs={3.5}>
-            <Item>{props.user.nickname}</Item>
+            <Item>{user.nickname}</Item>
           </Grid>
           <Grid item xs={5}>
-            <Item>{props.user.contact}</Item>
+            <Item>{user.contact}</Item>
           </Grid>
           <Grid item xs={3.5}>
-            <Item>{props.user.level}</Item>
+            <Item>{user.level}</Item>
           </Grid>
         </Grid>
       )}

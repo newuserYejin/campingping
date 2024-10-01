@@ -49,13 +49,20 @@ const Button = styled.button`
   }
 `;
 
-const ReReply = ({ reReply, fetchReReplies, currentUserId }) => {
-    const date = new Date(reReply.createdAt);
-    const formattedDate = date.toLocaleDateString('ko-KR', {
-        year: 'numeric',
-        month: '2-digit',
-        day: '2-digit',
-    });
+const ReReply = ({ reReply, fetchReReplies, currentUserId, campingId }) => {
+  const date = new Date(reReply.createdAt);
+  const formattedDate = date.toLocaleDateString('ko-KR', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+  });
+  const formattedTime = date.toLocaleTimeString('ko-KR', {
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false,
+  });
+
+  const formattedDateTime = `${formattedDate} ${formattedTime}`;
 
     // 대댓글 삭제 함수
     const handleDelete = async () => {
@@ -63,7 +70,7 @@ const ReReply = ({ reReply, fetchReReplies, currentUserId }) => {
         if (!confirmDelete) return;
 
         try {
-            await api.delete(`/re_reply/${reReply._id}`); // 대댓글 삭제 API 요청
+            await api.delete(`/${campingId? 're_review' : 're_reply'}/${reReply._id}`); // 대댓글 삭제 API 요청
             fetchReReplies()
         } catch (error) {
             console.log('Failed to delete re-reply:', error);
@@ -74,7 +81,7 @@ const ReReply = ({ reReply, fetchReReplies, currentUserId }) => {
         <ReReplyCardBody>
             <Nickname>{reReply.userId.nickname}</Nickname>
             <Content>{reReply.content}</Content>
-            <CreatedAt>{formattedDate}</CreatedAt>
+            <CreatedAt>{formattedDateTime}</CreatedAt>
             <ButtonContainer>
                 {
                     currentUserId == reReply.userId._id ?
