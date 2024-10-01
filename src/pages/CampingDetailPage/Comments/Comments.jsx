@@ -11,7 +11,7 @@ const Comments = ({campingId ,currentUser}) => {
       const response = await api.get(`/review/${campingId.contentId}`);
       setComments(response.data.data || [])
     } catch (error) {
-      
+      console.error("댓글 불러오기 실패:", error.error);
     }
   };
 
@@ -21,6 +21,8 @@ const Comments = ({campingId ,currentUser}) => {
 
 
   const handleCommentSubmit = async(newComment) => {
+    if(!currentUser) return alert("로그인 후 이용해주세요")
+
     const response = await api.post(`/review/`, {
       campingId : campingId,
       content: newComment.text,
@@ -52,25 +54,33 @@ const Comments = ({campingId ,currentUser}) => {
         setComments(updatedComments);
         fetchReply();
       } catch (error) {
-        console.error("댓글 삭제 실패:", error);
+        console.error("댓글 삭제 실패:", error.error);
       }
     }
   };
 
-  const handleCommentReply = (id, replyText) => {
-    const updatedComments = comments.map((comment) => {
-      if (comment.id === id) {
-        const newReply = {
-          id: Date.now(),
-          text: replyText,
-          date: new Date().toLocaleDateString(),
-          replies: [],
-        };
-        return { ...comment, replies: [...comment.replies, newReply] };
-      }
-      return comment;
-    });
-    setComments(updatedComments);
+  const handleCommentReply = async (id, replyText) => {
+    try {
+      const response = await api.post(`/re_review/${id}`, {
+        campingId,
+        content: replyText.content, 
+        nickname: replyText.nickname, 
+      });
+  
+      const newReply = response.data; 
+
+      const updatedComments = comments.map((comment) => {
+        if (comment.id === id) {
+          return { ...comment, replies: [...comment.replies, newReply] };
+        }
+        return comment;
+      });
+  
+      setComments(updatedComments);
+      fetchReply()
+    } catch (error) {
+      console.error("대댓글 작성 실패:", error);
+    }
   };
 
   return (
@@ -86,6 +96,7 @@ const Comments = ({campingId ,currentUser}) => {
         onEdit={handleCommentEdit}
         onDelete={handleCommentDelete}
         onReply={handleCommentReply}
+        campingId={campingId}
       />
     </div>
   );

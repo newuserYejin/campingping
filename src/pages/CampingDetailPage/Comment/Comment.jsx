@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-
+import api from '../../../utils/api';
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 const CommentContainer = styled.div`
   border: 1px solid #ddd;
   padding: 10px;
@@ -129,13 +131,16 @@ const ReplyContainer = styled.div`
   margin-bottom: 10px;
 `;
 
-const Comment = ({ comment, onEdit, onDelete, onReply, currentUser }) => {
+const Comment = ({ comment, onEdit, onDelete, onReply, currentUser, campingId }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [isReplying, setIsReplying] = useState(false);
   const [editedText, setEditedText] = useState(comment.text);
   const [replyText, setReplyText] = useState('');
-  const [likes, setLikes] = useState(comment.likes || 0);
+  const [likes, setLikes] = useState(comment.likes?.length || 0);
   const [liked, setLiked] = useState(false);
+  const [replies, setReplies] = useState([]);
+  
+
 
   const date = new Date(comment.createdAt);
   const formattedDate = date.toLocaleDateString('ko-KR', {
@@ -151,13 +156,47 @@ const Comment = ({ comment, onEdit, onDelete, onReply, currentUser }) => {
 
   const formattedDateTime = `${formattedDate} ${formattedTime}`;
 
-  const handleLike = () => {
-    if (liked) {
-      setLikes(likes - 1);
-    } else {
-      setLikes(likes < 999 ? likes + 1 : 999); // 999개로 제한
+
+
+  const fetchReply = async () => {
+    try{
+      const response = await api.get(`/re_review/${comment?._id}`);
+      setReplies(response?.data.data || [])
+    }catch(error){
+      console.error(error)
     }
-    setLiked(!liked);
+  };
+
+  useEffect(() => {
+    fetchReply();
+    // comment.likes에 currentUser.id가 있는지 확인
+      
+        if (comment?.likes?.includes(currentUser?._id)) {
+          setLiked(true)
+        }
+
+  }, [comment, currentUser._id]);
+
+
+  const handleLike = async(commentId) => {
+    try{
+      if (liked) {
+        //이미 좋아함을 눌렀다면 review.likes에서 currentUser._id를 삭제
+        await api.put(`review/${commentId}`, {
+          likedUser : currentUser?._id
+        })
+        setLikes(likes - 1);
+      } else {
+        await api.put(`review/${commentId}`, {
+          likedUser : currentUser?._id
+        })
+        setLikes(likes < 999 ? likes + 1 : 999); // 999개로 제한
+      }
+      setLiked(!liked);
+    }catch(error){
+      console.error(error)
+    }
+    
   };
 
   const handleEditSubmit = () => {
@@ -167,13 +206,10 @@ const Comment = ({ comment, onEdit, onDelete, onReply, currentUser }) => {
 
   const handleReplySubmit = () => {
     const reply = {
-      id: Date.now(),
-      text: replyText,
-      date: new Date().toLocaleDateString(),
-      username: '사장님', // 대댓글 작성자는 '사장님'으로 고정
-      replies: [],
+      content: replyText,
+      nickname: '사장님', // 대댓글 작성자는 '사장님'으로 고정
     };
-    onReply(comment.id, reply);
+    onReply(comment._id, reply);
     setReplyText('');
     setIsReplying(false);
   };
@@ -186,7 +222,7 @@ const Comment = ({ comment, onEdit, onDelete, onReply, currentUser }) => {
         </div>
         <CommentDetails>
           <ThumbsUpContainer>
-            <ThumbsUpButton liked={liked} onClick={handleLike}>
+            <ThumbsUpButton liked={liked} onClick={()=>{handleLike(comment._id)}}>
               👍<span>{likes}</span>
             </ThumbsUpButton>
           </ThumbsUpContainer>
@@ -218,12 +254,15 @@ const Comment = ({ comment, onEdit, onDelete, onReply, currentUser }) => {
             } */}
             {
               currentUser?._id == comment?.userId?._id ?
-              <DeleteButton onClick={() => onDelete(comment._id)}>
-                삭제
-              </DeleteButton>: null
+                <DeleteButton onClick={() => onDelete(comment._id)}>
+                  삭제
+                </DeleteButton> : null
             }
 
-            {!isReplying && (
+            {/* 현재캠핑장 사장님만 답글달기 표시 */}
+            {!isReplying && 
+              (currentUser?.level === "owner" && 
+                currentUser?.campingData?.contendID === campingId?.contentId) && (
               <ReplyButton onClick={() => setIsReplying(true)}>
                 답글 달기
               </ReplyButton>
@@ -244,15 +283,30 @@ const Comment = ({ comment, onEdit, onDelete, onReply, currentUser }) => {
         </div>
       )}
 
-      {Array.isArray(comment.replies) &&
-        comment.replies.length > 0 &&
-        comment.replies.map((reply) => (
-          <ReplyContainer key={reply.id}>
-            <strong>{reply.username}</strong>
-            <CommentText>{reply.text}</CommentText>
-            <CommentDetails>{reply.date}</CommentDetails>
-          </ReplyContainer>
-        ))}
+      {Array.isArray(replies) &&
+        replies.length > 0 &&
+        replies.map((reply) => {
+          const date = new Date(reply.createdAt);
+          const formattedDate = date.toLocaleDateString('ko-KR', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+          });
+          const formattedTime = date.toLocaleTimeString('ko-KR', {
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: false
+          });
+
+          return (
+            <ReplyContainer key={reply?._id}>
+              <strong>{reply?.userId.nickname}</strong>
+              <CommentText>{reply?.content}</CommentText>
+              <CommentDetails>{`${formattedDate} ${formattedTime}`}</CommentDetails>
+            </ReplyContainer>
+          );
+        })}
     </CommentContainer>
   );
 };

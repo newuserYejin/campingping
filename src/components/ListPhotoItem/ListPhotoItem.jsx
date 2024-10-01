@@ -96,7 +96,7 @@ const ItemInfo = styled.span`
 `;
 
 const ListPhotoItem = ({ data, link }) => {
-  console.log(data)
+  
   const date = new Date(data.createdAt)
 
   const formattedDate = date.toLocaleDateString("ko-KR", {
@@ -107,7 +107,6 @@ const ListPhotoItem = ({ data, link }) => {
 
   //태그에서 썸네일 뽑기
   function extractFirstImageFromContent(htmlContent) {
-    // DOMParser를 사용하여 HTML 문자열을 파싱
     const parser = new DOMParser();
     const doc = parser.parseFromString(htmlContent, "text/html");
   
