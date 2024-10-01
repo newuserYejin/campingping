@@ -73,9 +73,12 @@ const CommentInput = ({ onSubmit }) => {
       const review = {
         text: reviewText,
         rating, // 선택된 별점
+<<<<<<< HEAD
         date: new Date().toLocaleDateString(), // 현재 날짜 추가
         replies: [], // 대댓글 초기화
         username: '사용자아이디', // 사용자 아이디 추가
+=======
+>>>>>>> feature/241001_yejin
       };
       onSubmit(review); // 부모 컴포넌트에 데이터 전달
       setReviewText(''); // 입력 필드 초기화

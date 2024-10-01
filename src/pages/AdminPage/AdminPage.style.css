@@ -19,3 +19,14 @@
         flex-direction: row;
     }
 }
+
+.saveBtn_box {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    margin-top: 10px;
+
+    .list_save {
+        background-color: black;
+    }
+}

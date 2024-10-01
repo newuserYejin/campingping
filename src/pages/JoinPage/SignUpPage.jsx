@@ -225,7 +225,7 @@ const SignUpPage = () => {
           helperText={errors.contact}
         />
         {/* 파일선택 */}
-        <input type="file" accept="image/*" onChange={handleFileChange} />
+        {/* <input type="file" accept="image/*" onChange={handleFileChange} /> */}
 
         <FormControl fullWidth margin="normal" required error={!!errors.level}>
           <InputLabel>회원레벨</InputLabel>
