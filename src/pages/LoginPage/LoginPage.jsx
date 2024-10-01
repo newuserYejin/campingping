@@ -66,7 +66,7 @@ const LoginPage = () => {
         const { user, token } = response.data;
 
         dispatch(authenticateAction.login(user)); // 사용자 정보 저장
-        console.log("사용자 정보:", user);
+        console.log("사용자정보:", user);
         console.log("토큰:", token);
 
         localStorage.setItem("token", response.data.token);
