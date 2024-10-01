@@ -1,14 +1,15 @@
 import styled from "styled-components";
 import CommunityCategory from "./CommunityCategory";
 import { Container } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import ico_member from "../../../assets/images/ico_member.png";
 import ico_calendar from "../../../assets/images/ico_calendar2.png";
 import ico_arrow_prev from "../../../assets/images/ico_arrow_prev.png";
 import ico_arrow_next from "../../../assets/images/ico_arrow_next.png";
 import ReplyBox from "./ReplyBox";
 import { useUser } from "../../../hooks/useUser";
-
+import { useNavigate } from 'react-router-dom';
+import api from "../../../utils/api";
 const Header = styled.div`
   padding: 85px 0 50px;
   text-align: center;
@@ -53,6 +54,10 @@ const HeaderDate = styled.span`
 
 const Contents = styled.div`
   padding: 50px 0;
+  img {
+    max-width: 80%; // 이미지가 부모 요소 너비를 넘지 않도록 제한
+    height: auto;    // 비율을 유지하면서 이미지 높이 조정
+  }
 `;
 
 
@@ -133,16 +138,40 @@ const Button = styled.button`
 
 
 const CommunityDetail = ({ data, link }) => {
-  const date = new Date(data.createdAt)
-
-  const formattedDate = date.toLocaleDateString("ko-KR", {
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit"
+  const date = new Date(data.createdAt);
+  const formattedDate = date.toLocaleDateString('ko-KR', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
   });
+  const formattedTime = date.toLocaleTimeString('ko-KR', {
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false,
+  });
+
+  const formattedDateTime = `${formattedDate} ${formattedTime}`;
+
+  const {id} = useParams()
 
   const { data: currentUser, error, isLoading } = useUser();
   const currentUserId = currentUser?._id
+  const navigate = useNavigate()
+
+
+  const handleDelete = async () => {
+    const confirmDelete = window.confirm("정말 삭제하시겠습니까?");
+    if (!confirmDelete) return;
+
+    try {
+      await api.delete(`/post/${id}`)
+      alert("게시글이 삭제되었습니다.");
+      navigate(link); // 삭제 후 목록 페이지로 이동
+    } catch (error) {
+      console.error("Error deleting post:", error);
+      alert("게시글 삭제 중 오류가 발생했습니다.");
+    }
+  };
 
   return (
     <>
@@ -153,11 +182,17 @@ const CommunityDetail = ({ data, link }) => {
           <HeaderTitle>{data?.title} </HeaderTitle>
           <HeaderInfo>
             <HeaderName>{data?.userId?.nickname}</HeaderName>
-            <HeaderDate>{formattedDate}</HeaderDate>
+            <HeaderDate>{formattedDateTime}</HeaderDate>
           </HeaderInfo>
         </Header>
 
-        <Contents><pre>{data?.content}</pre></Contents>
+        <Contents>
+          <div
+            dangerouslySetInnerHTML={{
+              __html: data?.content,  // content를 HTML로 렌더링
+            }}
+          />
+        </Contents>
 
 
         {
@@ -166,18 +201,15 @@ const CommunityDetail = ({ data, link }) => {
               <Link to={link + `/write`} id={data?.id}>
                 수정
               </Link>
-              <Button delete>
+              <Button delete
+                onClick={handleDelete}>
                 삭제
               </Button>
             </ButtonContainer> : null
         }
 
-        <ReplyBox currentUserId={currentUserId}/>
+        <ReplyBox replyTitle={"댓글"} currentUserId={currentUserId} />
         <Footer>
-
-
-
-
 
           {/* {data?.prev && (
             <Link className="prev" to={link + `${data?.prev.id}`}>

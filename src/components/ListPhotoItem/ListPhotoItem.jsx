@@ -96,7 +96,7 @@ const ItemInfo = styled.span`
 `;
 
 const ListPhotoItem = ({ data, link }) => {
-  // console.log(data)
+  console.log(data)
   const date = new Date(data.createdAt)
 
   const formattedDate = date.toLocaleDateString("ko-KR", {
@@ -105,10 +105,29 @@ const ListPhotoItem = ({ data, link }) => {
     day: "2-digit"
   });
 
+  //태그에서 썸네일 뽑기
+  function extractFirstImageFromContent(htmlContent) {
+    // DOMParser를 사용하여 HTML 문자열을 파싱
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(htmlContent, "text/html");
+  
+    // 첫 번째 <img> 태그 찾음
+    const firstImg = doc.querySelector("img");
+  
+    // <img> 태그가 존재할 경우, src 속성을 반환
+    if (firstImg) {
+      return firstImg.src;
+    }
+  
+    // 이미지가 없을 경우 null을 반환
+    return null;
+  }
+  const firstImageUrl = extractFirstImageFromContent(data.content);
+
   return (
     <Item to={link + `/${data._id}`} className="link">
       <ItemThumb className="thumb">
-        <img src={data.thumb || noimage2} alt="" />
+        <img src={firstImageUrl || noimage2} alt="" />
       </ItemThumb>
       {data.title && <ItemTitle>{data.title}</ItemTitle>}
       {data.userId.nickname && <ItemName>{data.userId.nickname}</ItemName>}
