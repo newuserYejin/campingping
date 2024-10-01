@@ -1,0 +1,98 @@
+@import url(../../fonts.css);
+
+.BestCampList{
+  .title{
+    position:relative;
+    display:flex;
+    flex-direction: row-reverse;
+    padding:5rem 0;
+    .textBox{
+      position:absolute;
+      top:50%;
+      left:0;
+      transform: translateY(-50%);
+      h2{
+        margin:0;
+        font-family: 'TTHakgyoansimMulgyeolB';
+        font-size:3rem;
+        line-height:1.15;
+        color:var(--main-font-color);
+      }
+      p{
+        margin:1rem 0 0 0;
+        font-size:1rem;
+        line-height:1.25;
+        color:var(--color-gray);
+        span{
+          display:block;
+        }
+      }
+    }
+    .imgBox{
+      width:50%;
+      height:auto;
+      img{
+        width:100%;
+        height:auto;    
+      }
+    }
+  }
+  .tabBox{
+    border: 1px solid #d3d3d3;
+    height: 60px;
+    div[role="tablist"]{
+      justify-content: space-between;
+      height:100%;
+    }
+    button{
+      width:33.3%;
+      max-width:unset;
+      font-size:1rem;
+      font-weight:800;
+      word-break: keep-all;
+      &:not(:first-child){
+        border-left:1px solid #d3d3d3;
+      }
+    }
+  }
+  @media screen and (max-width:900px) {
+    .title{
+      padding:4rem 0;
+      .textBox{
+        h2{
+          font-size:2.5rem;
+          line-height:1;
+        }
+        p{
+          font-size:0.85rem;
+        }
+      }
+      .imgBox{
+        width:45%;
+      }
+    }
+  }
+  @media screen and (max-width:600px) {
+    .title{
+      padding:4rem 0 2.5rem;
+      flex-direction: row;
+      .textBox{
+        position:static;
+        top:0;
+        left:0;
+        transform:none;
+        h2{
+          font-size:2rem;
+          line-height:1;
+        }
+        p{
+          margin: 0.85rem 0 0 0;
+
+        }
+      }
+      .imgBox{
+        display:none;
+      }
+    }
+  }
+}
