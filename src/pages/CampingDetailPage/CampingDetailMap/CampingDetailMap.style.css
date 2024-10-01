@@ -23,7 +23,7 @@
   align-items: center;
   margin-top: 30px;
   position: absolute;
-  bottom: -300px;  
+  bottom: -300px;
   right: -800px;
   z-index: 1000;
 }
@@ -40,10 +40,10 @@
   align-items: center;
   background: var(--key-color);
   color: var(--main-background-color);
-  padding: .5rem;
+  padding: 0.5rem;
 }
 
-button {
+.camping-detail-map-area button {
   width: 160px;
   height: 40px;
   font-size: 1rem;
@@ -52,7 +52,7 @@ button {
   border-radius: 0;
 }
 
-button span {
+.camping-detail-map-area button span {
   padding-left: 5px;
   font-weight: 400;
   text-transform: capitalize;
@@ -61,7 +61,7 @@ button span {
 .camping-detail-map-url:hover {
   background: var(--button-hover-color);
 }
-.address{
+.address {
   font-size: 1em;
   margin-top: 2em;
 }
