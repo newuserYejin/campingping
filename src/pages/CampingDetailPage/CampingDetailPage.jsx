@@ -31,8 +31,10 @@ const CampingDetailPage = () => {
   const { data = [], isLoading } = useCampingKeywordQuery(keyword);
   const { contentId } = useParams()
 
-  const { data: currentUser  } = useUser();
-  const currentUserId = currentUser?._id
+  const { data: currentUser,  } = useUser();
+ 
+
+
   const campingId = {
     contentId : contentId,
     facltNm : keyword,
