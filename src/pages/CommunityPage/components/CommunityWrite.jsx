@@ -4,15 +4,22 @@ import ReactQuill, { Quill } from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import ImageResize from "quill-image-resize";
 import api from "../../../utils/api";
-import { useNavigate, useParams } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
 
 Quill.register("modules/ImageResize", ImageResize);
 
-const CommunityWritePage = ({category, onSubmit, maxImageSize = 2 * 1024 * 1024 }) => {
+const StyledReactQuill = styled.div`
+  .ql-editor {
+    height: 40vh;
+  }
+`;
+
+const CommunityWritePage = ({ category, onSubmit, maxImageSize = 2 * 1024 * 1024 }) => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const quillRef = React.useRef();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const imageHandler = useCallback(() => {
     const input = document.createElement("input");
@@ -23,9 +30,7 @@ const CommunityWritePage = ({category, onSubmit, maxImageSize = 2 * 1024 * 1024 
     input.onchange = async () => {
       const file = input.files[0];
       if (file.size > maxImageSize) {
-        alert(
-          `이미지 크기는 ${maxImageSize / 1024 / 1024}MB를 초과할 수 없습니다.`
-        );
+        alert(`이미지 크기는 ${maxImageSize / 1024 / 1024}MB를 초과할 수 없습니다.`);
         return;
       }
 
@@ -57,22 +62,10 @@ const CommunityWritePage = ({category, onSubmit, maxImageSize = 2 * 1024 * 1024 
     },
   };
 
-  const formats = [
-    "header",
-    "bold",
-    "italic",
-    "underline",
-    "strike",
-    "blockquote",
-    "list",
-    "bullet",
-    "link",
-    "image",
-  ];
+  const formats = ["header", "bold", "italic", "underline", "strike", "blockquote", "list", "bullet", "link", "image"];
 
-  const handleSubmit = async(e) => {
-
-    e.preventDefault()
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
     if (!title || !content) {
       alert("제목과 내용을 모두 입력해주세요.");
@@ -83,26 +76,25 @@ const CommunityWritePage = ({category, onSubmit, maxImageSize = 2 * 1024 * 1024 
     const postData = {
       title: title,
       content: content,
-      category : category,
+      category: category,
     };
 
-   
     try {
-      const response = await api.post("/post", postData)
-  
+      const response = await api.post("/post", postData);
+
       // 응답 처리
       if (response.status === 200) {
-        alert("게시글이 성공적으로 등록되었습니다!")
-        setTitle("")
-        setContent("")
+        alert("게시글이 성공적으로 등록되었습니다!");
+        setTitle("");
+        setContent("");
       }
     } catch (error) {
-      console.error("Error posting data:", error)
-      alert(`게시글 등록 중 오류가 발생했습니다: ${error.message}`)
+      console.error("Error posting data:", error);
+      alert(`게시글 등록 중 오류가 발생했습니다: ${error.message}`);
     }
 
-    navigate("/market")
-  }
+    navigate("/market");
+  };
 
   return (
     <>
@@ -124,7 +116,7 @@ const CommunityWritePage = ({category, onSubmit, maxImageSize = 2 * 1024 * 1024 
               onChange={(e) => setTitle(e.target.value)}
             />
 
-            <div>
+            <StyledReactQuill>
               <ReactQuill
                 theme="snow"
                 ref={quillRef}
@@ -137,7 +129,7 @@ const CommunityWritePage = ({category, onSubmit, maxImageSize = 2 * 1024 * 1024 
                   overflowY: "auto",
                 }}
               />
-            </div>
+            </StyledReactQuill>
 
             <Button
               onClick={handleSubmit}
