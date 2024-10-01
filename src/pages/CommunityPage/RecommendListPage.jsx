@@ -1,13 +1,10 @@
-import { Link } from "react-router-dom";
+import CoummunityLinkButton from "./components/CommunityLinkButton";
 import { useState, useEffect } from "react";
 import { Container } from "@mui/material";
 import { Pagination } from "@mui/material";
 import CommunityCategory from "./components/CommunityCategory";
 import CommunityListPhoto from "./components/CommunityListPhoto";
 import CommunitySearch from "./components/CommunitySearch";
-import noimage from "../../assets/images/noimage.png";
-import bannerCook01 from "../../assets/images/bannerCook01.jpg";
-import noimage2 from "../../assets/images/noimage2.png";
 import api from "../../utils/api";
 // const items = [
 //   {
@@ -37,20 +34,20 @@ const RecommendListPage = () => {
   const [totalPages, setTotalPages] = useState(1); // 총 페이지 수 상태
   const itemsPerPage = 9; // 한 페이지에 표시할 게시물 수
 
-  const fetchPosts = async (pageNumber, searchKeyword= "") => {
+  const fetchPosts = async (pageNumber, searchKeyword = "") => {
     try {
       const response = await api.get("/post", {
-        params: { 
+        params: {
           category: "recommend",
           page: pageNumber, // 현재 페이지 번호를 쿼리 파라미터로 전달
           limit: itemsPerPage, // 페이지당 항목 수 전달
           keyword: searchKeyword, // 키워드도 함께 전달
-         },
+        },
       });
 
       // 성공적으로 데이터를 가져오면 state에 저장
       setItems(response.data.data);
-      setTotalPages(response.data.totalPages)
+      setTotalPages(response.data.totalPages);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -65,7 +62,7 @@ const RecommendListPage = () => {
   };
 
   const handleSearch = (e) => {
-    e.preventDefault(); 
+    e.preventDefault();
     fetchPosts(1, keyword); // 페이지를 1로 초기화하고 검색어로 데이터 요청
   };
 
@@ -95,7 +92,7 @@ const RecommendListPage = () => {
             marginTop: "2em",
           }}
         />
-        <Link to="/recommend/write">글작성</Link>
+        <CoummunityLinkButton to="/recommend/write">글작성</CoummunityLinkButton>
       </Container>
     </>
   );
