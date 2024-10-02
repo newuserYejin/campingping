@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const MONGO_URL = process.env.REACT_APP_MONGO_URL;
 const LOCAL_BACKEND = process.env.REACT_APP_LOCAL_BACKEND;
-const BACK_PROXY = process.env.BACKEND_PROXY;
+const BACK_PROXY = process.env.REACT_APP_BACKEND_PROXY;
 
 const api = axios.create({
     // baseURL: `${REACT_APP_PROD_BACKEND}/api`,
