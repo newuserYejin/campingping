@@ -8,7 +8,7 @@ const api = axios.create({
     // baseURL: `${REACT_APP_PROD_BACKEND}/api`,
     // baseURL: LOCAL_BACKEND,
     // baseURL: MONGO_URL,
-    baseURL: `${BACK_PROXY}/api`,
+    baseURL: `${BACK_PROXY}`,
     headers: {
         'Content-Type': 'application/json',
         authorization: `Bearer ${localStorage.getItem('token')}`,
