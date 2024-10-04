@@ -143,7 +143,7 @@ const EmptyBox = styled.div`
 
 const groupItems = (items, size) => {
   const groupedItems = [];
-  for (let i = 0; i < items.length; i += size) {
+  for (let i = 0; i < items?.length; i += size) {
     groupedItems.push(items.slice(i, i + size));
   }
   return groupedItems;
@@ -154,7 +154,7 @@ export const UserWidgetCard = ({ title, items }) => {
 
   return (
     <UserWidgetBox title={title}>
-      {items && items.length > 0 ? (
+      {items && items?.length > 0 ? (
         <Swiper
           modules={[Pagination]}
           spaceBetween={20}
