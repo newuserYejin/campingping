@@ -175,7 +175,7 @@ const Comment = ({ comment, onEdit, onDelete, onReply, currentUser, campingId })
           setLiked(true)
         }
 
-  }, [comment, currentUser._id]);
+  }, [comment, currentUser?._id]);
 
 
   const handleLike = async(commentId) => {
@@ -209,7 +209,7 @@ const Comment = ({ comment, onEdit, onDelete, onReply, currentUser, campingId })
       content: replyText,
       nickname: '사장님', // 대댓글 작성자는 '사장님'으로 고정
     };
-    onReply(comment._id, reply);
+    onReply(comment?._id, reply);
     setReplyText('');
     setIsReplying(false);
   };
@@ -222,7 +222,7 @@ const Comment = ({ comment, onEdit, onDelete, onReply, currentUser, campingId })
         </div>
         <CommentDetails>
           <ThumbsUpContainer>
-            <ThumbsUpButton liked={liked} onClick={()=>{handleLike(comment._id)}}>
+            <ThumbsUpButton liked={liked} onClick={()=>{handleLike(comment?._id)}}>
               👍<span>{likes}</span>
             </ThumbsUpButton>
           </ThumbsUpContainer>
@@ -254,7 +254,7 @@ const Comment = ({ comment, onEdit, onDelete, onReply, currentUser, campingId })
             } */}
             {
               currentUser?._id == comment?.userId?._id ?
-                <DeleteButton onClick={() => onDelete(comment._id)}>
+                <DeleteButton onClick={() => onDelete(comment?._id)}>
                   삭제
                 </DeleteButton> : null
             }

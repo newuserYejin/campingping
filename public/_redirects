@@ -1,2 +1,6 @@
+<<<<<<< HEAD
+/api/* http://campingping.ap-northeast-2.elasticbeanstalk.com/api/:splat 200
+=======
 /api/* http://campingping.ap-northeast-2.elasticbeanstalk.com/api/:splat 200
 /* /index.html 200
+>>>>>>> a46bc9716e45e9ab411d5112d7422e0c4d074a93
