@@ -36,10 +36,13 @@ const CampingDetailMap = ({ lat, lon, name, address }) => {
       <h1>{`${name} 위치`}</h1>
       <div
         id="map"
-        style={{ width: "100%", height: "400px", position: 'relative' }}
+        style={{ width: "100%", height: "400px", position: "relative" }}
         className="camping-detail-map"
       >
-        <div className="camping-detail-map-url-area" style={{ position: 'absolute', top: '10px', left: '10px' }}>
+        <div
+          className="camping-detail-map-url-area"
+          style={{ position: "absolute", top: "10px", left: "10px" }}
+        >
           <Button
             onClick={() =>
               window.open(`https://map.kakao.com/link/to/${name},${lat},${lon}`)
@@ -50,9 +53,7 @@ const CampingDetailMap = ({ lat, lon, name, address }) => {
           </Button>
         </div>
       </div>
-      <div className="address">
- {`${address}`}
-        </div>
+      <div className="address">{`${address}`}</div>
     </div>
   );
 };

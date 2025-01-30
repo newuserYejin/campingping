@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import React, { useState } from "react";
+import styled from "styled-components";
 
 // 스타일 정의
 const StarRatingContainer = styled.div`
@@ -11,10 +11,10 @@ const StarRatingContainer = styled.div`
 const Star = styled.span`
   font-size: 24px;
   cursor: pointer;
-  color: ${(props) => (props.selected ? '#FFD700' : '#ddd')};
+  color: ${(props) => (props.selected ? "#FFD700" : "#ddd")};
   &:hover,
   &:hover ~ span {
-    color: #FFD700; /* 별점에 마우스 올리면 왼쪽 별도 노란색 */
+    color: #ffd700; /* 별점에 마우스 올리면 왼쪽 별도 노란색 */
   }
 `;
 
@@ -52,12 +52,12 @@ const CharacterCount = styled.div`
   text-align: right;
   font-size: 14px;
   color: #999;
-  margin-bottom : 25px;
-  margin-top : -10px;
+  margin-bottom: 25px;
+  margin-top: -10px;
 `;
 
 const CommentInput = ({ onSubmit }) => {
-  const [reviewText, setReviewText] = useState('');
+  const [reviewText, setReviewText] = useState("");
   const [rating, setRating] = useState(0); // 별점 상태 관리
   const maxChars = 100; // 최대 문자 수
 
@@ -73,18 +73,12 @@ const CommentInput = ({ onSubmit }) => {
       const review = {
         text: reviewText,
         rating, // 선택된 별점
-<<<<<<< HEAD
-        date: new Date().toLocaleDateString(), // 현재 날짜 추가
-        replies: [], // 대댓글 초기화
-        username: '사용자아이디', // 사용자 아이디 추가
-=======
->>>>>>> feature/241001_yejin
       };
       onSubmit(review); // 부모 컴포넌트에 데이터 전달
-      setReviewText(''); // 입력 필드 초기화
+      setReviewText(""); // 입력 필드 초기화
       setRating(0); // 별점 초기화
     } else {
-      alert('별점과 리뷰를 모두 입력해주세요.'); // 별점 또는 댓글이 비어있을 때 알림
+      alert("별점과 리뷰를 모두 입력해주세요."); // 별점 또는 댓글이 비어있을 때 알림
     }
   };
 
@@ -102,17 +96,18 @@ const CommentInput = ({ onSubmit }) => {
         ))}
       </StarRatingContainer>
 
-
       <ReviewInputContainer>
         <ReviewInputField
           placeholder="캠핑장에 다녀 온 후기를 남겨보세요."
-          maxLength={maxChars} 
+          maxLength={maxChars}
           value={reviewText}
-          onChange={(e) => setReviewText(e.target.value)} 
+          onChange={(e) => setReviewText(e.target.value)}
         />
         <SubmitButton onClick={handleSubmit}>등록</SubmitButton>
       </ReviewInputContainer>
-      <CharacterCount>{reviewText.length} / {maxChars}</CharacterCount>
+      <CharacterCount>
+        {reviewText.length} / {maxChars}
+      </CharacterCount>
     </div>
   );
 };

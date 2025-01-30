@@ -1,29 +1,14 @@
-<<<<<<< HEAD
-import React, { useState } from 'react';
-import CommentInput from '../CommentInput/CommentInput';
-import CommentsList from '../CommentsList/CommentsList';
-
-const Comments = () => {
+import React, { useEffect, useState } from "react";
+import CommentInput from "../CommentInput/CommentInput";
+import CommentsList from "../CommentsList/CommentsList";
+import api from "../../../utils/api";
+const Comments = ({ campingId, currentUser }) => {
   const [comments, setComments] = useState([]);
-
-  const handleCommentSubmit = (newComment) => {
-    setComments([...comments, newComment]);
-  };
-
-  const handleCommentEdit = (id, newText) => {
-=======
-import React, { useEffect, useState } from 'react';
-import CommentInput from '../CommentInput/CommentInput';
-import CommentsList from '../CommentsList/CommentsList';
-import api from '../../../utils/api';
-const Comments = ({campingId ,currentUser}) => {
-  const [comments, setComments] = useState([]);
-
 
   const fetchReply = async () => {
     try {
       const response = await api.get(`/review/${campingId.contentId}`);
-      setComments(response.data.data || [])
+      setComments(response.data.data || []);
     } catch (error) {
       console.error("댓글 불러오기 실패:", error.error);
     }
@@ -33,56 +18,32 @@ const Comments = ({campingId ,currentUser}) => {
     fetchReply();
   }, [campingId]);
 
-
-  const handleCommentSubmit = async(newComment) => {
-    if(!currentUser) return alert("로그인 후 이용해주세요")
+  const handleCommentSubmit = async (newComment) => {
+    if (!currentUser) return alert("로그인 후 이용해주세요");
 
     const response = await api.post(`/review/`, {
-      campingId : campingId,
+      campingId: campingId,
       content: newComment.text,
-      score : newComment.rating
+      score: newComment.rating,
     });
 
     setComments([...comments, newComment]);
     fetchReply();
   };
 
-  const handleCommentEdit = async(id, newText) => {
+  const handleCommentEdit = async (id, newText) => {
     const response = await api.put(`/review/${id}`, {
       content: newText,
     });
->>>>>>> feature/241001_yejin
     const updatedComments = comments.map((comment) =>
       comment.id === id ? { ...comment, text: newText } : comment
     );
     setComments(updatedComments);
   };
 
-<<<<<<< HEAD
-  const handleCommentDelete = (id) => {
-    const updatedComments = comments.filter((comment) => comment.id !== id);
-    setComments(updatedComments);
-  };
-
-  const handleCommentReply = (id, replyText) => {
-    const updatedComments = comments.map((comment) => {
-      if (comment.id === id) {
-        const newReply = {
-          id: Date.now(),
-          text: replyText,
-          date: new Date().toLocaleDateString(),
-          replies: [],
-        };
-        return { ...comment, replies: [...comment.replies, newReply] };
-      }
-      return comment;
-    });
-    setComments(updatedComments);
-=======
   const handleCommentDelete = async (id) => {
-    
     const isConfirmed = window.confirm("정말로 삭제하시겠습니까?");
-  
+
     if (isConfirmed) {
       try {
         const response = await api.delete(`/review/${id}`);
@@ -99,11 +60,11 @@ const Comments = ({campingId ,currentUser}) => {
     try {
       const response = await api.post(`/re_review/${id}`, {
         campingId,
-        content: replyText.content, 
-        nickname: replyText.nickname, 
+        content: replyText.content,
+        nickname: replyText.nickname,
       });
-  
-      const newReply = response.data; 
+
+      const newReply = response.data;
 
       const updatedComments = comments.map((comment) => {
         if (comment.id === id) {
@@ -111,35 +72,26 @@ const Comments = ({campingId ,currentUser}) => {
         }
         return comment;
       });
-  
+
       setComments(updatedComments);
-      fetchReply()
+      fetchReply();
     } catch (error) {
       console.error("대댓글 작성 실패:", error);
     }
->>>>>>> feature/241001_yejin
   };
 
   return (
     <div>
-      <h2>
-        먼저 다녀온 사람들의 후기  {/* 댓글 수 표시 */}
-      </h2>
+      <h2>먼저 다녀온 사람들의 후기 {/* 댓글 수 표시 */}</h2>
       <h6>{comments.length}개의 리뷰가 있습니다.</h6>
       <CommentInput onSubmit={handleCommentSubmit} />
       <CommentsList
-<<<<<<< HEAD
-=======
         currentUser={currentUser}
->>>>>>> feature/241001_yejin
         comments={comments}
         onEdit={handleCommentEdit}
         onDelete={handleCommentDelete}
         onReply={handleCommentReply}
-<<<<<<< HEAD
-=======
         campingId={campingId}
->>>>>>> feature/241001_yejin
       />
     </div>
   );

@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useCampingKeywordQuery } from "../../hooks/useCampingDetail";
-<<<<<<< HEAD
-import { useLocation, useSearchParams } from "react-router-dom";
-=======
 import { useLocation, useParams, useSearchParams } from "react-router-dom";
->>>>>>> feature/241001_yejin
 import Grid from "@mui/material/Grid";
 import CircularProgress from "@mui/material/CircularProgress";
 import { Container } from "@mui/material";
@@ -25,10 +21,7 @@ import HandleCopyClipBoard from "./HandleCopyClipBoard/HandleCopyClipBoard";
 import CampingDetailSkeleton from "./CampingDetailSkeleton/CampingDetailSkeleton";
 import Comments from "./Comments/Comments";
 import ReplyBox from "../CommunityPage/components/ReplyBox";
-<<<<<<< HEAD
-=======
 import { useUser } from "../../hooks/useUser";
->>>>>>> feature/241001_yejin
 
 const CampingDetailPage = () => {
   const [searchParams] = useSearchParams();
@@ -36,21 +29,16 @@ const CampingDetailPage = () => {
   const lat = searchParams.get("lat");
   const lon = searchParams.get("lon");
   const { data = [], isLoading } = useCampingKeywordQuery(keyword);
-<<<<<<< HEAD
-=======
-  const { contentId } = useParams()
+  const { contentId } = useParams();
 
-  const { data: currentUser,  } = useUser();
- 
-
+  const { data: currentUser } = useUser();
 
   const campingId = {
-    contentId : contentId,
-    facltNm : keyword,
-    mapX : lat,
-    mapY : lon
-  }
->>>>>>> feature/241001_yejin
+    contentId: contentId,
+    facltNm: keyword,
+    mapX: lat,
+    mapY: lon,
+  };
 
   const campingDetail = data[0];
 
@@ -85,7 +73,10 @@ const CampingDetailPage = () => {
       "반려동물",
       campingDetail?.animalCmgCl == "불가능" ? "불가능" : "가능"
     ),
-    createData("운영기간", campingDetail?.operPdCl ? campingDetail.operPdCl : "정보없음"),
+    createData(
+      "운영기간",
+      campingDetail?.operPdCl ? campingDetail.operPdCl : "정보없음"
+    ),
   ];
   if (isLoading) {
     return (
@@ -152,13 +143,8 @@ const CampingDetailPage = () => {
                     {/* 전화번호 마지막이 "-"로 끝나는 경우에는 "-"를 빼고 보여주기 */}
                     {campingDetail.tel
                       ? campingDetail.tel.charAt(
-<<<<<<< HEAD
                           campingDetail.tel.length - 1
                         ) == "-"
-=======
-                        campingDetail.tel.length - 1
-                      ) == "-"
->>>>>>> feature/241001_yejin
                         ? `문의처 : ${campingDetail.tel.slice(0, -1)}`
                         : `문의처 : ${campingDetail.tel}`
                       : "문의번호가 없습니다"}
@@ -280,19 +266,13 @@ const CampingDetailPage = () => {
               </div>
             </div>
             <div className="camping-detail-comments">
-<<<<<<< HEAD
-              <Comments />
-            </div>
-            <ReplyBox/>
-=======
-              <Comments currentUser={currentUser} campingId={campingId}/>
+              <Comments currentUser={currentUser} campingId={campingId} />
             </div>
             {/* <ReplyBox 
               replyTitle={"리뷰"} 
               campingId={campingId} 
               currentUserId={currentUserId}
             /> */}
->>>>>>> feature/241001_yejin
           </Container>
         </div>
       ) : (
