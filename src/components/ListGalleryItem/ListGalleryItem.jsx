@@ -1,6 +1,7 @@
 import React from "react";
 import "./ListGalleryItem.style.css";
 import { useAreaCode } from "../../hooks/useAreaCode";
+import noImage from "../../assets/images/noimage2.png";
 
 const ListGalleryItem = ({ isConnect = false, isLink = false, item }) => {
   const { data: AreaData } = useAreaCode();
@@ -20,11 +21,7 @@ const ListGalleryItem = ({ isConnect = false, isLink = false, item }) => {
         >
           <div className="gallery-item-thumb tnumb">
             <img
-              src={
-                item.firstimage ||
-                item.firstimage2 ||
-                "../../../src/assets/howAboutCampingLogo.png"
-              }
+              src={item.firstimage || item.firstimage2 || noImage}
               alt={item.title + "사진"}
             />
           </div>
@@ -38,7 +35,6 @@ const ListGalleryItem = ({ isConnect = false, isLink = false, item }) => {
                   }
                 })}
               </span>
-              {/* <span>#칠곡군</span> */}
             </div>
             <h3 className="title">{item.title}</h3>
             <ul>
@@ -58,7 +54,14 @@ const ListGalleryItem = ({ isConnect = false, isLink = false, item }) => {
               </li>
 
               <li className="addr">👉🏻 {item.addr1}</li>
-              <li className="tel">📞 {item.tel}</li>
+              <div className="linkBtn">
+                <li className="tel">📞 {item.tel}</li>
+                <a
+                  href={`https://search.daum.net/search?w=tot&DA=YZR&t__nil_searchbox=btn&q=${item.title}`}
+                >
+                  + 더보기
+                </a>
+              </div>
             </ul>
           </div>
         </div>
@@ -72,7 +75,7 @@ const ListGalleryItem = ({ isConnect = false, isLink = false, item }) => {
               </a>
               <a
                 className="connect connect-map"
-                href={`https://map.naver.com/p/search/${item.addr1}`}
+                href={`https://map.kakao.com/?map_type=TYPE_MAP&q=${item.addr1}`}
                 target="_blank"
                 rel="noreferrer"
               >

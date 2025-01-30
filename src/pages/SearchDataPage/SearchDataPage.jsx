@@ -2,21 +2,15 @@ import React from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useState } from "react";
 import { useSearchDataQuery } from "../../hooks/useSearchData";
-import Grid from "@mui/material/Unstable_Grid2"; // Grid version 2
-import "./SearchDataPage.style.css";
-import { faCloudDownloadAlt } from "@fortawesome/free-solid-svg-icons";
+import { visuallyHidden } from '@mui/utils';
+import styled from "styled-components";
 import ListCard from "../CampingListPage/components/ListCard/ListCard";
-import { Container } from "react-bootstrap";
-import { Pagination } from "@mui/material";
-import DetailPageSearchBox from "./components/DetailPageSearchBox";
-import { CircularProgress } from "@mui/material";
-import TitleMain from "../../components/Title/MainTitle";
+import ListCard2 from "../CampingListPage/components/ListCard/_ListCard";
+import { Container, Pagination, Box, dividerClasses } from "@mui/material";
 import SearchDataPgeSkeleton from "./SearchDataPgeSkeleton/SearchDataPgeSkeleton";
-import TopButton from "../../components/TopButton/TopButton";
 import { search_detail_filters } from "../../constants/info";
-// import MainSearchForm from "../Homepage/components/MainSearchForm";
-// import TopBanner from "../Homepage/components/TopBanner";
 import DetailPageSearchBox2 from "./components/DetailPageSearchBox2";
+import SearchDataPageTitle from "./components/SearchDataPageTitle";
 
 const SearchDataPage = () => {
   const [page, setPage] = useState(1);
@@ -263,61 +257,48 @@ const SearchDataPage = () => {
     item.sbrsCl.split(",")
   );
 
-  // const tagsArray = selectedTag?.split(",")
-
   const changePage = (event, page) => {
     setPage(page);
   };
 
-  let title = "";
-  if (keyword || province || city || theme || selectedTag) {
-    title = "검색 결과";
-  } else {
-    title = "전체 캠핑장";
-  }
+
 
   return (
     <>
-      {/* <TopBanner />
-      <MainSearchForm /> */}
       <DetailPageSearchBox2 />
-      <Container maxWidth="lg">
-        <div>
-          <div className="search-result-title">
-            <h2>
-              <TitleMain title={title} />
-            </h2>
-            <div className="tag-container">
-              {selectedTagArray?.map((tag, index) => (
-                <div key={index} className="tag-item">
-                  # {tag}
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {filteredData.map((searchData, index) => (
-            <ListCard
-              data={searchData}
-              facilityData={facilityData}
-              index={index}
-            />
-          ))}
-        </div>
+      <Container maxWidth="xl">
+        <SearchDataPageTitle selectedTags={selectedTagArray} dataLength={filteredData.length} />
+        {filteredData.length <= 0 && 
+          <Box sx={{ 
+            display:'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            minHeight:{
+              xs:'300px',
+              sm:'500px',
+            },
+            textAlign:'center'
+          }}>
+            <p>{keyword}로 검색된 결과가 없습니다</p>
+          </Box>
+        }
+        <ListCard data={filteredData} facilityData={facilityData} />
       </Container>
-      <Pagination
-        count={12}
-        page={page}
-        defaultPage={1}
-        siblingCount={0}
-        size="large"
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          marginTop: "2em",
-        }}
-        onChange={changePage}
-      />
+      {filteredData && filteredData.length !== 0 && 
+        <Pagination
+          count={12}
+          page={page}
+          defaultPage={1}
+          siblingCount={0}
+          size="large"
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            marginTop: "2em",
+          }}
+          onChange={changePage}
+        />
+      }
     </>
   );
 };

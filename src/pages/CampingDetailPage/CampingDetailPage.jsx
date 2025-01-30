@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useCampingKeywordQuery } from "../../hooks/useCampingDetail";
-import { useLocation, useSearchParams } from "react-router-dom";
+import { useLocation, useParams, useSearchParams } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import CircularProgress from "@mui/material/CircularProgress";
 import { Container } from "@mui/material";
@@ -19,6 +19,9 @@ import "./CampingDetailPage.style.css";
 import CampingDetailPageKakao from "./CampingDetailPageKakao/CampingDetailPageKakao";
 import HandleCopyClipBoard from "./HandleCopyClipBoard/HandleCopyClipBoard";
 import CampingDetailSkeleton from "./CampingDetailSkeleton/CampingDetailSkeleton";
+import Comments from "./Comments/Comments";
+import ReplyBox from "../CommunityPage/components/ReplyBox";
+import { useUser } from "../../hooks/useUser";
 
 const CampingDetailPage = () => {
   const [searchParams] = useSearchParams();
@@ -26,6 +29,16 @@ const CampingDetailPage = () => {
   const lat = searchParams.get("lat");
   const lon = searchParams.get("lon");
   const { data = [], isLoading } = useCampingKeywordQuery(keyword);
+  const { contentId } = useParams();
+
+  const { data: currentUser } = useUser();
+
+  const campingId = {
+    contentId: contentId,
+    facltNm: keyword,
+    mapX: lat,
+    mapY: lon,
+  };
 
   const campingDetail = data[0];
 
@@ -60,8 +73,11 @@ const CampingDetailPage = () => {
       "반려동물",
       campingDetail?.animalCmgCl == "불가능" ? "불가능" : "가능"
     ),
+    createData(
+      "운영기간",
+      campingDetail?.operPdCl ? campingDetail.operPdCl : "정보없음"
+    ),
   ];
-
   if (isLoading) {
     return (
       <div className="loading_wrap">
@@ -95,7 +111,7 @@ const CampingDetailPage = () => {
         <div>
           <Container className="camping-detail-main-area">
             <Grid container spacing={2}>
-              <Grid xs={12} md={8}>
+              <Grid xs={12} md={12}>
                 <div className="camping-detail-main-img">
                   {campingDetail.firstImageUrl ? (
                     <div
@@ -115,7 +131,7 @@ const CampingDetailPage = () => {
                   )}
                 </div>
               </Grid>
-              <Grid xs={12} md={4}>
+              <Grid xs={12} md={12}>
                 <div className="camping-detail-second-grid">
                   <h1>{campingDetail.facltNm}</h1>
                   <h5>
@@ -123,7 +139,6 @@ const CampingDetailPage = () => {
                       ? `${campingDetail.lineIntro}`
                       : ""}
                   </h5>
-                  <div>{campingDetail.addr1}</div>
                   <div>
                     {/* 전화번호 마지막이 "-"로 끝나는 경우에는 "-"를 빼고 보여주기 */}
                     {campingDetail.tel
@@ -134,17 +149,7 @@ const CampingDetailPage = () => {
                         : `문의처 : ${campingDetail.tel}`
                       : "문의번호가 없습니다"}
                   </div>
-                  <div>
-                    {" "}
-                    {campingDetail.operPdCl
-                      ? `운영기간 : ${campingDetail.operPdCl}`
-                      : ""}{" "}
-                  </div>
-                  <div>
-                    {campingDetail.operDeCl
-                      ? `운영일 : ${campingDetail.operDeCl}`
-                      : ""}
-                  </div>
+
                   <div>
                     {campingDetail.resveCl
                       ? `예약방법 : ${campingDetail.resveCl}`
@@ -172,7 +177,7 @@ const CampingDetailPage = () => {
                       ""
                     )}
                   </div>
-                  <div>
+                  {/* <div>
                     <div>
                       {campingDetail.siteBottomCl4 > 0
                         ? `바닥형태(단위:면) : 자갈(${campingDetail.siteBottomCl4})`
@@ -196,9 +201,9 @@ const CampingDetailPage = () => {
                     {campingDetail.siteBottomCl5 > 0
                       ? `바닥형태(단위:면) : 맨흙(${campingDetail.siteBottomCl5})`
                       : ""}
-                  </div>
+                  </div> */}
                   <div className="kakao-talk-area">
-                    <HandleCopyClipBoard data={campingDetail} />
+                    {/* <HandleCopyClipBoard data={campingDetail} /> */}
                     <CampingDetailPageKakao data={campingDetail} />
                   </div>
                 </div>
@@ -209,6 +214,7 @@ const CampingDetailPage = () => {
                 lat={lat}
                 lon={lon}
                 name={campingDetail.facltNm}
+                address={campingDetail.addr1}
               />
             </div>
             <div className="camping-detail-weather-line">
@@ -218,11 +224,7 @@ const CampingDetailPage = () => {
                 name={campingDetail.facltNm}
               />
             </div>
-            <div className="camping-detail-second-line">
-              {campingDetail.intro
-                ? `${campingDetail.intro}`
-                : `이번 캠핑은 ${campingDetail.facltNm}에서 함께하는건 어떨까요? 공기 좋은 곳에서 소중한 순간을 보내게 해주는 ${campingDetail.facltNm}입니다.`}
-            </div>
+
             <div className="camping-detail-second-line-count"></div>
             <div className="comping-detail-table-area">
               <div className="comping-detail-table-area-inside">
@@ -262,13 +264,15 @@ const CampingDetailPage = () => {
                   위해 꼭 필요한 사항은 해당 캠핑장에 미리 확인하시기 바랍니다
                 </div>
               </div>
-              <div className="camping-detail-attraction-line">
-                <AttractionCarousel
-                  attractData={CampingRecommendItemList}
-                  title={campingDetail.facltNm + " 주변 갈만한 곳"}
-                />
-              </div>
             </div>
+            <div className="camping-detail-comments">
+              <Comments currentUser={currentUser} campingId={campingId} />
+            </div>
+            {/* <ReplyBox 
+              replyTitle={"리뷰"} 
+              campingId={campingId} 
+              currentUserId={currentUserId}
+            /> */}
           </Container>
         </div>
       ) : (

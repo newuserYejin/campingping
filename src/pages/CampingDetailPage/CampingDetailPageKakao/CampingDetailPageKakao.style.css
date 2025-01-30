@@ -1,6 +1,7 @@
 .kakao-btn{
     border: none;
     background-color: white;
+    width: fit-content;
 }
 .phoneImage{
     height: 2.5em;

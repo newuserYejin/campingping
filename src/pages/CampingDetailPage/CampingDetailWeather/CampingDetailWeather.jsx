@@ -18,29 +18,19 @@ const CampingDetailWeather = ({ lat, lon, name }) => {
   return (
     <div className="camping-detail-weather">
       <div className="camping-detail-weather-box-area">
-        <h1>{`${name}`} 주변 5일 날씨</h1>
+        <h1>캠핑장 주변의 오늘 날씨</h1>
         <div className="camping-detail-weather-box-5days">
           <div className="camping-detail-weather-box-1day">
-            <div>{`${data?.list[0]?.dt_txt?.substr(
-              5,
-              2
-            )}월 ${data?.list[0]?.dt_txt?.substr(8, 2)}일`}</div>
-            <img
-              src={`https://openweathermap.org/img/wn/${data?.list[0]?.weather[0]?.icon}.png`}
-              alt="Weather Icon"
-            />
-            <div className="camping-detail-weather-description">
-              <strong>{weatherDescKo[data?.list[0]?.weather[0]?.id]}</strong>
-            </div>
-            <div>{`현재 온도 : ${Math.round(data?.list[0]?.main.temp)}℃`}</div>
-            <div>{`(${Math.round(data?.list[0]?.main.temp_min)}℃/${Math.round(
+            <div>{`최고 온도 : ${Math.round(
               data?.list[0]?.main.temp_max
-            )}℃)`}</div>
+            )}℃`}</div>
+            <div>{`최저 온도 : ${Math.round(data?.list[0]?.main.temp_min)}℃
+          `}</div>
             <div>{`강수확률 : ${Math.round(data?.list[0]?.pop) * 100}%`}</div>
             <div>{`습도 : ${Math.round(data?.list[0]?.main.humidity)}%`}</div>
           </div>
 
-          <div className="camping-detail-weather-box-1day">
+          {/* <div className="camping-detail-weather-box-1day">
             <div>{`${data?.list[8]?.dt_txt?.substr(
               5,
               2
@@ -115,7 +105,7 @@ const CampingDetailWeather = ({ lat, lon, name }) => {
             )}℃)`}</div>
             <div>{`강수확률 : ${Math.round(data?.list[8]?.pop) * 100}%`}</div>
             <div>{`습도 : ${Math.round(data?.list[29]?.main.humidity)}%`}</div>
-          </div>
+          </div> */}
         </div>
       </div>
 

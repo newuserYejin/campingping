@@ -5,9 +5,7 @@ const API_KEY = process.env.REACT_APP_API_KEY_EN_SANG;
 const PARAMS = process.env.REACT_APP_PARAMS_DEFAULT;
 
 const fetchBestCamping = () => {
-  return apiGocamping.get(
-    `basedList?serviceKey=${API_KEY}&${PARAMS}&numOfRows=500`
-  );
+  return apiGocamping.get(`basedList?serviceKey=${API_KEY}&${PARAMS}&numOfRows=500`);
 };
 
 export const useBestCampListQuery = () => {
