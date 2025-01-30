@@ -15,11 +15,7 @@ const StyledReactQuill = styled.div`
   }
 `;
 
-const CommunityWritePage = ({
-  category,
-  onSubmit,
-  maxImageSize = 2 * 1024 * 1024,
-}) => {
+const CommunityWritePage = ({ category, onSubmit, maxImageSize = 2 * 1024 * 1024 }) => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const quillRef = React.useRef();
@@ -34,9 +30,7 @@ const CommunityWritePage = ({
     input.onchange = async () => {
       const file = input.files[0];
       if (file.size > maxImageSize) {
-        alert(
-          `이미지 크기는 ${maxImageSize / 1024 / 1024}MB를 초과할 수 없습니다.`
-        );
+        alert(`이미지 크기는 ${maxImageSize / 1024 / 1024}MB를 초과할 수 없습니다.`);
         return;
       }
 
@@ -68,18 +62,7 @@ const CommunityWritePage = ({
     },
   };
 
-  const formats = [
-    "header",
-    "bold",
-    "italic",
-    "underline",
-    "strike",
-    "blockquote",
-    "list",
-    "bullet",
-    "link",
-    "image",
-  ];
+  const formats = ["header", "bold", "italic", "underline", "strike", "blockquote", "list", "bullet", "link", "image"];
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -118,8 +101,7 @@ const CommunityWritePage = ({
       <Container
         sx={{
           margin: "4em auto",
-        }}
-      >
+        }}>
         <div className="post-editor">
           <form onSubmit={handleSubmit}>
             <TextField
@@ -155,8 +137,7 @@ const CommunityWritePage = ({
               variant="contained"
               sx={{
                 marginTop: "4em",
-              }}
-            >
+              }}>
               등록
             </Button>
           </form>

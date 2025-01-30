@@ -143,7 +143,7 @@ const EmptyBox = styled.div`
 
 const groupItems = (items, size) => {
   const groupedItems = [];
-  for (let i = 0; i < items.length; i += size) {
+  for (let i = 0; i < items?.length; i += size) {
     groupedItems.push(items.slice(i, i + size));
   }
   return groupedItems;
@@ -154,7 +154,7 @@ export const UserWidgetCard = ({ title, items }) => {
 
   return (
     <UserWidgetBox title={title}>
-      {items && items.length > 0 ? (
+      {items && items?.length > 0 ? (
         <Swiper
           modules={[Pagination]}
           spaceBetween={20}
@@ -164,8 +164,7 @@ export const UserWidgetCard = ({ title, items }) => {
             renderBullet: (index, className) => {
               return `<span class="${className} bullet"></span>`;
             },
-          }}
-        >
+          }}>
           <>
             {groupedItems.map((group, groupIndex) => (
               <SwiperSlide key={groupIndex}>
@@ -174,10 +173,7 @@ export const UserWidgetCard = ({ title, items }) => {
                     <Link to={`${item.category}/${item._id}`} className="item">
                       <div className="thumb">
                         {item.image ? (
-                          <img
-                            src={extractFirstImageFromContent(item.content)}
-                            alt=""
-                          />
+                          <img src={extractFirstImageFromContent(item.content)} alt="" />
                         ) : (
                           <img src={nolimage} alt="" />
                         )}
@@ -186,14 +182,9 @@ export const UserWidgetCard = ({ title, items }) => {
                         <h3 className="info__title">{item.title}</h3>
                         <span className="info__name">
                           <span class="name">{item.userId.nickname}</span>
-                          <span class="date">
-                            {item.createdAt.slice(0, 10)}
-                          </span>
+                          <span class="date">{item.createdAt.slice(0, 10)}</span>
                         </span>
-                        <p
-                          className="info__content"
-                          dangerouslySetInnerHTML={{ __html: item.content }}
-                        />
+                        <p className="info__content" dangerouslySetInnerHTML={{ __html: item.content }} />
                       </div>
                     </Link>
                   </ListItem>
@@ -204,11 +195,7 @@ export const UserWidgetCard = ({ title, items }) => {
         </Swiper>
       ) : (
         <EmptyBox>
-          <svg
-            version="1.1"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
+          <svg version="1.1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <g id="grid_system" />
             <g id="_icons">
               <g>

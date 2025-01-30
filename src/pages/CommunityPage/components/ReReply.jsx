@@ -1,6 +1,6 @@
-import React from "react";
-import styled from "styled-components";
-import api from "../../../utils/api"; // API 유틸리티 경로에 맞게 수정
+import React from 'react';
+import styled from 'styled-components';
+import api from '../../../utils/api'; // API 유틸리티 경로에 맞게 수정
 
 // Styled-components
 const ReReplyCardBody = styled.div`
@@ -32,66 +32,67 @@ const ButtonContainer = styled.div`
   display: flex;
   justify-content: flex-end;
   gap: 10px;
+  
 `;
 
 const Button = styled.button`
   padding: 5px 10px;
   font-size: 12px;
   color: white;
-  background-color: ${(props) => (props.delete ? "#e74c3c" : "#23489d")};
+  background-color: ${(props) => (props.delete ? '#e74c3c' : '#23489d')};
   border: none;
   border-radius: 4px;
   cursor: pointer;
 
   &:hover {
-    background-color: ${(props) => (props.delete ? "#c0392b" : "#0056b3")};
+    background-color: ${(props) => (props.delete ? '#c0392b' : '#0056b3')};
   }
 `;
 
 const ReReply = ({ reReply, fetchReReplies, currentUserId, campingId }) => {
   const date = new Date(reReply.createdAt);
-  const formattedDate = date.toLocaleDateString("ko-KR", {
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
+  const formattedDate = date.toLocaleDateString('ko-KR', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
   });
-  const formattedTime = date.toLocaleTimeString("ko-KR", {
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: false,
+  const formattedTime = date.toLocaleTimeString('ko-KR', {
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false,
   });
 
   const formattedDateTime = `${formattedDate} ${formattedTime}`;
 
-  // 대댓글 삭제 함수
-  const handleDelete = async () => {
-    const confirmDelete = window.confirm("정말 삭제하시겠습니까?");
-    if (!confirmDelete) return;
+    // 대댓글 삭제 함수
+    const handleDelete = async () => {
+        const confirmDelete = window.confirm("정말 삭제하시겠습니까?");
+        if (!confirmDelete) return;
 
-    try {
-      await api.delete(
-        `/${campingId ? "re_review" : "re_reply"}/${reReply._id}`
-      ); // 대댓글 삭제 API 요청
-      fetchReReplies();
-    } catch (error) {
-      console.log("Failed to delete re-reply:", error);
-    }
-  };
+        try {
+            await api.delete(`/${campingId? 're_review' : 're_reply'}/${reReply._id}`); // 대댓글 삭제 API 요청
+            fetchReReplies()
+        } catch (error) {
+            console.log('Failed to delete re-reply:', error);
+        }
+    };
 
-  return (
-    <ReReplyCardBody>
-      <Nickname>{reReply.userId.nickname}</Nickname>
-      <Content>{reReply.content}</Content>
-      <CreatedAt>{formattedDateTime}</CreatedAt>
-      <ButtonContainer>
-        {currentUserId == reReply.userId._id ? (
-          <Button delete onClick={handleDelete}>
-            삭제
-          </Button>
-        ) : null}
-      </ButtonContainer>
-    </ReReplyCardBody>
-  );
+    return (
+        <ReReplyCardBody>
+            <Nickname>{reReply.userId.nickname}</Nickname>
+            <Content>{reReply.content}</Content>
+            <CreatedAt>{formattedDateTime}</CreatedAt>
+            <ButtonContainer>
+                {
+                    currentUserId == reReply.userId._id ?
+                        <Button delete onClick={handleDelete}>
+                            삭제
+                        </Button> : null
+                }
+
+            </ButtonContainer>
+        </ReReplyCardBody>
+    );
 };
 
 export default ReReply;

@@ -18,10 +18,10 @@ const Component = styled.div`
 const Widget = () => {
   return (
     <Component>
-      <WidgetBest title={{ title: "요즘 인기있는 캠핑장", link: "/recommend" }} />
+      <WidgetBest title={{ title: "요즘 인기있는 캠핑장", link: "/search?q=&province=&city=&theme=&selectedDetailTag=" }} />
       <WidgetEvent title={{ title: "가볼만한 지역 행사", link: "/event" }} />
-      <WidgetMarket title={{ title: "중고거래", link: "/market" }} />
-      <WidgetRecommend title={{ title: "캠핑 요리 추천", link: "/cook" }} />
+      <WidgetMarket title={{ title: "캠핑 요리 추천", link: "/cook" }} />
+      <WidgetRecommend title={{ title: "캠핑 용품 추천", link: "/recommend" }} />
     </Component>
   );
 };

@@ -52,16 +52,9 @@ const MarketListPage = () => {
       <Container
         sx={{
           margin: "6em auto",
-        }}
-      >
-        <CommunitySearch
-          title={"중고장터"}
-          keyword={keyword}
-          setKeyword={setKeyword}
-          handleSearch={handleSearch}
-        />
-        <CommunityListPhoto data={items} link="/market" />{" "}
-        {/* 받아온 데이터를 사용 */}
+        }}>
+        <CommunitySearch title={"중고장터"} keyword={keyword} setKeyword={setKeyword} handleSearch={handleSearch} />
+        <CommunityListPhoto data={items} link="/market" /> {/* 받아온 데이터를 사용 */}
         <Pagination
           count={totalPages}
           page={page}

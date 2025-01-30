@@ -72,16 +72,14 @@ const RecommendListPage = () => {
       <Container
         sx={{
           margin: "6em auto",
-        }}
-      >
+        }}>
         <CommunitySearch
           title={"캠핑용품 추천"}
           keyword={keyword}
           setKeyword={setKeyword}
           handleSearch={handleSearch}
         />
-        <CommunityListPhoto data={items} link="/recommend" />{" "}
-        {/* 받아온 데이터를 사용 */}
+        <CommunityListPhoto data={items} link="/recommend" /> {/* 받아온 데이터를 사용 */}
         <Pagination
           count={totalPages}
           page={page}
@@ -94,9 +92,7 @@ const RecommendListPage = () => {
             marginTop: "2em",
           }}
         />
-        <CoummunityLinkButton to="/recommend/write">
-          글작성
-        </CoummunityLinkButton>
+        <CoummunityLinkButton to="/recommend/write">글작성</CoummunityLinkButton>
       </Container>
     </>
   );

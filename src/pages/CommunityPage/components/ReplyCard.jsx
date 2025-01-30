@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import styled from "styled-components";
-import api from "../../../utils/api";
-import ReReply from "./ReReply";
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import styled from 'styled-components';
+import api from '../../../utils/api';
+import ReReply from './ReReply';
 // Styled-components
 const ReplyCardBody = styled.div`
   background-color: white;
@@ -33,19 +33,20 @@ const ButtonContainer = styled.div`
   display: flex;
   justify-content: flex-end;
   gap: 10px;
+  
 `;
 
 const Button = styled.button`
   padding: 5px 10px;
   font-size: 12px;
   color: white;
-  background-color: ${(props) => (props.delete ? "#e74c3c" : "#23489d")};
+  background-color: ${(props) => (props.delete ? '#e74c3c' : '#23489d')};
   border: none;
   border-radius: 4px;
   cursor: pointer;
 
   &:hover {
-    background-color: ${(props) => (props.delete ? "#c0392b" : "#0056b3")};
+    background-color: ${(props) => (props.delete ? '#c0392b' : '#0056b3')};
   }
 `;
 
@@ -53,151 +54,158 @@ const TextArea = styled.textarea`
   padding: 10px;
   border: 1px solid #e1e1e1;
   border-radius: 6px;
-  margin-top: 10px;
+  margin-top: 10px; 
   resize: none;
   width: 100%;
-  height: 70px;
+  height: 70px; 
   font-size: 14px;
 `;
 
 const ReplyCard = ({ reply, fetchReply, currentUserId, campingId }) => {
-  const [reReplies, setReReplies] = useState([]); // 대댓글 상태
-  const [loadingReReplies, setLoadingReReplies] = useState(false); // 로딩 상태
-  const [errorReReplies, setErrorReReplies] = useState(null); // 에러 상태
-  const [showReReplyForm, setShowReReplyForm] = useState(false); // 대댓글 폼 표시 여부
-  const [newReReply, setNewReReply] = useState(""); // 대댓글 내용
-  const { id } = useParams();
+    const [reReplies, setReReplies] = useState([]); // 대댓글 상태
+    const [loadingReReplies, setLoadingReReplies] = useState(false); // 로딩 상태
+    const [errorReReplies, setErrorReReplies] = useState(null); // 에러 상태
+    const [showReReplyForm, setShowReReplyForm] = useState(false); // 대댓글 폼 표시 여부
+    const [newReReply, setNewReReply] = useState(''); // 대댓글 내용
+    const { id } = useParams()
 
-  const date = new Date(reply.createdAt);
-  const formattedDate = date.toLocaleDateString("ko-KR", {
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-  });
-  const formattedTime = date.toLocaleTimeString("ko-KR", {
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: false,
-  });
 
-  const formattedDateTime = `${formattedDate} ${formattedTime}`;
+    const date = new Date(reply.createdAt);
+    const formattedDate = date.toLocaleDateString('ko-KR', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+    });
+    const formattedTime = date.toLocaleTimeString('ko-KR', {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false,
+    });
 
-  // 대댓글 가져오기
-  const fetchReReplies = async () => {
-    try {
-      setLoadingReReplies(true);
-      const response = await api.get(
-        `/${campingId ? "re_review" : "re_reply"}/${reply._id}`
-      );
-      setReReplies(response.data.data);
-      setLoadingReReplies(false);
-    } catch (error) {
-      setErrorReReplies(error.message);
-      setLoadingReReplies(false);
-    }
-  };
+    const formattedDateTime = `${formattedDate} ${formattedTime}`;
 
-  useEffect(() => {
-    fetchReReplies();
-  }, [reply._id]);
 
-  // 대댓글 작성 함수
-  const handleReReplySubmit = async (e) => {
-    e.preventDefault();
-    if (!currentUserId) {
-      alert("로그인 후 사용해주세요.");
-      return;
-    }
-    if (!newReReply) return;
 
-    try {
-      const requestBody = {
-        content: newReReply,
-        ...(campingId ? { campingId: campingId } : { postId: id }), // campingId가 있을 때는 campingId, 없을 때는 postId 추가
-      };
+    // 대댓글 가져오기
+    const fetchReReplies = async () => {
+        try {
+            setLoadingReReplies(true);
+            const response = await api.get(`/${campingId ? 're_review' : 're_reply'}/${reply._id}`);
+            setReReplies(response.data.data);
+            setLoadingReReplies(false);
+        } catch (error) {
+            setErrorReReplies(error.message);
+            setLoadingReReplies(false);
+        }
+    };
 
-      const endpoint = `/${campingId ? "re_review" : "re_reply"}/${reply._id}`;
-      const response = await api.post(endpoint, requestBody);
+    useEffect(() => {
+        fetchReReplies();
+    }, [reply._id]);
 
-      setReReplies([...reReplies, response.data.data]);
-      setNewReReply(""); // 입력 필드 초기화
-      setShowReReplyForm(false); // 대댓글 폼 숨기기
-      fetchReReplies(); // 대댓글 목록을 다시 불러오기
-    } catch (error) {
-      console.log("Failed to post re-reply:", error);
-    }
-  };
+    // 대댓글 작성 함수
+    const handleReReplySubmit = async (e) => {
+        e.preventDefault();
+        if (!currentUserId) {
+            alert("로그인 후 사용해주세요.");
+            return;
+        }
+        if (!newReReply) return;
 
-  // 댓글 삭제 함수
-  const handleDelete = async () => {
-    try {
-      // 삭제 확인 메시지
-      const confirmDelete = window.confirm("정말 삭제하시겠습니까?");
-      if (!confirmDelete) {
-        return;
-      }
-      await api.delete(`/${campingId ? "review" : "reply"}/${reply._id}`);
-      fetchReply();
-    } catch (error) {
-      console.log("Failed to delete reply:", error);
-    }
-  };
+        try {
+            const requestBody = {
+                content: newReReply,
+                ...(campingId ? { campingId: campingId } : { postId: id }) // campingId가 있을 때는 campingId, 없을 때는 postId 추가
+            };
 
-  return (
-    <ReplyCardBody>
-      <Nickname>{reply?.userId?.nickname}</Nickname>
-      <Content>{reply?.content}</Content>
-      <CreatedAt>{formattedDateTime}</CreatedAt>
+            const endpoint = `/${campingId ? 're_review' : 're_reply'}/${reply._id}`;
+            const response = await api.post(endpoint, requestBody);
 
-      {/* 대댓글 작성 버튼 및 삭제 버튼 */}
-      <ButtonContainer>
-        <Button onClick={() => setShowReReplyForm(!showReReplyForm)}>
-          대댓글 달기
-        </Button>
-        {currentUserId == reply?.userId?._id ? (
-          <Button delete onClick={handleDelete}>
-            삭제
-          </Button>
-        ) : null}
-      </ButtonContainer>
+            setReReplies([...reReplies, response.data.data]);
+            setNewReReply(''); // 입력 필드 초기화
+            setShowReReplyForm(false); // 대댓글 폼 숨기기
+            fetchReReplies(); // 대댓글 목록을 다시 불러오기
+        } catch (error) {
+            console.log('Failed to post re-reply:', error);
+        }
+    };
 
-      {/* 대댓글 작성 폼 */}
-      {showReReplyForm && (
-        <form onSubmit={handleReReplySubmit}>
-          <TextArea
-            value={newReReply}
-            onChange={(e) => setNewReReply(e.target.value)}
-            placeholder="대댓글을 작성하세요..."
-            required
-          />
-          <ButtonContainer>
-            <Button type="submit">작성</Button>
-          </ButtonContainer>
-        </form>
-      )}
+    // 댓글 삭제 함수
+    const handleDelete = async () => {
+        try {
+            // 삭제 확인 메시지
+            const confirmDelete = window.confirm("정말 삭제하시겠습니까?");
+            if (!confirmDelete) {
+                return
+            }
+            await api.delete(`/${campingId ? 'review' : 'reply'}/${reply._id}`);
+            fetchReply()
+        } catch (error) {
+            console.log('Failed to delete reply:', error);
+        }
+    };
 
-      {/* 대댓글 로딩 중일 때 */}
-      {loadingReReplies && <div>Loading replies...</div>}
 
-      {/* 대댓글 에러 발생 시 */}
-      {errorReReplies && <div>Error loading replies: {errorReReplies}</div>}
+    return (
+        <ReplyCardBody>
+            <Nickname>{reply?.userId?.nickname}</Nickname>
+            <Content>{reply?.content}</Content>
+            <CreatedAt>{formattedDateTime}</CreatedAt>
 
-      {/* 대댓글 리스트 렌더링 */}
-      {reReplies && reReplies.length > 0 && (
-        <div>
-          {reReplies.map((reReply) => (
-            <ReReply
-              key={reReply._id}
-              reReply={reReply}
-              fetchReReplies={fetchReReplies}
-              currentUserId={currentUserId}
-              campingId={campingId}
-            />
-          ))}
-        </div>
-      )}
-    </ReplyCardBody>
-  );
+            {/* 대댓글 작성 버튼 및 삭제 버튼 */}
+            <ButtonContainer>
+               
+                <Button onClick={() => setShowReReplyForm(!showReReplyForm)}>
+                    대댓글 달기
+                </Button>
+                {
+                    currentUserId == reply?.userId?._id ?
+                        <Button delete onClick={handleDelete}>
+                            삭제
+                        </Button> : null
+                }
+
+
+            </ButtonContainer>
+
+            {/* 대댓글 작성 폼 */}
+            {showReReplyForm && (
+                <form onSubmit={handleReReplySubmit}>
+                    <TextArea
+                        value={newReReply}
+                        onChange={(e) => setNewReReply(e.target.value)}
+                        placeholder="대댓글을 작성하세요..."
+                        required
+                    />
+                    <ButtonContainer>
+                        <Button type="submit">작성</Button>
+                    </ButtonContainer>
+
+                </form>
+            )}
+
+            {/* 대댓글 로딩 중일 때 */}
+            {loadingReReplies && <div>Loading replies...</div>}
+
+            {/* 대댓글 에러 발생 시 */}
+            {errorReReplies && <div>Error loading replies: {errorReReplies}</div>}
+
+            {/* 대댓글 리스트 렌더링 */}
+            {reReplies && reReplies.length > 0 && (
+                <div>
+                    {reReplies.map((reReply) => (
+                        <ReReply
+                            key={reReply._id}
+                            reReply={reReply}
+                            fetchReReplies={fetchReReplies}
+                            currentUserId={currentUserId}
+                            campingId={campingId}
+                        />
+                    ))}
+                </div>
+            )}
+        </ReplyCardBody>
+    );
 };
 
 export default ReplyCard;

@@ -52,16 +52,9 @@ const CookListPage = () => {
       <Container
         sx={{
           margin: "6em auto",
-        }}
-      >
-        <CommunitySearch
-          title={"캠핑요리"}
-          keyword={keyword}
-          setKeyword={setKeyword}
-          handleSearch={handleSearch}
-        />
-        <CommunityListPhoto data={items} link="/cook" />{" "}
-        {/* 받아온 데이터를 사용 */}
+        }}>
+        <CommunitySearch title={"캠핑요리"} keyword={keyword} setKeyword={setKeyword} handleSearch={handleSearch} />
+        <CommunityListPhoto data={items} link="/cook" /> {/* 받아온 데이터를 사용 */}
         <Pagination
           count={totalPages}
           page={page}

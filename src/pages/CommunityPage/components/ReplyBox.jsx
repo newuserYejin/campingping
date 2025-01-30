@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import styled from "styled-components";
-import api from "../../../utils/api";
-import ReplyCard from "./ReplyCard";
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import styled from 'styled-components';
+import api from '../../../utils/api';
+import ReplyCard from './ReplyCard';
 
 // Styled-components
 const ReplyBoxWrapper = styled.div`
@@ -42,53 +42,46 @@ const SubmitButton = styled.button`
   }
 `;
 
-const ReplyBox = ({ replyTitle, currentUserId, campingId }) => {
-  const { id } = useParams();
+const ReplyBox = ({replyTitle, currentUserId, campingId}) => {
+  const { id } = useParams()
   const [replies, setReplies] = useState([]); // 댓글 목록
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [newReply, setNewReply] = useState(""); // 새 댓글 내용
-
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
+  const [newReply, setNewReply] = useState(''); // 새 댓글 내용
+  
   const fetchReply = async () => {
     try {
-      const response = await api.get(
-        `/${campingId ? "review" : "reply"}/${
-          campingId ? campingId.contentId : id
-        }`
-      );
-      setReplies(response.data.data || []);
-      setLoading(false);
+      const response = await api.get(`/${campingId ? 'review' : 'reply'}/${campingId ? campingId.contentId : id}`);
+      setReplies(response.data.data || [])
+      setLoading(false)
     } catch (error) {
-      setError(error.message);
-      setLoading(false);
+      setError(error.message)
+      setLoading(false)
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!currentUserId) alert("로그인 후 사용해주세요");
+    if (!currentUserId) alert("로그인 후 사용해주세요")
     if (!newReply) return;
 
     try {
-      const response = await api.post(
-        `/${campingId ? "review" : "reply"}/${campingId ? "" : id}`,
-        {
-          campingId: campingId,
-          score: "4",
-          content: newReply,
-        }
-      );
+      const response = await api.post(`/${campingId ? 'review' : 'reply'}/${campingId ? "": id}`, {
+        campingId : campingId,
+        score: "4",
+        content: newReply,
+      });
       setReplies([...replies, response.data]);
-      setNewReply(""); // 댓글 입력 필드 초기화
-      fetchReply();
+      setNewReply(''); // 댓글 입력 필드 초기화
+      fetchReply()
     } catch (error) {
-      console.log("Failed to post reply:", error);
+      console.log('Failed to post reply:', error);
     }
   };
 
   // 엔터키 감지
   const handleKeyPress = (e) => {
-    if (e.key === "Enter" && !e.shiftKey) {
+    if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault(); // 엔터로 줄바꿈 방지
       handleSubmit(e); // 댓글 제출
     }
@@ -118,12 +111,12 @@ const ReplyBox = ({ replyTitle, currentUserId, campingId }) => {
 
       {/* 댓글 목록 렌더링 */}
       {replies.map((reply) => (
-        <ReplyCard
-          key={reply._id}
-          reply={reply}
-          fetchReply={fetchReply}
-          currentUserId={currentUserId}
-          campingId={campingId}
+        <ReplyCard 
+            key={reply._id} 
+            reply={reply} 
+            fetchReply={fetchReply}
+            currentUserId={currentUserId}
+            campingId={campingId}
         />
       ))}
     </ReplyBoxWrapper>

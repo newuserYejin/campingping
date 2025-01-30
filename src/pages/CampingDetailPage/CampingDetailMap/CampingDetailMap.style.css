@@ -13,8 +13,7 @@
 }
 
 .camping-detail-map {
-  position: relative;
-  /* 추가: 지도 컨테이너를 상대 위치의 기준점으로 설정 */
+  position: relative; /* 추가: 지도 컨테이너를 상대 위치의 기준점으로 설정 */
 }
 
 .camping-detail-map-url-area {
@@ -62,7 +61,6 @@
 .camping-detail-map-url:hover {
   background: var(--button-hover-color);
 }
-
 .address {
   font-size: 1em;
   margin-top: 2em;
